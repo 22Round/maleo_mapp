@@ -1,6 +1,7 @@
 package {
 	import application.AssetsLoader;
 	import application.utils.DeviceInfo;
+	import application.utils.UserPrefs;
 	import drawer.Drawer;
 	import feathers.controls.Button;
 	import feathers.controls.TextCallout;
@@ -67,6 +68,11 @@ package {
 			
 			var spl:Drawer = new Drawer;
 			addChild(spl);
+			
+			UserPrefs._write();
+			var ob:Object = UserPrefs._read();
+			trace(ob);
+			
 		}
 
 		protected function button_triggeredHandler(event:Event):void {

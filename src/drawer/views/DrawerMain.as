@@ -41,7 +41,6 @@ package drawer.views {
 			
 			super.initialize();
 			
-			
 			var layout:AnchorLayout =  new AnchorLayout();
 			this.layout = layout;
 			/*var layout:VerticalLayout = new VerticalLayout();

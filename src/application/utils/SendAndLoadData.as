@@ -1,7 +1,5 @@
 ﻿package application.utils{
 
-	import caurina.transitions.*;
-
 	import flash.display.Loader;
 	import flash.display.Stage;
 	import flash.events.Event;

@@ -12,7 +12,7 @@
     <movie minorVersion="0" />
     <movie platform="AIR Mobile" />
     <movie background="#000000" />
-    <movie preferredSDK="AIR 23.0.0;23.0.0;" />
+    <movie preferredSDK="AIR SDK 23;;D:\SDK\AIR_23" />
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>

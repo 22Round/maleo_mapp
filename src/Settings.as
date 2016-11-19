@@ -30,7 +30,7 @@
 		private static var __allowInstantiation:Boolean = false;
 
 		public static var _accessToken:String;
-		public static var _userID:String;
+		public static var _userID:String = '0215587';
 		
 		public static var _lang:String;
 		public static var _muiPack:Object;
