@@ -1,0 +1,1 @@
+call D:\sdk\flex_sdk_4.6\bin\optimizer -keep-as3-metadata Bindable Managed ChangeEvent NonCommittingChangeEvent Transient -input bin/Ooppo.swf -output bin/Ooppo.swf

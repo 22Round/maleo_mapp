@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--
+	 Usage:
+
+	 To localize the description, use the following format for the description element.
+	 <description>
+	 <text xml:lang="en">English App description goes here</text>
+	 <text xml:lang="fr">French App description goes here</text>
+	 <text xml:lang="ja">Japanese App description goes here</text>
+	 </description>
+
+	 To localize the name, use the following format for the name element.
+	 <name>
+	 <text xml:lang="en">English App name goes here</text>
+	 <text xml:lang="fr">French App name goes here</text>
+	 <text xml:lang="ja">Japanese App name goes here</text>
+	 </name>
+-->
+<application xmlns="http://ns.adobe.com/air/application/23.0">
+	<id>com.company.game</id>
+	<versionNumber>0.92.4</versionNumber>
+	<versionLabel>0.92.4a</versionLabel>
+	<filename>game</filename>
+	<name>game</name>
+	<initialWindow>
+	   <content>game.swf</content>
+	   <systemChrome>standard</systemChrome>
+	   <transparent>false</transparent>
+	   <visible>true</visible>
+	   <fullScreen>true</fullScreen>
+	   <aspectRatio>portrait</aspectRatio>
+	   <renderMode>direct</renderMode>
+	   <autoOrients>false</autoOrients>
+	</initialWindow>
+	<icon>
+		<image36x36>icons/ICON_36.png</image36x36>
+		<image48x48>icons/ICON_48.png</image48x48>
+		<image72x72>icons/ICON_72.png</image72x72>
+		<image96x96>icons/ICON_96.png</image96x96>
+		<image144x144>icons/ICON_144.png</image144x144>
+	</icon>
+	<customUpdateUI>false</customUpdateUI>
+	<allowBrowserInvocation>false</allowBrowserInvocation>
+	<android>
+		<manifestAdditions>
+			<![CDATA[
+				<manifest android:installLocation="auto">
+					
+					<uses-sdk android:minSdkVersion="9" android:targetSdkVersion="20"/>
+					
+					<uses-permission android:name="android.permission.INTERNET"/>
+					<uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
+					<uses-permission android:name="android.permission.WAKE_LOCK"/>
+					<uses-permission android:name="android.permission.GET_ACCOUNTS" />
+					
+					<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+					<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+					<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+					<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+					<uses-permission android:name="android.permission.VIBRATE" />
+					
+					<!-- <uses-permission android:name="com.android.vending.BILLING" /> -->
+					<!-- <uses-permission android:name="com.android.vending.BILLING" /> -->
+					
+					
+					<application 
+						android:hardwareAccelerated="true" 
+						android:allowBackup="true">
+						
+						<activity android:hardwareAccelerated="true" android:clearTaskOnLaunch="false" android:launchMode="singleTop">
+							<intent-filter>
+								<action android:name="android.intent.action.MAIN" />
+								<category android:name="android.intent.category.LAUNCHER" />
+							</intent-filter>
+							<intent-filter>
+								<action android:name="android.intent.action.VIEW" />
+								<category android:name="android.intent.category.BROWSABLE" />
+								<category android:name="android.intent.category.DEFAULT" />
+								<data android:scheme="air.com.company.game" />
+							</intent-filter>
+						</activity>
+						
+						
+						<activity
+						   android:name="air.com.company.game.MainActivity"
+						   android:theme="@android:style/Theme.NoTitleBar" />
+						
+						
+					</application>
+					
+				</manifest>
+			]]>
+		</manifestAdditions>
+		<colorDepth>16bit</colorDepth>
+	</android>
+	<supportedProfiles>mobileDevice</supportedProfiles>
+	<extensions>
+		<!--<extensionID>com.myflashlab.air.extensions.dependency.androidSupport</extensionID>
+		<extensionID>com.myflashlab.air.extensions.dependency.overrideAir</extensionID>
+		<extensionID>com.myflashlab.air.extensions.billing</extensionID>
+		<extensionID>com.myflashlab.air.extensions.facebook</extensionID>
+		<extensionID>com.milkmangames.extensions.GoogleGames</extensionID>
+		<extensionID>com.milkmangames.extensions.GoogleServices</extensionID>
+		<extensionID>com.mesmotronic.ane.fullscreen</extensionID>-->
+	</extensions>
+	
+</application>
