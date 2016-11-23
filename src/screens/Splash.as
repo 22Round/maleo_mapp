@@ -5,6 +5,7 @@ package screens {
 	import feathers.controls.StackScreenNavigator;
 	import feathers.controls.StackScreenNavigatorItem;
 	import feathers.events.FeathersEventType;
+	import screens.posta.ScreenAllMails;
 	import screens.splash.ScreenIntro;
 	import screens.splash.ScreenLang;
 	import screens.splash.ScreenLoginCase;
@@ -22,32 +23,30 @@ package screens {
 	
 	public class Splash extends LayoutGroup {
 		
-		private static const SCREEN_INTRO:String = "Intro";
-		private static const SCREEN_LANG:String = "Language";
-		private static const SCREEN_LOGINCASE:String = "LoginCase";
-		private static const SCREEN_REGISTER:String = "Registration";
-		private static const SCREEN_LOGIN:String = "Login";
+		
+		private static const SCREEN_ALLMAILS:String = 'allMails';
 		
 		private var logoWiteTexture:Texture;
 		private var logoBlueTexture:Texture;
 		
 		private var logoImg:Image;
+		private var shadowQade:Quad;
 		
 		
 		public function Splash() {
-			new MetalWorksMobileTheme();
+			
 			super();
 		}
 		
-		private var _navigator:StackScreenNavigator;
+		private var navigator:StackScreenNavigator;
 		
 		override protected function initialize():void {
 			
-			var quad:Quad = new Quad(50, stage.stageHeight);
-			quad.alpha = 1;
-			quad.filter = new DropShadowFilter(4, Math.PI);
-			addChild(quad);
 			
+			Settings._splash = this;
+			
+			
+			_changeBackgroundSkin(0xecf0f4);
 			logoWiteTexture = AssetsLoader._asset.getTexture("maleo_logo_wite.png");
 			logoBlueTexture = AssetsLoader._asset.getTexture("maleo_logo_blue.png");
 			
@@ -57,59 +56,87 @@ package screens {
 			logoImg.x = Math.round((stage.stageWidth - logoImg.width) / 2);
 			logoImg.y = 211 * DeviceInfo.dpiScaleMultiplier;
 			
-			this._navigator = new StackScreenNavigator();
-			this._navigator.pushTransition = Slide.createSlideLeftTransition();
-			this._navigator.popTransition = Slide.createSlideRightTransition();
-			this._navigator.addEventListener(FeathersEventType.TRANSITION_START, navigatorTransitionCompleteHandler);
+			navigator = new StackScreenNavigator();
+			navigator.pushTransition = Slide.createSlideLeftTransition();
+			navigator.popTransition = Slide.createSlideRightTransition();
+			navigator.addEventListener(FeathersEventType.TRANSITION_START, navigatorTransitionCompleteHandler);
 			
-			var itemIntro:StackScreenNavigatorItem = new StackScreenNavigatorItem(ScreenLoginCase);//ScreenIntro
-			itemIntro.setScreenIDForPushEvent(Event.COMPLETE, SCREEN_LANG);
-			this._navigator.addScreen(SCREEN_INTRO, itemIntro);
+			var item:StackScreenNavigatorItem = new StackScreenNavigatorItem(ScreenIntro);//ScreenIntro  ScreenLoginCase ScreenAllMails
+			item.setScreenIDForPushEvent(AppEvent.LOGIN_NATIVE, ScreenID.LOGIN_CASE);
+			navigator.addScreen(ScreenID.INTRO, item);
 			
-			var itemLang:StackScreenNavigatorItem = new StackScreenNavigatorItem(ScreenLang);
-			itemLang.setScreenIDForPushEvent(Event.COMPLETE, SCREEN_LOGINCASE);
-			itemLang.setScreenIDForReplaceEvent(Event.CHANGE, SCREEN_LOGIN);
-			itemLang.addPopEvent(Event.CANCEL);
-			this._navigator.addScreen(SCREEN_LANG, itemLang);
+			item = new StackScreenNavigatorItem(ScreenLang);
+			item.setScreenIDForPushEvent(Event.COMPLETE, ScreenID.LOGIN_CASE);
+			item.setScreenIDForReplaceEvent(Event.CHANGE, ScreenID.LOGIN_CASE);
+			item.addPopEvent(Event.CANCEL);
+			navigator.addScreen(ScreenID.LANG_SELECT, item);
 			
-			var itemLoginCase:StackScreenNavigatorItem = new StackScreenNavigatorItem(ScreenLoginCase);
+			item = new StackScreenNavigatorItem(ScreenLoginCase);
 			//itemLoginCase.pushTransition = Fade.createFadeInTransition();
-			itemLoginCase.addPopEvent(Event.CANCEL);
-			this._navigator.addScreen(SCREEN_LOGINCASE, itemLoginCase);
+			item.addPopEvent(Event.CANCEL);
+			navigator.addScreen(ScreenID.LOGIN_CASE, item);
 			
 			/*var itemC:StackScreenNavigatorItem = new StackScreenNavigatorItem(ScreenLogin);
 			itemC.addPopToRootEvent(Event.CLOSE);
 			itemC.addPopEvent(Event.CANCEL);
 			this._navigator.addScreen(SCREEN_LOGIN, itemC);*/
 			
-			this._navigator.rootScreenID = SCREEN_INTRO;
-			this.addChild(this._navigator);
+			navigator.rootScreenID = ScreenID.INTRO;//SCREEN_INTRO
+			this.addChild(navigator);
 			this.validate();
 			
-			addChild(logoImg);
+			//addChild(logoImg);
 			
 			var topH:TopHeader = new TopHeader;
 			addChild(topH);
+			
+			var bottomH:TopFooter = new TopFooter;
+			addChild(bottomH);
+			bottomH.y = stage.stageWidth - bottomH.height;
+			
+		}
 		
+		
+		public function _changeBackgroundSkin(bgColor:uint = 0xffffff):void {
+			var bgQuad:Quad = new Quad(10, 10, bgColor);
+			
+			this.backgroundSkin = bgQuad;
+			this.refreshBackgroundSkin();
+			
+			if (shadowQade) {
+				this.removeChild(shadowQade);
+				shadowQade.dispose();
+				shadowQade = null;
+			}
+			shadowQade = new Quad(50, stage.stageHeight, bgColor);
+			shadowQade.filter = new DropShadowFilter(4, Math.PI);
+			addChildAt(shadowQade,0);
+			
 		}
 		
 		private function navigatorTransitionCompleteHandler(e:Event):void {
+			addChild(logoImg);
+			
 			
 			switch(StackScreenNavigator(e.target).activeScreenID) {
 				
-				case SCREEN_INTRO:
+				case ScreenID.INTRO:
 					
 					logoImg.texture = logoWiteTexture;
 					
 					break;
 					
-				case SCREEN_LANG:
-				case SCREEN_LOGIN:
-				case SCREEN_REGISTER:
+				case ScreenID.LANG_SELECT:
+				case ScreenID.LOGIN:
+				case ScreenID.LOGIN_CASE:
+				case ScreenID.REGISTER:
 					
 					logoImg.texture = logoBlueTexture;
 					
 					break;
+					
+				default:
+					if(logoImg && contains(logoImg))removeChild(logoImg);
 					
 			}
 		}

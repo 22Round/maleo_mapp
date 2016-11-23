@@ -23,7 +23,7 @@ package screens {
 		
 		
 		public function TopHeader() {
-			super();
+			//super();
 			this.addEventListener(Event.ADDED_TO_STAGE, added)
 			
 		}
@@ -32,9 +32,10 @@ package screens {
 			removeEventListener(Event.ADDED_TO_STAGE, added);
 			this.addEventListener(Event.REMOVED_FROM_STAGE, removed);
 			
-			bgQuad = new Quad(400, 400, 0xffffff);
+			bgQuad = new Quad(400, 400, 0xff0000);
 			bgSkin = new Image(bgQuad.texture);
 			this.backgroundSkin = bgSkin;
+			
 			this.paddingLeft = Settings._getIntByDPI(30);
 			this.paddingRight = Settings._getIntByDPI(30);
 			
@@ -61,10 +62,6 @@ package screens {
 			
 			this.width = stage.stageWidth;
 			this.height = Settings._getIntByDPI(130);
-			
-			
-			
-			
 			validate();
 		}
 		

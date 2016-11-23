@@ -1,7 +1,8 @@
-package screens.splash {
+package screens.posta {
 	
 	import application.AssetsLoader;
 	import application.utils.StaticGUI;
+	import components.MailBlock;
 	import feathers.controls.Button;
 	import feathers.controls.Label;
 	import feathers.controls.LayoutGroup;
@@ -45,7 +46,7 @@ package screens.splash {
 	
 	[Event(name = "complete", type = "starling.events.Event")]
 	
-	public class ScreenLoginCase extends Screen {
+	public class ScreenAllMails extends Screen {
 		
 		private var btnStyle1:TextFormat;
 		private var btnStyle2:TextFormat;
@@ -63,11 +64,10 @@ package screens.splash {
 		private var faceBRegBtn:Button;
 		private var registRegBtn:Button;
 		
-		private var group:LayoutGroup;
-		private var groupLayout:VerticalLayout;
+		private var title:Label;
 		
 		
-		public function ScreenLoginCase() {
+		public function ScreenAllMails() {
 			super();
 			//this.title = "Screen C";
 		}
@@ -75,79 +75,39 @@ package screens.splash {
 		override protected function initialize():void {
 			
 			super.initialize();
-			
-			
-			Settings._splash._changeBackgroundSkin();
+			Settings._splash._changeBackgroundSkin(0xecf0f4);
 			
 			var layout:VerticalLayout = new VerticalLayout();
 			layout.horizontalAlign = HorizontalAlign.CENTER;
-			layout.verticalAlign = VerticalAlign.MIDDLE;
+			layout.verticalAlign = VerticalAlign.TOP;
 			layout.gap = 50;
+			layout.paddingTop = Settings._getIntByDPI(220);
 			this.layout = layout;
 			
 			btnStyle1 = new TextFormat;
 			btnStyle1.font = '_bpgArialRegular';
-			btnStyle1.size = Settings._getIntByDPI(24);
+			btnStyle1.size = 24;
 			btnStyle1.color = 0xffffff;
 			
 			btnStyle2 = new TextFormat;
 			btnStyle2.font = '_bpgArialRegular';
-			btnStyle2.size = Settings._getIntByDPI(24);
+			btnStyle2.size = 24;
 			btnStyle2.color = 0x575a5b;
 			
 			labelStyle = new TextFormat;
-			labelStyle.font = '_hKolkhetyMtavBold';
-			labelStyle.size = Settings._getIntByDPI(30);
-			labelStyle.color = 0x575a5b;
+			labelStyle.font = '_bpgArialRegular';
+			labelStyle.size = 30;
+			labelStyle.color = 0x4d5051;
 			
-			btnMailSkin = new ImageSkin(AssetsLoader._asset.getTexture("login_mail_btn.png"));
-			btnMailSkin.scale9Grid = new Rectangle(40, 40, 120, 120);
+			title = StaticGUI._addLabel(this, "ჩამოსული", labelStyle);
 			
-			btnFaceBSkin = new ImageSkin(AssetsLoader._asset.getTexture("login_facebook_btn.png"));
-			btnFaceBSkin.scale9Grid = new Rectangle(40, 40, 120, 120);
+			var item:MailBlock = new MailBlock;
+			addChild(item);
 			
-			btnRegSkin = new ImageSkin(AssetsLoader._asset.getTexture("register_btn.png"));
-			btnRegSkin.scale9Grid = new Rectangle(40, 40, 120, 120);
-			
-			
-			var label:Label = StaticGUI._addLabel(this, Settings._muiPack['logincase_enter_lbl'][Settings._lang], labelStyle);
-			
-			group = new LayoutGroup();
-			groupLayout = new VerticalLayout();
-			groupLayout.gap = 7;
-			group.layout = groupLayout;
-			this.addChild( group );
-
-			mailRegBtn = StaticGUI._addBtnSkin(group, Settings._muiPack['logincase_login_mail_btn'][Settings._lang], btnStyle1, btnMailSkin);
-			mailRegBtn.addEventListener(Event.TRIGGERED, mailRegHandler);
+			this.width = stage.stageWidth;
+			this.height = stage.stageHeight;
 			
 			
-			faceBRegBtn = StaticGUI._addBtnSkin(group,  Settings._muiPack['logincase_login_facebook_btn'][Settings._lang], btnStyle1, btnFaceBSkin);
-			faceBRegBtn.defaultIcon = new Image(AssetsLoader._asset.getTexture("facebook_btn_ico.png"));
-			faceBRegBtn.iconOffsetX = -15;
-			faceBRegBtn.addEventListener(Event.TRIGGERED, faceBdHandler);
-			
-			
-			label = StaticGUI._addLabel(this, Settings._muiPack['logincase_orregister_lbl'][Settings._lang], labelStyle);
-			
-			registRegBtn = StaticGUI._addBtnSkin(this, "რეგისტრაცია", btnStyle2, btnRegSkin);
-			registRegBtn.addEventListener(Event.TRIGGERED, registerHandler);
-			
-	
-			
-		}
-		
-		
-		override public function dispose():void {
-			
-			if (mailRegBtn) mailRegBtn.removeEventListener(Event.TRIGGERED, mailRegHandler);
-			if (faceBRegBtn) faceBRegBtn.removeEventListener(Event.TRIGGERED, faceBdHandler);
-			if (registRegBtn) registRegBtn.removeEventListener(Event.TRIGGERED, registerHandler);
-			
-			StaticGUI._safeRemoveChildren(group, true);
-			StaticGUI._safeRemoveChildren(this, true);
-			
-			super.dispose();
 		}
 		
 		protected function mailRegHandler(event:Event):void {

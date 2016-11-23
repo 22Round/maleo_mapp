@@ -74,11 +74,6 @@ package screens.splash {
 			layout.paddingTop = 50;
 			this.layout = layout;
 			
-			bgQuad = new Quad(400, 400, 0xffffff);
-			bgSkin = new Image(bgQuad.texture);
-			
-			this.backgroundSkin = bgSkin
-			
 			btnQuad = new Quad(400, 80);
 			btnSkin = new ImageSkin(btnQuad.texture);
 			btnSkin.scale9Grid = new Rectangle(2, 3, 3, 8);

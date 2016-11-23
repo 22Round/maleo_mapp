@@ -2,10 +2,13 @@ package application.utils {
 	import feathers.controls.Button;
 	import feathers.controls.Label;
 	import feathers.controls.TextArea;
+	import feathers.controls.TextInput;
 	import feathers.controls.text.BitmapFontTextRenderer;
 	import feathers.controls.text.ITextEditorViewPort;
+	import feathers.controls.text.TextFieldTextEditor;
 	import feathers.controls.text.TextFieldTextEditorViewPort;
 	import feathers.controls.text.TextFieldTextRenderer;
+	import feathers.core.ITextEditor;
 	import feathers.core.ITextRenderer;
 	import feathers.skins.ImageSkin;
 	import feathers.text.BitmapFontTextFormat;
@@ -63,6 +66,23 @@ package application.utils {
 			_loc_2.removeChild(param1);
 			return true;
 		} // end function
+		
+		public static function _safeRemoveChildren(param1:DisplayObjectContainer, dispose:Boolean = false):Boolean {
+			if (param1 == null) {
+				//Tracer._log("couldnt remove: " + param1);
+				return false;
+			} else if (dispose == true) {
+				
+				while (param1.numChildren > 0) {
+					param1.getChildAt(0).dispose();
+					param1.removeChildAt(0)	
+				}
+				
+				param1.dispose();
+			}
+			
+			return true;
+		}
 		   
 		   
 		   public static function _setButtonBitmapLabel(target:Button,  lab:String, yoff:Number, fontName:String, ls:Number, fontSize:int = -1):Button{
@@ -88,7 +108,22 @@ package application.utils {
 			
 		}
 		   
-		   
+			public static function _addBtnSkin(cont:*, label:String='', fStyle:TextFormat = null, bSkin:ImageSkin = null):Button {
+				
+				var btn:Button = new Button;
+				btn.fontStyles = fStyle;
+				btn.label = label;
+				btn.labelFactory = function():ITextRenderer {
+					var renderer:TextFieldTextRenderer = new TextFieldTextRenderer();
+					renderer.embedFonts = true;
+					//renderer.textFormat = btnStyle
+					return renderer;
+				}
+				btn.defaultSkin = bSkin;
+				cont.addChild(btn);
+				btn.validate();
+				return btn;
+			}
 		   
 		   public static function _changeFormatOfBitmapText(_bitmapTextfield:BitmapFontTextRenderer,
 															_x:Number, 
@@ -214,8 +249,33 @@ package application.utils {
 					   
 		}
 		
+		public static function _addTextInput(cont:DisplayObjectContainer, prompt_txt:String = '', inputStyle:TextFormat = null, promptStyle:TextFormat = null):TextInput {
+			
+			var input:TextInput = new TextInput;
+			input.prompt = prompt_txt;
+			input.fontStyles = inputStyle;
+			input.promptFontStyles = promptStyle;
+			
+			input.promptFactory = function():ITextRenderer {
+				var renderer:TextFieldTextRenderer = new TextFieldTextRenderer();
+				renderer.embedFonts = true;
+				return renderer;
+			};
+			
+			
+			input.textEditorFactory = function():ITextEditor {
+				var renderer:TextFieldTextEditor = new TextFieldTextEditor();
+				renderer.embedFonts = true;
+				return renderer;
+			};
+			
+			
+			cont.addChild(input);
+			input.validate();
+			return(input);
+		}
 		
-		  
+		
 		public static function _addLabel(cont:DisplayObjectContainer, lab_txt:String = '', labStyle:TextFormat = null):Label {
 			
 			var lab:Label = new Label;
@@ -230,6 +290,7 @@ package application.utils {
 			
 			
 			cont.addChild(lab);
+			lab.validate();
 			return(lab);
 		}
 		

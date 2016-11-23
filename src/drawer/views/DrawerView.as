@@ -23,7 +23,6 @@ package drawer.views {
 	import starling.events.Event;
 	
 	public class DrawerView extends ScrollContainer {
-		public static var globalStyleProvider:IStyleProvider;
 		
 		public static const CHANGE_DOCK_MODE_TO_NONE:String = "changeDockModeToNone";
 		public static const CHANGE_DOCK_MODE_TO_BOTH:String = "changeDockModeToBoth";
@@ -44,14 +43,21 @@ package drawer.views {
 		private var line:MyCanvas;
 		private var titleLabel:Label;
 		private var fillBalanceBtn:Button;
+		private var menuList:Vector.<Button>;
 		
-		override protected function get defaultStyleProvider():IStyleProvider {
-			return DrawerView.globalStyleProvider;
-		}
 		
 		override protected function initialize():void {
 			//never forget to call super.initialize()
 			super.initialize();
+			
+			var layout:VerticalLayout = new VerticalLayout();
+			//layout.horizontalAlign = HorizontalAlign.CENTER;
+			//layout.verticalAlign = VerticalAlign.MIDDLE;
+			layout.paddingTop = Settings._getIntByDPI(110);
+			layout.paddingLeft = Settings._getIntByDPI(45);
+			layout.gap = Settings._getIntByDPI(60);
+			this.layout = layout;
+			
 			
 			btnStyle1 = new TextFormat;
 			btnStyle1.font = '_bpgArialRegular';
@@ -88,15 +94,13 @@ package drawer.views {
 			menuGroup.layout = menuGroupLayout;
 			this.addChild( menuGroup );
 			
+			menuList = new Vector.<Button>;
+			
 			for (var i:uint; i < 6; i++ ) {
 				
-				btn = new Button();
-				
-				btn.label = Settings._muiPack['drawer_menu_item_'+i][Settings._lang];
-				//faceBRegBtn.layoutData = new VerticalLayoutData(50);
+				btn = StaticGUI._addBtnSkin(menuGroup, Settings._muiPack['drawer_menu_item_' + i][Settings._lang],  btnStyle1, null);
 				btn.addEventListener(Event.TRIGGERED, menuHandler);
-				btn = addBtnSkin(menuGroup, btnStyle1, null, btn);
-				
+				menuList.push(btn);
 			}
 			
 			
@@ -148,7 +152,7 @@ package drawer.views {
 			lariImg.scaleY = lariImg.scaleX;
 			lariSimGroup.addChild(lariImg);
 			
-			fillBalanceBtn = StaticGUI._addButton(sectorTwoGroup, 0, 0, Settings._muiPack['drawer_balance_btn'][Settings._lang], btnStyle1, new ImageSkin(AssetsLoader._asset.getTexture("drawer_fill_balance_btn.png")));
+			fillBalanceBtn = StaticGUI._addBtnSkin(sectorTwoGroup, Settings._muiPack['drawer_balance_btn'][Settings._lang], btnStyle1, new ImageSkin(AssetsLoader._asset.getTexture("drawer_fill_balance_btn.png")));
 			
 			line = new MyCanvas;
 			addChild(line);
@@ -156,12 +160,26 @@ package drawer.views {
 			line.lineTo(0, 0);
 			line.lineTo(Settings._getIntByDPI(400), 0);
 			
-			this.width = Settings._getIntByDPI(stage.stageWidth - 50);
+			
 			this.height = stage.height-100;
 		}
 		
 		private function menuHandler(e:Event):void {
 			
+		}
+		
+		override public function dispose():void {
+			
+			for (var i:uint; i < menuList.length; i++ ) {
+				
+				menuList[i].removeEventListener(Event.TRIGGERED, menuHandler);
+				
+			}
+			menuList = null;
+			this.removeChildren();
+			super.dispose();
+			
+			trace('dispose callde')
 		}
 		
 		private function addBtnSkin(cont:*, fStyle:TextFormat, bSkin:ImageSkin ,btn:Button):Button {
@@ -177,14 +195,6 @@ package drawer.views {
 			cont.addChild(btn);
 			btn.validate();
 			return btn;
-		}
-		
-		private function dockCheck_changeHandler(event:Event):void {
-			if (this._dockCheck.isSelected) {
-				this.dispatchEventWith(CHANGE_DOCK_MODE_TO_BOTH);
-			} else {
-				this.dispatchEventWith(CHANGE_DOCK_MODE_TO_NONE);
-			}
 		}
 	}
 }

@@ -4,12 +4,15 @@
 	import application.assetLibs.Shared;
 	import application.utils.DeviceInfo;
 	import application.utils.SendAndLoadData;
+	import feathers.controls.LayoutGroup;
 	import flash.text.engine.FontLookup;
 	import flash.text.engine.Kerning;
 	import flash.text.engine.RenderingMode;
 	import flash.text.engine.TextRotation;
 	import flash.text.AntiAliasType;
 	import flash.text.TextFieldAutoSize;
+	import screens.Splash;
+	import starling.display.DisplayObject;
 	
 	/*import fl.text.TLFTextField;
 	import flashx.textLayout.formats.TextLayoutFormat;
@@ -35,6 +38,7 @@
 		public static var _lang:String;
 		public static var _muiPack:Object;
 		public static var _sharedObj:Shared;
+		public static var _splash:Splash;
 		
 		
 		//ITEM LIBRARY
@@ -70,6 +74,43 @@
 		
 		public static function _getIntByDPI(exInt:int = 0):int {
 			return int(exInt * DeviceInfo.dpiScaleMultiplier);
+		}
+		
+		public static function _moveByDPI(obj:DisplayObject,xPos:Number = undefined, yPos:Number=undefined):DisplayObject {
+			if(!xPos) obj.x = int(xPos * DeviceInfo.dpiScaleMultiplier);
+			if(!yPos) obj.y = int(yPos * DeviceInfo.dpiScaleMultiplier);
+			
+			return obj;
+		}
+		
+		public static function _setSize(obj:DisplayObject, sizeX:Number = undefined, sizeY:Number = undefined, prop:Boolean = false, scale:Boolean = false):DisplayObject {
+			
+			if (scale) {
+				if (!sizeX) {
+					obj.scaleX = sizeX;
+					if (prop) obj.scaleY = obj.scaleX;
+				}
+				
+				if (!sizeY) {
+					obj.scaleY = sizeY;
+					if (prop) obj.scaleX = obj.scaleY;
+				}
+				
+			}else {
+				if (!sizeX) {
+					obj.x = Settings._getIntByDPI(sizeX);
+					if (prop) obj.scaleY = obj.scaleX;
+				}
+				
+				if (!sizeY) {
+					obj.y = Settings._getIntByDPI(sizeY);
+					if (prop) obj.scaleX = obj.scaleY;
+				}
+				
+			}
+			
+			return obj;
+			
 		}
 
 

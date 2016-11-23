@@ -1,71 +1,155 @@
-package screens.splash
-{
+package screens.splash {
+	
+	import application.AssetsLoader;
+	import application.utils.StaticGUI;
 	import feathers.controls.Button;
+	import feathers.controls.Label;
+	import feathers.controls.LayoutGroup;
 	import feathers.controls.PanelScreen;
+	import feathers.controls.Screen;
+	import feathers.controls.TextInput;
+	import feathers.controls.text.TextBlockTextRenderer;
+	import feathers.controls.text.TextFieldTextRenderer;
+	import feathers.core.ITextRenderer;
 	import feathers.layout.HorizontalAlign;
 	import feathers.layout.VerticalAlign;
 	import feathers.layout.VerticalLayout;
 	import feathers.layout.VerticalLayoutData;
-
+	import feathers.skins.ImageSkin;
+	import flash.geom.Rectangle;
+	import starling.display.Image;
+	import starling.display.Quad;
+	import starling.text.TextFormat;
+	import starling.textures.Texture;
+	
 	import starling.events.Event;
-
-	/**
-	 * Pops all screens from the stack to return to the root screen. An event
-	 * is mapped to the pop to root action by calling addPopToRootEvent() on the
-	 * StackScreenNavigatorItem.
-	 *
-	 * item.addPopToRootEvent(Event.CLOSE);
-	 */
-	[Event(name="close",type="starling.events.Event")]
-
-	/**
-	 * Pops this screen from the stack to return to the previous screen. An
-	 * event is mapped to the pop action by calling addPopEvent() on the
-	 * StackScreenNavigatorItem.
-	 *
-	 * item.addPopEvent(Event.CANCEL);
-	 */
-	[Event(name="cancel",type="starling.events.Event")]
-
-	public class ScreenLogin extends PanelScreen
-	{
-		public function ScreenLogin()
-		{
+	
+	public class ScreenLogin extends Screen {
+		
+		private var btnStyle1:TextFormat;
+		private var labelStyle:TextFormat;
+		private var inputStyle:TextFormat;
+		
+		private var btnMailSkin:ImageSkin;
+		private var btnFaceBSkin:ImageSkin;
+		private var btnFaceBIcom:Texture;
+		
+		private var bgQuad:Quad;
+		private var bgSkin:Image;
+		
+		private var mailRegBtn:Button;
+		private var faceBRegBtn:Button;
+		
+		private var label:Label;
+		
+		private var inputGroup:LayoutGroup;
+		private var inputGroupLayout:VerticalLayout;
+		
+		private var group:LayoutGroup;
+		private var groupLayout:VerticalLayout;
+		
+		public function ScreenLogin() {
 			super();
-			this.title = "Screen C";
+			//this.title = "Screen C";
 		}
-
-		override protected function initialize():void
-		{
+		
+		override protected function initialize():void {
+			
 			super.initialize();
-
+			
+			Settings._splash._changeBackgroundSkin();
+			
 			var layout:VerticalLayout = new VerticalLayout();
 			layout.horizontalAlign = HorizontalAlign.CENTER;
 			layout.verticalAlign = VerticalAlign.MIDDLE;
-			layout.gap = 10;
+			layout.gap = 25;
 			this.layout = layout;
-
-			var popToB1Button:Button = new Button();
-			popToB1Button.label = "Pop to Screen B";
-			popToB1Button.layoutData = new VerticalLayoutData(50);
-			popToB1Button.addEventListener(Event.TRIGGERED, popToB1Button_triggeredHandler);
-			this.addChild(popToB1Button);
-
-			var popToRootButton:Button = new Button();
-			popToRootButton.label = "Pop to Root";
-			popToRootButton.layoutData = new VerticalLayoutData(50);
-			popToRootButton.addEventListener(Event.TRIGGERED, popToRootButton_triggeredHandler);
-			this.addChild(popToRootButton);
+			
+			btnStyle1 = new TextFormat;
+			btnStyle1.font = '_bpgArialRegular';
+			btnStyle1.size = Settings._getIntByDPI(24);
+			btnStyle1.color = 0xffffff;
+			
+			labelStyle = new TextFormat;
+			labelStyle.font = '_hKolkhetyMtavBold';
+			labelStyle.size = Settings._getIntByDPI(30);
+			labelStyle.color = 0x575a5b;
+			
+			inputStyle = new TextFormat;
+			inputStyle.font = '_bpgArialRegular';
+			inputStyle.size = Settings._getIntByDPI(24);
+			inputStyle.horizontalAlign = HorizontalAlign.CENTER;
+			inputStyle.color = 0x747474;
+			
+			btnMailSkin = new ImageSkin(AssetsLoader._asset.getTexture("login_mail_btn.png"));
+			btnMailSkin.scale9Grid = new Rectangle(40, 40, 120, 120);
+			
+			btnFaceBSkin = new ImageSkin(AssetsLoader._asset.getTexture("login_facebook_btn.png"));
+			btnFaceBSkin.scale9Grid = new Rectangle(40, 40, 120, 120);
+			
+			
+			//var label:Label = StaticGUI._addLabel(this, "Sesvla", labelStyle);
+			
+			inputGroup = new LayoutGroup();
+			inputGroupLayout = new VerticalLayout();
+			inputGroupLayout.gap = 7;
+			inputGroup.layout = inputGroupLayout;
+			this.addChild(inputGroup);
+			
+			var userInputSkin:ImageSkin = new ImageSkin(AssetsLoader._asset.getTexture("login_field_border.png"));
+			userInputSkin.scale9Grid = new Rectangle(40, 40, 120, 120);
+			
+			var userPassInputSkin:ImageSkin = new ImageSkin(AssetsLoader._asset.getTexture("login_field_border.png"));
+			userPassInputSkin.scale9Grid = new Rectangle(40, 40, 120, 120);
+			
+			var userInput:TextInput = StaticGUI._addTextInput(inputGroup, Settings._muiPack['login_user_input'][Settings._lang], inputStyle, inputStyle);
+			userInput.backgroundSkin = userInputSkin;
+			
+			var passInput:TextInput = StaticGUI._addTextInput(inputGroup, Settings._muiPack['login_pass_input'][Settings._lang], inputStyle, inputStyle);
+			passInput.backgroundSkin = userPassInputSkin;
+			passInput.displayAsPassword = true;
+			
+			group = new LayoutGroup();
+			groupLayout = new VerticalLayout();
+			groupLayout.horizontalAlign = HorizontalAlign.CENTER;
+			groupLayout.gap = 50;
+			group.layout = groupLayout;
+			
+			this.addChild(group);
+			
+			mailRegBtn = StaticGUI._addBtnSkin(group, Settings._muiPack['login_submit_btn'][Settings._lang], btnStyle1, btnMailSkin);
+			mailRegBtn.addEventListener(Event.TRIGGERED, mailRegHandler);
+			
+			label = StaticGUI._addLabel(group, Settings._muiPack['login_or_lbl'][Settings._lang], labelStyle);
+			
+			faceBRegBtn = StaticGUI._addBtnSkin(group, Settings._muiPack['login_login_facebook_btn'][Settings._lang], btnStyle1, btnFaceBSkin);
+			faceBRegBtn.defaultIcon = new Image(AssetsLoader._asset.getTexture("facebook_btn_ico.png"));
+			faceBRegBtn.iconOffsetX = -15;
+			faceBRegBtn.addEventListener(Event.TRIGGERED, faceBdHandler);
+			
+			
+		
 		}
-
-		protected function popToB1Button_triggeredHandler(event:Event):void
-		{
-			this.dispatchEventWith(Event.CANCEL);
+		
+		override public function dispose():void {
+			
+			
+			if (mailRegBtn) mailRegBtn.removeEventListener(Event.TRIGGERED, mailRegHandler);
+			if (faceBRegBtn) faceBRegBtn.removeEventListener(Event.TRIGGERED, faceBdHandler);
+			
+			StaticGUI._safeRemoveChildren(group, true);
+			StaticGUI._safeRemoveChildren(inputGroup, true);
+			StaticGUI._safeRemoveChildren(this, true);
+			
+			super.dispose();
 		}
-
-		protected function popToRootButton_triggeredHandler(event:Event):void
-		{
-			this.dispatchEventWith(Event.CLOSE);
+		
+		protected function mailRegHandler(event:Event):void {
+			this.dispatchEventWith(AppEvent.LOGIN_NATIVE);
+		}
+		
+		protected function faceBdHandler(event:Event):void {
+			this.dispatchEventWith(AppEvent.LOGIN_FACEBOOK);
 		}
 	}
 }

@@ -71,7 +71,6 @@ package {
 			
 			UserPrefs._write();
 			var ob:Object = UserPrefs._read();
-			trace(ob);
 			
 		}
 
