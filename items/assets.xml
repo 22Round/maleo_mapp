@@ -4,37 +4,42 @@
 	Created with ShoeBox
 	http://renderhjs.net/shoebox/
 	-->
-	<SubTexture name="check_empty.png"	x="444"	y="779"	width="34"	height="34" frameX="-0" frameY="-0" frameWidth="34" frameHeight="34"/>
-	<SubTexture name="check_full.png"	x="374"	y="987"	width="34"	height="34" frameX="-0" frameY="-0" frameWidth="34" frameHeight="34"/>
+	<SubTexture name="arrowtoleft_white_btn.png"	x="384"	y="723"	width="85"	height="73" frameX="-0" frameY="-0" frameWidth="85" frameHeight="73"/>
+	<SubTexture name="check_empty.png"	x="473"	y="979"	width="34"	height="34" frameX="-0" frameY="-0" frameWidth="34" frameHeight="34"/>
+	<SubTexture name="check_full.png"	x="508"	y="981"	width="34"	height="34" frameX="-0" frameY="-0" frameWidth="34" frameHeight="34"/>
+	<SubTexture name="close_white_btn.png"	x="461"	y="797"	width="71"	height="69" frameX="-0" frameY="-0" frameWidth="71" frameHeight="69"/>
 	<SubTexture name="drawer_fill_balance_btn.png"	x="0"	y="916"	width="264"	height="68" frameX="-0" frameY="-0" frameWidth="264" frameHeight="68"/>
-	<SubTexture name="drawer_setting_ico.png"	x="438"	y="723"	width="55"	height="55" frameX="-0" frameY="-0" frameWidth="55" frameHeight="55"/>
-	<SubTexture name="facebook_btn_ico.png"	x="335"	y="976"	width="38"	height="38" frameX="-0" frameY="-0" frameWidth="38" frameHeight="38"/>
-	<SubTexture name="faq_btn.png"	x="281"	y="879"	width="98"	height="96" frameX="-0" frameY="-0" frameWidth="98" frameHeight="96"/>
+	<SubTexture name="drawer_setting_ico.png"	x="534"	y="925"	width="55"	height="55" frameX="-0" frameY="-0" frameWidth="55" frameHeight="55"/>
+	<SubTexture name="edit_white_btn.png"	x="386"	y="797"	width="74"	height="73" frameX="-0" frameY="-0" frameWidth="74" frameHeight="73"/>
+	<SubTexture name="facebook_btn_ico.png"	x="434"	y="971"	width="38"	height="38" frameX="-0" frameY="-0" frameWidth="38" frameHeight="38"/>
+	<SubTexture name="faq_blue_btn.png"	x="281"	y="879"	width="98"	height="96" frameX="-0" frameY="-0" frameWidth="98" frameHeight="96"/>
+	<SubTexture name="faq_white_btn.png"	x="380"	y="879"	width="92"	height="91" frameX="-0" frameY="-0" frameWidth="92" frameHeight="91"/>
 	<SubTexture name="footer_item_1_normal.png"	x="287"	y="976"	width="47"	height="45" frameX="-0" frameY="-0" frameWidth="47" frameHeight="45"/>
-	<SubTexture name="footer_item_1_selected.png"	x="441"	y="945"	width="47"	height="45" frameX="-0" frameY="-0" frameWidth="47" frameHeight="45"/>
-	<SubTexture name="footer_item_2_normal.png"	x="367"	y="723"	width="70"	height="57" frameX="-0" frameY="-0" frameWidth="70" frameHeight="57"/>
-	<SubTexture name="footer_item_2_selected.png"	x="296"	y="723"	width="70"	height="57" frameX="-0" frameY="-0" frameWidth="70" frameHeight="57"/>
-	<SubTexture name="footer_item_3_normal.png"	x="386"	y="781"	width="57"	height="57" frameX="-0" frameY="-0" frameWidth="57" frameHeight="57"/>
-	<SubTexture name="footer_item_3_selected.png"	x="386"	y="781"	width="57"	height="57" frameX="-0" frameY="-0" frameWidth="57" frameHeight="57"/>
-	<SubTexture name="footer_item_4_normal.png"	x="441"	y="892"	width="53"	height="52" frameX="-0" frameY="-0" frameWidth="53" frameHeight="52"/>
-	<SubTexture name="footer_item_4_selected.png"	x="441"	y="839"	width="53"	height="52" frameX="-0" frameY="-0" frameWidth="53" frameHeight="52"/>
-	<SubTexture name="footer_item_5_normal.png"	x="380"	y="879"	width="60"	height="53" frameX="-0" frameY="-0" frameWidth="60" frameHeight="53"/>
-	<SubTexture name="footer_item_5_selected.png"	x="380"	y="933"	width="60"	height="53" frameX="-0" frameY="-0" frameWidth="60" frameHeight="53"/>
+	<SubTexture name="footer_item_1_selected.png"	x="576"	y="399"	width="47"	height="45" frameX="-0" frameY="-0" frameWidth="47" frameHeight="45"/>
+	<SubTexture name="footer_item_2_normal.png"	x="473"	y="867"	width="70"	height="57" frameX="-0" frameY="-0" frameWidth="70" frameHeight="57"/>
+	<SubTexture name="footer_item_2_selected.png"	x="470"	y="723"	width="70"	height="57" frameX="-0" frameY="-0" frameWidth="70" frameHeight="57"/>
+	<SubTexture name="footer_item_3_normal.png"	x="541"	y="723"	width="57"	height="57" frameX="-0" frameY="-0" frameWidth="57" frameHeight="57"/>
+	<SubTexture name="footer_item_3_selected.png"	x="541"	y="723"	width="57"	height="57" frameX="-0" frameY="-0" frameWidth="57" frameHeight="57"/>
+	<SubTexture name="footer_item_4_normal.png"	x="380"	y="971"	width="53"	height="52" frameX="-0" frameY="-0" frameWidth="53" frameHeight="52"/>
+	<SubTexture name="footer_item_4_selected.png"	x="544"	y="835"	width="53"	height="52" frameX="-0" frameY="-0" frameWidth="53" frameHeight="52"/>
+	<SubTexture name="footer_item_5_normal.png"	x="533"	y="781"	width="60"	height="53" frameX="-0" frameY="-0" frameWidth="60" frameHeight="53"/>
+	<SubTexture name="footer_item_5_selected.png"	x="473"	y="925"	width="60"	height="53" frameX="-0" frameY="-0" frameWidth="60" frameHeight="53"/>
 	<SubTexture name="intro_start_btn.png"	x="0"	y="723"	width="295"	height="80" frameX="-0" frameY="-0" frameWidth="295" frameHeight="80"/>
 	<SubTexture name="item_label_red.png"	x="0"	y="985"	width="145"	height="33" frameX="-0" frameY="-0" frameWidth="145" frameHeight="33"/>
 	<SubTexture name="item_label_yellow.png"	x="146"	y="985"	width="140"	height="33" frameX="-0" frameY="-0" frameWidth="140" frameHeight="33"/>
-	<SubTexture name="lari_simb.png"	x="409"	y="987"	width="21"	height="23" frameX="-0" frameY="-0" frameWidth="21" frameHeight="23"/>
-	<SubTexture name="login_facebook_btn.png"	x="0"	y="642"	width="575"	height="80" frameX="-0" frameY="-0" frameWidth="575" frameHeight="80"/>
+	<SubTexture name="lari_simb.png"	x="543"	y="981"	width="21"	height="23" frameX="-0" frameY="-0" frameWidth="21" frameHeight="23"/>
+	<SubTexture name="login_facebook_btn.png"	x="0"	y="399"	width="575"	height="80" frameX="-0" frameY="-0" frameWidth="575" frameHeight="80"/>
 	<SubTexture name="login_field_border.png"	x="0"	y="561"	width="575"	height="80" frameX="-0" frameY="-0" frameWidth="575" frameHeight="80"/>
 	<SubTexture name="login_mail_btn.png"	x="0"	y="480"	width="575"	height="80" frameX="-0" frameY="-0" frameWidth="575" frameHeight="80"/>
 	<SubTexture name="maleo_logo_blue.png"	x="0"	y="860"	width="280"	height="55" frameX="-0" frameY="-0" frameWidth="280" frameHeight="55"/>
 	<SubTexture name="maleo_logo_wite.png"	x="0"	y="804"	width="280"	height="55" frameX="-0" frameY="-0" frameWidth="280" frameHeight="55"/>
-	<SubTexture name="menu_flow_btn.png"	x="281"	y="804"	width="104"	height="74" frameX="-0" frameY="-0" frameWidth="104" frameHeight="74"/>
-	<SubTexture name="post_item_btn_arrow.png"	x="479"	y="779"	width="32"	height="56" frameX="-0" frameY="-0" frameWidth="32" frameHeight="56"/>
-	<SubTexture name="post_item_green_light.png"	x="386"	y="839"	width="37"	height="37" frameX="-0" frameY="-0" frameWidth="37" frameHeight="37"/>
+	<SubTexture name="menu_blue_btn.png"	x="281"	y="804"	width="104"	height="74" frameX="-0" frameY="-0" frameWidth="104" frameHeight="74"/>
+	<SubTexture name="menu_white_btn.png"	x="296"	y="723"	width="87"	height="62" frameX="-0" frameY="-0" frameWidth="87" frameHeight="62"/>
+	<SubTexture name="post_item_btn_arrow.png"	x="576"	y="445"	width="32"	height="56" frameX="-0" frameY="-0" frameWidth="32" frameHeight="56"/>
+	<SubTexture name="post_item_green_light.png"	x="335"	y="976"	width="37"	height="37" frameX="-0" frameY="-0" frameWidth="37" frameHeight="37"/>
 	<SubTexture name="post_items_bg.png"	x="0"	y="243"	width="604"	height="155" frameX="-0" frameY="-0" frameWidth="604" frameHeight="155"/>
-	<SubTexture name="posta_item_pay_btn.png"	x="0"	y="162"	width="608"	height="80" frameX="-0" frameY="-0" frameWidth="608" frameHeight="80"/>
-	<SubTexture name="posta_item_submit__btn_disabled.png"	x="0"	y="81"	width="608"	height="80" frameX="-0" frameY="-0" frameWidth="608" frameHeight="80"/>
-	<SubTexture name="posta_item_submit_btn_normal.png"	x="0"	y="0"	width="608"	height="80" frameX="-0" frameY="-0" frameWidth="608" frameHeight="80"/>
-	<SubTexture name="register_btn.png"	x="0"	y="399"	width="575"	height="80" frameX="-0" frameY="-0" frameWidth="575" frameHeight="80"/>
+	<SubTexture name="posta_item_pay_btn.png"	x="0"	y="81"	width="608"	height="80" frameX="-0" frameY="-0" frameWidth="608" frameHeight="80"/>
+	<SubTexture name="posta_item_submit__btn_disabled.png"	x="0"	y="0"	width="608"	height="80" frameX="-0" frameY="-0" frameWidth="608" frameHeight="80"/>
+	<SubTexture name="posta_item_submit_btn_normal.png"	x="0"	y="162"	width="608"	height="80" frameX="-0" frameY="-0" frameWidth="608" frameHeight="80"/>
+	<SubTexture name="register_btn.png"	x="0"	y="642"	width="575"	height="80" frameX="-0" frameY="-0" frameWidth="575" frameHeight="80"/>
 </TextureAtlas>

@@ -12,6 +12,7 @@ package components {
 	import feathers.core.ITextRenderer;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
+	import feathers.layout.FlowLayout;
 	import feathers.layout.HorizontalAlign;
 	import feathers.layout.RelativePosition;
 	import feathers.layout.VerticalAlign;
@@ -54,6 +55,10 @@ package components {
 		private var domainStyle:TextFormat;
 		private var productStyle:TextFormat;
 		private var infoStyle:TextFormat;
+		private var amountStyle:TextFormat;
+		private var statusStyle:TextFormat;
+		private var mailLocAmountStyle:TextFormat;
+		private var lariStyle:TextFormat;
 		
 		private var bgQuad:Quad;
 		private var bgSkin:Image;
@@ -66,15 +71,30 @@ package components {
 		private var productLabel:Label;
 		private var infoLabel:Label;
 		private var detailsIco:Image;
+		private var lariSymbolLabel:Label;
 		private var fromName:Button;
 		
-		public static const COMPLETED_MAIL = 'completedMail';
-		public static const ENTER_GOODS_MAIL = 'enterGoodsMail';
-		public static const PAY_MAIL = 'payMail';
+		private var statusImg:Image;
+		private var statusLabel:Label;
+		
+		private var infoLabelLayoutData:AnchorLayoutData;
+		private var statusLayoutData:AnchorLayoutData;
+		private var detailsBtnLayoutData:AnchorLayoutData;
+		private var statusGroup:LayoutGroup;
+		private var statusGroupLayout:FlowLayout;
+		
+		public static const COMPLETED_MAIL:String = 'completedMail';
+		public static const ENTER_GOODS_MAIL:String = 'enterGoodsMail';
+		public static const PAY_MAIL:String = 'payMail';
+		public static const UNKNOWN_MAIL:String = 'unknownMail';
 		
 		public var _state:String;
 		
-		public function MailBlock() {
+		
+		
+		public function MailBlock(st:String) {
+			
+			_state = st;
 			super();
 			//this.title = "Screen C";
 		}
@@ -119,6 +139,29 @@ package components {
 			infoStyle.horizontalAlign = HorizontalAlign.LEFT;
 			infoStyle.italic = true;
 			
+			mailLocAmountStyle = new TextFormat;
+			mailLocAmountStyle.font = '_bpgArialRegular';
+			mailLocAmountStyle.size = Settings._getIntByDPI(30);
+			mailLocAmountStyle.color = 0x575a5b;
+			mailLocAmountStyle.horizontalAlign = HorizontalAlign.LEFT;
+			
+			statusStyle = new TextFormat;
+			statusStyle.font = '_bpgArialRegular';
+			statusStyle.size = Settings._getIntByDPI(14);
+			statusStyle.color = 0xffffff;
+			statusStyle.horizontalAlign = HorizontalAlign.CENTER;
+			
+			amountStyle = new TextFormat;
+			amountStyle.font = '_bpgArialRegular';
+			amountStyle.size = Settings._getIntByDPI(24);
+			amountStyle.color = 0xff6363;
+			amountStyle.horizontalAlign = HorizontalAlign.LEFT;
+			
+			lariStyle = new TextFormat;
+			lariStyle.font = '_lariSymbol';
+			lariStyle.size = Settings._getIntByDPI(24);
+			lariStyle.color = 0xff6363;
+			
 			var fromNameLayoutData:AnchorLayoutData = new AnchorLayoutData();
 			fromNameLayoutData.top = Settings._getIntByDPI(21);
 			fromNameLayoutData.left = Settings._getIntByDPI(12);
@@ -140,30 +183,154 @@ package components {
 			productLabel.layoutData = productLabelLayoutData;
 			
 			
-			var infoLabelLayoutData:AnchorLayoutData = new AnchorLayoutData();
-			infoLabelLayoutData.top = Settings._getIntByDPI(88);
-			infoLabelLayoutData.left = Settings._getIntByDPI(28);
-			infoLabel = StaticGUI._addLabel(this, "გთხოვთ მიაკითხოთ ამანათს<br>ანდ აელოდოთ კურიერს", infoStyle);
-			infoLabel.width = 400;
-			infoLabel.textRendererProperties.wordWrap = true;
-			infoLabel.textRendererProperties.isHTML = true;
-			infoLabel.layoutData = infoLabelLayoutData;
+			switch(_state) {
+				
+				case MailBlock.COMPLETED_MAIL:
+					
+					infoLabelLayoutData = new AnchorLayoutData();
+					infoLabelLayoutData.top = Settings._getIntByDPI(88);
+					infoLabelLayoutData.left = Settings._getIntByDPI(28);
+					infoLabel = StaticGUI._addLabel(this, "გთხოვთ მიაკითხოთ ამანათს<br>ანდ აელოდოთ კურიერს", infoStyle);
+					infoLabel.width = 400;
+					infoLabel.textRendererProperties.wordWrap = true;
+					infoLabel.textRendererProperties.isHTML = true;
+					infoLabel.layoutData = infoLabelLayoutData;
+					
+					detailsBtnLayoutData = new AnchorLayoutData();
+					detailsBtnLayoutData.verticalCenter = 0;
+					detailsBtnLayoutData.right = Settings._getIntByDPI(28);
 			
-			var detailsBtnLayoutData:AnchorLayoutData = new AnchorLayoutData();
-			detailsBtnLayoutData.verticalCenter = 0;
-			detailsBtnLayoutData.right = Settings._getIntByDPI(28);
+					
+					detailsIco = new Image(AssetsLoader._asset.getTexture("post_item_btn_arrow.png"));
+					detailsIco.textureSmoothing = TextureSmoothing.BILINEAR;
+					detailsIco.width = Settings._getIntByDPI(15);
+					detailsIco.scaleY = domainIco.scaleX;
+					
+					detailsBtn = StaticGUI._addBtnSkin(this, 'დეტალები', btnStyle2);
+					detailsBtn.addEventListener(Event.TRIGGERED, detailsHandler);
+					detailsBtn.defaultIcon = detailsIco;
+					detailsBtn.iconPosition = RelativePosition.RIGHT;
+					detailsBtn.layoutData = detailsBtnLayoutData;
+					
+					break;
+					
+				case MailBlock.UNKNOWN_MAIL:
+					
+					fromName.defaultIcon = null;
+					
+					infoLabelLayoutData = new AnchorLayoutData();
+					infoLabelLayoutData.bottom = Settings._getIntByDPI(20);
+					infoLabelLayoutData.left = Settings._getIntByDPI(28);
+					infoLabel = StaticGUI._addLabel(this, "20 $", mailLocAmountStyle);
+					infoLabel.width = 200;
+					infoLabel.layoutData = infoLabelLayoutData;
+					
+					detailsBtnLayoutData = new AnchorLayoutData();
+					detailsBtnLayoutData.verticalCenter = 0;
+					detailsBtnLayoutData.right = Settings._getIntByDPI(28);
 			
+					
+					detailsIco = new Image(AssetsLoader._asset.getTexture("post_item_btn_arrow.png"));
+					detailsIco.textureSmoothing = TextureSmoothing.BILINEAR;
+					detailsIco.width = Settings._getIntByDPI(15);
+					detailsIco.scaleY = domainIco.scaleX;
+					
+					detailsBtn = StaticGUI._addBtnSkin(this, 'დეტალები', btnStyle2);
+					detailsBtn.addEventListener(Event.TRIGGERED, detailsHandler);
+					detailsBtn.defaultIcon = detailsIco;
+					detailsBtn.iconPosition = RelativePosition.RIGHT;
+					detailsBtn.layoutData = detailsBtnLayoutData;
+					
+					break;
+					
+				case MailBlock.ENTER_GOODS_MAIL:
+					
+					fromName.defaultIcon = null;
+					
+					infoLabelLayoutData = new AnchorLayoutData();
+					infoLabelLayoutData.top = Settings._getIntByDPI(88);
+					infoLabelLayoutData.left = Settings._getIntByDPI(28);
+					infoLabel = StaticGUI._addLabel(this, "გთხოვთ დაადეკლარიროთ ამანათი<br>მომდევნო 24 საათის გამვალობაში", infoStyle);
+					infoLabel.width = 400;
+					infoLabel.textRendererProperties.wordWrap = true;
+					infoLabel.textRendererProperties.isHTML = true;
+					infoLabel.layoutData = infoLabelLayoutData;
+					
+					statusLayoutData = new AnchorLayoutData();
+					statusLayoutData.verticalCenter = 0;
+					statusLayoutData.right = Settings._getIntByDPI(-75);
+					
+					statusGroup = new LayoutGroup();
+					statusGroup.width = Settings._getIntByDPI(350);
+					statusGroupLayout = new FlowLayout();
+					statusGroupLayout.horizontalAlign = HorizontalAlign.CENTER;
+					statusGroupLayout.firstHorizontalGap = Settings._getIntByDPI(170);
+					statusGroupLayout.gap = 5;
+					statusGroup.layout = statusGroupLayout;
+					statusGroup.layoutData = statusLayoutData;
+					addChild(statusGroup);
+					
+					statusImg = new Image(AssetsLoader._asset.getTexture("item_label_yellow.png"));
+					statusImg.width = Settings._getIntByDPI(145);
+					statusImg.scaleY = statusImg.scaleX;
+					//label2Group.addChild(statusImg)
+					statusLabel = StaticGUI._addLabel(statusGroup, 'დეკლარირება', statusStyle);
+					statusLabel.backgroundSkin = statusImg;
+					
+					break;
+					
+				case MailBlock.PAY_MAIL:
+					
+					fromName.defaultIcon = null;
+					
+					infoLabelLayoutData = new AnchorLayoutData();
+					infoLabelLayoutData.bottom = Settings._getIntByDPI(20);
+					infoLabelLayoutData.left = Settings._getIntByDPI(28);
+					infoLabel = StaticGUI._addLabel(this, "20 $", mailLocAmountStyle);
+					infoLabel.width = 200;
+					infoLabel.layoutData = infoLabelLayoutData;
+					
+					statusLayoutData = new AnchorLayoutData();
+					statusLayoutData.verticalCenter = 30;
+					statusLayoutData.right = Settings._getIntByDPI(-75);
+					
+					statusGroup = new LayoutGroup();
+					statusGroup.width = Settings._getIntByDPI(350);
+					statusGroupLayout = new FlowLayout();
+					statusGroupLayout.horizontalAlign = HorizontalAlign.CENTER;
+					statusGroupLayout.firstHorizontalGap = Settings._getIntByDPI(170);
+					statusGroupLayout.gap = 5;
+					statusGroup.layout = statusGroupLayout;
+					statusGroup.layoutData = statusLayoutData;
+					addChild(statusGroup);
+					
+					statusImg = new Image(AssetsLoader._asset.getTexture("item_label_red.png"));
+					statusImg.width = Settings._getIntByDPI(145);
+					statusImg.scaleY = statusImg.scaleX;
+					//label2Group.addChild(statusImg)
+					statusLabel = StaticGUI._addLabel(statusGroup, 'გადასახდელია', statusStyle);
+					statusLabel.backgroundSkin = statusImg;
+					var amountLabel:Label = StaticGUI._addLabel(statusGroup, '12233.54', amountStyle);
+					
+					
+					var lariSimGroup:LayoutGroup = new LayoutGroup();
+					var lariSimGroupLayout:VerticalLayout = new VerticalLayout();
+					lariSimGroupLayout.paddingTop = Settings._getIntByDPI(1);
+					
+					lariSimGroup.layout = lariSimGroupLayout;
+					statusGroup.addChild(lariSimGroup);
+					
+					lariSymbolLabel = StaticGUI._addLabel(lariSimGroup, 's', lariStyle);
+					//var lariImg:Image = new Image(AssetsLoader._asset.getTexture("lari_simb.png"));
+					/*lariImg.color = 0xff6363;
+					lariImg.textureSmoothing = TextureSmoothing.TRILINEAR;
+					lariImg.width = Settings._getIntByDPI(19);
+					lariImg.scaleY = lariImg.scaleX;
+					lariSimGroup.addChild(lariImg);*/
+					
+					break;
+			}
 			
-			detailsIco = new Image(AssetsLoader._asset.getTexture("post_item_btn_arrow.png"));
-			detailsIco.textureSmoothing = TextureSmoothing.BILINEAR;
-			detailsIco.width = Settings._getIntByDPI(15);
-			detailsIco.scaleY = domainIco.scaleX;
-			
-			detailsBtn = StaticGUI._addBtnSkin(this, 'დეტალები', btnStyle2);
-			detailsBtn.addEventListener(Event.TRIGGERED, detailsHandler);
-			detailsBtn.defaultIcon = detailsIco;
-			detailsBtn.iconPosition = RelativePosition.RIGHT;
-			detailsBtn.layoutData = detailsBtnLayoutData;
 		}
 		
 		protected function detailsHandler(event:Event):void {

@@ -7,8 +7,8 @@ package screens {
 	import feathers.events.FeathersEventType;
 	import screens.posta.ScreenAllMails;
 	import screens.splash.ScreenIntro;
-	import screens.splash.ScreenLang;
-	import screens.splash.ScreenLoginCase;
+	//import screens.splash.ScreenLang;
+	//import screens.splash.ScreenLoginCase;
 	import screens.splash.ScreenRegistration;
 	import screens.splash.ScreenLogin;
 	import feathers.motion.Fade;
@@ -23,15 +23,12 @@ package screens {
 	
 	public class Splash extends LayoutGroup {
 		
-		
-		private static const SCREEN_ALLMAILS:String = 'allMails';
-		
 		private var logoWiteTexture:Texture;
 		private var logoBlueTexture:Texture;
 		
 		private var logoImg:Image;
 		private var shadowQade:Quad;
-		
+		private var topHeader:TopHeader;
 		
 		public function Splash() {
 			
@@ -47,6 +44,8 @@ package screens {
 			
 			
 			_changeBackgroundSkin(0xecf0f4);
+			topHeader = new TopHeader;
+			
 			logoWiteTexture = AssetsLoader._asset.getTexture("maleo_logo_wite.png");
 			logoBlueTexture = AssetsLoader._asset.getTexture("maleo_logo_blue.png");
 			
@@ -61,10 +60,10 @@ package screens {
 			navigator.popTransition = Slide.createSlideRightTransition();
 			navigator.addEventListener(FeathersEventType.TRANSITION_START, navigatorTransitionCompleteHandler);
 			
-			var item:StackScreenNavigatorItem = new StackScreenNavigatorItem(ScreenIntro);//ScreenIntro  ScreenLoginCase ScreenAllMails
+			var item:StackScreenNavigatorItem = new StackScreenNavigatorItem(ScreenAllMails);//ScreenIntro  ScreenLoginCase ScreenAllMails
 			item.setScreenIDForPushEvent(AppEvent.LOGIN_NATIVE, ScreenID.LOGIN_CASE);
 			navigator.addScreen(ScreenID.INTRO, item);
-			
+			/*
 			item = new StackScreenNavigatorItem(ScreenLang);
 			item.setScreenIDForPushEvent(Event.COMPLETE, ScreenID.LOGIN_CASE);
 			item.setScreenIDForReplaceEvent(Event.CHANGE, ScreenID.LOGIN_CASE);
@@ -75,7 +74,7 @@ package screens {
 			//itemLoginCase.pushTransition = Fade.createFadeInTransition();
 			item.addPopEvent(Event.CANCEL);
 			navigator.addScreen(ScreenID.LOGIN_CASE, item);
-			
+			*/
 			/*var itemC:StackScreenNavigatorItem = new StackScreenNavigatorItem(ScreenLogin);
 			itemC.addPopToRootEvent(Event.CLOSE);
 			itemC.addPopEvent(Event.CANCEL);
@@ -87,12 +86,12 @@ package screens {
 			
 			//addChild(logoImg);
 			
-			var topH:TopHeader = new TopHeader;
-			addChild(topH);
 			
-			var bottomH:TopFooter = new TopFooter;
+			addChild(topHeader);
+			
+			/*var bottomH:TopFooter = new TopFooter;
 			addChild(bottomH);
-			bottomH.y = stage.stageWidth - bottomH.height;
+			bottomH.y = stage.stageWidth - bottomH.height;*/
 			
 		}
 		
@@ -115,13 +114,13 @@ package screens {
 		}
 		
 		private function navigatorTransitionCompleteHandler(e:Event):void {
-			addChild(logoImg);
+			//addChild(logoImg);
 			
 			
 			switch(StackScreenNavigator(e.target).activeScreenID) {
 				
 				case ScreenID.INTRO:
-					
+					topHeader._changeBackgroundSkin(0x00b7f0);
 					logoImg.texture = logoWiteTexture;
 					
 					break;

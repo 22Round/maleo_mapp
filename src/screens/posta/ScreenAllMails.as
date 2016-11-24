@@ -6,8 +6,8 @@ package screens.posta {
 	import feathers.controls.Button;
 	import feathers.controls.Label;
 	import feathers.controls.LayoutGroup;
-	import feathers.controls.PanelScreen;
-	import feathers.controls.Screen;
+	import feathers.controls.ScrollBarDisplayMode;
+	import feathers.controls.ScrollScreen;
 	import feathers.controls.text.TextBlockTextRenderer;
 	import feathers.controls.text.TextFieldTextRenderer;
 	import feathers.core.ITextRenderer;
@@ -24,48 +24,13 @@ package screens.posta {
 	
 	import starling.events.Event;
 	
-	/**
-	 * Pops all screens from the stack to return to the root screen. An event
-	 * is mapped to the pop to root action by calling addPopToRootEvent() on the
-	 * StackScreenNavigatorItem.
-	 *
-	 * item.addPopToRootEvent(Event.CLOSE);
-	 */
-	[Event(name = "close", type = "starling.events.Event")]
-	
-	/**
-	 * Pops this screen from the stack to return to the previous screen. An
-	 * event is mapped to the pop action by calling addPopEvent() on the
-	 * StackScreenNavigatorItem.
-	 *
-	 * item.addPopEvent(Event.CANCEL);
-	 */
-	[Event(name = "cancel", type = "starling.events.Event")]
-	
-	
-	
-	[Event(name = "complete", type = "starling.events.Event")]
-	
-	public class ScreenAllMails extends Screen {
+	public class ScreenAllMails extends ScrollScreen {
 		
-		private var btnStyle1:TextFormat;
-		private var btnStyle2:TextFormat;
-		private var labelStyle:TextFormat;
-		
-		private var btnMailSkin:ImageSkin;
-		private var btnFaceBSkin:ImageSkin;
-		private var btnRegSkin:ImageSkin;
-		private var btnFaceBIcom:Texture;
-		
-		private var bgQuad:Quad;
-		private var bgSkin:Image;
-		
-		private var mailRegBtn:Button;
-		private var faceBRegBtn:Button;
-		private var registRegBtn:Button;
+		private var titleStyle:TextFormat;
+		private var subTitleStyle:TextFormat;
 		
 		private var title:Label;
-		
+		private var item:MailBlock;
 		
 		public function ScreenAllMails() {
 			super();
@@ -82,32 +47,70 @@ package screens.posta {
 			layout.verticalAlign = VerticalAlign.TOP;
 			layout.gap = 50;
 			layout.paddingTop = Settings._getIntByDPI(220);
+			layout.paddingBottom = Settings._getIntByDPI(20);
 			this.layout = layout;
+			this.scrollBarDisplayMode = ScrollBarDisplayMode.NONE;
 			
-			btnStyle1 = new TextFormat;
-			btnStyle1.font = '_bpgArialRegular';
-			btnStyle1.size = 24;
-			btnStyle1.color = 0xffffff;
+			titleStyle = new TextFormat;
+			titleStyle.font = '_bpgArialRegular';
+			titleStyle.size = Settings._getIntByDPI(30);
+			titleStyle.color = 0x4d5051;
 			
-			btnStyle2 = new TextFormat;
-			btnStyle2.font = '_bpgArialRegular';
-			btnStyle2.size = 24;
-			btnStyle2.color = 0x575a5b;
+			subTitleStyle = new TextFormat;
+			subTitleStyle.font = '_bpgArialRegular';
+			subTitleStyle.size = Settings._getIntByDPI(20);
+			subTitleStyle.color = 0x798188;
 			
-			labelStyle = new TextFormat;
-			labelStyle.font = '_bpgArialRegular';
-			labelStyle.size = 30;
-			labelStyle.color = 0x4d5051;
 			
-			title = StaticGUI._addLabel(this, "ჩამოსული", labelStyle);
+			var arrivedGroup:LayoutGroup = new LayoutGroup();
+			var arrivedGroupLayout:VerticalLayout = new VerticalLayout();
+			arrivedGroupLayout.horizontalAlign = HorizontalAlign.CENTER;
+			arrivedGroupLayout.verticalAlign = VerticalAlign.TOP;
+			arrivedGroupLayout.gap = 10;
+			arrivedGroup.layout = arrivedGroupLayout;
+			addChild(arrivedGroup);
 			
-			var item:MailBlock = new MailBlock;
-			addChild(item);
+			title = StaticGUI._addLabel(arrivedGroup, "ჩამოსული", titleStyle);
+			
+			item = new MailBlock(MailBlock.COMPLETED_MAIL);
+			arrivedGroup.addChild(item);
+			item = new MailBlock(MailBlock.PAY_MAIL);
+			arrivedGroup.addChild(item);
+			
+			
+			var recivedGroup:LayoutGroup = new LayoutGroup();
+			var recivedGroupLayout:VerticalLayout = new VerticalLayout();
+			recivedGroupLayout.horizontalAlign = HorizontalAlign.CENTER;
+			recivedGroupLayout.verticalAlign = VerticalAlign.TOP;
+			recivedGroupLayout.gap = 10;
+			recivedGroup.layout = arrivedGroupLayout;
+			addChild(recivedGroup);
+			title = StaticGUI._addLabel(recivedGroup, "ჩამოსული აშშ-ში", titleStyle);
+			item = new MailBlock(MailBlock.ENTER_GOODS_MAIL);
+			recivedGroup.addChild(item);
+			item = new MailBlock(MailBlock.UNKNOWN_MAIL);
+			recivedGroup.addChild(item);
+			
+			
+			var sendGroup:LayoutGroup = new LayoutGroup();
+			var sendGroupLayout:VerticalLayout = new VerticalLayout();
+			sendGroupLayout.horizontalAlign = HorizontalAlign.CENTER;
+			sendGroupLayout.verticalAlign = VerticalAlign.TOP;
+			sendGroupLayout.gap = 10;
+			sendGroup.layout = sendGroupLayout;
+			addChild(sendGroup);
+			title = StaticGUI._addLabel(sendGroup, "გამოგზავნილი (გზაშია)", titleStyle);
+			title = StaticGUI._addLabel(sendGroup, 'სავარაუდო ჩამოფრენა - 2016, 23 ოქტომბერი', subTitleStyle);
+			item = new MailBlock(MailBlock.ENTER_GOODS_MAIL);
+			sendGroup.addChild(item);
+			title = StaticGUI._addLabel(sendGroup, 'სავარაუდო ჩამოფრენა - 2016, 3 ნოემბერი', subTitleStyle);
+			item = new MailBlock(MailBlock.UNKNOWN_MAIL);
+			sendGroup.addChild(item);
 			
 			this.width = stage.stageWidth;
 			this.height = stage.stageHeight;
 			
-			
+			this.validate();
 		}
 		
 		protected function mailRegHandler(event:Event):void {
