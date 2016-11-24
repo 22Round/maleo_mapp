@@ -28,25 +28,6 @@ package components {
 	
 	import starling.events.Event;
 	
-	/**
-	 * Pops all screens from the stack to return to the root screen. An event
-	 * is mapped to the pop to root action by calling addPopToRootEvent() on the
-	 * StackScreenNavigatorItem.
-	 *
-	 * item.addPopToRootEvent(Event.CLOSE);
-	 */
-	[Event(name = "close", type = "starling.events.Event")]
-	
-	/**
-	 * Pops this screen from the stack to return to the previous screen. An
-	 * event is mapped to the pop action by calling addPopEvent() on the
-	 * StackScreenNavigatorItem.
-	 *
-	 * item.addPopEvent(Event.CANCEL);
-	 */
-	[Event(name = "cancel", type = "starling.events.Event")]
-	
-	[Event(name = "complete", type = "starling.events.Event")]
 	
 	public class MailBlock extends LayoutGroup {
 		

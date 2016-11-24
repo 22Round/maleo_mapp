@@ -47,7 +47,7 @@ package screens.posta {
 			layout.verticalAlign = VerticalAlign.TOP;
 			layout.gap = 50;
 			layout.paddingTop = Settings._getIntByDPI(220);
-			layout.paddingBottom = Settings._getIntByDPI(20);
+			layout.paddingBottom = Settings._getIntByDPI(130);
 			this.layout = layout;
 			this.scrollBarDisplayMode = ScrollBarDisplayMode.NONE;
 			

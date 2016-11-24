@@ -72,14 +72,14 @@ package drawer.views {
 			var fillBottomLayoutData:AnchorLayoutData = new AnchorLayoutData();
 			fillBottomLayoutData.left = Settings._getIntByDPI(30);
 			fillBottomLayoutData.bottom = Settings._getIntByDPI(25);
-			/*
+			
 			settingsBtn = StaticGUI._addButton(this, 0, 0, Settings._muiPack['drawer_settings_btn'][Settings._lang], btnStyle1);
 			settingsBtn.addEventListener(Event.TRIGGERED, settingsHandler);
 			settingsBtn.defaultIcon = settingsIco;
 			//settingsBtn.iconOffsetX = -15;
 			settingsBtn.defaultSkin = null;
 			settingsBtn.layoutData = fillBottomLayoutData;
-			*/
+			
 			
 			//this.height = stage.stageHeight;
 			

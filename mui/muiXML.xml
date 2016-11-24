@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<langs>
+	
+	<muipack word = 'intro_skip_btn'>
+		<lang ID = 'en'>Skip</lang>
+		<lang ID = 'ru'>Пропускать</lang>
+		<lang ID = 'ka'>გამოტოვება</lang>
+	</muipack>
+
+	<muipack word = 'aboutNav'>
+		<lang ID = 'en'><![CDATA[ABOUT <font color="#3bb80a">AZERBAIJAN</font>]]></lang>
+		<lang ID = 'ru'><![CDATA[ОБ <font color="#3bb80a">АЗЕРБАЙДЖАНЕ</font>]]></lang>
+		<lang ID = 'ka'><![CDATA[<font color="#3bb80a">AZƏRBAYCAN</font> HAQQINDA]]></lang>
+	</muipack>
+	
+	<muipack word = 'screenSaverLegend'>
+		<lang ID = 'en'><![CDATA[Tap to remove <font color="#3bb80a">Screen Saver</font>]]></lang>
+		<lang ID = 'ru'><![CDATA[Нажмите, чтобы удалить <font color="#3bb80a">заставку</font>]]></lang>
+		<lang ID = 'ka'><![CDATA[Нажмите, чтобы удалить <font color="#3bb80a">заставку</font>]]></lang>
+	</muipack>
+	
+	
+	<!-- drawer menu items and labels -->
+	
+	
+	<muipack word = 'drawer_menu_item_0'>
+		<lang ID = 'en'>Dashboard</lang>
+		<lang ID = 'ru'>Dashboard</lang>
+		<lang ID = 'ka'>Dashboard</lang>
+	</muipack>
+	<muipack word = 'drawer_menu_item_1'>
+		<lang ID = 'en'>Parcels</lang>
+		<lang ID = 'ru'>Посылки</lang>
+		<lang ID = 'ka'>ამანათები</lang>
+	</muipack>
+	<muipack word = 'drawer_menu_item_2'>
+		<lang ID = 'en'>My addresses</lang>
+		<lang ID = 'ru'>Мои адреса</lang>
+		<lang ID = 'ka'>ჩემი მისამართები</lang>
+	</muipack>
+	<muipack word = 'drawer_menu_item_3'>
+		<lang ID = 'en'>Notifications (11)</lang>
+		<lang ID = 'ru'>Уведомления (78)</lang>
+		<lang ID = 'ka'>შეტყობინებები (58)</lang>
+	</muipack>
+	<muipack word = 'drawer_menu_item_4'>
+		<lang ID = 'en'>Catalog Favorites</lang>
+		<lang ID = 'ru'>Каталог Избранное</lang>
+		<lang ID = 'ka'>კატალოგის ფავორიტები</lang>
+	</muipack>
+	<muipack word = 'drawer_menu_item_5'>
+		<lang ID = 'en'>Service Providers</lang>
+		<lang ID = 'ru'>Поставщики услуг</lang>
+		<lang ID = 'ka'>სერვის ცენტრები</lang>
+	</muipack>
+	<muipack word = 'drawer_title_1'>
+		<lang ID = 'en'>Hello</lang>
+		<lang ID = 'ru'>Добро пожаловать</lang>
+		<lang ID = 'ka'>მოგესალმებით</lang>
+	</muipack>
+	<muipack word = 'drawer_title_2'>
+		<lang ID = 'en'>Balance</lang>
+		<lang ID = 'ru'>Баланс</lang>
+		<lang ID = 'ka'>ბალანსი</lang>
+	</muipack>
+	<muipack word = 'drawer_balance_btn'>
+		<lang ID = 'en'>Fill balance</lang>
+		<lang ID = 'ru'>Заполните баланс</lang>
+		<lang ID = 'ka'>ბალანსის შევსება</lang>
+	</muipack>
+	<muipack word = 'drawer_settings_btn'>
+		<lang ID = 'en'>Settings</lang>
+		<lang ID = 'ru'>Настройки баланс</lang>
+		<lang ID = 'ka'>პარამეტრები</lang>
+	</muipack>
+	
+	
+	<!-- login screen -->
+	
+	<muipack word = 'login_user_input'>
+		<lang ID = 'en'>Name (e-mail)</lang>
+		<lang ID = 'ru'>Имя (электронная почта)</lang>
+		<lang ID = 'ka'>სახელი (ელ.ფოსტა)</lang>
+	</muipack>
+	<muipack word = 'login_pass_input'>
+		<lang ID = 'en'>Password</lang>
+		<lang ID = 'ru'>Пароль</lang>
+		<lang ID = 'ka'>პაროლი</lang>
+	</muipack>
+	<muipack word = 'login_submit_btn'>
+		<lang ID = 'en'>Submit</lang>
+		<lang ID = 'ru'>Отправить</lang>
+		<lang ID = 'ka'>შესვლა</lang>
+	</muipack>
+	<muipack word = 'login_or_lbl'>
+		<lang ID = 'en'>OR</lang>
+		<lang ID = 'ru'>ИЛИ</lang>
+		<lang ID = 'ka'>an</lang>
+	</muipack>
+	<muipack word = 'login_login_facebook_btn'>
+		<lang ID = 'en'>Submit with Facebook</lang>
+		<lang ID = 'ru'>Войти с Facebook</lang>
+		<lang ID = 'ka'>facebook - ით შესვლა</lang>
+	</muipack>
+	
+	
+	<!-- logincase screen -->
+	
+	<muipack word = 'logincase_enter_lbl'>
+		<lang ID = 'en'>ENTER</lang>
+		<lang ID = 'ru'>ВОЙТИ</lang>
+		<lang ID = 'ka'>Sesvla</lang>
+	</muipack>
+	<muipack word = 'logincase_login_mail_btn'>
+		<lang ID = 'en'>Submit with e-mail</lang>
+		<lang ID = 'ru'>Отправить с электронной почтой</lang>
+		<lang ID = 'ka'>ელ. ფოსტის მეშვეობით</lang>
+	</muipack>
+	<muipack word = 'logincase_login_facebook_btn'>
+		<lang ID = 'en'>Submit with Facebook</lang>
+		<lang ID = 'ru'>Войти с Facebook</lang>
+		<lang ID = 'ka'>facebook - ით შესვლა</lang>
+	</muipack>
+	<muipack word = 'logincase_orregister_lbl'>
+		<lang ID = 'en'>OR SIGN UP</lang>
+		<lang ID = 'ru'>ИЛИ РЕГИСТРИРОВАТЬ</lang>
+		<lang ID = 'ka'>an gaxseniT angariSi</lang>
+	</muipack>
+	<muipack word = 'logincase_register_btn'>
+		<lang ID = 'en'>Register</lang>
+		<lang ID = 'ru'>Регистрировать</lang>
+		<lang ID = 'ka'>რეგისტრაცია</lang>
+	</muipack>
+</langs>
