@@ -3,12 +3,15 @@ package screens {
 	import application.utils.DeviceInfo;
 	import feathers.controls.Button;
 	import feathers.controls.Header;
+	import feathers.controls.text.TextFieldTextRenderer;
+	import feathers.core.ITextRenderer;
 	import feathers.skins.ImageSkin;
 	import flash.geom.Rectangle;
 	import starling.display.DisplayObject;
 	import starling.display.Image;
 	import starling.display.Quad;
 	import starling.events.Event;
+	import starling.text.TextFormat;
 	import starling.textures.TextureSmoothing;
 	
 
@@ -18,6 +21,7 @@ package screens {
 		private var btnRightSkin:ImageSkin;
 		private var bgQuad:Quad;
 		private var bgSkin:Image;
+		private var titleGeoStyle:TextFormat;
 		
 		public static const TOGGLE_LEFT_DRAWER:String = "toggleLeftDrawer";
 		
@@ -71,11 +75,22 @@ package screens {
 			this.paddingLeft = Settings._getIntByDPI(30);
 			this.paddingRight = Settings._getIntByDPI(30);
 			
-			
 			_setMenuItems(MENU_WHITE_ITEM, LEFT_ITEM);
-			_setMenuItems(FAQ_WHITE_ITEM, LEFT_ITEM);
+			_setMenuItems(FAQ_WHITE_ITEM, RIGHT_ITEM);
 			
+			titleGeoStyle = new TextFormat;
+			titleGeoStyle.font = '_hKolkhetyMtavBold';
+			titleGeoStyle.size = Settings._getIntByDPI(30);
+			titleGeoStyle.color = 0xFFFFFF;
 			
+			this.fontStyles = titleGeoStyle;
+			title = 'mTavari123'
+			
+			titleFactory = function():ITextRenderer {
+				var titleRenderer:TextFieldTextRenderer = new TextFieldTextRenderer();
+				titleRenderer.embedFonts = true;
+				return titleRenderer;
+			}
 			
 			this.width = stage.stageWidth;
 			this.height = Settings._getIntByDPI(130);
@@ -110,6 +125,7 @@ package screens {
 					btn.height = Settings._getIntByDPI(menuItems[i].heightDPI);
 					btn.addEventListener(Event.TRIGGERED, backButton_triggeredHandler);
 					btn.defaultSkin = skin;
+					
 					if (side == LEFT_ITEM) {
 						
 						if (!leftItems) leftItems = new <DisplayObject>[];
@@ -136,7 +152,6 @@ package screens {
 		
 		private function removed(e:Event):void {
 			removeEventListener(Event.REMOVED_FROM_STAGE, removed);
-			
 		}
 		
 	}
