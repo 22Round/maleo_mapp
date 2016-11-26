@@ -99,11 +99,12 @@ package screens.splash {
 			var userInputSkin:ImageSkin = new ImageSkin(AssetsLoader._asset.getTexture("login_field_border.png"));
 			userInputSkin.scale9Grid = new Rectangle(40, 40, 120, 120);
 			
-			var userPassInputSkin:ImageSkin = new ImageSkin(AssetsLoader._asset.getTexture("login_field_border.png"));
-			userPassInputSkin.scale9Grid = new Rectangle(40, 40, 120, 120);
-			
 			var userInput:TextInput = StaticGUI._addTextInput(inputGroup, Settings._muiPack['login_user_input'][Settings._lang], inputStyle, inputStyle);
 			userInput.backgroundSkin = userInputSkin;
+			
+			
+			var userPassInputSkin:ImageSkin = new ImageSkin(AssetsLoader._asset.getTexture("login_field_border.png"));
+			userPassInputSkin.scale9Grid = new Rectangle(40, 40, 120, 120);
 			
 			var passInput:TextInput = StaticGUI._addTextInput(inputGroup, Settings._muiPack['login_pass_input'][Settings._lang], inputStyle, inputStyle);
 			passInput.backgroundSkin = userPassInputSkin;

@@ -1,4 +1,5 @@
 package application.utils {
+	import feathers.controls.AutoComplete;
 	import feathers.controls.Button;
 	import feathers.controls.Label;
 	import feathers.controls.TextArea;
@@ -115,6 +116,7 @@ package application.utils {
 				btn.label = label;
 				btn.labelFactory = function():ITextRenderer {
 					var renderer:TextFieldTextRenderer = new TextFieldTextRenderer();
+					
 					renderer.embedFonts = true;
 					//renderer.textFormat = btnStyle
 					return renderer;
@@ -275,6 +277,31 @@ package application.utils {
 			return(input);
 		}
 		
+		public static function _addAutoComplete(cont:DisplayObjectContainer, prompt_txt:String = '', inputStyle:TextFormat = null, promptStyle:TextFormat = null):AutoComplete {
+			
+			var input:AutoComplete = new AutoComplete;
+			input.prompt = prompt_txt;
+			input.fontStyles = inputStyle;
+			input.promptFontStyles = promptStyle;
+			
+			input.promptFactory = function():ITextRenderer {
+				var renderer:TextFieldTextRenderer = new TextFieldTextRenderer();
+				renderer.embedFonts = true;
+				return renderer;
+			};
+			
+			
+			input.textEditorFactory = function():ITextEditor {
+				var renderer:TextFieldTextEditor = new TextFieldTextEditor();
+				renderer.embedFonts = true;
+				return renderer;
+			};
+			
+			
+			cont.addChild(input);
+			input.validate();
+			return(input);
+		}
 		
 		public static function _addLabel(cont:DisplayObjectContainer, lab_txt:String = '', labStyle:TextFormat = null):Label {
 			

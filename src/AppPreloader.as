@@ -2,6 +2,7 @@ package {
 	import application.AssetsLoader;
 	import application.assetLibs.FontLoader;
 	import application.assetLibs.Mui;
+	import feathers.system.DeviceCapabilities;
 	import feathers.utils.ScreenDensityScaleFactorManager;
 	import flash.text.Font;
 	
@@ -24,6 +25,11 @@ package {
 	[SWF(width = "640", height = "960", frameRate = "60", backgroundColor = "#ffffff")]
 	
 	public class AppPreloader extends Sprite {
+		//DeviceCapabilities.dpi = 163;
+		//DeviceCapabilities.screenPixelWidth = 480;
+		//DeviceCapabilities.screenPixelHeight = 800;
+		
+		
 		public function AppPreloader() {
 			if (this.stage) {
 				this.stage.scaleMode = StageScaleMode.NO_SCALE;

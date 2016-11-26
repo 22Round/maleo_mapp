@@ -11,6 +11,8 @@ package screens {
 	import feathers.layout.VerticalLayout;
 	import feathers.layout.VerticalLayoutData;
 	import screens.posta.ScreenAllMails;
+	import screens.posta.ScreenArrivedMails;
+	import screens.posta.ScreenDeclareMails;
 	import screens.splash.ScreenIntro;
 	import screens.splash.ScreenLang;
 	import screens.splash.ScreenLoginCase;
@@ -34,6 +36,7 @@ package screens {
 		private var logoImg:Image;
 		private var shadowQade:Quad;
 		private var topHeader:TopHeader;
+		private var topFooter:TopFooter;
 		
 		public function Splash() {
 			
@@ -50,6 +53,11 @@ package screens {
 			_changeBackgroundSkin(0xecf0f4);
 			topHeader = new TopHeader;
 			
+			var bottomLayout:AnchorLayoutData = new AnchorLayoutData();
+			bottomLayout.bottom = 0;
+			topFooter = new TopFooter;
+			topFooter.layoutData = bottomLayout;
+			
 			logoWiteTexture = AssetsLoader._asset.getTexture("maleo_logo_wite.png");
 			logoBlueTexture = AssetsLoader._asset.getTexture("maleo_logo_blue.png");
 			
@@ -64,9 +72,15 @@ package screens {
 			navigator.popTransition = Slide.createSlideRightTransition();
 			navigator.addEventListener(FeathersEventType.TRANSITION_START, navigatorTransitionCompleteHandler);
 			
-			var item:StackScreenNavigatorItem = new StackScreenNavigatorItem(ScreenAllMails); //ScreenIntro  ScreenLoginCase ScreenAllMails
+			var item:StackScreenNavigatorItem = new StackScreenNavigatorItem(ScreenArrivedMails); //ScreenIntro  ScreenLoginCase ScreenAllMails
 			item.setScreenIDForPushEvent(AppEvent.LOGIN_NATIVE, ScreenID.LOGIN_CASE);
 			navigator.addScreen(ScreenID.INTRO, item);
+			
+			item = new StackScreenNavigatorItem(ScreenDeclareMails);
+			item.setScreenIDForPushEvent(Event.COMPLETE, ScreenID.LOGIN_CASE);
+			
+			item.addPopEvent(Event.CANCEL);
+			navigator.addScreen(ScreenID.DECLARE_MAIL, item);
 			
 			item = new StackScreenNavigatorItem(ScreenLang);
 			item.setScreenIDForPushEvent(Event.COMPLETE, ScreenID.LOGIN_CASE);
@@ -84,7 +98,7 @@ package screens {
 			   itemC.addPopEvent(Event.CANCEL);
 			   this._navigator.addScreen(SCREEN_LOGIN, itemC);*/
 			
-			navigator.rootScreenID = ScreenID.INTRO; //SCREEN_INTRO
+			navigator.rootScreenID = ScreenID.DECLARE_MAIL; //ScreenID.INTRO
 			this.addChild(navigator);
 			this.validate();
 			
@@ -92,12 +106,9 @@ package screens {
 			
 			addChild(topHeader);
 			
-			var bottomLayout:AnchorLayoutData = new AnchorLayoutData();
-			bottomLayout.bottom = 0;
-			var bottomH:TopFooter = new TopFooter;
-			bottomH.layoutData = bottomLayout;
-			addChild(bottomH);
-			bottomH.validate();
+			
+			addChild(topFooter);
+			topFooter.validate();
 		
 		}
 		
@@ -135,6 +146,10 @@ package screens {
 				case ScreenID.REGISTER:
 					
 					logoImg.texture = logoBlueTexture;
+					
+					break;
+				case ScreenID.DECLARE_MAIL:
+					topFooter.visible = false;
 					
 					break;
 				

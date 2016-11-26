@@ -33,8 +33,10 @@
 				
 				var bpgArial:Class = $adObj.getDefinition("FontsLib__bpgArialRegular") as Class;
 				var hKolh:Class = $adObj.getDefinition("FontsLib__hKolkhetyMtavBold") as Class;
+				var bpgMrglovani:Class = $adObj.getDefinition("FontsLib__bpgMrglovaniCapsRegular") as Class;
 				var lariSym:Class = $adObj.getDefinition("FontsLib__lariSymbol") as Class;
 				Font.registerFont(bpgArial);
+				Font.registerFont(bpgMrglovani);
 				Font.registerFont(hKolh); 
 				Font.registerFont(lariSym); 
 				

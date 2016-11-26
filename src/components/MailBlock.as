@@ -3,6 +3,8 @@ package components {
 	import application.AssetsLoader;
 	import application.utils.StaticGUI;
 	import feathers.controls.Button;
+	import feathers.controls.ButtonState;
+	import feathers.controls.Check;
 	import feathers.controls.Label;
 	import feathers.controls.LayoutGroup;
 	import feathers.controls.PanelScreen;
@@ -10,6 +12,7 @@ package components {
 	import feathers.controls.text.TextBlockTextRenderer;
 	import feathers.controls.text.TextFieldTextRenderer;
 	import feathers.core.ITextRenderer;
+	import feathers.core.ToggleGroup;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
 	import feathers.layout.FlowLayout;
@@ -61,13 +64,25 @@ package components {
 		private var infoLabelLayoutData:AnchorLayoutData;
 		private var statusLayoutData:AnchorLayoutData;
 		private var detailsBtnLayoutData:AnchorLayoutData;
+		private var fromNameLayoutData:AnchorLayoutData;
+		private var productLabelLayoutData:AnchorLayoutData;
+		private var radioLayoutData:AnchorLayoutData;
+
+		private var lariSimGroup:LayoutGroup;
+		private var lariSimGroupLayout:VerticalLayout;
 		private var statusGroup:LayoutGroup;
 		private var statusGroupLayout:FlowLayout;
+		
+		private var check:Check;
+		private var amountLabel:Label;
 		
 		public static const COMPLETED_MAIL:String = 'completedMail';
 		public static const ENTER_GOODS_MAIL:String = 'enterGoodsMail';
 		public static const PAY_MAIL:String = 'payMail';
 		public static const UNKNOWN_MAIL:String = 'unknownMail';
+		public static const PAYED_MAIL:String = 'payedMail';
+		public static const CHECK_TOPAY_MAIL:String = 'checkToPayMail';
+		
 		
 		public var _state:String;
 		
@@ -143,35 +158,99 @@ package components {
 			lariStyle.size = Settings._getIntByDPI(24);
 			lariStyle.color = 0xff6363;
 			
-			var fromNameLayoutData:AnchorLayoutData = new AnchorLayoutData();
-			fromNameLayoutData.top = Settings._getIntByDPI(21);
-			fromNameLayoutData.left = Settings._getIntByDPI(12);
+			switch(_state) {
+				case MailBlock.CHECK_TOPAY_MAIL:
+					
+					fromNameLayoutData = new AnchorLayoutData();
+					fromNameLayoutData.top = Settings._getIntByDPI(21);
+					fromNameLayoutData.left = Settings._getIntByDPI(52);
+					
+					productLabelLayoutData = new AnchorLayoutData();
+					productLabelLayoutData.top = Settings._getIntByDPI(55);
+					productLabelLayoutData.left = Settings._getIntByDPI(68);
+					
+					radioLayoutData = new AnchorLayoutData();
+					radioLayoutData.verticalCenter = 0;
+					radioLayoutData.left = Settings._getIntByDPI(22);
+					
+					var defaultRadioSkin:ImageSkin = new ImageSkin(AssetsLoader._asset.getTexture('check_empty.png'));
+					defaultRadioSkin.setTextureForState(ButtonState.DOWN, AssetsLoader._asset.getTexture('check_full.png'));
+					defaultRadioSkin.setTextureForState(ButtonState.DOWN_AND_SELECTED, AssetsLoader._asset.getTexture('check_full.png'));
+					defaultRadioSkin.setTextureForState(ButtonState.UP_AND_SELECTED, AssetsLoader._asset.getTexture('check_full.png'));
+					defaultRadioSkin.setTextureForState(ButtonState.HOVER_AND_SELECTED, AssetsLoader._asset.getTexture('check_full.png'));
+					defaultRadioSkin.textureSmoothing = TextureSmoothing.TRILINEAR;
+					defaultRadioSkin.width = Settings._getIntByDPI(34);
+					defaultRadioSkin.scaleY = defaultRadioSkin.scaleX;
+					
+					check = new Check;
+					check.styleProvider = null;
+					check.isSelected = false;
+					check.layoutData = radioLayoutData;
+					check.defaultSkin = defaultRadioSkin;
+					addChild(check);
+				
+					break;
+					
+				default:
+					
+					fromNameLayoutData = new AnchorLayoutData();
+					fromNameLayoutData.top = Settings._getIntByDPI(21);
+					fromNameLayoutData.left = Settings._getIntByDPI(12);
+					
+					productLabelLayoutData = new AnchorLayoutData();
+					productLabelLayoutData.top = Settings._getIntByDPI(55);
+					productLabelLayoutData.left = Settings._getIntByDPI(28);
+					
+			}
+			
 			
 			domainIco = new Image(AssetsLoader._asset.getTexture("post_item_green_light.png"));
 			domainIco.textureSmoothing = TextureSmoothing.BILINEAR;
 			domainIco.width = Settings._getIntByDPI(15);
 			domainIco.scaleY = domainIco.scaleX;
-			//domainIco = Settings._setSize(domainIco, 15, null, true, false);
 			
 			fromName = StaticGUI._addBtnSkin(this, 'amazon.com', domainStyle);
 			fromName.defaultIcon = domainIco;
 			fromName.layoutData = fromNameLayoutData;
 			
-			var productLabelLayoutData:AnchorLayoutData = new AnchorLayoutData();
-			productLabelLayoutData.top = Settings._getIntByDPI(55);
-			productLabelLayoutData.left = Settings._getIntByDPI(28);
 			productLabel = StaticGUI._addLabel(this, "ტელეფონი", productStyle);
 			productLabel.layoutData = productLabelLayoutData;
-			
 			
 			switch(_state) {
 				
 				case MailBlock.COMPLETED_MAIL:
 					
 					infoLabelLayoutData = new AnchorLayoutData();
+					infoLabelLayoutData.bottom = Settings._getIntByDPI(20);
+					infoLabelLayoutData.left = Settings._getIntByDPI(28);
+					infoLabel = StaticGUI._addLabel(this, "20 $", mailLocAmountStyle);
+					infoLabel.width = 200;
+					infoLabel.layoutData = infoLabelLayoutData;
+					
+					detailsBtnLayoutData = new AnchorLayoutData();
+					detailsBtnLayoutData.verticalCenter = 0;
+					detailsBtnLayoutData.right = Settings._getIntByDPI(28);
+					
+					detailsIco = new Image(AssetsLoader._asset.getTexture("post_item_btn_arrow.png"));
+					detailsIco.textureSmoothing = TextureSmoothing.BILINEAR;
+					detailsIco.width = Settings._getIntByDPI(15);
+					detailsIco.scaleY = domainIco.scaleX;
+					
+					detailsBtn = StaticGUI._addBtnSkin(this, Settings._muiPack['mails_block_label_1'][Settings._lang], btnStyle2);
+					detailsBtn.addEventListener(Event.TRIGGERED, detailsHandler);
+					detailsBtn.defaultIcon = detailsIco;
+					detailsBtn.iconPosition = RelativePosition.RIGHT;
+					detailsBtn.layoutData = detailsBtnLayoutData;
+					
+					break;
+				
+				
+				case MailBlock.PAYED_MAIL:
+					
+					infoLabelLayoutData = new AnchorLayoutData();
 					infoLabelLayoutData.top = Settings._getIntByDPI(88);
 					infoLabelLayoutData.left = Settings._getIntByDPI(28);
-					infoLabel = StaticGUI._addLabel(this, "გთხოვთ მიაკითხოთ ამანათს<br>ანდ აელოდოთ კურიერს", infoStyle);
+					infoLabel = StaticGUI._addLabel(this, Settings._muiPack['mails_block_notifi_1'][Settings._lang], infoStyle);
 					infoLabel.width = 400;
 					infoLabel.textRendererProperties.wordWrap = true;
 					infoLabel.textRendererProperties.isHTML = true;
@@ -187,7 +266,7 @@ package components {
 					detailsIco.width = Settings._getIntByDPI(15);
 					detailsIco.scaleY = domainIco.scaleX;
 					
-					detailsBtn = StaticGUI._addBtnSkin(this, 'დეტალები', btnStyle2);
+					detailsBtn = StaticGUI._addBtnSkin(this, Settings._muiPack['mails_block_label_1'][Settings._lang], btnStyle2);
 					detailsBtn.addEventListener(Event.TRIGGERED, detailsHandler);
 					detailsBtn.defaultIcon = detailsIco;
 					detailsBtn.iconPosition = RelativePosition.RIGHT;
@@ -216,7 +295,7 @@ package components {
 					detailsIco.width = Settings._getIntByDPI(15);
 					detailsIco.scaleY = domainIco.scaleX;
 					
-					detailsBtn = StaticGUI._addBtnSkin(this, 'დეტალები', btnStyle2);
+					detailsBtn = StaticGUI._addBtnSkin(this, Settings._muiPack['mails_block_label_1'][Settings._lang], btnStyle2);
 					detailsBtn.addEventListener(Event.TRIGGERED, detailsHandler);
 					detailsBtn.defaultIcon = detailsIco;
 					detailsBtn.iconPosition = RelativePosition.RIGHT;
@@ -231,7 +310,7 @@ package components {
 					infoLabelLayoutData = new AnchorLayoutData();
 					infoLabelLayoutData.top = Settings._getIntByDPI(88);
 					infoLabelLayoutData.left = Settings._getIntByDPI(28);
-					infoLabel = StaticGUI._addLabel(this, "გთხოვთ დაადეკლარიროთ ამანათი<br>მომდევნო 24 საათის გამვალობაში", infoStyle);
+					infoLabel = StaticGUI._addLabel(this, Settings._muiPack['mails_block_notifi_2'][Settings._lang], infoStyle);
 					infoLabel.width = 400;
 					infoLabel.textRendererProperties.wordWrap = true;
 					infoLabel.textRendererProperties.isHTML = true;
@@ -255,7 +334,7 @@ package components {
 					statusImg.width = Settings._getIntByDPI(145);
 					statusImg.scaleY = statusImg.scaleX;
 					//label2Group.addChild(statusImg)
-					statusLabel = StaticGUI._addLabel(statusGroup, 'დეკლარირება', statusStyle);
+					statusLabel = StaticGUI._addLabel(statusGroup, Settings._muiPack['mails_block_label_2'][Settings._lang], statusStyle);
 					statusLabel.backgroundSkin = statusImg;
 					
 					break;
@@ -289,13 +368,64 @@ package components {
 					statusImg.width = Settings._getIntByDPI(145);
 					statusImg.scaleY = statusImg.scaleX;
 					//label2Group.addChild(statusImg)
-					statusLabel = StaticGUI._addLabel(statusGroup, 'გადასახდელია', statusStyle);
+					statusLabel = StaticGUI._addLabel(statusGroup, Settings._muiPack['mails_block_label_3'][Settings._lang], statusStyle);
 					statusLabel.backgroundSkin = statusImg;
-					var amountLabel:Label = StaticGUI._addLabel(statusGroup, '12233.54', amountStyle);
+					amountLabel = StaticGUI._addLabel(statusGroup, '12233.54', amountStyle);
 					
 					
-					var lariSimGroup:LayoutGroup = new LayoutGroup();
-					var lariSimGroupLayout:VerticalLayout = new VerticalLayout();
+					lariSimGroup = new LayoutGroup();
+					lariSimGroupLayout = new VerticalLayout();
+					lariSimGroupLayout.paddingTop = Settings._getIntByDPI(1);
+					
+					lariSimGroup.layout = lariSimGroupLayout;
+					statusGroup.addChild(lariSimGroup);
+					
+					lariSymbolLabel = StaticGUI._addLabel(lariSimGroup, 's', lariStyle);
+					//var lariImg:Image = new Image(AssetsLoader._asset.getTexture("lari_simb.png"));
+					/*lariImg.color = 0xff6363;
+					lariImg.textureSmoothing = TextureSmoothing.TRILINEAR;
+					lariImg.width = Settings._getIntByDPI(19);
+					lariImg.scaleY = lariImg.scaleX;
+					lariSimGroup.addChild(lariImg);*/
+					
+					break;
+					
+				case MailBlock.CHECK_TOPAY_MAIL:
+					
+					fromName.defaultIcon = null;
+					
+					infoLabelLayoutData = new AnchorLayoutData();
+					infoLabelLayoutData.bottom = Settings._getIntByDPI(20);
+					infoLabelLayoutData.left = Settings._getIntByDPI(70);
+					infoLabel = StaticGUI._addLabel(this, "20 $", mailLocAmountStyle);
+					infoLabel.width = 200;
+					infoLabel.layoutData = infoLabelLayoutData;
+					
+					statusLayoutData = new AnchorLayoutData();
+					statusLayoutData.verticalCenter = 30;
+					statusLayoutData.right = Settings._getIntByDPI(-75);
+					
+					statusGroup = new LayoutGroup();
+					statusGroup.width = Settings._getIntByDPI(350);
+					statusGroupLayout = new FlowLayout();
+					statusGroupLayout.horizontalAlign = HorizontalAlign.CENTER;
+					statusGroupLayout.firstHorizontalGap = Settings._getIntByDPI(170);
+					statusGroupLayout.gap = 5;
+					statusGroup.layout = statusGroupLayout;
+					statusGroup.layoutData = statusLayoutData;
+					addChild(statusGroup);
+					
+					statusImg = new Image(AssetsLoader._asset.getTexture("item_label_red.png"));
+					statusImg.width = Settings._getIntByDPI(145);
+					statusImg.scaleY = statusImg.scaleX;
+					//label2Group.addChild(statusImg)
+					statusLabel = StaticGUI._addLabel(statusGroup, Settings._muiPack['mails_block_label_3'][Settings._lang], statusStyle);
+					statusLabel.backgroundSkin = statusImg;
+					amountLabel = StaticGUI._addLabel(statusGroup, '12233.54', amountStyle);
+					
+					
+					lariSimGroup = new LayoutGroup();
+					lariSimGroupLayout = new VerticalLayout();
 					lariSimGroupLayout.paddingTop = Settings._getIntByDPI(1);
 					
 					lariSimGroup.layout = lariSimGroupLayout;
@@ -313,6 +443,14 @@ package components {
 			}
 			
 		}
+		
+		override public function dispose():void {
+			
+			StaticGUI._safeRemoveChildren(this, true);
+			
+			super.dispose();
+		}
+		
 		
 		protected function detailsHandler(event:Event):void {
 			this.dispatchEventWith(Event.COMPLETE);

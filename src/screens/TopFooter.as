@@ -62,7 +62,7 @@ package screens {
 			tabBar.height = Settings._getIntByDPI(103);
 			tabBar.dataProvider = new ListCollection(dataProvArr);
 											
-			tabBar.addEventListener(Event.CHANGE, tabBar_changeHandler);
+			tabBar.addEventListener(Event.CHANGE, tabBarHandler);
 			tabBar.layoutData = new AnchorLayoutData(NaN, 0, 0, 0);
 			tabBar.styleProvider = null;
 			this.addChild(tabBar);
@@ -72,7 +72,7 @@ package screens {
 			
 		}
 		
-		private function tabBar_changeHandler(event:Event):void {
+		private function tabBarHandler(event:Event):void {
 			//this._label.text = "selectedIndex: " + this._tabBar.selectedIndex.toString();
 		}
 	}

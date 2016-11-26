@@ -32,6 +32,13 @@ package screens.posta {
 		private var title:Label;
 		private var item:MailBlock;
 		
+		private var arrivedGroup:LayoutGroup;
+		private var arrivedGroupLayout:VerticalLayout;
+		private var recivedGroup:LayoutGroup;
+		private var recivedGroupLayout:VerticalLayout;
+		private var sendGroup:LayoutGroup;
+		private var sendGroupLayout:VerticalLayout;
+		
 		public function ScreenAllMails() {
 			super();
 			//this.title = "Screen C";
@@ -62,15 +69,15 @@ package screens.posta {
 			subTitleStyle.color = 0x798188;
 			
 			
-			var arrivedGroup:LayoutGroup = new LayoutGroup();
-			var arrivedGroupLayout:VerticalLayout = new VerticalLayout();
+			arrivedGroup = new LayoutGroup();
+			arrivedGroupLayout = new VerticalLayout();
 			arrivedGroupLayout.horizontalAlign = HorizontalAlign.CENTER;
 			arrivedGroupLayout.verticalAlign = VerticalAlign.TOP;
 			arrivedGroupLayout.gap = 10;
 			arrivedGroup.layout = arrivedGroupLayout;
 			addChild(arrivedGroup);
 			
-			title = StaticGUI._addLabel(arrivedGroup, "ჩამოსული", titleStyle);
+			title = StaticGUI._addLabel(arrivedGroup, Settings._muiPack['mails_title_arrived'][Settings._lang], titleStyle);
 			
 			item = new MailBlock(MailBlock.COMPLETED_MAIL);
 			arrivedGroup.addChild(item);
@@ -78,32 +85,32 @@ package screens.posta {
 			arrivedGroup.addChild(item);
 			
 			
-			var recivedGroup:LayoutGroup = new LayoutGroup();
-			var recivedGroupLayout:VerticalLayout = new VerticalLayout();
+			recivedGroup = new LayoutGroup();
+			recivedGroupLayout = new VerticalLayout();
 			recivedGroupLayout.horizontalAlign = HorizontalAlign.CENTER;
 			recivedGroupLayout.verticalAlign = VerticalAlign.TOP;
 			recivedGroupLayout.gap = 10;
 			recivedGroup.layout = arrivedGroupLayout;
 			addChild(recivedGroup);
-			title = StaticGUI._addLabel(recivedGroup, "ჩამოსული აშშ-ში", titleStyle);
+			title = StaticGUI._addLabel(recivedGroup, Settings._muiPack['mails_title_recived_usa'][Settings._lang], titleStyle);
 			item = new MailBlock(MailBlock.ENTER_GOODS_MAIL);
 			recivedGroup.addChild(item);
 			item = new MailBlock(MailBlock.UNKNOWN_MAIL);
 			recivedGroup.addChild(item);
 			
 			
-			var sendGroup:LayoutGroup = new LayoutGroup();
-			var sendGroupLayout:VerticalLayout = new VerticalLayout();
+			sendGroup = new LayoutGroup();
+			sendGroupLayout = new VerticalLayout();
 			sendGroupLayout.horizontalAlign = HorizontalAlign.CENTER;
 			sendGroupLayout.verticalAlign = VerticalAlign.TOP;
 			sendGroupLayout.gap = 10;
 			sendGroup.layout = sendGroupLayout;
 			addChild(sendGroup);
-			title = StaticGUI._addLabel(sendGroup, "გამოგზავნილი (გზაშია)", titleStyle);
-			title = StaticGUI._addLabel(sendGroup, 'სავარაუდო ჩამოფრენა - 2016, 23 ოქტომბერი', subTitleStyle);
+			title = StaticGUI._addLabel(sendGroup, Settings._muiPack['mails_title_ontheway'][Settings._lang], titleStyle);
+			title = StaticGUI._addLabel(sendGroup, Settings._muiPack['mails_title_estarrival'][Settings._lang]+' - 2016, 23 ოქტომბერი', subTitleStyle);
 			item = new MailBlock(MailBlock.ENTER_GOODS_MAIL);
 			sendGroup.addChild(item);
-			title = StaticGUI._addLabel(sendGroup, 'სავარაუდო ჩამოფრენა - 2016, 3 ნოემბერი', subTitleStyle);
+			title = StaticGUI._addLabel(sendGroup, Settings._muiPack['mails_title_estarrival'][Settings._lang]+' - 2016, 3 ნოემბერი', subTitleStyle);
 			item = new MailBlock(MailBlock.UNKNOWN_MAIL);
 			sendGroup.addChild(item);
 			
@@ -111,6 +118,17 @@ package screens.posta {
 			this.height = stage.stageHeight;
 			
 			this.validate();
+		}
+		
+		override public function dispose():void {
+			
+			if (arrivedGroup) StaticGUI._safeRemoveChildren(arrivedGroup, true);
+			if (recivedGroup) StaticGUI._safeRemoveChildren(recivedGroup, true);
+			if (sendGroup) StaticGUI._safeRemoveChildren(sendGroup, true);
+			
+			StaticGUI._safeRemoveChildren(this, true);
+			
+			super.dispose();
 		}
 		
 		protected function mailRegHandler(event:Event):void {

@@ -19,6 +19,90 @@
 		<lang ID = 'ka'><![CDATA[Нажмите, чтобы удалить <font color="#3bb80a">заставку</font>]]></lang>
 	</muipack>
 	
+	<!-- mails titles -->
+	
+	<muipack word = 'mails_title_arrived'>
+		<lang ID = 'en'>Recived</lang>
+		<lang ID = 'ru'>Получено</lang>
+		<lang ID = 'ka'>მიღებული</lang>
+	</muipack>
+	
+	<muipack word = 'mails_title_recived_usa'>
+		<lang ID = 'en'>Recived in USA</lang>
+		<lang ID = 'ru'>Поступило в США</lang>
+		<lang ID = 'ka'>ნიღებული აშშ-ში</lang>
+	</muipack>
+	
+	<muipack word = 'mails_title_ontheway'>
+		<lang ID = 'en'>Sent (on the road)</lang>
+		<lang ID = 'ru'>Прислал (на дороге)</lang>
+		<lang ID = 'ka'>გამოგზავნილი (გზაშია)</lang>
+	</muipack>
+	
+	<muipack word = 'mails_title_estarrival'>
+		<lang ID = 'en'>Estimated Arrival</lang>
+		<lang ID = 'ru'>Ожидаемое прибытие</lang>
+		<lang ID = 'ka'>სავარაუდო ჩამოფრენა</lang>
+	</muipack>
+	
+	
+	<!-- mails arrived titles -->
+	
+	<muipack word = 'mails_arrived_notifi'>
+		<lang ID = 'en'><![CDATA[You do not have enough money, please fill in the balance]]></lang>
+		<lang ID = 'ru'><![CDATA[У вас нет достаточно денег, пожалуйста, заполните баланс]]></lang>
+		<lang ID = 'ka'><![CDATA[თქვენ არ გაგაჩნიათ საკმარისი თანხა,<br>გთხოვთ შეავსოთ ბალანსი]]></lang>
+	</muipack>
+	
+	<muipack word = 'mails_arrived_sum_pay_btn'>
+		<lang ID = 'en'>SUM</lang>
+		<lang ID = 'ru'>сумма</lang>
+		<lang ID = 'ka'>სულ</lang>
+	</muipack>
+	
+	<muipack word = 'mails_arrived_payment_pay_btn'>
+		<lang ID = 'en'>Pay</lang>
+		<lang ID = 'ru'>сумма</lang>
+		<lang ID = 'ka'>გადახდა</lang>
+	</muipack>
+	
+	<muipack word = 'mails_arrived_fill_balance_btn'>
+		<lang ID = 'en'>Refill balance with georgian card</lang>
+		<lang ID = 'ru'>Пополните баланс с georgian card</lang>
+		<lang ID = 'ka'>ბალანსის შევსება georgian card - ით</lang>
+	</muipack>
+	
+	<!-- mails arrived titles -->
+	
+	<muipack word = 'mails_block_label_1'>
+		<lang ID = 'en'>Details</lang>
+		<lang ID = 'ru'>Детали</lang>
+		<lang ID = 'ka'>დეტალები</lang>
+	</muipack>
+	
+	<muipack word = 'mails_block_label_2'>
+		<lang ID = 'en'>Declare</lang>
+		<lang ID = 'ru'>Декларировать</lang>
+		<lang ID = 'ka'>დეკლარირება</lang>
+	</muipack>
+	
+	<muipack word = 'mails_block_label_3'>
+		<lang ID = 'en'>Payable</lang>
+		<lang ID = 'ru'>К оплате</lang>
+		<lang ID = 'ka'>გადასახდელია</lang>
+	</muipack>
+	
+	<muipack word = 'mails_block_notifi_1'>
+		<lang ID = 'en'><![CDATA[Please come to the parcel or wait courier]]></lang>
+		<lang ID = 'ru'><![CDATA[Пожалуйста, приходите к посылке или дождитесь курьера]]></lang>
+		<lang ID = 'ka'><![CDATA[გთხოვთ მიაკითხოთ ამანათს<br>ან დაელოდოთ კურიერს]]></lang>
+	</muipack>	
+	
+	<muipack word = 'mails_block_notifi_2'>
+		<lang ID = 'en'><![CDATA[Please declare parcel in the next 24 hours]]></lang>
+		<lang ID = 'ru'><![CDATA[Пожалуйста, объявить посылку в течение следующих 24 часов]]></lang>
+		<lang ID = 'ka'><![CDATA[გთხოვთ დაადეკლარიროთ ამანათი<br>მომდევნო 24 საათის გამვალობაში]]></lang>
+	</muipack>	
 	
 	<!-- drawer menu items and labels -->
 	
