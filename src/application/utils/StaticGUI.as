@@ -15,6 +15,7 @@ package application.utils {
 	import feathers.text.BitmapFontTextFormat;
 	import flash.geom.*;
 	import flash.filters.DropShadowFilter;
+	import flash.text.AntiAliasType;
 	import flash.text.TextFormatAlign;
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
@@ -74,10 +75,10 @@ package application.utils {
 				return false;
 			} else if (dispose == true) {
 				
-				while (param1.numChildren > 0) {
+				/*while (param1.numChildren > 0) {
 					param1.getChildAt(0).dispose();
 					param1.removeChildAt(0)	
-				}
+				}*/
 				
 				param1.dispose();
 			}
@@ -311,6 +312,8 @@ package application.utils {
 			
 			lab.textRendererFactory = function():ITextRenderer {
 				var renderer:TextFieldTextRenderer = new TextFieldTextRenderer();
+				renderer.antiAliasType = AntiAliasType.ADVANCED;
+				
 				renderer.embedFonts = true;
 				return renderer;
 			};

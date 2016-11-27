@@ -1,23 +1,15 @@
 package screens.splash {
-	import application.AssetsLoader;
-	import application.utils.DeviceInfo;
 	import feathers.controls.Button;
-	import feathers.controls.ImageLoader;
 	import feathers.controls.PageIndicator;
-	import feathers.layout.HorizontalAlign;
-	import feathers.layout.VerticalAlign;
 	import screens.splash.gallery.GalleryMain;
-	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.events.Event;
-	import starling.textures.Texture;
-	
-	
-	[Event(name = "change", type = "starling.events.Event")]
 	
 	public class ScreenIntro extends Sprite {
 		
 		private var pageIndicator:PageIndicator;
+		private var sh:GalleryMain;
+		private var pushB1Button:Button;
 		
 		public function ScreenIntro() {
 			super();
@@ -43,7 +35,7 @@ package screens.splash {
 			
 			pageIndicator = new PageIndicator();
 			
-			var sh:GalleryMain = new GalleryMain;
+			sh = new GalleryMain;
 			sh.addEventListener(Event.CHANGE, galleryChange);
 			addChild(sh);
 			
@@ -52,9 +44,9 @@ package screens.splash {
 			addChild(pageIndicator);
 			pageIndicator.validate();
 			pageIndicator.x = (stage.stageWidth-pageIndicator.width)/2;
-			pageIndicator.y = stage.stageHeight - 150;
+			pageIndicator.y = Settings._getIntByDPI(stage.stageHeight - 150);
 			
-			var pushB1Button:Button = new Button();
+			pushB1Button = new Button();
 			pushB1Button.label = "გამოტოვება";
 			pushB1Button.width = 150;
 			pushB1Button.height = 30;
@@ -82,7 +74,7 @@ package screens.splash {
 		
 				
 		protected function pushB1Button_triggeredHandler(event:Event):void {
-			this.dispatchEventWith(Event.COMPLETE);
+			this.dispatchEventWith(AppEvent.COMPLETED);
 		}
 		
 	}

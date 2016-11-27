@@ -2,47 +2,33 @@ package screens.posta {
 	
 	import application.AssetsLoader;
 	import application.utils.StaticGUI;
-	import components.InputWithTitle;
+	import components.InputWithTitleBlock;
 	import components.MailBlock;
 	import components.MailPickerItemBlock;
 	import components.MailRepacBlock;
 	import components.MailSenderBlock;
 	import feathers.controls.Button;
 	import feathers.controls.ButtonState;
-	import feathers.controls.Label;
 	import feathers.controls.LayoutGroup;
 	import feathers.controls.ScrollBarDisplayMode;
 	import feathers.controls.ScrollScreen;
-	import feathers.controls.TextInput;
-	import feathers.controls.text.TextBlockTextRenderer;
-	import feathers.controls.text.TextFieldTextRenderer;
-	import feathers.core.ITextRenderer;
-	import feathers.core.ToggleGroup;
-	import feathers.layout.FlowLayout;
 	import feathers.layout.HorizontalAlign;
 	import feathers.layout.VerticalAlign;
 	import feathers.layout.VerticalLayout;
-	import feathers.layout.VerticalLayoutData;
 	import feathers.skins.ImageSkin;
 	import flash.geom.Rectangle;
-	import starling.display.Image;
-	import starling.display.Quad;
-	import starling.text.TextFormat;
-	import starling.textures.Texture;
-	
 	import starling.events.Event;
+	import starling.text.TextFormat;
 	
-	public class ScreenDeclareMails extends ScrollScreen {
+	
+	public class ScreenDeclareMail extends ScrollScreen {
 		
 
 		private var payBtnStyle:TextFormat;
 		private var payBtnDisabledStyle:TextFormat;
 		private var fillBtnStyle:TextFormat;
-
 		
-
 		private var item:MailBlock;
-		private var mailToggleGroup:ToggleGroup;
 		private var trackingGroup:LayoutGroup;
 		private var trackingGroupLayout:VerticalLayout;
 		private var notifiGroup:LayoutGroup;
@@ -50,7 +36,7 @@ package screens.posta {
 		private var buttonsGroup:LayoutGroup;
 		private var buttonsGroupLayout:VerticalLayout;
 		
-		public function ScreenDeclareMails() {
+		public function ScreenDeclareMail() {
 			super();
 			//this.title = "Screen C";
 		}
@@ -60,7 +46,6 @@ package screens.posta {
 			super.initialize();
 			Settings._splash._changeBackgroundSkin(0xffffff);
 			
-			mailToggleGroup = new ToggleGroup;
 			
 			var layout:VerticalLayout = new VerticalLayout();
 			layout.horizontalAlign = HorizontalAlign.CENTER;
@@ -88,7 +73,7 @@ package screens.posta {
 			fillBtnStyle.color = 0x798188;
 			
 
-			var trackingInput:InputWithTitle = new InputWithTitle('თრექინგ კოდი', '9361289681090039432375');
+			var trackingInput:InputWithTitleBlock = new InputWithTitleBlock('თრექინგ კოდი', '9361289681090039432375');
 			addChild(trackingInput);
 			
 			var sender:MailSenderBlock = new MailSenderBlock('მიუთითეთ გამომგზავნი', 'მაგ. amazon.com');
@@ -97,7 +82,7 @@ package screens.posta {
 			var product:MailPickerItemBlock = new MailPickerItemBlock('პროდუქციის დასახელება', 'ამოირჩიეთ პროდუქტი');
 			addChild(product);
 			
-			var mailPrice:InputWithTitle = new InputWithTitle('ღირებულება (USD)', '');
+			var mailPrice:InputWithTitleBlock = new InputWithTitleBlock('ღირებულება (USD)', '');
 			addChild(mailPrice);
 			
 			var checkPac:MailRepacBlock = new MailRepacBlock('გადაფუთვა');
@@ -106,7 +91,7 @@ package screens.posta {
 			var address:MailPickerItemBlock = new MailPickerItemBlock('მსურს მივიღო მისამართზე', 'თბილისი, ზუბალაშვილების #50');
 			addChild(address);
 			
-			var comment:InputWithTitle = new InputWithTitle('კომენტარი', '');
+			var comment:InputWithTitleBlock = new InputWithTitleBlock('კომენტარი', '');
 			addChild(comment);
 			
 			buttonsGroup = new LayoutGroup();

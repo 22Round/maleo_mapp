@@ -2,37 +2,18 @@ package components {
 	
 	import application.AssetsLoader;
 	import application.utils.StaticGUI;
-	import feathers.controls.Button;
-	import feathers.controls.ButtonState;
-	import feathers.controls.Check;
 	import feathers.controls.Label;
 	import feathers.controls.LayoutGroup;
-	import feathers.controls.PanelScreen;
-	import feathers.controls.Screen;
 	import feathers.controls.TextInput;
-	import feathers.controls.text.TextBlockTextRenderer;
-	import feathers.controls.text.TextFieldTextRenderer;
-	import feathers.core.ITextRenderer;
-	import feathers.core.ToggleGroup;
-	import feathers.layout.AnchorLayout;
-	import feathers.layout.AnchorLayoutData;
-	import feathers.layout.FlowLayout;
 	import feathers.layout.HorizontalAlign;
-	import feathers.layout.RelativePosition;
 	import feathers.layout.VerticalAlign;
 	import feathers.layout.VerticalLayout;
-	import feathers.layout.VerticalLayoutData;
 	import feathers.skins.ImageSkin;
 	import flash.geom.Rectangle;
-	import starling.display.Image;
-	import starling.display.Quad;
 	import starling.text.TextFormat;
-	import starling.textures.Texture;
-	import starling.textures.TextureSmoothing;
 	
-	import starling.events.Event;
 	
-	public class InputWithTitle extends LayoutGroup {
+	public class InputWithTitleBlock extends LayoutGroup {
 		private var title:Label;
 		private var titleStyle:TextFormat;
 		private var titleDisabledStyle:TextFormat;
@@ -43,7 +24,7 @@ package components {
 		private var inputPromptStr:String;
 	
 		
-		public function InputWithTitle(title:String, inputPrompt:String) {
+		public function InputWithTitleBlock(title:String, inputPrompt:String) {
 			titleStr = title;
 			inputPromptStr = inputPrompt;
 			super();

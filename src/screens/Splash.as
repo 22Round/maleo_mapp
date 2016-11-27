@@ -12,7 +12,8 @@ package screens {
 	import feathers.layout.VerticalLayoutData;
 	import screens.posta.ScreenAllMails;
 	import screens.posta.ScreenArrivedMails;
-	import screens.posta.ScreenDeclareMails;
+	import screens.posta.ScreenDeclareDoneMail;
+	import screens.posta.ScreenDeclareMail;
 	import screens.splash.ScreenIntro;
 	import screens.splash.ScreenLang;
 	import screens.splash.ScreenLoginCase;
@@ -43,7 +44,7 @@ package screens {
 			super();
 		}
 		
-		private var navigator:StackScreenNavigator;
+		public var navigator:StackScreenNavigator;
 		
 		override protected function initialize():void {
 			
@@ -72,15 +73,22 @@ package screens {
 			navigator.popTransition = Slide.createSlideRightTransition();
 			navigator.addEventListener(FeathersEventType.TRANSITION_START, navigatorTransitionCompleteHandler);
 			
-			var item:StackScreenNavigatorItem = new StackScreenNavigatorItem(ScreenArrivedMails); //ScreenIntro  ScreenLoginCase ScreenAllMails
-			item.setScreenIDForPushEvent(AppEvent.LOGIN_NATIVE, ScreenID.LOGIN_CASE);
+			var item:StackScreenNavigatorItem = new StackScreenNavigatorItem(ScreenIntro); //ScreenIntro  ScreenLoginCase ScreenAllMails
+			item.setScreenIDForPushEvent(AppEvent.COMPLETED, ScreenID.DECLARE_DONE_MAIL);
 			navigator.addScreen(ScreenID.INTRO, item);
 			
-			item = new StackScreenNavigatorItem(ScreenDeclareMails);
+			item = new StackScreenNavigatorItem(ScreenDeclareMail);
 			item.setScreenIDForPushEvent(Event.COMPLETE, ScreenID.LOGIN_CASE);
 			
 			item.addPopEvent(Event.CANCEL);
 			navigator.addScreen(ScreenID.DECLARE_MAIL, item);
+			
+			item = new StackScreenNavigatorItem(ScreenDeclareDoneMail);
+			item.setScreenIDForPushEvent(AppEvent.COMPLETED, ScreenID.LOGIN_CASE);
+			
+			item.addPopToRootEvent(AppEvent.CLOSE);
+			navigator.addScreen(ScreenID.DECLARE_DONE_MAIL, item);
+			
 			
 			item = new StackScreenNavigatorItem(ScreenLang);
 			item.setScreenIDForPushEvent(Event.COMPLETE, ScreenID.LOGIN_CASE);
@@ -98,7 +106,7 @@ package screens {
 			   itemC.addPopEvent(Event.CANCEL);
 			   this._navigator.addScreen(SCREEN_LOGIN, itemC);*/
 			
-			navigator.rootScreenID = ScreenID.DECLARE_MAIL; //ScreenID.INTRO
+			navigator.rootScreenID = ScreenID.INTRO; //ScreenID.INTRO
 			this.addChild(navigator);
 			this.validate();
 			
@@ -130,7 +138,14 @@ package screens {
 		}
 		
 		private function navigatorTransitionCompleteHandler(e:Event):void {
-			//addChild(logoImg);
+			
+			if (logoImg && contains(logoImg)) removeChild(logoImg);
+			
+			topFooter.visible = false;
+			topHeader.visible = false;
+			
+			topHeader._setMenuItems(null);
+			topHeader._setMenuItems(null, TopHeader.RIGHT_ITEM);
 			
 			switch (StackScreenNavigator(e.target).activeScreenID) {
 				
@@ -149,7 +164,14 @@ package screens {
 					
 					break;
 				case ScreenID.DECLARE_MAIL:
-					topFooter.visible = false;
+					
+					
+					break;
+				case ScreenID.DECLARE_DONE_MAIL:
+					
+					topHeader.visible = true;
+					topHeader._changeBackgroundSkin(0x00b7f0);
+					topHeader._setMenuItems(TopHeader.ARROWTOLEFT_WHITE_ITEM, TopHeader.LEFT_ITEM);
 					
 					break;
 				

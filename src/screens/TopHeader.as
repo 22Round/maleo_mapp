@@ -1,12 +1,10 @@
 package screens {
 	import application.AssetsLoader;
-	import application.utils.DeviceInfo;
 	import feathers.controls.Button;
 	import feathers.controls.Header;
 	import feathers.controls.text.TextFieldTextRenderer;
 	import feathers.core.ITextRenderer;
 	import feathers.skins.ImageSkin;
-	import flash.geom.Rectangle;
 	import starling.display.DisplayObject;
 	import starling.display.Image;
 	import starling.display.Quad;
@@ -75,8 +73,8 @@ package screens {
 			this.paddingLeft = Settings._getIntByDPI(30);
 			this.paddingRight = Settings._getIntByDPI(30);
 			
-			_setMenuItems(MENU_WHITE_ITEM, LEFT_ITEM);
-			_setMenuItems(FAQ_WHITE_ITEM, RIGHT_ITEM);
+			//_setMenuItems(MENU_WHITE_ITEM, LEFT_ITEM);
+			//_setMenuItems(FAQ_WHITE_ITEM, RIGHT_ITEM);
 			
 			titleGeoStyle = new TextFormat;
 			titleGeoStyle.font = '_hKolkhetyMtavBold';
@@ -98,7 +96,7 @@ package screens {
 		}
 		
 		
-		public function _setMenuItems(setIco:String, side:String = LEFT_ITEM):void {
+		public function _setMenuItems(setIco:String = null, side:String = LEFT_ITEM):void {
 			
 			var skin:ImageSkin;
 			var btn:Button;
@@ -115,6 +113,7 @@ package screens {
 				}
 				_currentRightItem = '';
 			}
+			if (!setIco) return;
 			
 			for (var i:uint; i < menuItems.length; i++ ) {
 				if (setIco  == menuItems[i].name) {
@@ -147,7 +146,8 @@ package screens {
 		}
 		
 		private function backButton_triggeredHandler(e:Event):void {
-			this.dispatchEventWith(TOGGLE_LEFT_DRAWER, true);
+			//this.dispatchEventWith(TOGGLE_LEFT_DRAWER, true);
+			Settings._splash.navigator.popScreen();
 		}
 		
 		private function removed(e:Event):void {
