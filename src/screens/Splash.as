@@ -10,7 +10,9 @@ package screens {
 	import feathers.layout.VerticalAlign;
 	import feathers.layout.VerticalLayout;
 	import feathers.layout.VerticalLayoutData;
+	import screens.map.ScreenMap;
 	import screens.posta.ScreenAllMails;
+	import screens.posta.ScreenMainMails;
 	import screens.posta.ScreenArrivedMails;
 	import screens.posta.ScreenDeclareDoneMail;
 	import screens.posta.ScreenDeclareMail;
@@ -44,7 +46,7 @@ package screens {
 			super();
 		}
 		
-		public var navigator:StackScreenNavigator;
+		public var _navigator:StackScreenNavigator;
 		
 		override protected function initialize():void {
 			
@@ -68,46 +70,69 @@ package screens {
 			logoImg.x = Math.round((stage.stageWidth - logoImg.width) / 2);
 			logoImg.y = 211 * DeviceInfo.dpiScaleMultiplier;
 			
-			navigator = new StackScreenNavigator();
-			navigator.pushTransition = Slide.createSlideLeftTransition();
-			navigator.popTransition = Slide.createSlideRightTransition();
-			navigator.addEventListener(FeathersEventType.TRANSITION_START, navigatorTransitionCompleteHandler);
+			_navigator = new StackScreenNavigator();
+			_navigator.pushTransition = Slide.createSlideLeftTransition();
+			_navigator.popTransition = Slide.createSlideRightTransition();
+			_navigator.addEventListener(FeathersEventType.TRANSITION_START, navigatorTransitionCompleteHandler);
 			
 			var item:StackScreenNavigatorItem = new StackScreenNavigatorItem(ScreenIntro); //ScreenIntro  ScreenLoginCase ScreenAllMails
-			item.setScreenIDForPushEvent(AppEvent.COMPLETED, ScreenID.DECLARE_DONE_MAIL);
-			navigator.addScreen(ScreenID.INTRO, item);
-			
-			item = new StackScreenNavigatorItem(ScreenDeclareMail);
-			item.setScreenIDForPushEvent(Event.COMPLETE, ScreenID.LOGIN_CASE);
-			
-			item.addPopEvent(Event.CANCEL);
-			navigator.addScreen(ScreenID.DECLARE_MAIL, item);
-			
-			item = new StackScreenNavigatorItem(ScreenDeclareDoneMail);
-			item.setScreenIDForPushEvent(AppEvent.COMPLETED, ScreenID.LOGIN_CASE);
-			
-			item.addPopToRootEvent(AppEvent.CLOSE);
-			navigator.addScreen(ScreenID.DECLARE_DONE_MAIL, item);
-			
+			item.setScreenIDForPushEvent(AppEvent.COMPLETED, ScreenID.LANG_SELECT);
+			_navigator.addScreen(ScreenID.INTRO, item);
 			
 			item = new StackScreenNavigatorItem(ScreenLang);
-			item.setScreenIDForPushEvent(Event.COMPLETE, ScreenID.LOGIN_CASE);
-			item.setScreenIDForReplaceEvent(Event.CHANGE, ScreenID.LOGIN_CASE);
-			item.addPopEvent(Event.CANCEL);
-			navigator.addScreen(ScreenID.LANG_SELECT, item);
+			item.setScreenIDForPushEvent(AppEvent.COMPLETED, ScreenID.LOGIN);
+			item.addPopEvent(AppEvent.CANCEL);
+			_navigator.addScreen(ScreenID.LANG_SELECT, item);
 			
 			item = new StackScreenNavigatorItem(ScreenLoginCase);
+			item.setScreenIDForPushEvent(AppEvent.COMPLETED, ScreenID.ALL_MAILS);
+			item.addPopToRootEvent(AppEvent.CLOSE);
+			_navigator.addScreen(ScreenID.LOGIN_CASE, item);
+			
+			item = new StackScreenNavigatorItem(ScreenLogin);
+			item.setScreenIDForPushEvent(AppEvent.LOGIN_NATIVE, ScreenID.MAIN_MAILS);
+			item.setScreenIDForReplaceEvent(AppEvent.LOGIN_FACEBOOK, ScreenID.LOGIN_CASE);
+			item.addPopEvent(AppEvent.CANCEL);
+			_navigator.addScreen(ScreenID.LOGIN, item);
+			
+			
+			item = new StackScreenNavigatorItem(ScreenMainMails);
+			item.setScreenIDForPushEvent(AppEvent.COMPLETED, ScreenID.ARRIVED_MAIL);
+			item.setScreenIDForReplaceEvent(AppEvent.CANCEL, ScreenID.LOGIN_CASE);
+			item.addPopEvent(AppEvent.CANCEL);
+			_navigator.addScreen(ScreenID.MAIN_MAILS, item);
+			
+			item = new StackScreenNavigatorItem(ScreenArrivedMails);
+			item.setScreenIDForPushEvent(AppEvent.COMPLETED, ScreenID.LOGIN_CASE);
+			item.addPopEvent(AppEvent.CANCEL);
+			_navigator.addScreen(ScreenID.ARRIVED_MAIL, item);
+			
+			item = new StackScreenNavigatorItem(ScreenAllMails);
+			item.setScreenIDForPushEvent(AppEvent.COMPLETED, ScreenID.LOGIN_CASE);
+			item.addPopEvent(AppEvent.CANCEL);
+			_navigator.addScreen(ScreenID.ALL_MAILS, item);
+			
+			item = new StackScreenNavigatorItem(ScreenDeclareMail);
+			_navigator.addScreen(ScreenID.DECLARE_MAIL, item);
+			
+			
+			item = new StackScreenNavigatorItem(ScreenMap);
+			//item.setScreenIDForPushEvent(AppEvent.COMPLETED, ScreenID.LOGIN_CASE);
+			item.addPopEvent(AppEvent.CANCEL);
+			_navigator.addScreen(ScreenID.MAPS, item);
+			
+			//item = new StackScreenNavigatorItem(ScreenLoginCase);
 			//itemLoginCase.pushTransition = Fade.createFadeInTransition();
-			item.addPopEvent(Event.CANCEL);
-			navigator.addScreen(ScreenID.LOGIN_CASE, item);
+			//item.addPopEvent(AppEvent.CANCEL);
+			//navigator.addScreen(ScreenID.LOGIN_CASE, item);
 			
 			/*var itemC:StackScreenNavigatorItem = new StackScreenNavigatorItem(ScreenLogin);
 			   itemC.addPopToRootEvent(Event.CLOSE);
 			   itemC.addPopEvent(Event.CANCEL);
 			   this._navigator.addScreen(SCREEN_LOGIN, itemC);*/
 			
-			navigator.rootScreenID = ScreenID.INTRO; //ScreenID.INTRO
-			this.addChild(navigator);
+			_navigator.rootScreenID = ScreenID.INTRO; //ScreenID.INTRO
+			this.addChild(_navigator);
 			this.validate();
 			
 			//addChild(logoImg);
@@ -142,17 +167,17 @@ package screens {
 			if (logoImg && contains(logoImg)) removeChild(logoImg);
 			
 			topFooter.visible = false;
-			topHeader.visible = false;
 			
-			topHeader._setMenuItems(null);
-			topHeader._setMenuItems(null, TopHeader.RIGHT_ITEM);
+			var currentSt:String = StackScreenNavigator(e.target).activeScreenID
 			
-			switch (StackScreenNavigator(e.target).activeScreenID) {
+			topHeader._changeHeaderState(currentSt);
+			
+			switch (currentSt) {
 				
 				case ScreenID.INTRO: 
-					topHeader._changeBackgroundSkin(0x00b7f0);
-					logoImg.texture = logoWiteTexture;
 					
+					logoImg.texture = logoWiteTexture;
+					addChild(logoImg);
 					break;
 				
 				case ScreenID.LANG_SELECT: 
@@ -161,23 +186,49 @@ package screens {
 				case ScreenID.REGISTER:
 					
 					logoImg.texture = logoBlueTexture;
+					addChild(logoImg);
+					
+					_changeBackgroundSkin(0xffffff);
 					
 					break;
+					
+				case ScreenID.MAIN_MAILS:
+					_changeBackgroundSkin(0xecf0f4);
+					topFooter.visible = true;
+					
+					break;	
+					
+				case ScreenID.ALL_MAILS:
+					_changeBackgroundSkin(0xecf0f4);
+					topFooter.visible = true;
+					
+					break;	
+					
+				case ScreenID.ARRIVED_MAIL:
+					_changeBackgroundSkin(0xecf0f4);
+					topFooter.visible = false;
+					
+					break;	
+					
 				case ScreenID.DECLARE_MAIL:
-					
+					_changeBackgroundSkin(0xffffff);
 					
 					break;
+						
+					
 				case ScreenID.DECLARE_DONE_MAIL:
 					
-					topHeader.visible = true;
-					topHeader._changeBackgroundSkin(0x00b7f0);
-					topHeader._setMenuItems(TopHeader.ARROWTOLEFT_WHITE_ITEM, TopHeader.LEFT_ITEM);
+					//topHeader._changeBackgroundSkin(0x00b7f0);
 					
+					break;
+					
+				case ScreenID.MAPS:
+					
+					topFooter.visible = true;
 					break;
 				
 				default: 
-					if (logoImg && contains(logoImg))
-						removeChild(logoImg);
+					if (logoImg && contains(logoImg)) removeChild(logoImg);
 				
 			}
 		}

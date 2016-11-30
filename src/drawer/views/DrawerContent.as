@@ -7,7 +7,7 @@ package drawer.views {
 	import feathers.events.FeathersEventType;
 	import feathers.motion.Reveal;
 	import screens.ScreenID;
-	import screens.posta.ScreenAllMails;
+	import screens.posta.ScreenMainMails;
 	import screens.splash.ScreenIntro;
 	import screens.splash.ScreenLang;
 	import screens.splash.ScreenLoginCase;

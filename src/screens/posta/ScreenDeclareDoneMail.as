@@ -9,7 +9,6 @@ package screens.posta {
 	import feathers.controls.LayoutGroup;
 	import feathers.controls.ScrollBarDisplayMode;
 	import feathers.controls.ScrollScreen;
-	import feathers.core.ToggleGroup;
 	import feathers.layout.HorizontalAlign;
 	import feathers.layout.VerticalAlign;
 	import feathers.layout.VerticalLayout;
@@ -31,6 +30,12 @@ package screens.posta {
 		private var line:MyCanvas;
 		private var infoLab:LabelWithTitleBlock;
 		
+		private var mui:Object;
+		private var lang:String;
+		
+		private var submitBtnSkin:ImageSkin;
+		private var submitBtn:Button;
+		
 		public function ScreenDeclareDoneMail() {
 			super();
 			//this.title = "Screen C";
@@ -39,8 +44,9 @@ package screens.posta {
 		override protected function initialize():void {
 			
 			super.initialize();
-			Settings._splash._changeBackgroundSkin(0xffffff);
-			
+
+			mui = Settings._mui;
+			lang = Settings._lang;
 			
 			var layout:VerticalLayout = new VerticalLayout();
 			layout.horizontalAlign = HorizontalAlign.CENTER;
@@ -66,43 +72,43 @@ package screens.posta {
 			fillBtnStyle.size = Settings._getIntByDPI(20);
 			fillBtnStyle.color = 0x798188;
 			
-			infoLab = new LabelWithTitleBlock('სტატუსი', 'გამოგზავნილი');
+			infoLab = new LabelWithTitleBlock(mui['mails_declare_status'][lang], 'გამოგზავნილი');
 			addChild(infoLab);
 			
 			line = drawFullHorizontalLine();
 			
-			infoLab = new LabelWithTitleBlock('თრექინგ კოდი', '9361289681090039432375');
+			infoLab = new LabelWithTitleBlock(mui['mails_declare_trackingcode'][lang], '9361289681090039432375');
 			addChild(infoLab);
 			
 			line = drawFullHorizontalLine();
 			
-			infoLab = new LabelWithTitleBlock('გამომგზავნი', 'amazon.com');
+			infoLab = new LabelWithTitleBlock((mui['mails_declare_sender'][lang], 'amazon.com');
 			addChild(infoLab);
 			
 			line = drawFullHorizontalLine();
 			
-			infoLab = new LabelWithTitleBlock('პროდუქციის დასახელება', 'იარაღები და ხელის ინსტრუმენტები (8202)');
+			infoLab = new LabelWithTitleBlock(mui['mails_declare_productname'][lang], 'იარაღები და ხელის ინსტრუმენტები (8202)');
 			addChild(infoLab);
 			
 			line = drawFullHorizontalLine();
 			
 			
-			infoLab = new LabelWithTitleBlock('ღირებულება (USD)', '455');
+			infoLab = new LabelWithTitleBlock(mui['mails_declare_priseusd'][lang], '455');
 			addChild(infoLab);
 			
 			line = drawFullHorizontalLine();
 			
-			infoLab = new LabelWithTitleBlock('გადაფუთვა', 'დიახ');
+			infoLab = new LabelWithTitleBlock(mui['mails_declare_repack'][lang], mui['mails_declare_yes'][lang]); //mails_declare_no
 			addChild(infoLab);
 			
 			line = drawFullHorizontalLine();
 			
-			infoLab = new LabelWithTitleBlock('მსურს მივიღო მისამართზე', 'თბილისი, ძმ. ზუბალაშვილების #50');
+			infoLab = new LabelWithTitleBlock(mui['mails_declare_toaddress'][lang], 'თბილისი, ძმ. ზუბალაშვილების #50');
 			addChild(infoLab);
 			
 			line = drawFullHorizontalLine();
 			
-			infoLab = new LabelWithTitleBlock('კომენტარი', 'საახალწლო საჩუქრები');
+			infoLab = new LabelWithTitleBlock(mui['mails_declare_comment'][lang], 'საახალწლო საჩუქრები');
 			addChild(infoLab);
 			
 			
@@ -115,14 +121,14 @@ package screens.posta {
 			buttonsGroup.layout = buttonsGroupLayout;
 			addChild(buttonsGroup);
 			
-			var payBtnSkin:ImageSkin = new ImageSkin(AssetsLoader._asset.getTexture("posta_item_submit_btn_normal.png"));
-		    payBtnSkin.setTextureForState(ButtonState.DISABLED, AssetsLoader._asset.getTexture("posta_item_submit_btn_disabled.png"));
-		    payBtnSkin.scale9Grid = new Rectangle(40, 40, 120, 120);
+			submitBtnSkin = new ImageSkin(AssetsLoader._asset.getTexture("posta_item_submit_btn_normal.png"));
+		    submitBtnSkin.setTextureForState(ButtonState.DISABLED, AssetsLoader._asset.getTexture("posta_item_submit_btn_disabled.png"));
+		    submitBtnSkin.scale9Grid = new Rectangle(40, 40, 120, 120);
 			
-			var payBtn:Button = StaticGUI._addBtnSkin(buttonsGroup, 'მონაცემების შენახვა', payBtnStyle, payBtnSkin);
-			payBtn.disabledFontStyles = payBtnDisabledStyle;
+			submitBtn = StaticGUI._addBtnSkin(buttonsGroup, 'მონაცემების შენახვა', payBtnStyle, submitBtnSkin);
+			submitBtn.disabledFontStyles = payBtnDisabledStyle;
 			//payBtn.isEnabled = false;
-			payBtn.addEventListener(Event.TRIGGERED, mailRegHandler);
+			submitBtn.addEventListener(Event.TRIGGERED, submitHandler);
 			
 			this.width = stage.stageWidth;
 			this.height = stage.stageHeight;
@@ -141,23 +147,22 @@ package screens.posta {
 		
 		override public function dispose():void {
 			
-			//if (arrivedGroup) StaticGUI._safeRemoveChildren(arrivedGroup, true);
+			submitBtn.removeEventListener(Event.TRIGGERED, submitHandler);
+			if (buttonsGroup) StaticGUI._safeRemoveChildren(buttonsGroup, true);
 			
 			//StaticGUI._safeRemoveChildren(this, true);
+			
+			mui = null;
+			lang = null;
+			
+			submitBtnSkin = null;
+			submitBtn = null;
 			
 			super.dispose();
 		}
 		
-		protected function mailRegHandler(event:Event):void {
+		protected function submitHandler(event:Event):void {
 			this.dispatchEventWith(AppEvent.CLOSE);
-		}
-		
-		protected function faceBdHandler(event:Event):void {
-			this.dispatchEventWith(Event.COMPLETE);
-		}
-		
-		protected function registerHandler(event:Event):void {
-			this.dispatchEventWith(Event.COMPLETE);
 		}
 	}
 }

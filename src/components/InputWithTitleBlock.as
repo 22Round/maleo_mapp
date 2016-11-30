@@ -76,7 +76,7 @@ package components {
 		
 		override public function dispose():void {
 			
-			StaticGUI._safeRemoveChildren(this, true);
+			//StaticGUI._safeRemoveChildren(this, true);
 			
 			super.dispose();
 		}

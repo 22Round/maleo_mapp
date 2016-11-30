@@ -98,7 +98,7 @@ package drawer.views {
 			
 			for (var i:uint; i < 6; i++ ) {
 				
-				btn = StaticGUI._addBtnSkin(menuGroup, Settings._muiPack['drawer_menu_item_' + i][Settings._lang],  btnStyle1, null);
+				btn = StaticGUI._addBtnSkin(menuGroup, Settings._mui['drawer_menu_item_' + i][Settings._lang],  btnStyle1, null);
 				btn.addEventListener(Event.TRIGGERED, menuHandler);
 				menuList.push(btn);
 			}
@@ -123,7 +123,7 @@ package drawer.views {
 			label1Group.layout = label1GroupLayout;
 			sectorTwoGroup.addChild( label1Group );
 			
-			titleLabel = StaticGUI._addLabel(label1Group, Settings._muiPack['drawer_title_1'][Settings._lang], labelStyle1);
+			titleLabel = StaticGUI._addLabel(label1Group, Settings._mui['drawer_title_1'][Settings._lang], labelStyle1);
 			titleLabel = StaticGUI._addLabel(label1Group, 'ზვიად Ziziguri დიდი ერთი царица', btnStyle1);
 			
 			var label2Group:LayoutGroup = new LayoutGroup();
@@ -135,7 +135,7 @@ package drawer.views {
 			label2Group.layout = label2GroupLayout;
 			sectorTwoGroup.addChild(label2Group);
 			
-			titleLabel = StaticGUI._addLabel(label2Group, Settings._muiPack['drawer_title_2'][Settings._lang], labelStyle1);
+			titleLabel = StaticGUI._addLabel(label2Group, Settings._mui['drawer_title_2'][Settings._lang], labelStyle1);
 			titleLabel = StaticGUI._addLabel(label2Group, '33.54', labelStyle2);
 			
 			var lariSimGroup:LayoutGroup = new LayoutGroup();
@@ -152,7 +152,7 @@ package drawer.views {
 			lariImg.scaleY = lariImg.scaleX;
 			lariSimGroup.addChild(lariImg);
 			
-			fillBalanceBtn = StaticGUI._addBtnSkin(sectorTwoGroup, Settings._muiPack['drawer_balance_btn'][Settings._lang], btnStyle1, new ImageSkin(AssetsLoader._asset.getTexture("drawer_fill_balance_btn.png")));
+			fillBalanceBtn = StaticGUI._addBtnSkin(sectorTwoGroup, Settings._mui['drawer_balance_btn'][Settings._lang], btnStyle1, new ImageSkin(AssetsLoader._asset.getTexture("drawer_fill_balance_btn.png")));
 			
 			line = new MyCanvas;
 			addChild(line);

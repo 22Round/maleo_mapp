@@ -12,6 +12,7 @@
 	import flash.text.AntiAliasType;
 	import flash.text.TextFieldAutoSize;
 	import screens.Splash;
+	import screens.TopFooter;
 	import starling.display.DisplayObject;
 	
 	/*import fl.text.TLFTextField;
@@ -36,9 +37,10 @@
 		public static var _userID:String = '0215587';
 		
 		public static var _lang:String;
-		public static var _muiPack:Object;
+		public static var _mui:Object;
 		public static var _sharedObj:Shared;
 		public static var _splash:Splash;
+		public static var _topFooter:TopFooter;
 		
 		
 		//ITEM LIBRARY

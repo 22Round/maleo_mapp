@@ -3,42 +3,27 @@ package components {
 	import application.AssetsLoader;
 	import application.utils.StaticGUI;
 	import feathers.controls.AutoComplete;
-	import feathers.controls.Button;
 	import feathers.controls.ButtonState;
-	import feathers.controls.Check;
 	import feathers.controls.Label;
 	import feathers.controls.LayoutGroup;
 	import feathers.controls.List;
-	import feathers.controls.PanelScreen;
-	import feathers.controls.Screen;
 	import feathers.controls.TabBar;
-	import feathers.controls.TextInput;
 	import feathers.controls.ToggleButton;
 	import feathers.controls.renderers.DefaultListItemRenderer;
 	import feathers.controls.renderers.IListItemRenderer;
-	import feathers.controls.text.TextBlockTextRenderer;
 	import feathers.controls.text.TextFieldTextRenderer;
 	import feathers.core.ITextRenderer;
-	import feathers.core.ToggleGroup;
 	import feathers.data.ListCollection;
 	import feathers.data.LocalAutoCompleteSource;
-	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
-	import feathers.layout.FlowLayout;
 	import feathers.layout.HorizontalAlign;
-	import feathers.layout.RelativePosition;
 	import feathers.layout.VerticalAlign;
 	import feathers.layout.VerticalLayout;
-	import feathers.layout.VerticalLayoutData;
 	import feathers.skins.ImageSkin;
 	import flash.geom.Rectangle;
-	import starling.display.Image;
-	import starling.display.Quad;
-	import starling.text.TextFormat;
-	import starling.textures.Texture;
-	import starling.textures.TextureSmoothing;
-	
 	import starling.events.Event;
+	import starling.text.TextFormat;
+	
 	
 	public class MailSenderBlock extends LayoutGroup {
 		private var title:Label;
@@ -114,7 +99,7 @@ package components {
 			var dataProvObj:Object;
 			var dataProvArr:Array = new Array;
 			
-			var labelArr:Array = new Array('ონლაინ მაღაზია', 'პირადი გზავნილი');
+			var labelArr:Array = new Array(Settings._mui['mails_declare_sendercase1'][Settings._lang], Settings._mui['mails_declare_sendercase2'][Settings._lang]);
 			for (var i:uint; i < 2; i++) {
 				dataProvObj = new Object;
 				dataProvObj.label = labelArr[i];
@@ -185,7 +170,7 @@ package components {
 			var input:AutoComplete = StaticGUI._addAutoComplete(this, inputPromptStr, inputStyle, inputPromptStyle);
 			input.backgroundSkin = inputSkin;
 			input.source = new LocalAutoCompleteSource(new ListCollection(new <String>["Apple", "Apricot", "Banana", "Cantaloupe", "Cherry", "Grape", "Lemon", "Lime", "Mango", "Orange", "Peach", "Pineapple", "Plum", "Pomegranate", "Raspberry", "Strawberry", "Watermelon"]));
-		
+			//TODO neen real data from server
 			
 			input.listFactory = function():List{
 				var list:List = new List();
@@ -220,7 +205,7 @@ package components {
 		
 		override public function dispose():void {
 			
-			StaticGUI._safeRemoveChildren(this, true);
+			//StaticGUI._safeRemoveChildren(this, true);
 			
 			super.dispose();
 		}

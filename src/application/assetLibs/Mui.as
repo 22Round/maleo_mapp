@@ -102,7 +102,7 @@
 				
 				
 
-				Settings._muiPack = $muiObject;
+				Settings._mui = $muiObject;
 				System.disposeXML(xmlCont);
 			
 				_loaded = true;

@@ -29,12 +29,21 @@ package screens.posta {
 		private var fillBtnStyle:TextFormat;
 		
 		private var item:MailBlock;
-		private var trackingGroup:LayoutGroup;
-		private var trackingGroupLayout:VerticalLayout;
-		private var notifiGroup:LayoutGroup;
-		private var notifiGroupLayout:VerticalLayout;
 		private var buttonsGroup:LayoutGroup;
 		private var buttonsGroupLayout:VerticalLayout;
+		
+		private var mui:Object;
+		private var lang:String;
+		private var submitBtnSkin:ImageSkin;
+		private var submitBtn:Button;
+		
+		private var trackingInput:InputWithTitleBlock;
+		private var sender:MailSenderBlock;
+		private var product:MailPickerItemBlock;
+		private var mailPrice:InputWithTitleBlock;
+		private var checkPac:MailRepacBlock;
+		private var address:MailPickerItemBlock;
+		private var comment:InputWithTitleBlock;
 		
 		public function ScreenDeclareMail() {
 			super();
@@ -44,8 +53,10 @@ package screens.posta {
 		override protected function initialize():void {
 			
 			super.initialize();
-			Settings._splash._changeBackgroundSkin(0xffffff);
 			
+			
+			mui = Settings._mui;
+			lang = Settings._lang;
 			
 			var layout:VerticalLayout = new VerticalLayout();
 			layout.horizontalAlign = HorizontalAlign.CENTER;
@@ -73,25 +84,25 @@ package screens.posta {
 			fillBtnStyle.color = 0x798188;
 			
 
-			var trackingInput:InputWithTitleBlock = new InputWithTitleBlock('თრექინგ კოდი', '9361289681090039432375');
+			trackingInput = new InputWithTitleBlock(mui['mails_declare_trackingcode'][lang], '9361289681090039432375');
 			addChild(trackingInput);
 			
-			var sender:MailSenderBlock = new MailSenderBlock('მიუთითეთ გამომგზავნი', 'მაგ. amazon.com');
+			sender = new MailSenderBlock(mui['mails_declare_sender'][lang], mui['mails_declare_sender_example'][lang]);
 			addChild(sender);
 			
-			var product:MailPickerItemBlock = new MailPickerItemBlock('პროდუქციის დასახელება', 'ამოირჩიეთ პროდუქტი');
+			product = new MailPickerItemBlock(mui['mails_declare_productname'][lang], mui['mails_declare_product_choose'][lang]);
 			addChild(product);
 			
-			var mailPrice:InputWithTitleBlock = new InputWithTitleBlock('ღირებულება (USD)', '');
+			mailPrice = new InputWithTitleBlock(mui['mails_declare_priseusd'][lang], '');
 			addChild(mailPrice);
 			
-			var checkPac:MailRepacBlock = new MailRepacBlock('გადაფუთვა');
+			checkPac = new MailRepacBlock(mui['mails_declare_repack'][lang]);
 			addChild(checkPac);
 			
-			var address:MailPickerItemBlock = new MailPickerItemBlock('მსურს მივიღო მისამართზე', 'თბილისი, ზუბალაშვილების #50');
+			address = new MailPickerItemBlock(mui['mails_declare_toaddress'][lang], 'თბილისი, ზუბალაშვილების #50');
 			addChild(address);
 			
-			var comment:InputWithTitleBlock = new InputWithTitleBlock('კომენტარი', '');
+			comment = new InputWithTitleBlock(mui['mails_declare_comment'][lang], '');
 			addChild(comment);
 			
 			buttonsGroup = new LayoutGroup();
@@ -102,15 +113,14 @@ package screens.posta {
 			buttonsGroup.layout = buttonsGroupLayout;
 			addChild(buttonsGroup);
 			
-			var payBtnSkin:ImageSkin = new ImageSkin(AssetsLoader._asset.getTexture("posta_item_submit_btn_normal.png"));
-			payBtnSkin.setTextureForState(ButtonState.DISABLED, AssetsLoader._asset.getTexture("posta_item_submit_btn_disabled.png"));
-			payBtnSkin.scale9Grid = new Rectangle(40, 40, 120, 120);
+			submitBtnSkin = new ImageSkin(AssetsLoader._asset.getTexture("posta_item_submit_btn_normal.png"));
+			submitBtnSkin.setTextureForState(ButtonState.DISABLED, AssetsLoader._asset.getTexture("posta_item_submit_btn_disabled.png"));
+			submitBtnSkin.scale9Grid = new Rectangle(40, 40, 120, 120);
 			
-			var payBtn:Button = StaticGUI._addBtnSkin(buttonsGroup, 'მონაცემების შენახვა', payBtnStyle, payBtnSkin);
-			payBtn.disabledFontStyles = payBtnDisabledStyle;
+			submitBtn = StaticGUI._addBtnSkin(buttonsGroup, mui['mails_declare_submit'][lang], payBtnStyle, submitBtnSkin);
+			submitBtn.disabledFontStyles = payBtnDisabledStyle;
 			//payBtn.isEnabled = false;
-			//payBtn.addEventListener(Event.TRIGGERED, mailRegHandler);
-			
+			submitBtn.addEventListener(Event.TRIGGERED, submitHandler);
 			
 			this.width = stage.stageWidth;
 			this.height = stage.stageHeight;
@@ -120,22 +130,29 @@ package screens.posta {
 		
 		override public function dispose():void {
 			
+			submitBtn.removeEventListener(Event.TRIGGERED, submitHandler);
 			//if (arrivedGroup) StaticGUI._safeRemoveChildren(arrivedGroup, true);
-			if (notifiGroup) StaticGUI._safeRemoveChildren(notifiGroup, true);
-			StaticGUI._safeRemoveChildren(this, true);
+			if (buttonsGroup) StaticGUI._safeRemoveChildren(buttonsGroup, true);
+			//StaticGUI._safeRemoveChildren(this, true);
+			
+			mui = null;
+			lang = null;
+			
+			submitBtnSkin = null;
+			submitBtn = null;
+		
+			trackingInput = null;
+			sender = null;
+			product = null;
+			mailPrice = null;
+			checkPac = null;
+			address = null;
+			comment = null;
 			
 			super.dispose();
 		}
 		
-		protected function mailRegHandler(event:Event):void {
-			this.dispatchEventWith(Event.COMPLETE);
-		}
-		
-		protected function faceBdHandler(event:Event):void {
-			this.dispatchEventWith(Event.COMPLETE);
-		}
-		
-		protected function registerHandler(event:Event):void {
+		protected function submitHandler(event:Event):void {
 			this.dispatchEventWith(Event.COMPLETE);
 		}
 	}

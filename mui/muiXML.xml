@@ -19,6 +19,98 @@
 		<lang ID = 'ka'><![CDATA[Нажмите, чтобы удалить <font color="#3bb80a">заставку</font>]]></lang>
 	</muipack>
 	
+	<!-- mails declare -->
+	
+	<muipack word = 'mails_declare_trackingcode'>
+		<lang ID = 'en'>Tracking code</lang>
+		<lang ID = 'ru'>Код отслеживания</lang>
+		<lang ID = 'ka'>თრექინგ კოდი</lang>
+	</muipack>
+	
+	<muipack word = 'mails_declare_sender'>
+		<lang ID = 'en'>Specify sender</lang>
+		<lang ID = 'ru'>Укажите отправителя</lang>
+		<lang ID = 'ka'>მიუთითეთ გამომგზავნი</lang>
+	</muipack>
+	
+	<muipack word = 'mails_declare_sender_example'>
+		<lang ID = 'en'>ex. amazon.com</lang>
+		<lang ID = 'ru'>пример amazon.com</lang>
+		<lang ID = 'ka'>მაგ. amazon.com</lang>
+	</muipack>
+	
+	<muipack word = 'mails_declare_product_choose'>
+		<lang ID = 'en'>Choose a product</lang>
+		<lang ID = 'ru'>Выберите продукт</lang>
+		<lang ID = 'ka'>ამოირჩიეთ პროდუქტი</lang>
+	</muipack>
+	
+	<muipack word = 'mails_declare_productname'>
+		<lang ID = 'en'>Product name</lang>
+		<lang ID = 'ru'>Наименование товара</lang>
+		<lang ID = 'ka'>პროდუქციის დასახელება</lang>
+	</muipack>
+	
+	<muipack word = 'mails_declare_priseusd'>
+		<lang ID = 'en'>Cost (USD)</lang>
+		<lang ID = 'ru'>Стоимость (USD)</lang>
+		<lang ID = 'ka'>ღირებულება (USD)</lang>
+	</muipack>	
+	
+	<muipack word = 'mails_declare_repack'>
+		<lang ID = 'en'>Repacking</lang>
+		<lang ID = 'ru'>Переупаковка</lang>
+		<lang ID = 'ka'>გადაფუთვა</lang>
+	</muipack>
+	
+	<muipack word = 'mails_declare_toaddress'>
+		<lang ID = 'en'>I wish to receive address</lang>
+		<lang ID = 'ru'>Я хотел бы получить адрес</lang>
+		<lang ID = 'ka'>მსურს მივიღო მისამართზე</lang>
+	</muipack>	
+	
+	<muipack word = 'mails_declare_comment'>
+		<lang ID = 'en'>Comments</lang>
+		<lang ID = 'ru'>Комментарии</lang>
+		<lang ID = 'ka'>კომენტარი</lang>
+	</muipack>
+	
+	<muipack word = 'mails_declare_submit'>
+		<lang ID = 'en'>Submit</lang>
+		<lang ID = 'ru'>Отправить</lang>
+		<lang ID = 'ka'>მონაცემების შენახვა</lang>
+	</muipack>	
+	
+	<muipack word = 'mails_declare_yes'>
+		<lang ID = 'en'>Yes</lang>
+		<lang ID = 'ru'>Да</lang>
+		<lang ID = 'ka'>დიახ</lang>
+	</muipack>
+	
+	<muipack word = 'mails_declare_no'>
+		<lang ID = 'en'>No</lang>
+		<lang ID = 'ru'>Нет</lang>
+		<lang ID = 'ka'>არა</lang>
+	</muipack>
+	
+	<muipack word = 'mails_declare_status'>
+		<lang ID = 'en'>Status</lang>
+		<lang ID = 'ru'>Статус</lang>
+		<lang ID = 'ka'>სტატუსი</lang>
+	</muipack>
+	
+	<muipack word = 'mails_declare_sendercase1'>
+		<lang ID = 'en'>Online shop</lang>
+		<lang ID = 'ru'>Интернет магазин</lang>
+		<lang ID = 'ka'>ონლაინ მაღაზია</lang>
+	</muipack>	
+	
+	<muipack word = 'mails_declare_sendercase2'>
+		<lang ID = 'en'>Private mail</lang>
+		<lang ID = 'ru'>Частная почта</lang>
+		<lang ID = 'ka'>პირადი გზავნილი</lang>
+	</muipack>	
+	
 	<!-- mails titles -->
 	
 	<muipack word = 'mails_title_arrived'>
@@ -46,7 +138,19 @@
 	</muipack>
 	
 	
+	<!-- all mails -->
+	
+	<muipack word = 'mails_allmails_menu'>
+		<lang ID = 'en'>On the road,Arrived,Received</lang>
+		<lang ID = 'ru'>На дороге,Прибыл,Полученное</lang>
+		<lang ID = 'ka'>გზაშია,ჩამოსული,მიღებული</lang>
+	</muipack>
+	
+	
 	<!-- mails arrived titles -->
+	
+	
+	
 	
 	<muipack word = 'mails_arrived_notifi'>
 		<lang ID = 'en'><![CDATA[You do not have enough money, please fill in the balance]]></lang>

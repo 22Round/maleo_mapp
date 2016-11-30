@@ -7,30 +7,21 @@ package components {
 	import feathers.controls.Check;
 	import feathers.controls.Label;
 	import feathers.controls.LayoutGroup;
-	import feathers.controls.PanelScreen;
-	import feathers.controls.Screen;
-	import feathers.controls.text.TextBlockTextRenderer;
-	import feathers.controls.text.TextFieldTextRenderer;
-	import feathers.core.ITextRenderer;
-	import feathers.core.ToggleGroup;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
 	import feathers.layout.FlowLayout;
 	import feathers.layout.HorizontalAlign;
 	import feathers.layout.RelativePosition;
-	import feathers.layout.VerticalAlign;
 	import feathers.layout.VerticalLayout;
-	import feathers.layout.VerticalLayoutData;
 	import feathers.skins.ImageSkin;
 	import flash.geom.Rectangle;
+	import screens.ScreenID;
 	import starling.display.Image;
 	import starling.display.Quad;
+	import starling.events.Event;
 	import starling.text.TextFormat;
 	import starling.textures.Texture;
 	import starling.textures.TextureSmoothing;
-	
-	import starling.events.Event;
-	
 	
 	public class MailBlock extends LayoutGroup {
 		
@@ -75,6 +66,9 @@ package components {
 		
 		private var check:Check;
 		private var amountLabel:Label;
+		
+		private var hitQad:Quad;
+		private var hitBtn:Button;
 		
 		public static const COMPLETED_MAIL:String = 'completedMail';
 		public static const ENTER_GOODS_MAIL:String = 'enterGoodsMail';
@@ -236,8 +230,7 @@ package components {
 					detailsIco.width = Settings._getIntByDPI(15);
 					detailsIco.scaleY = domainIco.scaleX;
 					
-					detailsBtn = StaticGUI._addBtnSkin(this, Settings._muiPack['mails_block_label_1'][Settings._lang], btnStyle2);
-					detailsBtn.addEventListener(Event.TRIGGERED, detailsHandler);
+					detailsBtn = StaticGUI._addBtnSkin(this, Settings._mui['mails_block_label_1'][Settings._lang], btnStyle2);
 					detailsBtn.defaultIcon = detailsIco;
 					detailsBtn.iconPosition = RelativePosition.RIGHT;
 					detailsBtn.layoutData = detailsBtnLayoutData;
@@ -250,7 +243,7 @@ package components {
 					infoLabelLayoutData = new AnchorLayoutData();
 					infoLabelLayoutData.top = Settings._getIntByDPI(88);
 					infoLabelLayoutData.left = Settings._getIntByDPI(28);
-					infoLabel = StaticGUI._addLabel(this, Settings._muiPack['mails_block_notifi_1'][Settings._lang], infoStyle);
+					infoLabel = StaticGUI._addLabel(this, Settings._mui['mails_block_notifi_1'][Settings._lang], infoStyle);
 					infoLabel.width = 400;
 					infoLabel.textRendererProperties.wordWrap = true;
 					infoLabel.textRendererProperties.isHTML = true;
@@ -266,8 +259,7 @@ package components {
 					detailsIco.width = Settings._getIntByDPI(15);
 					detailsIco.scaleY = domainIco.scaleX;
 					
-					detailsBtn = StaticGUI._addBtnSkin(this, Settings._muiPack['mails_block_label_1'][Settings._lang], btnStyle2);
-					detailsBtn.addEventListener(Event.TRIGGERED, detailsHandler);
+					detailsBtn = StaticGUI._addBtnSkin(this, Settings._mui['mails_block_label_1'][Settings._lang], btnStyle2);
 					detailsBtn.defaultIcon = detailsIco;
 					detailsBtn.iconPosition = RelativePosition.RIGHT;
 					detailsBtn.layoutData = detailsBtnLayoutData;
@@ -295,8 +287,7 @@ package components {
 					detailsIco.width = Settings._getIntByDPI(15);
 					detailsIco.scaleY = domainIco.scaleX;
 					
-					detailsBtn = StaticGUI._addBtnSkin(this, Settings._muiPack['mails_block_label_1'][Settings._lang], btnStyle2);
-					detailsBtn.addEventListener(Event.TRIGGERED, detailsHandler);
+					detailsBtn = StaticGUI._addBtnSkin(this, Settings._mui['mails_block_label_1'][Settings._lang], btnStyle2);
 					detailsBtn.defaultIcon = detailsIco;
 					detailsBtn.iconPosition = RelativePosition.RIGHT;
 					detailsBtn.layoutData = detailsBtnLayoutData;
@@ -310,7 +301,7 @@ package components {
 					infoLabelLayoutData = new AnchorLayoutData();
 					infoLabelLayoutData.top = Settings._getIntByDPI(88);
 					infoLabelLayoutData.left = Settings._getIntByDPI(28);
-					infoLabel = StaticGUI._addLabel(this, Settings._muiPack['mails_block_notifi_2'][Settings._lang], infoStyle);
+					infoLabel = StaticGUI._addLabel(this, Settings._mui['mails_block_notifi_2'][Settings._lang], infoStyle);
 					infoLabel.width = 400;
 					infoLabel.textRendererProperties.wordWrap = true;
 					infoLabel.textRendererProperties.isHTML = true;
@@ -334,7 +325,7 @@ package components {
 					statusImg.width = Settings._getIntByDPI(145);
 					statusImg.scaleY = statusImg.scaleX;
 					//label2Group.addChild(statusImg)
-					statusLabel = StaticGUI._addLabel(statusGroup, Settings._muiPack['mails_block_label_2'][Settings._lang], statusStyle);
+					statusLabel = StaticGUI._addLabel(statusGroup, Settings._mui['mails_block_label_2'][Settings._lang], statusStyle);
 					statusLabel.backgroundSkin = statusImg;
 					
 					break;
@@ -368,7 +359,7 @@ package components {
 					statusImg.width = Settings._getIntByDPI(145);
 					statusImg.scaleY = statusImg.scaleX;
 					//label2Group.addChild(statusImg)
-					statusLabel = StaticGUI._addLabel(statusGroup, Settings._muiPack['mails_block_label_3'][Settings._lang], statusStyle);
+					statusLabel = StaticGUI._addLabel(statusGroup, Settings._mui['mails_block_label_3'][Settings._lang], statusStyle);
 					statusLabel.backgroundSkin = statusImg;
 					amountLabel = StaticGUI._addLabel(statusGroup, '12233.54', amountStyle);
 					
@@ -419,7 +410,7 @@ package components {
 					statusImg.width = Settings._getIntByDPI(145);
 					statusImg.scaleY = statusImg.scaleX;
 					//label2Group.addChild(statusImg)
-					statusLabel = StaticGUI._addLabel(statusGroup, Settings._muiPack['mails_block_label_3'][Settings._lang], statusStyle);
+					statusLabel = StaticGUI._addLabel(statusGroup, Settings._mui['mails_block_label_3'][Settings._lang], statusStyle);
 					statusLabel.backgroundSkin = statusImg;
 					amountLabel = StaticGUI._addLabel(statusGroup, '12233.54', amountStyle);
 					
@@ -442,18 +433,30 @@ package components {
 					break;
 			}
 			
+			
+			hitQad = new Quad(50, 50);
+			hitQad.alpha = 0;
+			hitBtn = new Button;
+			//hitBtn.defaultStyleProvider = null;
+			hitBtn.defaultSkin = hitQad;
+			hitBtn.layoutData = new AnchorLayoutData(0, 0, 0, 0);
+			addChild(hitBtn)
+			hitBtn.addEventListener(Event.TRIGGERED, blockHandler);
+			
+		}
+		
+		private function blockHandler(e:Event):void {
+			//this.dispatchEventWith(AppEvent.COMPLETED, true);
+			Settings._splash._navigator.pushScreen(ScreenID.DECLARE_MAIL);
 		}
 		
 		override public function dispose():void {
 			
-			StaticGUI._safeRemoveChildren(this, true);
+			//StaticGUI._safeRemoveChildren(this, true);
+			this.removeEventListener(Event.TRIGGERED, blockHandler);
 			
 			super.dispose();
 		}
-		
-		
-		protected function detailsHandler(event:Event):void {
-			this.dispatchEventWith(Event.COMPLETE);
-		}
 	}
 }
+

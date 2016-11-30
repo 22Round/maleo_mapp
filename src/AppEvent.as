@@ -19,9 +19,12 @@ package {
 		public static const SETTINGS:String              	   = 'settings';
 		public static const CLOSE:String              	  	   = 'close';
 		public static const CANCEL:String              	  	   = 'cancel';
+		public static const CHANGE:String              	  	   = 'change';
 		public static const REGISTER:String              	   = 'register';
 		public static const LOGIN_FACEBOOK:String              = 'loginFacebook';
 		public static const LOGIN_NATIVE:String                = 'loginNative';
+		public static const POSTA_MENU_CALLBACK:String         = 'postaMenuCallBack';
+		
 	
 		public var data:Object;
 		

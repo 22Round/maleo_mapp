@@ -1,4 +1,5 @@
 package screens.splash.gallery {
+	import application.utils.StaticGUI;
 	import feathers.controls.AutoSizeMode;
 	import feathers.controls.ImageLoader;
 	import feathers.controls.Label;
@@ -42,6 +43,16 @@ package screens.splash.gallery {
 				this.textureCache.dispose();
 				this.textureCache = null;
 			}
+			
+			if (list) {
+				list.removeEventListener(FeathersEventType.SCROLL_COMPLETE, listScrollCompleted);
+				list.removeEventListener(Event.CHANGE, list_changeHandler);
+			}
+			
+			
+			StaticGUI._safeRemoveChildren(list, true);
+			list = null;
+			
 			super.dispose();
 		}
 		
@@ -67,26 +78,26 @@ package screens.splash.gallery {
 			
 			this.list = new List();
 			//this.list.styleNameList.add(THUMBNAIL_LIST_NAME);
-			this.list.layout = listLayout;
-			this.list.horizontalScrollPolicy = ScrollPolicy.ON;
-			this.list.snapScrollPositionsToPixels = true;
-			this.list.scrollBarDisplayMode = ScrollBarDisplayMode.NONE;
-			this.list.horizontalScrollStep = stage.stageWidth;
-			this.list.itemRendererFactory = itemRendererFactory;
-			this.list.snapToPages = true;
-			this.list.addEventListener(Event.CHANGE, list_changeHandler);
-			this.list.addEventListener(FeathersEventType.SCROLL_COMPLETE, listScrollCompleted);
-			this.list.height = stage.stageHeight;
-			this.list.width = stage.stageWidth;
+			list.layout = listLayout;
+			list.horizontalScrollPolicy = ScrollPolicy.ON;
+			list.snapScrollPositionsToPixels = true;
+			list.scrollBarDisplayMode = ScrollBarDisplayMode.NONE;
+			list.horizontalScrollStep = stage.stageWidth;
+			list.itemRendererFactory = itemRendererFactory;
+			list.snapToPages = true;
+			list.addEventListener(Event.CHANGE, list_changeHandler);
+			list.addEventListener(FeathersEventType.SCROLL_COMPLETE, listScrollCompleted);
+			list.height = stage.stageHeight;
+			list.width = stage.stageWidth;
 			
-			this.list.layoutData = listLayoutData;
-			this.addChild(this.list);
+			list.layoutData = listLayoutData;
+			this.addChild(list);
 			
 			loadSlides();
 		}
 		
 		private function listScrollCompleted(e:Event):void {
-			this.dispatchEventWith(Event.CHANGE, false, this.list);
+			this.dispatchEventWith(Event.CHANGE, false, list);
 		}
 		
 		protected function itemRendererFactory():IListItemRenderer {

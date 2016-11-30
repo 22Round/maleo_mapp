@@ -25,10 +25,14 @@ package screens {
 		}
 		
 		private var tabBar:TabBar;
+		private var clickedBoo:Boolean;
 		
 		override protected function initialize():void {
 			//never forget to call super.initialize()
 			super.initialize();
+			
+			
+			Settings._topFooter = this;
 			
 			this.layout = new AnchorLayout();
 			
@@ -36,6 +40,7 @@ package screens {
 			var dataProvObj:Object;
 			var defaultIco:Image;
 			var defaultSelectedIco:Image;
+			
 			
 			for (var i:uint; i < 5; i++) {
 				dataProvObj = new Object;
@@ -63,6 +68,7 @@ package screens {
 			tabBar.dataProvider = new ListCollection(dataProvArr);
 											
 			tabBar.addEventListener(Event.CHANGE, tabBarHandler);
+			tabBar.addEventListener(Event.TRIGGERED, tabBarClickHandler);
 			tabBar.layoutData = new AnchorLayoutData(NaN, 0, 0, 0);
 			tabBar.styleProvider = null;
 			this.addChild(tabBar);
@@ -72,8 +78,45 @@ package screens {
 			
 		}
 		
+		private function tabBarClickHandler(e:Event):void {
+			clickedBoo = true;
+			trace("selectedIndex:1");
+		}
+		
 		private function tabBarHandler(event:Event):void {
 			//this._label.text = "selectedIndex: " + this._tabBar.selectedIndex.toString();
+			trace("selectedIndex: " + tabBar.selectedIndex.toString());
+			
+			
+			if (clickedBoo) {
+				switch(tabBar.selectedIndex) {
+					case 0:
+						
+						Settings._splash._navigator.pushScreen(ScreenID.MAIN_MAILS);
+						
+						break;
+					case 1:
+						
+						Settings._splash._navigator.pushScreen(ScreenID.ALL_MAILS);
+						
+						break;
+					case 2:
+						
+						Settings._splash._navigator.pushScreen(ScreenID.DECLARE_MAIL);
+						
+						break
+					case 3:
+						
+						Settings._splash._navigator.pushScreen(ScreenID.MAPS);
+						
+						break;
+				}
+				
+			}
+			
+			
+			clickedBoo = false;
+			
 		}
 	}
 }

@@ -23,27 +23,6 @@ package screens.splash {
 	
 	import starling.events.Event;
 	
-	/**
-	 * Pops all screens from the stack to return to the root screen. An event
-	 * is mapped to the pop to root action by calling addPopToRootEvent() on the
-	 * StackScreenNavigatorItem.
-	 *
-	 * item.addPopToRootEvent(Event.CLOSE);
-	 */
-	[Event(name = "close", type = "starling.events.Event")]
-	
-	/**
-	 * Pops this screen from the stack to return to the previous screen. An
-	 * event is mapped to the pop action by calling addPopEvent() on the
-	 * StackScreenNavigatorItem.
-	 *
-	 * item.addPopEvent(Event.CANCEL);
-	 */
-	[Event(name = "cancel", type = "starling.events.Event")]
-	
-	
-	
-	[Event(name = "complete", type = "starling.events.Event")]
 	
 	public class ScreenLoginCase extends Screen {
 		
@@ -77,8 +56,6 @@ package screens.splash {
 			super.initialize();
 			
 			
-			Settings._splash._changeBackgroundSkin();
-			
 			var layout:VerticalLayout = new VerticalLayout();
 			layout.horizontalAlign = HorizontalAlign.CENTER;
 			layout.verticalAlign = VerticalAlign.MIDDLE;
@@ -110,7 +87,7 @@ package screens.splash {
 			btnRegSkin.scale9Grid = new Rectangle(40, 40, 120, 120);
 			
 			
-			var label:Label = StaticGUI._addLabel(this, Settings._muiPack['logincase_enter_lbl'][Settings._lang], labelStyle);
+			var label:Label = StaticGUI._addLabel(this, Settings._mui['logincase_enter_lbl'][Settings._lang], labelStyle);
 			
 			group = new LayoutGroup();
 			groupLayout = new VerticalLayout();
@@ -118,17 +95,17 @@ package screens.splash {
 			group.layout = groupLayout;
 			this.addChild( group );
 
-			mailRegBtn = StaticGUI._addBtnSkin(group, Settings._muiPack['logincase_login_mail_btn'][Settings._lang], btnStyle1, btnMailSkin);
+			mailRegBtn = StaticGUI._addBtnSkin(group, Settings._mui['logincase_login_mail_btn'][Settings._lang], btnStyle1, btnMailSkin);
 			mailRegBtn.addEventListener(Event.TRIGGERED, mailRegHandler);
 			
 			
-			faceBRegBtn = StaticGUI._addBtnSkin(group,  Settings._muiPack['logincase_login_facebook_btn'][Settings._lang], btnStyle1, btnFaceBSkin);
+			faceBRegBtn = StaticGUI._addBtnSkin(group,  Settings._mui['logincase_login_facebook_btn'][Settings._lang], btnStyle1, btnFaceBSkin);
 			faceBRegBtn.defaultIcon = new Image(AssetsLoader._asset.getTexture("facebook_btn_ico.png"));
 			faceBRegBtn.iconOffsetX = -15;
 			faceBRegBtn.addEventListener(Event.TRIGGERED, faceBdHandler);
 			
 			
-			label = StaticGUI._addLabel(this, Settings._muiPack['logincase_orregister_lbl'][Settings._lang], labelStyle);
+			label = StaticGUI._addLabel(this, Settings._mui['logincase_orregister_lbl'][Settings._lang], labelStyle);
 			
 			registRegBtn = StaticGUI._addBtnSkin(this, "რეგისტრაცია", btnStyle2, btnRegSkin);
 			registRegBtn.addEventListener(Event.TRIGGERED, registerHandler);
@@ -145,7 +122,7 @@ package screens.splash {
 			if (registRegBtn) registRegBtn.removeEventListener(Event.TRIGGERED, registerHandler);
 			
 			StaticGUI._safeRemoveChildren(group, true);
-			StaticGUI._safeRemoveChildren(this, true);
+			//StaticGUI._safeRemoveChildren(this, true);
 			
 			super.dispose();
 		}

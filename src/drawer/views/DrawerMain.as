@@ -3,26 +3,14 @@ package drawer.views {
 	import application.AssetsLoader;
 	import application.utils.StaticGUI;
 	import feathers.controls.Button;
-	import feathers.controls.Label;
-	import feathers.controls.LayoutGroup;
 	import feathers.controls.Screen;
-	import feathers.controls.text.TextBlockTextRenderer;
-	import feathers.controls.text.TextFieldTextRenderer;
-	import feathers.core.ITextRenderer;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
-	import feathers.layout.HorizontalAlign;
-	import feathers.layout.VerticalAlign;
-	import feathers.layout.VerticalLayout;
-	import feathers.layout.VerticalLayoutData;
-	import feathers.skins.ImageSkin;
-	import flash.geom.Rectangle;
 	import starling.display.Image;
 	import starling.display.Quad;
-	import starling.text.TextFormat;
-	import starling.textures.Texture;
-	
 	import starling.events.Event;
+	import starling.text.TextFormat;
+	
 	
 	
 	public class DrawerMain extends Screen {
@@ -73,7 +61,7 @@ package drawer.views {
 			fillBottomLayoutData.left = Settings._getIntByDPI(30);
 			fillBottomLayoutData.bottom = Settings._getIntByDPI(25);
 			
-			settingsBtn = StaticGUI._addButton(this, 0, 0, Settings._muiPack['drawer_settings_btn'][Settings._lang], btnStyle1);
+			settingsBtn = StaticGUI._addButton(this, 0, 0, Settings._mui['drawer_settings_btn'][Settings._lang], btnStyle1);
 			settingsBtn.addEventListener(Event.TRIGGERED, settingsHandler);
 			settingsBtn.defaultIcon = settingsIco;
 			//settingsBtn.iconOffsetX = -15;

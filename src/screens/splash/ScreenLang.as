@@ -1,48 +1,17 @@
 package screens.splash {
 	import application.utils.MyCanvas;
+	import application.utils.StaticGUI;
 	import feathers.controls.Button;
-	import feathers.controls.PanelScreen;
 	import feathers.controls.Screen;
-	import feathers.controls.text.TextFieldTextRenderer;
-	import feathers.core.ITextRenderer;
 	import feathers.layout.HorizontalAlign;
 	import feathers.layout.VerticalAlign;
 	import feathers.layout.VerticalLayout;
-	import feathers.layout.VerticalLayoutData;
 	import feathers.skins.ImageSkin;
 	import flash.geom.Rectangle;
 	import starling.display.Image;
 	import starling.display.Quad;
-	import starling.text.TextFormat;
-	
 	import starling.events.Event;
-	
-	/**
-	 * Pops this screen from the stack to return to the previous screen. An
-	 * event is mapped to the pop action by calling addPopEvent() on the
-	 * StackScreenNavigatorItem.
-	 *
-	 * item.addPopEvent(Event.CANCEL);
-	 */
-	[Event(name = "cancel", type = "starling.events.Event")]
-	
-	/**
-	 * Replaces this screen with another screen at the same position in the
-	 * stack. An event is mapped to the replace action by calling
-	 * setScreenIDForReplaceEvent() on the StackScreenNavigatorItem.
-	 *
-	 * item.setScreenIDForReplaceEvent(Event.CHANGE, otherScreenID);
-	 */
-	[Event(name = "change", type = "starling.events.Event")]
-	
-	/**
-	 * Pushes another screen onto the stack. An event is mapped to the push
-	 * action by calling setScreenIDForPushEvent() on the
-	 * StackScreenNavigatorItem.
-	 *
-	 * item.setScreenIDForPushEvent(Event.COMPLETE, otherScreenID);
-	 */
-	[Event(name = "complete", type = "starling.events.Event")]
+	import starling.text.TextFormat;
 	
 	public class ScreenLang extends Screen {
 		
@@ -89,11 +58,9 @@ package screens.splash {
 			line.lineTo(0, 0);
 			line.lineTo(300, 0);
 			
-			kaLangBtn = new Button();
-			kaLangBtn.label = "ქართული";
+			kaLangBtn = StaticGUI._addBtnSkin(this, "ქართული", btnStyle, btnSkin);
 			//popToAButton.layoutData = new VerticalLayoutData(50);
-			kaLangBtn.addEventListener(Event.TRIGGERED, popToAButton_triggeredHandler);
-			kaLangBtn = addBtnSkin(this, btnStyle, btnSkin, kaLangBtn);
+			kaLangBtn.addEventListener(Event.TRIGGERED, langChangeHandler);
 			
 			line = new MyCanvas;
 			addChild(line);
@@ -101,11 +68,10 @@ package screens.splash {
 			line.lineTo(0, 0);
 			line.lineTo(300, 0);
 			
-			enLangBtn = new Button();
-			enLangBtn.label = "English";
+			enLangBtn = StaticGUI._addBtnSkin(this, "English", btnStyle, btnSkin);
+			
 			//pushCButton.layoutData = new VerticalLayoutData(50);
-			enLangBtn.addEventListener(Event.TRIGGERED, pushCButton_triggeredHandler);
-			enLangBtn = addBtnSkin(this, btnStyle, btnSkin, enLangBtn);
+			enLangBtn.addEventListener(Event.TRIGGERED, langChangeHandler);
 			
 			line = new MyCanvas;
 			addChild(line);
@@ -113,11 +79,11 @@ package screens.splash {
 			line.lineTo(0, 0);
 			line.lineTo(300, 0);
 			
-			ruLangBtn = new Button();
-			ruLangBtn.label = "Русский";
+			
+			ruLangBtn = StaticGUI._addBtnSkin(this, "Русский", btnStyle, btnSkin);
 			//replaceWithB2Button.layoutData = new VerticalLayoutData(50);
-			ruLangBtn.addEventListener(Event.TRIGGERED, replaceWithB2Button_triggeredHandler);
-			ruLangBtn = addBtnSkin(this, btnStyle, btnSkin, ruLangBtn);
+			ruLangBtn.addEventListener(Event.TRIGGERED, langChangeHandler);
+			
 			
 			line = new MyCanvas;
 			addChild(line);
@@ -126,33 +92,19 @@ package screens.splash {
 			line.lineTo(300, 0);
 		}
 		
-		private function addBtnSkin(cont:Screen, fStyle:TextFormat, bSkin:ImageSkin ,btn:Button):Button {
-			btn.fontStyles = fStyle;
+		override public function dispose():void {
 			
-			btn.labelFactory = function():ITextRenderer {
-				var renderer:TextFieldTextRenderer = new TextFieldTextRenderer();
-				renderer.embedFonts = true;
-				//renderer.textFormat = btnStyle
-				return renderer;
-			}
-			btn.defaultSkin = bSkin;
-			this.addChild(btn);
-			btn.validate();
-			return btn;
+			if (kaLangBtn) kaLangBtn.removeEventListener(Event.TRIGGERED, langChangeHandler);
+			if (enLangBtn) enLangBtn.removeEventListener(Event.TRIGGERED, langChangeHandler);
+			if (ruLangBtn) ruLangBtn.removeEventListener(Event.TRIGGERED, langChangeHandler);
+			
+			super.dispose();
 		}
 		
-		protected function popToAButton_triggeredHandler(event:Event):void {
+		
+		protected function langChangeHandler(event:Event):void {
 			//this.dispatchEventWith(Event.CANCEL);
-			this.dispatchEventWith(Event.COMPLETE);
-		}
-		
-		protected function pushCButton_triggeredHandler(event:Event):void {
-			this.dispatchEventWith(Event.COMPLETE);
-		}
-		
-		protected function replaceWithB2Button_triggeredHandler(event:Event):void {
-			//this.dispatchEventWith(Event.CHANGE);
-			this.dispatchEventWith(Event.COMPLETE);
+			this.dispatchEventWith(AppEvent.COMPLETED);
 		}
 	}
 }

@@ -9,23 +9,16 @@ package screens.posta {
 	import feathers.controls.LayoutGroup;
 	import feathers.controls.ScrollBarDisplayMode;
 	import feathers.controls.ScrollScreen;
-	import feathers.controls.text.TextBlockTextRenderer;
-	import feathers.controls.text.TextFieldTextRenderer;
-	import feathers.core.ITextRenderer;
 	import feathers.core.ToggleGroup;
 	import feathers.layout.FlowLayout;
 	import feathers.layout.HorizontalAlign;
 	import feathers.layout.VerticalAlign;
 	import feathers.layout.VerticalLayout;
-	import feathers.layout.VerticalLayoutData;
 	import feathers.skins.ImageSkin;
 	import flash.geom.Rectangle;
-	import starling.display.Image;
-	import starling.display.Quad;
-	import starling.text.TextFormat;
-	import starling.textures.Texture;
-	
 	import starling.events.Event;
+	import starling.text.TextFormat;
+	
 	
 	public class ScreenArrivedMails extends ScrollScreen {
 		
@@ -58,7 +51,6 @@ package screens.posta {
 		override protected function initialize():void {
 			
 			super.initialize();
-			Settings._splash._changeBackgroundSkin(0xecf0f4);
 			
 			mailToggleGroup = new ToggleGroup;
 			
@@ -66,7 +58,7 @@ package screens.posta {
 			layout.horizontalAlign = HorizontalAlign.CENTER;
 			layout.verticalAlign = VerticalAlign.TOP;
 			layout.gap = Settings._getIntByDPI(20);
-			layout.paddingTop = Settings._getIntByDPI(220);
+			layout.paddingTop = Settings._getIntByDPI(180);
 			layout.paddingBottom = Settings._getIntByDPI(130);
 			this.layout = layout;
 			this.scrollBarDisplayMode = ScrollBarDisplayMode.NONE;
@@ -126,7 +118,7 @@ package screens.posta {
 			arrivedGroup.layout = arrivedGroupLayout;
 			addChild(arrivedGroup);
 			
-			title = StaticGUI._addLabel(arrivedGroup, Settings._muiPack['mails_title_arrived'][Settings._lang], titleStyle);
+			title = StaticGUI._addLabel(arrivedGroup, Settings._mui['mails_title_arrived'][Settings._lang], titleStyle);
 			
 			item = new MailBlock(MailBlock.COMPLETED_MAIL);
 			arrivedGroup.addChild(item);
@@ -156,7 +148,7 @@ package screens.posta {
 			notifiGroup.layout = notifiGroupLayout;
 			addChild(notifiGroup);
 			
-			title = StaticGUI._addLabel(notifiGroup, Settings._muiPack['mails_arrived_notifi'][Settings._lang], alertStyle);
+			title = StaticGUI._addLabel(notifiGroup, Settings._mui['mails_arrived_notifi'][Settings._lang], alertStyle);
 			title.width = Settings._getIntByDPI(500);
 			title.textRendererProperties.wordWrap = true;
 			title.textRendererProperties.isHTML = true;
@@ -198,15 +190,15 @@ package screens.posta {
 				lStyle = lariDisableStyle;
 			}
 			
-			var amountLabel:Label = StaticGUI._addLabel(payBtnIcoGroup, Settings._muiPack['mails_arrived_sum_pay_btn'][Settings._lang]+' 320122.54', aStyle);
+			var amountLabel:Label = StaticGUI._addLabel(payBtnIcoGroup, Settings._mui['mails_arrived_sum_pay_btn'][Settings._lang]+' 320122.54', aStyle);
 			var lariSymbolLabel:Label = StaticGUI._addLabel(payBtnIcoGroup, 's', lStyle);
-			amountLabel = StaticGUI._addLabel(payBtnIcoGroup, ' - '+Settings._muiPack['mails_arrived_payment_pay_btn'][Settings._lang], aStyle);
+			amountLabel = StaticGUI._addLabel(payBtnIcoGroup, ' - '+Settings._mui['mails_arrived_payment_pay_btn'][Settings._lang], aStyle);
 			payBtn.defaultIcon = payBtnIcoGroup;
 			payBtn.iconOffsetY = 25;
 			
 			
 			var fillBtnSkin:ImageSkin = new ImageSkin(AssetsLoader._asset.getTexture("posta_item_pay_btn.png"));
-			var fillBtn:Button = StaticGUI._addBtnSkin(buttonsGroup, Settings._muiPack['mails_arrived_fill_balance_btn'][Settings._lang], fillBtnStyle, fillBtnSkin);
+			var fillBtn:Button = StaticGUI._addBtnSkin(buttonsGroup, Settings._mui['mails_arrived_fill_balance_btn'][Settings._lang], fillBtnStyle, fillBtnSkin);
 			
 			
 			this.width = stage.stageWidth;
@@ -219,7 +211,6 @@ package screens.posta {
 			
 			if (arrivedGroup) StaticGUI._safeRemoveChildren(arrivedGroup, true);
 			if (notifiGroup) StaticGUI._safeRemoveChildren(notifiGroup, true);
-			StaticGUI._safeRemoveChildren(this, true);
 			
 			super.dispose();
 		}

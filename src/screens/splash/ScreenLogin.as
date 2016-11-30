@@ -5,24 +5,19 @@ package screens.splash {
 	import feathers.controls.Button;
 	import feathers.controls.Label;
 	import feathers.controls.LayoutGroup;
-	import feathers.controls.PanelScreen;
 	import feathers.controls.Screen;
 	import feathers.controls.TextInput;
-	import feathers.controls.text.TextBlockTextRenderer;
-	import feathers.controls.text.TextFieldTextRenderer;
-	import feathers.core.ITextRenderer;
 	import feathers.layout.HorizontalAlign;
 	import feathers.layout.VerticalAlign;
 	import feathers.layout.VerticalLayout;
-	import feathers.layout.VerticalLayoutData;
 	import feathers.skins.ImageSkin;
 	import flash.geom.Rectangle;
 	import starling.display.Image;
 	import starling.display.Quad;
+	import starling.events.Event;
 	import starling.text.TextFormat;
 	import starling.textures.Texture;
 	
-	import starling.events.Event;
 	
 	public class ScreenLogin extends Screen {
 		
@@ -56,8 +51,6 @@ package screens.splash {
 		override protected function initialize():void {
 			
 			super.initialize();
-			
-			Settings._splash._changeBackgroundSkin();
 			
 			var layout:VerticalLayout = new VerticalLayout();
 			layout.horizontalAlign = HorizontalAlign.CENTER;
@@ -99,14 +92,14 @@ package screens.splash {
 			var userInputSkin:ImageSkin = new ImageSkin(AssetsLoader._asset.getTexture("login_field_border.png"));
 			userInputSkin.scale9Grid = new Rectangle(40, 40, 120, 120);
 			
-			var userInput:TextInput = StaticGUI._addTextInput(inputGroup, Settings._muiPack['login_user_input'][Settings._lang], inputStyle, inputStyle);
+			var userInput:TextInput = StaticGUI._addTextInput(inputGroup, Settings._mui['login_user_input'][Settings._lang], inputStyle, inputStyle);
 			userInput.backgroundSkin = userInputSkin;
 			
 			
 			var userPassInputSkin:ImageSkin = new ImageSkin(AssetsLoader._asset.getTexture("login_field_border.png"));
 			userPassInputSkin.scale9Grid = new Rectangle(40, 40, 120, 120);
 			
-			var passInput:TextInput = StaticGUI._addTextInput(inputGroup, Settings._muiPack['login_pass_input'][Settings._lang], inputStyle, inputStyle);
+			var passInput:TextInput = StaticGUI._addTextInput(inputGroup, Settings._mui['login_pass_input'][Settings._lang], inputStyle, inputStyle);
 			passInput.backgroundSkin = userPassInputSkin;
 			passInput.displayAsPassword = true;
 			
@@ -118,12 +111,12 @@ package screens.splash {
 			
 			this.addChild(group);
 			
-			mailRegBtn = StaticGUI._addBtnSkin(group, Settings._muiPack['login_submit_btn'][Settings._lang], btnStyle1, btnMailSkin);
+			mailRegBtn = StaticGUI._addBtnSkin(group, Settings._mui['login_submit_btn'][Settings._lang], btnStyle1, btnMailSkin);
 			mailRegBtn.addEventListener(Event.TRIGGERED, mailRegHandler);
 			
-			label = StaticGUI._addLabel(group, Settings._muiPack['login_or_lbl'][Settings._lang], labelStyle);
+			label = StaticGUI._addLabel(group, Settings._mui['login_or_lbl'][Settings._lang], labelStyle);
 			
-			faceBRegBtn = StaticGUI._addBtnSkin(group, Settings._muiPack['login_login_facebook_btn'][Settings._lang], btnStyle1, btnFaceBSkin);
+			faceBRegBtn = StaticGUI._addBtnSkin(group, Settings._mui['login_login_facebook_btn'][Settings._lang], btnStyle1, btnFaceBSkin);
 			faceBRegBtn.defaultIcon = new Image(AssetsLoader._asset.getTexture("facebook_btn_ico.png"));
 			faceBRegBtn.iconOffsetX = -15;
 			faceBRegBtn.addEventListener(Event.TRIGGERED, faceBdHandler);
@@ -140,7 +133,6 @@ package screens.splash {
 			
 			StaticGUI._safeRemoveChildren(group, true);
 			StaticGUI._safeRemoveChildren(inputGroup, true);
-			StaticGUI._safeRemoveChildren(this, true);
 			
 			super.dispose();
 		}

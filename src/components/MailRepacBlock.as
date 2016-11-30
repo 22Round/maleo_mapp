@@ -3,48 +3,20 @@ package components {
 	import application.AssetsLoader;
 	import application.utils.MyCanvas;
 	import application.utils.StaticGUI;
-	import feathers.controls.AutoComplete;
-	import feathers.controls.Button;
 	import feathers.controls.ButtonState;
-	import feathers.controls.Check;
 	import feathers.controls.Label;
 	import feathers.controls.LayoutGroup;
-	import feathers.controls.List;
-	import feathers.controls.PanelScreen;
-	import feathers.controls.PickerList;
 	import feathers.controls.Radio;
-	import feathers.controls.Screen;
-	import feathers.controls.SpinnerList;
-	import feathers.controls.TabBar;
-	import feathers.controls.TextInput;
-	import feathers.controls.ToggleButton;
-	import feathers.controls.popups.VerticalCenteredPopUpContentManager;
-	import feathers.controls.renderers.DefaultListItemRenderer;
-	import feathers.controls.renderers.IListItemRenderer;
-	import feathers.controls.text.TextBlockTextRenderer;
 	import feathers.controls.text.TextFieldTextRenderer;
 	import feathers.core.ITextRenderer;
-	import feathers.core.ToggleGroup;
-	import feathers.data.ListCollection;
-	import feathers.data.LocalAutoCompleteSource;
-	import feathers.layout.AnchorLayout;
-	import feathers.layout.AnchorLayoutData;
-	import feathers.layout.FlowLayout;
 	import feathers.layout.HorizontalAlign;
 	import feathers.layout.HorizontalLayout;
-	import feathers.layout.RelativePosition;
 	import feathers.layout.VerticalAlign;
 	import feathers.layout.VerticalLayout;
-	import feathers.layout.VerticalLayoutData;
 	import feathers.skins.ImageSkin;
-	import flash.geom.Rectangle;
-	import starling.display.Image;
-	import starling.display.Quad;
 	import starling.text.TextFormat;
-	import starling.textures.Texture;
 	import starling.textures.TextureSmoothing;
 	
-	import starling.events.Event;
 	
 	public class MailRepacBlock extends LayoutGroup {
 		private var title:Label;
@@ -123,7 +95,7 @@ package components {
 			radio.fontStyles = radioStyle;
 			radio.disabledFontStyles = radioDisabledStyle;
 			radio.defaultIcon = radioSkin;
-			radio.label = 'დიახ';
+			radio.label = Settings._mui['mails_declare_yes'][Settings._lang];
 			radio.labelOffsetX = 10;
 			radio.labelFactory = function():ITextRenderer {
 				
@@ -160,7 +132,7 @@ package components {
 			radio.fontStyles = radioStyle;
 			radio.disabledFontStyles = radioDisabledStyle;
 			radio.defaultIcon = radioSkin;
-			radio.label = 'არა';
+			radio.label = Settings._mui['mails_declare_no'][Settings._lang];
 			radio.labelOffsetX = 10;
 			radio.labelFactory = function():ITextRenderer {
 				
@@ -176,7 +148,7 @@ package components {
 		
 		override public function dispose():void {
 			
-			StaticGUI._safeRemoveChildren(this, true);
+			//StaticGUI._safeRemoveChildren(this, true);
 			
 			super.dispose();
 		}
