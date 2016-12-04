@@ -18,7 +18,7 @@ package screens.posta {
 	import starling.text.TextFormat;
 	
 	
-	public class ScreenDeclareDoneMail extends ScrollScreen {
+	public class ScreenMailContent extends ScrollScreen {
 		
 		private var payBtnStyle:TextFormat;
 		private var payBtnDisabledStyle:TextFormat;
@@ -36,7 +36,7 @@ package screens.posta {
 		private var submitBtnSkin:ImageSkin;
 		private var submitBtn:Button;
 		
-		public function ScreenDeclareDoneMail() {
+		public function ScreenMailContent() {
 			super();
 			//this.title = "Screen C";
 		}
@@ -52,7 +52,7 @@ package screens.posta {
 			layout.horizontalAlign = HorizontalAlign.CENTER;
 			layout.verticalAlign = VerticalAlign.TOP;
 			layout.gap = Settings._getIntByDPI(50);
-			layout.paddingTop = Settings._getIntByDPI(180);
+			layout.paddingTop = Settings._getIntByDPI(220);
 			layout.paddingBottom = Settings._getIntByDPI(50);
 			this.layout = layout;
 			this.scrollBarDisplayMode = ScrollBarDisplayMode.NONE;
@@ -82,7 +82,7 @@ package screens.posta {
 			
 			line = drawFullHorizontalLine();
 			
-			infoLab = new LabelWithTitleBlock((mui['mails_declare_sender'][lang], 'amazon.com');
+			infoLab = new LabelWithTitleBlock(mui['mails_declare_sender'][lang], 'amazon.com');
 			addChild(infoLab);
 			
 			line = drawFullHorizontalLine();

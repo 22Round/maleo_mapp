@@ -13,6 +13,7 @@ package screens.splash {
 	import screens.splash.gallery.GalleryMain;
 	import starling.display.DisplayObject;
 	import starling.display.Image;
+	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.events.Event;
 	import starling.text.TextFormat;
@@ -52,6 +53,7 @@ package screens.splash {
 			loader.width = stage.stageWidth;
 			loader.maintainAspectRatio = false;
 			loader.validate();*/
+			this.backgroundSkin = new Quad(50, 50, 0xffffff);
 			
 			var pageIndLabelLayoutData:AnchorLayoutData = new AnchorLayoutData();
 			pageIndLabelLayoutData.horizontalCenter = 0;

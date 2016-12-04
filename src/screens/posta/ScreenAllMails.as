@@ -53,12 +53,15 @@ package screens.posta {
 			this.layout = layout;
 			this.scrollBarDisplayMode = ScrollBarDisplayMode.NONE;
 			
+			mailsGroup = new LayoutGroup();
+			
 			var menuArr:Array = String(Settings._mui['mails_allmails_menu'][Settings._lang]).split(',');
 			menu = new MailMenuBlock(menuArr);
+			menu.addEventListener(AppEvent.CHANGE, menuChangeHandler);
 			addChild(menu);
 			
 			
-			mailsGroup = new LayoutGroup();
+			
 			mailsGroupLayout = new VerticalLayout();
 			mailsGroupLayout.horizontalAlign = HorizontalAlign.CENTER;
 			mailsGroupLayout.verticalAlign = VerticalAlign.TOP;
@@ -66,10 +69,7 @@ package screens.posta {
 			mailsGroup.layout = mailsGroupLayout;
 			addChild(mailsGroup);
 			
-			item = new MailBlock(MailBlock.COMPLETED_MAIL);
-			mailsGroup.addChild(item);
-			item = new MailBlock(MailBlock.PAY_MAIL);
-			mailsGroup.addChild(item);
+			
 			
 			this.width = stage.stageWidth;
 			this.height = stage.stageHeight;
@@ -77,10 +77,42 @@ package screens.posta {
 			this.validate();
 		}
 		
+		private function menuChangeHandler(e:Event):void {
+			trace(e.data.selectedIndex);
+			if (mailsGroup) mailsGroup.removeChildren();
+			
+			switch(e.data.selectedIndex) {
+				case 0:
+					item = new MailBlock(MailBlock.COMPLETED_MAIL);
+					mailsGroup.addChild(item);
+					item = new MailBlock(MailBlock.PAY_MAIL);
+					mailsGroup.addChild(item);
+					item = new MailBlock(MailBlock.ENTER_GOODS_MAIL);
+					mailsGroup.addChild(item);
+					break;
+					
+					
+				case 1:
+					item = new MailBlock(MailBlock.COMPLETED_MAIL);
+					mailsGroup.addChild(item);
+					item = new MailBlock(MailBlock.PAY_MAIL);
+					mailsGroup.addChild(item);
+					break;
+					
+					
+				case 2:
+					mailsGroup.addChild(item);
+					item = new MailBlock(MailBlock.PAYED_MAIL);
+					mailsGroup.addChild(item);
+					break;
+			}
+		}
+		
 		override public function dispose():void {
 			
 			if (mailsGroup) StaticGUI._safeRemoveChildren(mailsGroup, true);
 			
+			menu.removeEventListener(AppEvent.CHANGE, menuChangeHandler);
 			menu = null;
 			super.dispose();
 		}

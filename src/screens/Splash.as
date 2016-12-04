@@ -7,29 +7,24 @@ package screens {
 	import feathers.events.FeathersEventType;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
-	import feathers.layout.VerticalAlign;
-	import feathers.layout.VerticalLayout;
-	import feathers.layout.VerticalLayoutData;
+	import feathers.motion.Slide;
+	import screens.faq.ScreenFAQ;
 	import screens.map.ScreenMap;
 	import screens.posta.ScreenAllMails;
-	import screens.posta.ScreenMainMails;
 	import screens.posta.ScreenArrivedMails;
-	import screens.posta.ScreenDeclareDoneMail;
 	import screens.posta.ScreenDeclareMail;
+	import screens.posta.ScreenMailContent;
+	import screens.posta.ScreenMainMails;
 	import screens.splash.ScreenIntro;
 	import screens.splash.ScreenLang;
-	import screens.splash.ScreenLoginCase;
-	import screens.splash.ScreenRegistration;
 	import screens.splash.ScreenLogin;
-	import feathers.motion.Fade;
-	import feathers.motion.Slide;
-	import feathers.themes.MetalWorksMobileTheme;
+	import screens.splash.ScreenLoginCase;
 	import starling.display.Image;
 	import starling.display.Quad;
+	import starling.events.Event;
 	import starling.filters.DropShadowFilter;
 	import starling.textures.Texture;
 	
-	import starling.events.Event;
 	
 	public class Splash extends LayoutGroup {
 		
@@ -39,6 +34,7 @@ package screens {
 		private var logoImg:Image;
 		private var shadowQade:Quad;
 		private var topHeader:TopHeader;
+		private var statusBar:StatusBar;
 		private var topFooter:TopFooter;
 		
 		public function Splash() {
@@ -55,11 +51,13 @@ package screens {
 			
 			_changeBackgroundSkin(0xecf0f4);
 			topHeader = new TopHeader;
+			statusBar = new StatusBar;
 			
 			var bottomLayout:AnchorLayoutData = new AnchorLayoutData();
 			bottomLayout.bottom = 0;
 			topFooter = new TopFooter;
 			topFooter.layoutData = bottomLayout;
+			addChild(topFooter);
 			
 			logoWiteTexture = AssetsLoader._asset.getTexture("maleo_logo_wite.png");
 			logoBlueTexture = AssetsLoader._asset.getTexture("maleo_logo_blue.png");
@@ -115,6 +113,12 @@ package screens {
 			item = new StackScreenNavigatorItem(ScreenDeclareMail);
 			_navigator.addScreen(ScreenID.DECLARE_MAIL, item);
 			
+			item = new StackScreenNavigatorItem(ScreenMailContent);
+			_navigator.addScreen(ScreenID.MAIL_CONTENT, item);
+			
+			item = new StackScreenNavigatorItem(ScreenFAQ);
+			_navigator.addScreen(ScreenID.FAQ, item);
+			
 			
 			item = new StackScreenNavigatorItem(ScreenMap);
 			//item.setScreenIDForPushEvent(AppEvent.COMPLETED, ScreenID.LOGIN_CASE);
@@ -139,6 +143,8 @@ package screens {
 			
 			addChild(topHeader);
 			
+			statusBar.y = topHeader.height;
+			addChild(statusBar);
 			
 			addChild(topFooter);
 			topFooter.validate();
@@ -167,6 +173,9 @@ package screens {
 			if (logoImg && contains(logoImg)) removeChild(logoImg);
 			
 			topFooter.visible = false;
+			topFooter._tabBar.selectedIndex = 0;
+			statusBar.visible = false;
+			
 			
 			var currentSt:String = StackScreenNavigator(e.target).activeScreenID
 			
@@ -196,15 +205,19 @@ package screens {
 					_changeBackgroundSkin(0xecf0f4);
 					topFooter.visible = true;
 					
+					topFooter._tabBar.selectedIndex = 0;
+					
 					break;	
 					
 				case ScreenID.ALL_MAILS:
 					_changeBackgroundSkin(0xecf0f4);
 					topFooter.visible = true;
+					topFooter._tabBar.selectedIndex = 1;
 					
 					break;	
 					
 				case ScreenID.ARRIVED_MAIL:
+					
 					_changeBackgroundSkin(0xecf0f4);
 					topFooter.visible = false;
 					
@@ -216,14 +229,14 @@ package screens {
 					break;
 						
 					
-				case ScreenID.DECLARE_DONE_MAIL:
-					
-					//topHeader._changeBackgroundSkin(0x00b7f0);
+				case ScreenID.MAIL_CONTENT:
+					statusBar.visible = true;
+					_changeBackgroundSkin(0xffffff);
 					
 					break;
 					
 				case ScreenID.MAPS:
-					
+					topFooter._tabBar.selectedIndex = 3;
 					topFooter.visible = true;
 					break;
 				

@@ -447,7 +447,7 @@ package components {
 		
 		private function blockHandler(e:Event):void {
 			//this.dispatchEventWith(AppEvent.COMPLETED, true);
-			Settings._splash._navigator.pushScreen(ScreenID.DECLARE_MAIL);
+			Settings._splash._navigator.pushScreen(ScreenID.MAIL_CONTENT);
 		}
 		
 		override public function dispose():void {
@@ -459,4 +459,3 @@ package components {
 		}
 	}
 }
-

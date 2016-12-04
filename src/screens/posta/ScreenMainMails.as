@@ -48,7 +48,6 @@ package screens.posta {
 			
 			super.initialize();
 			
-			
 			var layout:VerticalLayout = new VerticalLayout();
 			layout.horizontalAlign = HorizontalAlign.CENTER;
 			layout.verticalAlign = VerticalAlign.TOP;

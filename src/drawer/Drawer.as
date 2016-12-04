@@ -38,7 +38,7 @@ package drawer {
 			
 			drawers.content = new Splash();
 
-			drawers.leftDrawerToggleEventType = TopHeader.TOGGLE_LEFT_DRAWER;
+			drawers.leftDrawerToggleEventType = AppEvent.TOGGLE_LEFT_DRAWER;
 			drawers.content.addEventListener(Event.CHANGE, contentView_openDrawerChangeHandler);
 			
 			

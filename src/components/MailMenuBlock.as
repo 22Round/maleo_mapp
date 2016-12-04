@@ -2,7 +2,6 @@ package components {
 	
 	import application.AssetsLoader;
 	import feathers.controls.ButtonState;
-	import feathers.controls.Label;
 	import feathers.controls.LayoutGroup;
 	import feathers.controls.TabBar;
 	import feathers.controls.ToggleButton;
@@ -151,10 +150,13 @@ package components {
 			this.addChild(tabBar);
 			tabBar.validate();
 			
+			tabBarHandler(null);
+			
 		}
 		
 		private function tabBarHandler(event:Event):void {
 			//this._label.text = "selectedIndex: " + this._tabBar.selectedIndex.toString();
+			this.dispatchEventWith(AppEvent.CHANGE, false, {selectedIndex:tabBar.selectedIndex } );
 		}
 		
 		override public function dispose():void {

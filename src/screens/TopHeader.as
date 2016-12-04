@@ -4,6 +4,7 @@ package screens {
 	import feathers.controls.Header;
 	import feathers.controls.text.TextFieldTextRenderer;
 	import feathers.core.ITextRenderer;
+	import feathers.motion.Slide;
 	import feathers.skins.ImageSkin;
 	import starling.display.DisplayObject;
 	import starling.display.Image;
@@ -21,8 +22,6 @@ package screens {
 		private var bgSkin:Image;
 		private var titleGeoStyle:TextFormat;
 		
-		public static const TOGGLE_LEFT_DRAWER:String                   = "toggleLeftDrawer";
-		
 		public static const FAQ_BLUE_ITEM:String                        = 'faqBlueItem';
 		public static const MENU_BLUE_ITEM:String                       = 'menuBlueItem';
 		public static const FAQ_WHITE_ITEM:String                       = 'faqWhiteItem';
@@ -32,8 +31,8 @@ package screens {
 		public static const ARROWTOLEFT_WHITE_ITEM:String               = 'arrowToLeftWhiteItem';
 		public static const CLOSE_WHITE_ITEM:String                     = 'closeWhiteItem';
 		
-		public static const LEFT_ITEM:String                            = 'leftSideItm';
-		public static const RIGHT_ITEM:String                           = 'rightSideItm';
+		public static const LEFT_ITEM:String                            = 'leftSideItem';
+		public static const RIGHT_ITEM:String                           = 'rightSideItem';
 		
 		private var menuItems:Vector.<Object>;
 		public static var _currentLeftItem:String;
@@ -79,12 +78,12 @@ package screens {
 			//_setMenuItems(FAQ_WHITE_ITEM, RIGHT_ITEM);
 			
 			titleGeoStyle = new TextFormat;
-			titleGeoStyle.font = '_hKolkhetyMtavBold';
+			titleGeoStyle.font = '_bpgMrglovaniCapsRegular';//_hKolkhetyMtavBold
 			titleGeoStyle.size = Settings._getIntByDPI(30);
 			titleGeoStyle.color = 0xFFFFFF;
 			
 			this.fontStyles = titleGeoStyle;
-			title = 'mTavari123'
+			title = 'მთავარი';
 			
 			titleFactory = function():ITextRenderer {
 				var titleRenderer:TextFieldTextRenderer = new TextFieldTextRenderer();
@@ -95,6 +94,10 @@ package screens {
 			this.width = stage.stageWidth;
 			this.height = Settings._getIntByDPI(130);
 			validate();
+		}
+		
+		public function _changeTitle(titleStr:String = ''):void {
+			title = titleStr;
 		}
 		
 		
@@ -134,7 +137,7 @@ package screens {
 					btn = new Button();
 					btn.width = Settings._getIntByDPI(menuItems[i].widthDPI);
 					btn.height = Settings._getIntByDPI(menuItems[i].heightDPI);
-					btn.addEventListener(Event.TRIGGERED, headerNavHandler);
+					
 					btn.defaultSkin = skin;
 					btn.name = menuItems[i].name;
 					if (side == LEFT_ITEM) {
@@ -142,12 +145,14 @@ package screens {
 						if (!leftItems) leftItems = new <DisplayObject>[];
 						leftItems.push(btn);
 						_currentLeftItem = menuItems[i].name;
+						btn.addEventListener(Event.TRIGGERED, headerLeftNavHandler);
 						
 					}else if (side == RIGHT_ITEM) {
 						
 						if (!rightItems) rightItems = new <DisplayObject>[];
 						rightItems.push(btn);
 						_currentRightItem = menuItems[i].name;
+						btn.addEventListener(Event.TRIGGERED, headerRightNavHandler);
 						
 					}else {
 						
@@ -196,6 +201,14 @@ package screens {
 					_changeBackgroundSkin(0x18a6e7);
 					visible = true;
 					
+				break;
+				
+				case ScreenID.MAIL_CONTENT:
+					
+					_setMenuItems(ARROWTOLEFT_WHITE_ITEM);
+					_changeBackgroundSkin(0x18a6e7);
+					visible = true;
+					
 				break
 					
 				case ScreenID.ALL_MAILS:
@@ -221,14 +234,55 @@ package screens {
 					_changeBackgroundSkin(0x18a6e7);
 					_setMenuItems(ARROWTOLEFT_WHITE_ITEM);
 					
+					break;
+					
+				case ScreenID.FAQ:	
+					
+					  visible = true;
+					_changeBackgroundSkin(0x18a6e7);
+					_setMenuItems(ARROWTOLEFT_WHITE_ITEM);
+					
 					break;	
 					
 			}
 		}
 		
-		private function headerNavHandler(e:Event):void {
-			//this.dispatchEventWith(TOGGLE_LEFT_DRAWER, true);
-			Settings._splash._navigator.popScreen();
+		private function headerLeftNavHandler(e:Event):void {
+			
+			switch(_currentLeftItem) {
+				case MENU_BLUE_ITEM:
+				case MENU_WHITE_ITEM:
+					this.dispatchEventWith(AppEvent.TOGGLE_LEFT_DRAWER, true);
+					break;
+					
+				case ARROWTOLEFT_WHITE_ITEM:
+					Settings._splash._navigator.popScreen();
+					break
+				
+				case CLOSE_WHITE_ITEM:
+					
+					Settings._splash._navigator.pushScreen(ScreenID.MAIN_MAILS, null, Slide.createSlideRightTransition());
+					
+					break;
+			}	
+		}
+		
+		private function headerRightNavHandler(e:Event):void {
+			
+			switch(_currentRightItem) {
+				case FAQ_BLUE_ITEM:
+				case FAQ_WHITE_ITEM:
+					Settings._splash._navigator.pushScreen(ScreenID.FAQ);
+					break;
+				case EDIT_WHITE_ITEM:
+					
+					break
+				case EDIT_DISABLED_WHITE_ITEM:
+					
+					break;
+			}
+			
+			
 		}
 		
 		private function removed(e:Event):void {

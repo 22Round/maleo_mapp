@@ -14,8 +14,9 @@ package screens {
 		
 		public static const RECIVED_MAILS:String                      = 'recivedMails';
 		public static const DECLARE_MAIL:String                       = 'declareMail';
-		public static const DECLARE_DONE_MAIL:String                  = 'declareDoneMail';
+		public static const MAIL_CONTENT:String                       = 'MailContent';
 		public static const ARRIVED_MAIL:String                       = 'arrivedMail';
+		public static const FAQ:String                                = 'faq';
 		
 		
 		//drawer slides
