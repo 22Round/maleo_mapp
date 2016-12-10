@@ -49,7 +49,7 @@ package screens {
 			}
 			
 			_tabBar = new TabBar();
-			
+			_tabBar.styleProvider = null;
 			_tabBar.tabFactory = function():ToggleButton{
 				var tab:ToggleButton = new ToggleButton();
 				tab.defaultSkin = new Quad(50,50,0x273447);

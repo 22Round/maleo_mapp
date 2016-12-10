@@ -7,11 +7,10 @@ package screens.faq {
 	import feathers.layout.VerticalAlign;
 	import feathers.layout.VerticalLayout;
 
-	
-
 	public class ScreenFAQ extends Screen {
 		
-		private var browser:WebView
+		private var browser:WebView;
+		private var layout:VerticalLayout;
 		
 		public function ScreenFAQ() {
 			super();
@@ -20,7 +19,7 @@ package screens.faq {
 		override protected function initialize():void {
 			super.initialize();
 			
-			var layout:VerticalLayout = new VerticalLayout();
+			layout = new VerticalLayout();
 			layout.horizontalAlign = HorizontalAlign.CENTER;
 			layout.verticalAlign = VerticalAlign.MIDDLE;
 			layout.paddingTop = Settings._getIntByDPI(130);
@@ -42,6 +41,7 @@ package screens.faq {
 			
 			StaticGUI._safeRemoveChildren(browser, true);
 			browser = null;
+			layout = null;
 			
 			super.dispose();
 		}

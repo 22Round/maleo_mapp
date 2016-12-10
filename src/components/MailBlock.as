@@ -35,7 +35,6 @@ package components {
 		private var mailLocAmountStyle:TextFormat;
 		private var lariStyle:TextFormat;
 		
-		private var bgQuad:Quad;
 		private var bgSkin:Image;
 		
 		private var detailsBtn:Button;
@@ -155,12 +154,12 @@ package components {
 			switch(_state) {
 				case MailBlock.CHECK_TOPAY_MAIL:
 					
-					fromNameLayoutData = new AnchorLayoutData();
+					/*fromNameLayoutData = new AnchorLayoutData();
 					fromNameLayoutData.top = Settings._getIntByDPI(21);
-					fromNameLayoutData.left = Settings._getIntByDPI(52);
+					fromNameLayoutData.left = Settings._getIntByDPI(52);*/
 					
 					productLabelLayoutData = new AnchorLayoutData();
-					productLabelLayoutData.top = Settings._getIntByDPI(55);
+					productLabelLayoutData.top = Settings._getIntByDPI(60);
 					productLabelLayoutData.left = Settings._getIntByDPI(68);
 					
 					radioLayoutData = new AnchorLayoutData();
@@ -187,16 +186,15 @@ package components {
 					
 				default:
 					
-					fromNameLayoutData = new AnchorLayoutData();
-					fromNameLayoutData.top = Settings._getIntByDPI(21);
-					fromNameLayoutData.left = Settings._getIntByDPI(12);
-					
 					productLabelLayoutData = new AnchorLayoutData();
-					productLabelLayoutData.top = Settings._getIntByDPI(55);
+					productLabelLayoutData.top = Settings._getIntByDPI(60);
 					productLabelLayoutData.left = Settings._getIntByDPI(28);
 					
 			}
 			
+			fromNameLayoutData = new AnchorLayoutData();
+			fromNameLayoutData.top = Settings._getIntByDPI(21);
+			fromNameLayoutData.left = Settings._getIntByDPI(2);
 			
 			domainIco = new Image(AssetsLoader._asset.getTexture("post_item_green_light.png"));
 			domainIco.textureSmoothing = TextureSmoothing.BILINEAR;
@@ -440,7 +438,7 @@ package components {
 			//hitBtn.defaultStyleProvider = null;
 			hitBtn.defaultSkin = hitQad;
 			hitBtn.layoutData = new AnchorLayoutData(0, 0, 0, 0);
-			addChild(hitBtn)
+			addChild(hitBtn);
 			hitBtn.addEventListener(Event.TRIGGERED, blockHandler);
 			
 		}
@@ -452,8 +450,75 @@ package components {
 		
 		override public function dispose():void {
 			
+			
+			//TODO need dispose and clear all components;
+			
 			//StaticGUI._safeRemoveChildren(this, true);
-			this.removeEventListener(Event.TRIGGERED, blockHandler);
+			hitBtn.removeEventListener(Event.TRIGGERED, blockHandler);
+			StaticGUI._safeRemoveChildren(hitBtn, true);
+			if(detailsBtn) StaticGUI._safeRemoveChildren(detailsBtn, true);
+			if(domainLabel) StaticGUI._safeRemoveChildren(domainLabel, true);
+			if(productLabel) StaticGUI._safeRemoveChildren(productLabel, true);
+			if(infoLabel) StaticGUI._safeRemoveChildren(infoLabel, true);
+			if(lariSymbolLabel) StaticGUI._safeRemoveChildren(lariSymbolLabel, true);
+			if(fromName) StaticGUI._safeRemoveChildren(fromName, true);
+			if(statusLabel) StaticGUI._safeRemoveChildren(statusLabel, true);
+			if(check) StaticGUI._safeRemoveChildren(check, true);
+			if(amountLabel) StaticGUI._safeRemoveChildren(amountLabel, true);
+			if(lariSimGroup) StaticGUI._safeRemoveChildren(lariSimGroup, true);
+			if(statusGroup) StaticGUI._safeRemoveChildren(statusGroup, true);
+			
+			bgSkin.dispose();
+			bgTexture.dispose();
+			hitQad.dispose();
+			if (domainIco) domainIco.dispose();
+			if (detailsIco) detailsIco.dispose();
+			if (statusImg) statusImg.dispose();
+			
+			
+			btnStyle1 = null;
+			btnStyle2 = null;
+			domainStyle = null;
+			productStyle = null;
+			infoStyle = null;
+			amountStyle = null;
+			statusStyle = null;
+			mailLocAmountStyle = null;
+			lariStyle = null;
+			
+			bgSkin = null;
+			detailsBtn = null;
+			bgTexture = null;
+			domainIco = null;
+			
+			domainLabel = null;
+			productLabel = null;
+			infoLabel = null;
+			detailsIco = null;
+			lariSymbolLabel = null;
+			fromName = null;
+			
+			statusImg = null;
+			statusLabel = null;
+			
+			infoLabelLayoutData = null;
+			statusLayoutData = null;
+			detailsBtnLayoutData = null;
+			fromNameLayoutData = null;
+			productLabelLayoutData = null;
+			radioLayoutData = null;
+
+			lariSimGroup = null;
+			lariSimGroupLayout = null;
+			statusGroup = null;
+			statusGroupLayout = null;
+			
+			check = null;
+			amountLabel = null;
+			
+			hitQad = null;
+			hitBtn = null;
+			
 			
 			super.dispose();
 		}

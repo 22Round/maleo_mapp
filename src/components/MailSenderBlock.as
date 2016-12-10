@@ -38,6 +38,8 @@ package components {
 		private var titleStr:String;
 		private var inputPromptStr:String;
 		private var tabBar:TabBar;
+		private var input:AutoComplete
+		private var inputSkin:ImageSkin;
 		
 		public function MailSenderBlock(title:String, inputPrompt:String) {
 			titleStr = title;
@@ -163,11 +165,11 @@ package components {
 			this.addChild(tabBar);
 			tabBar.validate();
 			
-			var inputSkin:ImageSkin = new ImageSkin(AssetsLoader._asset.getTexture("posta_declare_field_default.png"));
+			inputSkin = new ImageSkin(AssetsLoader._asset.getTexture("posta_declare_field_default.png"));
 			inputSkin.disabledTexture = AssetsLoader._asset.getTexture("posta_declare_field_disabled.png")
 			inputSkin.scale9Grid = new Rectangle(40, 40, 120, 120);
 			
-			var input:AutoComplete = StaticGUI._addAutoComplete(this, inputPromptStr, inputStyle, inputPromptStyle);
+			input = StaticGUI._addAutoComplete(this, inputPromptStr, inputStyle, inputPromptStyle);
 			input.backgroundSkin = inputSkin;
 			input.source = new LocalAutoCompleteSource(new ListCollection(new <String>["Apple", "Apricot", "Banana", "Cantaloupe", "Cherry", "Grape", "Lemon", "Lime", "Mango", "Orange", "Peach", "Pineapple", "Plum", "Pomegranate", "Raspberry", "Strawberry", "Watermelon"]));
 			//TODO neen real data from server
@@ -205,7 +207,24 @@ package components {
 		
 		override public function dispose():void {
 			
-			//StaticGUI._safeRemoveChildren(this, true);
+			StaticGUI._safeRemoveChildren(tabBar, true);
+			StaticGUI._safeRemoveChildren(title, true);
+			StaticGUI._safeRemoveChildren(input, true);
+			inputSkin.dispose();
+			
+			title = null;
+			titleStyle = null;
+			titleDisabledStyle = null;
+			tabStyle = null;
+			tabSelectedStyle = null;
+			tabDisabledStyle = null;
+			inputSkin = null;
+			inputStyle = null;
+			inputPromptStyle = null;
+			titleStr = null;
+			inputPromptStr = null;
+			tabBar = null;
+			input = null;
 			
 			super.dispose();
 		}

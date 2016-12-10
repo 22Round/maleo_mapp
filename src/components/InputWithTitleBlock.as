@@ -22,6 +22,8 @@ package components {
 		private var inputPromptStyle:TextFormat;
 		private var titleStr:String;
 		private var inputPromptStr:String;
+		private var userInputSkin:ImageSkin;
+		private var userInput:TextInput;
 	
 		
 		public function InputWithTitleBlock(title:String, inputPrompt:String) {
@@ -64,11 +66,11 @@ package components {
 			title = StaticGUI._addLabel(this, titleStr, titleStyle);
 			title.disabledFontStyles = titleDisabledStyle;
 			
-			var userInputSkin:ImageSkin = new ImageSkin(AssetsLoader._asset.getTexture("posta_declare_field_default.png"));
+			userInputSkin = new ImageSkin(AssetsLoader._asset.getTexture("posta_declare_field_default.png"));
 			userInputSkin.disabledTexture = AssetsLoader._asset.getTexture("posta_declare_field_disabled.png")
 			userInputSkin.scale9Grid = new Rectangle(40, 40, 120, 120);
 			
-			var userInput:TextInput = StaticGUI._addTextInput(this, inputPromptStr, inputStyle, inputPromptStyle);
+			userInput = StaticGUI._addTextInput(this, inputPromptStr, inputStyle, inputPromptStyle);
 			userInput.backgroundSkin = userInputSkin;
 			
 		
@@ -76,7 +78,20 @@ package components {
 		
 		override public function dispose():void {
 			
-			//StaticGUI._safeRemoveChildren(this, true);
+			StaticGUI._safeRemoveChildren(userInput, true);
+			StaticGUI._safeRemoveChildren(title, true);
+			userInputSkin.dispose();
+			
+			title = null;
+			titleStyle = null;
+			titleDisabledStyle = null;
+			
+			inputStyle = null;
+			inputPromptStyle = null;
+			titleStr = null;
+			inputPromptStr = null;
+			userInputSkin = null;
+			userInput = null;
 			
 			super.dispose();
 		}

@@ -10,6 +10,8 @@ package components {
 	import feathers.controls.popups.VerticalCenteredPopUpContentManager;
 	import feathers.controls.renderers.DefaultListItemRenderer;
 	import feathers.controls.renderers.IListItemRenderer;
+	import feathers.controls.text.TextFieldTextRenderer;
+	import feathers.core.ITextRenderer;
 	import feathers.data.ListCollection;
 	import feathers.layout.HorizontalAlign;
 	import feathers.layout.RelativePosition;
@@ -17,6 +19,7 @@ package components {
 	import feathers.layout.VerticalLayout;
 	import feathers.skins.ImageSkin;
 	import flash.geom.Rectangle;
+	import flash.text.AntiAliasType;
 	import starling.events.Event;
 	import starling.text.TextFormat;
 	import starling.textures.TextureSmoothing;
@@ -28,9 +31,13 @@ package components {
 		private var titleDisabledStyle:TextFormat;
 		
 		private var inputStyle:TextFormat;
+		private var listStyle:TextFormat;
 		private var inputPromptStyle:TextFormat;
 		private var titleStr:String;
 		private var inputPromptStr:String;
+		
+		private var inputSkin:ImageSkin;
+		private var picker:PickerList;
 		
 		public function MailPickerItemBlock(title:String, inputPrompt:String) {
 			titleStr = title;
@@ -53,6 +60,12 @@ package components {
 			inputStyle.horizontalAlign = HorizontalAlign.CENTER;
 			inputStyle.color = 0xd3d4d4;
 			
+			listStyle = new TextFormat;
+			listStyle.font = '_bpgArialRegular';
+			listStyle.size = Settings._getIntByDPI(24);
+			listStyle.horizontalAlign = HorizontalAlign.CENTER;
+			listStyle.color = 0x919191;			
+			
 			inputPromptStyle = new TextFormat;
 			inputPromptStyle.font = '_bpgArialRegular';
 			inputPromptStyle.size = Settings._getIntByDPI(24);
@@ -69,26 +82,17 @@ package components {
 			titleDisabledStyle.size = Settings._getIntByDPI(24);
 			titleDisabledStyle.color = 0xabadad;
 			
-
-			
 			title = StaticGUI._addLabel(this, titleStr, titleStyle);
 			title.disabledFontStyles = titleDisabledStyle;
 			
-			var inputSkin:ImageSkin = new ImageSkin(AssetsLoader._asset.getTexture("posta_declare_field_default.png"));
+			inputSkin = new ImageSkin(AssetsLoader._asset.getTexture("posta_declare_field_default.png"));
 			inputSkin.disabledTexture = AssetsLoader._asset.getTexture("posta_declare_field_disabled.png")
 			inputSkin.scale9Grid = new Rectangle(40, 40, 120, 120);
 			
-			var items:Array = [];
-			for (var i:int = 0; i < 150; i++) {
-				var item:Object = {text: "Item " + (i + 1).toString()};
-				items[i] = item;
-			}
-			items.fixed = true;
+			picker = new PickerList();
+			picker.styleProvider = null;
 			
-			var list:PickerList = new PickerList();
-			list.styleProvider = null;
-			
-			list.buttonFactory = function():Button {
+			picker.buttonFactory = function():Button {
 				var btn:Button = StaticGUI._addBtnSkin(this, inputPromptStr, inputStyle, inputSkin);
 				btn.styleProvider = null;
 				btn.horizontalAlign = HorizontalAlign.CENTER;
@@ -104,29 +108,60 @@ package components {
 			
 			
 			
-			list.prompt = "Select an Item";
-			list.dataProvider = new ListCollection(items);
-			//normally, the first item is selected, but let's show the prompt
-			list.selectedIndex = -1;
+			var items:Array = [];
+			for (var i:int = 0; i < 150; i++) {
+				var item:Object = {text: "Item " + (i + 1).toString()};
+				items[i] = item;
+			}
+			items.fixed = true;
 			
-			list.addEventListener(Event.CHANGE, pickerListHandler);
-			addChild(list);
+			
+			picker.prompt = "Select an Item";
+			picker.dataProvider = new ListCollection(items);
+			//normally, the first item is selected, but let's show the prompt
+			picker.selectedIndex = -1;
+			
+			picker.addEventListener(Event.CHANGE, pickerListHandler);
+			addChild(picker);
+			picker.validate();
 			
 			//the typical item helps us set an ideal width for the button
 			//if we don't use a typical item, the button will resize to fit
 			//the currently selected item.
-			list.typicalItem = {text: "Select an Item"};
-			list.labelField = "text";
-			list.popUpContentManager = new VerticalCenteredPopUpContentManager
-			list.listFactory = function():List {
+			picker.typicalItem = {text: "Select an Item"};
+			picker.labelField = "text";
+			
+			
+			var popUpContentManager:VerticalCenteredPopUpContentManager = new VerticalCenteredPopUpContentManager();
+			popUpContentManager.marginTop = Settings._getIntByDPI(170);
+			//popUpContentManager.marginRight = Settings._getIntByDPI(5);
+			popUpContentManager.marginBottom = Settings._getIntByDPI(50);
+			//popUpContentManager.marginLeft = Settings._getIntByDPI(5);
+			
+			
+			picker.popUpContentManager = popUpContentManager;
+			
+			picker.listFactory = function():List {
 				var list:List = new List;
-				
+				list.height = stage.stageHeight - 50;
 				//notice that we're setting typicalItem on the list separately. we
 				//may want to have the list measure at a different width, so it
 				//might need a different typical item than the picker list's button.
-				list.typicalItem = {text: "Item 1000"};
+				list.typicalItem = { text: "Item 1000" };
+				
 				list.itemRendererFactory = function():IListItemRenderer {
 					var renderer:DefaultListItemRenderer = new DefaultListItemRenderer();
+					renderer.height = Settings._getIntByDPI(100);
+					renderer.fontStyles = listStyle;
+					renderer.labelFactory = function():ITextRenderer{
+							var tftRenderer:TextFieldTextRenderer = new TextFieldTextRenderer();
+							
+							tftRenderer.antiAliasType = AntiAliasType.ADVANCED;
+							
+							tftRenderer.embedFonts = true;
+							return tftRenderer;
+					}
+					
 					//notice that we're setting labelField on the item renderers
 					//separately. the default item renderer has a labelField property,
 					//but a custom item renderer may not even have a label, so
@@ -149,7 +184,24 @@ package components {
 		
 		override public function dispose():void {
 			
-			//StaticGUI._safeRemoveChildren(this, true);
+			StaticGUI._safeRemoveChildren(picker, true);
+			StaticGUI._safeRemoveChildren(title, true);
+			
+			inputSkin.dispose();
+			
+			
+			title = null;
+			titleStyle = null;
+			titleDisabledStyle = null;
+			
+			inputStyle = null;
+			listStyle = null;
+			inputPromptStyle = null;
+			titleStr = null;
+			inputPromptStr = null;
+			
+			inputSkin = null;
+			picker = null;
 			
 			super.dispose();
 		}

@@ -2,12 +2,12 @@ package screens.splash.gallery {
 	import feathers.controls.DecelerationRate;
 	import feathers.controls.List;
 	import feathers.controls.ScrollBarDisplayMode;
-	import feathers.themes.MetalWorksMobileTheme;
+	import feathers.themes.TopcoatLightMobileTheme;
 	
 	/**
 	 * Extends MetalWorksMobileTheme to make some app-specific styling tweaks
 	 */
-	public class GalleryTheme extends MetalWorksMobileTheme {
+	public class GalleryTheme extends TopcoatLightMobileTheme {
 		public function GalleryTheme() {
 			super();
 		}

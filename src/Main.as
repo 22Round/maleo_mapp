@@ -1,22 +1,15 @@
 package {
 	import application.AssetsLoader;
-	import application.utils.DeviceInfo;
 	import application.utils.UserPrefs;
 	import drawer.Drawer;
 	import feathers.controls.Button;
 	import feathers.controls.TextCallout;
-	import feathers.themes.MetalWorksMobileTheme;
-	import flash.text.Font;
+	import feathers.themes.TopcoatLightMobileTheme;
 	import flash.utils.clearInterval;
 	import flash.utils.setInterval;
-	import screens.Splash;
-	import starling.display.Image;
-	import starling.textures.Texture;
-	
 	import starling.display.Sprite;
 	import starling.events.Event;
 	
-
 	public class Main extends Sprite {
 		
 		private var assetLoadingInterval:uint;
@@ -26,7 +19,6 @@ package {
 			this.addEventListener(Event.ADDED_TO_STAGE, addedToStageHandler);
 		}
 		
-
 		protected var button:Button;
 		
 		
@@ -35,8 +27,7 @@ package {
 			this.removeEventListener(Event.ADDED_TO_STAGE, addedToStageHandler);
 			assetLoadingInterval = setInterval (checkIfAssetsLoaded, 500);
 			
-			
-			new MetalWorksMobileTheme();
+			new TopcoatLightMobileTheme();
 				
 		}
 		

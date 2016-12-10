@@ -16,7 +16,6 @@ package drawer.views {
 	import feathers.motion.Fade;
 	import feathers.motion.Slide;
 	import feathers.motion.Cover;
-	import feathers.themes.MetalWorksMobileTheme;
 	import starling.display.Image;
 	import starling.display.Quad;
 	import starling.filters.DropShadowFilter;

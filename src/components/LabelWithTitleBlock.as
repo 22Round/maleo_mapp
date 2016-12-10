@@ -51,9 +51,19 @@ package components {
 		
 		override public function dispose():void {
 			
-			//StaticGUI._safeRemoveChildren(this, true);
+			StaticGUI._safeRemoveChildren(title, true);
+			StaticGUI._safeRemoveChildren(label, true);
 			
 			super.dispose();
+			
+			title = null;
+			label = null;
+			titleStyle = null;
+			
+			labelStyle = null;
+			titleStr = null;
+			promptStr = null;
+			
 		}
 	}
 }

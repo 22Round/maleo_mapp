@@ -19,6 +19,7 @@ package components {
 	
 	
 	public class MailRepacBlock extends LayoutGroup {
+		
 		private var title:Label;
 		private var titleStyle:TextFormat;
 		private var titleDisabledStyle:TextFormat;
@@ -28,7 +29,8 @@ package components {
 		
 		private var titleStr:String;
 		private var radioGroup:LayoutGroup;
-		private var radio:Radio;
+		private var radioYes:Radio;
+		private var radioNo:Radio;
 		private var radioSkin:ImageSkin;
 
 		
@@ -89,15 +91,15 @@ package components {
 			radioSkin.width = Settings._getIntByDPI(34);
 			radioSkin.scaleY = radioSkin.scaleX;
 			
-			radio = new Radio;
-			radio.styleProvider = null;
-			radio.isSelected = false;
-			radio.fontStyles = radioStyle;
-			radio.disabledFontStyles = radioDisabledStyle;
-			radio.defaultIcon = radioSkin;
-			radio.label = Settings._mui['mails_declare_yes'][Settings._lang];
-			radio.labelOffsetX = 10;
-			radio.labelFactory = function():ITextRenderer {
+			radioYes = new Radio;
+			radioYes.styleProvider = null;
+			radioYes.isSelected = false;
+			radioYes.fontStyles = radioStyle;
+			radioYes.disabledFontStyles = radioDisabledStyle;
+			radioYes.defaultIcon = radioSkin;
+			radioYes.label = Settings._mui['mails_declare_yes'][Settings._lang];
+			radioYes.labelOffsetX = 10;
+			radioYes.labelFactory = function():ITextRenderer {
 				
 				var renderer:TextFieldTextRenderer = new TextFieldTextRenderer();
 				renderer.embedFonts = true;
@@ -105,15 +107,14 @@ package components {
 	
 			}
 			
-			radioGroup.addChild(radio);
-			radio.validate();
+			radioGroup.addChild(radioYes);
+			radioYes.validate();
 			
 			var line:MyCanvas = new MyCanvas;
 			line.lineStyle(1, 0xd6d7d7);
 			line.lineTo(0, 0);
 			line.lineTo(0, Settings._getIntByDPI(32));
 			radioGroup.addChild(line);
-			
 			
 			radioSkin = new ImageSkin(AssetsLoader._asset.getTexture('check_empty.png'));
 			radioSkin.setTextureForState(ButtonState.DOWN, AssetsLoader._asset.getTexture('check_full.png'));
@@ -126,15 +127,15 @@ package components {
 			radioSkin.width = Settings._getIntByDPI(34);
 			radioSkin.scaleY = radioSkin.scaleX;
 			
-			radio = new Radio;
-			radio.styleProvider = null;
-			radio.isSelected = false;
-			radio.fontStyles = radioStyle;
-			radio.disabledFontStyles = radioDisabledStyle;
-			radio.defaultIcon = radioSkin;
-			radio.label = Settings._mui['mails_declare_no'][Settings._lang];
-			radio.labelOffsetX = 10;
-			radio.labelFactory = function():ITextRenderer {
+			radioNo = new Radio;
+			radioNo.styleProvider = null;
+			radioNo.isSelected = false;
+			radioNo.fontStyles = radioStyle;
+			radioNo.disabledFontStyles = radioDisabledStyle;
+			radioNo.defaultIcon = radioSkin;
+			radioNo.label = Settings._mui['mails_declare_no'][Settings._lang];
+			radioNo.labelOffsetX = 10;
+			radioNo.labelFactory = function():ITextRenderer {
 				
 				var renderer:TextFieldTextRenderer = new TextFieldTextRenderer();
 				renderer.embedFonts = true;
@@ -142,13 +143,31 @@ package components {
 	
 			}
 			
-			radioGroup.addChild(radio);
-			radio.validate();
+			radioGroup.addChild(radioNo);
+			radioNo.validate();
 		}
 		
 		override public function dispose():void {
 			
-			//StaticGUI._safeRemoveChildren(this, true);
+			StaticGUI._safeRemoveChildren(radioYes, true);
+			StaticGUI._safeRemoveChildren(radioNo, true);
+			StaticGUI._safeRemoveChildren(title, true);
+			StaticGUI._safeRemoveChildren(radioGroup, true);
+			
+			radioSkin.dispose();
+			
+			
+			title = null;
+			titleStyle = null;
+			titleDisabledStyle = null;
+			radioStyle = null;
+			radioDisabledStyle = null;
+			
+			titleStr = null;
+			radioGroup = null;
+			radioYes = null;
+			radioNo = null;
+			radioSkin = null;
 			
 			super.dispose();
 		}
