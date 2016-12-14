@@ -113,7 +113,7 @@ package screens.splash {
 			skipBtnIco.width = Settings._getIntByDPI(9);
 			skipBtnIco.scaleY = skipBtnIco.scaleX;
 			
-			skipBtn = StaticGUI._addBtnSkin(this, 'გამოტოვება', btnStyle, null);
+			skipBtn = StaticGUI._addBtnSkin(this, Settings._mui['intro_skip_btn'][Settings._lang], btnStyle, null);
 			skipBtn.layoutData = skipBtnLayoutData;
 			skipBtn.defaultIcon = skipBtnIco;
 			skipBtn.iconPosition = RelativePosition.RIGHT;
@@ -125,14 +125,14 @@ package screens.splash {
 			
 			
 			var contBtnSkin:ImageSkin = new ImageSkin(AssetsLoader._asset.getTexture("intro_start_btn.png"));
-			contBtnSkin.scale9Grid = new Rectangle(40, 40, 120, 120);
+			contBtnSkin.scale9Grid = StaticGUI._getScale9GridRect(16, 16, contBtnSkin.width, contBtnSkin.height);
 			contBtnSkin.textureSmoothing = TextureSmoothing.TRILINEAR;
 			contBtnSkin.width = Settings._getIntByDPI(295);
 			contBtnSkin.scaleY = contBtnSkin.scaleX;
 		
 			
-			contBtn = StaticGUI._addBtnSkin(this, 'გაგრძელება', btnStyle, contBtnSkin);
-			contBtn.labelOffsetY =  Settings._getIntByDPI(10);
+			contBtn = StaticGUI._addBtnSkin(this, Settings._mui['intro_continue_btn'][Settings._lang], btnStyle, contBtnSkin);
+			//contBtn.labelOffsetY =  Settings._getIntByDPI(10);
 			contBtn.layoutData = contBtnLayoutData;
 			contBtn.addEventListener(Event.TRIGGERED, contHandler);
 			

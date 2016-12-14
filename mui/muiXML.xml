@@ -6,6 +6,12 @@
 		<lang ID = 'ru'>Пропускать</lang>
 		<lang ID = 'ka'>გამოტოვება</lang>
 	</muipack>
+	
+	<muipack word = 'intro_continue_btn'>
+		<lang ID = 'en'>Continue</lang>
+		<lang ID = 'ru'>Продолжать</lang>
+		<lang ID = 'ka'>გაგრძელება</lang>
+	</muipack>
 
 	<muipack word = 'aboutNav'>
 		<lang ID = 'en'><![CDATA[ABOUT <font color="#3bb80a">AZERBAIJAN</font>]]></lang>

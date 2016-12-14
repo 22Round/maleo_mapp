@@ -2,19 +2,15 @@ package application.utils {
 	import feathers.controls.AutoComplete;
 	import feathers.controls.Button;
 	import feathers.controls.Label;
-	import feathers.controls.TextArea;
 	import feathers.controls.TextInput;
 	import feathers.controls.text.BitmapFontTextRenderer;
-	import feathers.controls.text.ITextEditorViewPort;
 	import feathers.controls.text.TextFieldTextEditor;
-	import feathers.controls.text.TextFieldTextEditorViewPort;
 	import feathers.controls.text.TextFieldTextRenderer;
 	import feathers.core.ITextEditor;
 	import feathers.core.ITextRenderer;
 	import feathers.skins.ImageSkin;
 	import feathers.text.BitmapFontTextFormat;
 	import flash.geom.*;
-	import flash.filters.DropShadowFilter;
 	import flash.text.AntiAliasType;
 	import flash.text.TextFormatAlign;
 	import starling.display.DisplayObject;
@@ -22,8 +18,6 @@ package application.utils {
 	import starling.display.Image;
 	import starling.text.TextFormat;
 	import starling.textures.Texture;
-	import starling.utils.Align;
-	import starling.utils.Align;
 	
 	public class StaticGUI extends Object {
 		
@@ -84,6 +78,12 @@ package application.utils {
 			}
 			
 			return true;
+		}
+		
+		public static function _getScale9GridRect(xPos:int = 20 ,yPos:int = 20, sourceWidth:int = 100, sourceHeight:int = 100):Rectangle {
+			var rect:Rectangle = new Rectangle(xPos, yPos, sourceWidth - (xPos * 2), sourceHeight - (yPos * 2));
+			
+			return rect;
 		}
 		   
 		   

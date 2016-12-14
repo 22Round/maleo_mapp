@@ -24,12 +24,7 @@ package drawer.views {
 	import starling.events.Event;
 	
 	public class DrawerContent extends LayoutGroup {
-		
-		private static const SCREEN_MAIN:String = "Main";
-		private static const SCREEN_SETTINGS:String = "Settings";
 
-		
-		
 		public function DrawerContent() {
 			
 			super();

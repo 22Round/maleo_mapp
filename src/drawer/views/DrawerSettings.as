@@ -14,6 +14,7 @@ package drawer.views {
 	import feathers.layout.HorizontalAlign;
 	import feathers.layout.RelativePosition;
 	import feathers.layout.VerticalAlign;
+	import feathers.layout.VerticalLayout;
 	
 	import starling.display.DisplayObject;
 	import starling.events.Event;
@@ -59,12 +60,22 @@ package drawer.views {
 			//never forget to call super.initialize()
 			super.initialize();
 			
-			this.title = "Item Renderer Settings";
+			this.title = "Settings";
 			
-			this.layout = new AnchorLayout();
+			//this.layout = new AnchorLayout();
+			//this.layoutData = new AnchorLayoutData(NaN, NaN, NaN, NaN);
 			
+			
+			var layout:VerticalLayout = new VerticalLayout();
+			layout.horizontalAlign = HorizontalAlign.LEFT;
+			layout.verticalAlign = VerticalAlign.TOP;
+			//layout.paddingRight = 20;
+			//layout.typicalItemWidth = 800;
+			this.layout = layout;
+			
+			//this.width = 500;
 			settings = new DrawerSettingsData;
-			this.maxWidth = 300;
+			
 			
 			this._hasIconToggle = new ToggleSwitch();
 			this._hasIconToggle.isSelected = this.settings.hasIcon;

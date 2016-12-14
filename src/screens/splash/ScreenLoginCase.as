@@ -78,13 +78,13 @@ package screens.splash {
 			labelStyle.color = 0x575a5b;
 			
 			btnMailSkin = new ImageSkin(AssetsLoader._asset.getTexture("login_mail_btn.png"));
-			btnMailSkin.scale9Grid = new Rectangle(40, 40, 120, 120);
+			btnMailSkin.scale9Grid = StaticGUI._getScale9GridRect(16, 16, btnMailSkin.width, btnMailSkin.height);
 			
 			btnFaceBSkin = new ImageSkin(AssetsLoader._asset.getTexture("login_facebook_btn.png"));
-			btnFaceBSkin.scale9Grid = new Rectangle(40, 40, 120, 120);
+			btnFaceBSkin.scale9Grid = StaticGUI._getScale9GridRect(16, 16, btnFaceBSkin.width, btnFaceBSkin.height);
 			
 			btnRegSkin = new ImageSkin(AssetsLoader._asset.getTexture("register_btn.png"));
-			btnRegSkin.scale9Grid = new Rectangle(40, 40, 120, 120);
+			btnRegSkin.scale9Grid = StaticGUI._getScale9GridRect(16, 16, btnRegSkin.width, btnRegSkin.height);
 			
 			
 			var label:Label = StaticGUI._addLabel(this, Settings._mui['logincase_enter_lbl'][Settings._lang], labelStyle);
@@ -107,7 +107,7 @@ package screens.splash {
 			
 			label = StaticGUI._addLabel(this, Settings._mui['logincase_orregister_lbl'][Settings._lang], labelStyle);
 			
-			registRegBtn = StaticGUI._addBtnSkin(this, "რეგისტრაცია", btnStyle2, btnRegSkin);
+			registRegBtn = StaticGUI._addBtnSkin(this, Settings._mui['logincase_register_btn'][Settings._lang], btnStyle2, btnRegSkin);
 			registRegBtn.addEventListener(Event.TRIGGERED, registerHandler);
 			
 	

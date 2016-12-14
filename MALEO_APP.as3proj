@@ -87,8 +87,9 @@
     <element path="lib\AndroidFullScreen.ane" />
     <element path="D:\Flash Resources\com\starling_2.1.swc" />
     <element path="D:\Flash Resources\com\feathers_3.1.0.swc" />
-    <element path="lib\MetalWorksMobileTheme\swc\MetalWorksMobileTheme.swc" />
     <element path="D:\Flash Resources\com\feathers_3.1.1.swc" />
+    <element path="lib\MetalWorksMobileTheme\swc\TopcoatLightMobileTheme.swc" />
+    <element path="lib\theme\swc\TopcoatLightMobileTheme.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>

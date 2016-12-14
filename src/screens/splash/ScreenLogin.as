@@ -75,10 +75,10 @@ package screens.splash {
 			inputStyle.color = 0x747474;
 			
 			btnMailSkin = new ImageSkin(AssetsLoader._asset.getTexture("login_mail_btn.png"));
-			btnMailSkin.scale9Grid = new Rectangle(40, 40, 120, 120);
+			btnMailSkin.scale9Grid = StaticGUI._getScale9GridRect(16, 16, btnMailSkin.width, btnMailSkin.height);
 			
 			btnFaceBSkin = new ImageSkin(AssetsLoader._asset.getTexture("login_facebook_btn.png"));
-			btnFaceBSkin.scale9Grid = new Rectangle(40, 40, 120, 120);
+			btnFaceBSkin.scale9Grid = StaticGUI._getScale9GridRect(16, 16, btnFaceBSkin.width, btnFaceBSkin.height);
 			
 			
 			//var label:Label = StaticGUI._addLabel(this, "Sesvla", labelStyle);
@@ -90,14 +90,14 @@ package screens.splash {
 			this.addChild(inputGroup);
 			
 			var userInputSkin:ImageSkin = new ImageSkin(AssetsLoader._asset.getTexture("login_field_border.png"));
-			userInputSkin.scale9Grid = new Rectangle(40, 40, 120, 120);
+			userInputSkin.scale9Grid = StaticGUI._getScale9GridRect(16, 16, userInputSkin.width, userInputSkin.height);
 			
 			var userInput:TextInput = StaticGUI._addTextInput(inputGroup, Settings._mui['login_user_input'][Settings._lang], inputStyle, inputStyle);
 			userInput.backgroundSkin = userInputSkin;
 			
 			
 			var userPassInputSkin:ImageSkin = new ImageSkin(AssetsLoader._asset.getTexture("login_field_border.png"));
-			userPassInputSkin.scale9Grid = new Rectangle(40, 40, 120, 120);
+			userPassInputSkin.scale9Grid = StaticGUI._getScale9GridRect(16, 16, userPassInputSkin.width, userPassInputSkin.height);
 			
 			var passInput:TextInput = StaticGUI._addTextInput(inputGroup, Settings._mui['login_pass_input'][Settings._lang], inputStyle, inputStyle);
 			passInput.backgroundSkin = userPassInputSkin;
