@@ -55,7 +55,7 @@ package screens.splash {
 			var layout:VerticalLayout = new VerticalLayout();
 			layout.horizontalAlign = HorizontalAlign.CENTER;
 			layout.verticalAlign = VerticalAlign.MIDDLE;
-			layout.gap = 25;
+			layout.gap = Settings._getIntByDPI(25);
 			this.layout = layout;
 			
 			btnStyle1 = new TextFormat;

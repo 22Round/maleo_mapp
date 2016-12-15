@@ -230,7 +230,7 @@ package screens {
 					
 				case ScreenID.MAPS:	
 					
-					  visible = true;
+					visible = true;
 					_changeBackgroundSkin(0x18a6e7);
 					_setMenuItems(ARROWTOLEFT_WHITE_ITEM);
 					
@@ -238,7 +238,7 @@ package screens {
 					
 				case ScreenID.FAQ:	
 					
-					  visible = true;
+					visible = true;
 					_changeBackgroundSkin(0x18a6e7);
 					_setMenuItems(ARROWTOLEFT_WHITE_ITEM);
 					

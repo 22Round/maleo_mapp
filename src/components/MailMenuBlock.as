@@ -1,6 +1,7 @@
 package components {
 	
 	import application.AssetsLoader;
+	import application.utils.StaticGUI;
 	import feathers.controls.ButtonState;
 	import feathers.controls.LayoutGroup;
 	import feathers.controls.TabBar;
@@ -25,7 +26,6 @@ package components {
 		private var tabDisabledStyle:TextFormat;
 		
 		private var tabBar:TabBar;
-		private var tabScaleRect:Rectangle;
 		
 		private var menuArray:Array;
 		
@@ -70,13 +70,12 @@ package components {
 			}
 			
 			tabBar = new TabBar();
-			tabScaleRect = new Rectangle(15, 15, 178, 28);
 			
 			tabBar.firstTabFactory = function():ToggleButton {
 				
 				var tabSkin:ImageSkin = new ImageSkin(AssetsLoader._asset.getTexture("posta_mails_menu_default_left.png"));
 				tabSkin.selectedTexture = AssetsLoader._asset.getTexture("posta_mails_menu_selected_left.png");
-				tabSkin.scale9Grid = tabScaleRect;
+				tabSkin.scale9Grid = StaticGUI._getScale9GridRect(16, 16, tabSkin.width, tabSkin.height);
 				var tab:ToggleButton = new ToggleButton();
 				
 				tab.labelFactory = function():ITextRenderer {
@@ -100,7 +99,7 @@ package components {
 				
 				var tabSkin:ImageSkin = new ImageSkin(AssetsLoader._asset.getTexture("posta_mails_menu_default_center.png"));
 				tabSkin.selectedTexture = AssetsLoader._asset.getTexture("posta_mails_menu_selected_center.png");
-				tabSkin.scale9Grid = tabScaleRect;
+				tabSkin.scale9Grid = StaticGUI._getScale9GridRect(16, 16, tabSkin.width, tabSkin.height);
 				var tab:ToggleButton = new ToggleButton();
 				
 				tab.labelFactory = function():ITextRenderer {
@@ -123,7 +122,7 @@ package components {
 				
 				var tabSkin:ImageSkin = new ImageSkin(AssetsLoader._asset.getTexture("posta_mails_menu_default_right.png"));
 				tabSkin.selectedTexture = AssetsLoader._asset.getTexture("posta_mails_menu_selected_right.png");
-				tabSkin.scale9Grid = tabScaleRect;
+				tabSkin.scale9Grid = StaticGUI._getScale9GridRect(16, 16, tabSkin.width, tabSkin.height);
 				var tab:ToggleButton = new ToggleButton();
 				
 				tab.labelFactory = function():ITextRenderer {
@@ -163,7 +162,6 @@ package components {
 			
 			//StaticGUI._safeRemoveChildren(this, true);
 			tabBar.removeEventListener(Event.CHANGE, tabBarHandler);
-			tabScaleRect = null;
 			tabDisabledStyle = null;
 			tabSelectedStyle = null;
 			tabStyle = null;

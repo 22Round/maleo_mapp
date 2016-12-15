@@ -325,4 +325,80 @@
 		<lang ID = 'ru'>Регистрировать</lang>
 		<lang ID = 'ka'>რეგისტრაცია</lang>
 	</muipack>
+	
+	<!-- months -->
+
+	<muipack word = 'month_0'>
+		<lang ID = 'en'>January</lang>
+		<lang ID = 'ru'>Январь</lang>
+		<lang ID = 'ka'>იანვარი</lang>
+	</muipack>
+	
+	<muipack word = 'month_1'>
+		<lang ID = 'en'>February</lang>
+		<lang ID = 'ru'>Февраль</lang>
+		<lang ID = 'ka'>თებერვალი</lang>
+	</muipack>
+	
+	<muipack word = 'month_2'>
+		<lang ID = 'en'>March</lang>
+		<lang ID = 'ru'>Март</lang>
+		<lang ID = 'ka'>მარტი</lang>
+	</muipack>
+	
+	<muipack word = 'month_3'>
+		<lang ID = 'en'>April</lang>
+		<lang ID = 'ru'>Апрель</lang>
+		<lang ID = 'ka'>აპრილი</lang>
+	</muipack>
+	
+	<muipack word = 'month_4'>
+		<lang ID = 'en'>May</lang>
+		<lang ID = 'ru'>Май</lang>
+		<lang ID = 'ka'>მაისი</lang>
+	</muipack>
+	
+	<muipack word = 'month_5'>
+		<lang ID = 'en'>June</lang>
+		<lang ID = 'ru'>Июнь</lang>
+		<lang ID = 'ka'>ივნისი</lang>
+	</muipack>
+	
+	<muipack word = 'month_6'>
+		<lang ID = 'en'>July</lang>
+		<lang ID = 'ru'>Июль</lang>
+		<lang ID = 'ka'>ივლისი</lang>
+	</muipack>
+	
+	<muipack word = 'month_7'>
+		<lang ID = 'en'>August</lang>
+		<lang ID = 'ru'>Август</lang>
+		<lang ID = 'ka'>აგვისტო</lang>
+	</muipack>
+	
+	<muipack word = 'month_8'>
+		<lang ID = 'en'>September</lang>
+		<lang ID = 'ru'>Сентябрь</lang>
+		<lang ID = 'ka'>სექტემბერი</lang>
+	</muipack>
+	
+	<muipack word = 'month_9'>
+		<lang ID = 'en'>October</lang>
+		<lang ID = 'ru'>Октября</lang>
+		<lang ID = 'ka'>ოქტომბერი</lang>
+	</muipack>
+	
+	<muipack word = 'month_10'>
+		<lang ID = 'en'>November</lang>
+		<lang ID = 'ru'>ВОЙТИ</lang>
+		<lang ID = 'ka'>ნოემბერი</lang>
+	</muipack>
+	
+	<muipack word = 'month_11'>
+		<lang ID = 'en'>December</lang>
+		<lang ID = 'ru'>ВОЙТИ</lang>
+		<lang ID = 'ka'>დეკემბერი</lang>
+	</muipack>
+	
+	
 </langs>

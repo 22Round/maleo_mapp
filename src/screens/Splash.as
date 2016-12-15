@@ -63,10 +63,10 @@ package screens {
 			logoBlueTexture = AssetsLoader._asset.getTexture("maleo_logo_blue.png");
 			
 			logoImg = new Image(logoWiteTexture);
-			logoImg.width = 280 * DeviceInfo.dpiScaleMultiplier;
-			logoImg.height = 55 * DeviceInfo.dpiScaleMultiplier;
+			logoImg.width = Settings._getIntByDPI(280);
+			logoImg.height = Settings._getIntByDPI(55);
 			logoImg.x = Math.round((stage.stageWidth - logoImg.width) / 2);
-			logoImg.y = 211 * DeviceInfo.dpiScaleMultiplier;
+			logoImg.y = Settings._getIntByDPI(211);
 			
 			_navigator = new StackScreenNavigator();
 			_navigator.pushTransition = Slide.createSlideLeftTransition();
@@ -174,7 +174,7 @@ package screens {
 			
 			topFooter.visible = false;
 			topFooter._tabBar.selectedIndex = 0;
-			statusBar.visible = false;
+			statusBar._visible = false;
 			
 			
 			var currentSt:String = StackScreenNavigator(e.target).activeScreenID
@@ -230,7 +230,7 @@ package screens {
 						
 					
 				case ScreenID.MAIL_CONTENT:
-					statusBar.visible = true;
+					statusBar._visible = true;
 					_changeBackgroundSkin(0xffffff);
 					
 					break;
@@ -238,6 +238,11 @@ package screens {
 				case ScreenID.MAPS:
 					topFooter._tabBar.selectedIndex = 3;
 					topFooter.visible = true;
+					break;
+					
+				case ScreenID.FAQ:
+					
+					
 					break;
 				
 				default: 

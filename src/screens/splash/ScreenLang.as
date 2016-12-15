@@ -58,6 +58,8 @@ package screens.splash {
 			line.lineTo(0, 0);
 			line.lineTo(300, 0);
 			
+			
+			
 			kaLangBtn = StaticGUI._addBtnSkin(this, "ქართული", btnStyle, btnSkin);
 			//popToAButton.layoutData = new VerticalLayoutData(50);
 			kaLangBtn.addEventListener(Event.TRIGGERED, langChangeHandler);
@@ -83,6 +85,8 @@ package screens.splash {
 			ruLangBtn = StaticGUI._addBtnSkin(this, "Русский", btnStyle, btnSkin);
 			//replaceWithB2Button.layoutData = new VerticalLayoutData(50);
 			ruLangBtn.addEventListener(Event.TRIGGERED, langChangeHandler);
+			
+			
 			
 			
 			line = new MyCanvas;

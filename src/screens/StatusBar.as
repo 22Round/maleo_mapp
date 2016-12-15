@@ -5,6 +5,9 @@ package screens {
 	import feathers.controls.text.TextFieldTextRenderer;
 	import feathers.core.ITextRenderer;
 	import feathers.skins.ImageSkin;
+	import starling.animation.Transitions;
+	import starling.animation.Tween;
+	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.display.Image;
 	import starling.display.Quad;
@@ -17,12 +20,13 @@ package screens {
 		
 		private var bgQuad:Quad;
 		private var bgSkin:Image;
-		private var titleGeoStyle:TextFormat;
+		private var titleStyle:TextFormat;
 		
 		private var menuItems:Vector.<Object>;
 		public static var _currentLeftItem:String;
 		public static var _currentRightItem:String;
 		
+		private var tween:Tween;
 		
 		
 		public function StatusBar() {
@@ -41,7 +45,6 @@ package screens {
 			
 			this.backgroundSkin = bgQuad;
 			//this.refreshBackgroundSkin();
-			
 		}
 		
 		private function added(e:Event):void {
@@ -51,12 +54,12 @@ package screens {
 			//_setMenuItems(MENU_WHITE_ITEM, LEFT_ITEM);
 			//_setMenuItems(FAQ_WHITE_ITEM, RIGHT_ITEM);
 			
-			titleGeoStyle = new TextFormat;
-			titleGeoStyle.font = '_bpgArialRegular';
-			titleGeoStyle.size = Settings._getIntByDPI(20);
-			titleGeoStyle.color = 0xFFFFFF;
+			titleStyle = new TextFormat;
+			titleStyle.font = '_bpgArialRegular';
+			titleStyle.size = Settings._getIntByDPI(20);
+			titleStyle.color = 0xFFFFFF;
 			
-			this.fontStyles = titleGeoStyle;
+			this.fontStyles = titleStyle;
 			title = 'სავარაუდო ჩამოფრენა - 2016, 23 ოქტომბერი';
 			
 			_changeBackgroundSkin();
@@ -68,8 +71,49 @@ package screens {
 			}
 			
 			this.width = stage.stageWidth;
-			this.height = Settings._getIntByDPI(60);
+			this.height = 0;
+			this.alpha = 0;
 			validate();
+			
+		}
+		
+		public function set _visible(boo:Boolean):void {
+			const time:Number = .5;
+			var thisAlpha:Number;
+			var thisHeight:int;
+			
+			if (!this.visible && !boo) {
+				return;
+			}
+			
+			Starling.juggler.remove(tween);
+			tween = new Tween(this, time, Transitions.EASE_OUT);
+			
+			if (boo) {
+				this.visible = boo;
+				thisAlpha = 1;
+				
+				thisHeight = Settings._getIntByDPI(60);
+				
+			}else {
+				
+				thisAlpha = 0;
+				thisHeight = 0;
+			}
+			tween.animate("height", thisHeight);
+			tween.fadeTo(thisAlpha);
+			tween.onComplete = onTweenCompleted;
+			tween.onCompleteArgs = [boo];
+			Starling.juggler.add(tween);	
+		}
+		
+		private function onTweenCompleted(boo:Boolean):void {
+			this.visible = boo;
+			Starling.juggler.remove(tween);
+		}
+		
+		public function get _visible():Boolean {
+			return this.visible;
 		}
 		
 		private function removed(e:Event):void {
