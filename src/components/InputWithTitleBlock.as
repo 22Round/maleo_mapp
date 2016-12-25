@@ -68,7 +68,7 @@ package components {
 			
 			userInputSkin = new ImageSkin(AssetsLoader._asset.getTexture("posta_declare_field_default.png"));
 			userInputSkin.disabledTexture = AssetsLoader._asset.getTexture("posta_declare_field_disabled.png")
-			userInputSkin.scale9Grid = StaticGUI._getScale9GridRect(16, 16, userInputSkin.width, userInputSkin.height);
+			userInputSkin.scale9Grid = StaticGUI._getScale9GridRect(userInputSkin.width, userInputSkin.height);
 			
 			userInput = StaticGUI._addTextInput(this, inputPromptStr, inputStyle, inputPromptStyle);
 			userInput.backgroundSkin = userInputSkin;

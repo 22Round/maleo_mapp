@@ -10,7 +10,9 @@ package screens.map {
 	import feathers.core.FeathersControl;
 	import feathers.layout.HorizontalAlign;
 	import feathers.layout.VerticalAlign;
+	import flash.events.Event;
 	import flash.events.GeolocationEvent;
+	import flash.events.StatusEvent;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	import flash.sensors.Geolocation;
@@ -75,13 +77,24 @@ package screens.map {
 			geoMap.addEventListener(MapEvent.MARKER_TRIGGERED, onGeoMapMarkerTriggered);
 			
 			//referance http://stackoverflow.com/questions/24797998/detect-the-closest-to-the-user-point
-			if (Geolocation.isSupported){
-				geo.addEventListener(GeolocationEvent.UPDATE, onGeoUpdate);
+			if (Geolocation.isSupported) {
+				geo = new Geolocation();
+				if (!geo.muted)  { 
+                    geo.addEventListener(GeolocationEvent.UPDATE, geoUpdateHandler);
+                } 
+				geo.addEventListener(StatusEvent.STATUS, geoStatusHandler);
 			} 
 
 		}
 		
-		private function onGeoUpdate(e:GeolocationEvent):void{
+		private function geoStatusHandler(e:Event):void {
+			if (geo.muted)
+                geo.removeEventListener(GeolocationEvent.UPDATE, geoUpdateHandler);
+            else
+                geo.addEventListener(GeolocationEvent.UPDATE, geoUpdateHandler);
+		}
+		
+		private function geoUpdateHandler(e:GeolocationEvent):void{
 			//embeddedIconPoi.latLng = new LatLng(e.latitude, e.longitude);
 		}
 		
@@ -124,8 +137,14 @@ package screens.map {
 		override public function dispose():void {
 			
 			
-			if (geo) geo.addEventListener(GeolocationEvent.UPDATE, onGeoUpdate);
-			if (geoMap) StaticGUI._safeRemoveChildren(geoMap, true);
+			if (geo) {
+				geo.removeEventListener(GeolocationEvent.UPDATE, geoUpdateHandler);
+				geo.removeEventListener(StatusEvent.STATUS, geoStatusHandler);
+			}
+			if (geoMap) {
+				geoMap.removeEventListener(MapEvent.MARKER_TRIGGERED, onGeoMapMarkerTriggered);
+				StaticGUI._safeRemoveChildren(geoMap, true);
+			}
 			
 			mapOptions = null;
 			geoMap = null;

@@ -20,6 +20,9 @@ package application {
 			this.enqueue(appDir.resolvePath("assets/assets.xml"));
 			this.enqueue(appDir.resolvePath("assets/assets.png"));
 			
+			this.enqueue(appDir.resolvePath("assets/assets_x" + 3 + ".xml"));
+			this.enqueue(appDir.resolvePath("assets/assets_x" + 3 + ".png"));
+			
 			
 			this.loadQueue(function(ratio:Number):void {
 				//trace("Loading assets, progress:", ratio);

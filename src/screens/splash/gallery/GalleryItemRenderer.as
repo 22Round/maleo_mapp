@@ -194,6 +194,23 @@ package screens.splash.gallery {
 		/**
 		 * @private
 		 */
+		
+		 
+		 override public function dispose():void {
+			if (this.textureCache) {
+				this.textureCache.dispose();
+				this.textureCache = null;
+			}
+			
+			if (image) {
+				removeChild(image);
+				image.dispose();
+			}
+			
+			super.dispose();
+		}
+		 
+		 
 		override protected function initialize():void {
 			super.initialize();
 			
@@ -327,7 +344,7 @@ package screens.splash.gallery {
 		protected function image_completeHandler(event:Event):void {
 			this.image.alpha = 0;
 			this.image.visible = true;
-			this.fadeTween = new Tween(this.image, 1, Transitions.EASE_OUT);
+			this.fadeTween = new Tween(this.image, .5, Transitions.EASE_OUT);
 			this.fadeTween.fadeTo(1);
 			this.fadeTween.onComplete = fadeTween_onComplete;
 			Starling.juggler.add(this.fadeTween);

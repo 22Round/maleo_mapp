@@ -87,7 +87,7 @@ package components {
 			radioSkin.setTextureForState(ButtonState.HOVER_AND_SELECTED, AssetsLoader._asset.getTexture('check_full.png'));
 			radioSkin.setTextureForState(ButtonState.DISABLED_AND_SELECTED, AssetsLoader._asset.getTexture('check_disabled.png'));
 			
-			radioSkin.textureSmoothing = TextureSmoothing.TRILINEAR;
+			//radioSkin.textureSmoothing = TextureSmoothing.TRILINEAR;
 			radioSkin.width = Settings._getIntByDPI(34);
 			radioSkin.scaleY = radioSkin.scaleX;
 			
@@ -123,7 +123,7 @@ package components {
 			radioSkin.setTextureForState(ButtonState.HOVER_AND_SELECTED, AssetsLoader._asset.getTexture('check_full.png'));
 			radioSkin.setTextureForState(ButtonState.DISABLED_AND_SELECTED, AssetsLoader._asset.getTexture('check_disabled.png'));
 			
-			radioSkin.textureSmoothing = TextureSmoothing.TRILINEAR;
+			//radioSkin.textureSmoothing = TextureSmoothing.TRILINEAR;
 			radioSkin.width = Settings._getIntByDPI(34);
 			radioSkin.scaleY = radioSkin.scaleX;
 			

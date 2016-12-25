@@ -98,7 +98,7 @@ package components {
 			bgSkin.scale9Grid = new Rectangle(20, 20, bgTexture.width - 40, bgTexture.height - 40);
 			this.backgroundSkin = bgSkin;
 			
-			this.width = stage.stageWidth - 34;
+			this.width = stage.stageWidth - Settings._getIntByDPI(34);
 			this.height = Settings._getIntByDPI(155);
 			
 			btnStyle1 = new TextFormat;
@@ -171,7 +171,7 @@ package components {
 					defaultRadioSkin.setTextureForState(ButtonState.DOWN_AND_SELECTED, AssetsLoader._asset.getTexture('check_full.png'));
 					defaultRadioSkin.setTextureForState(ButtonState.UP_AND_SELECTED, AssetsLoader._asset.getTexture('check_full.png'));
 					defaultRadioSkin.setTextureForState(ButtonState.HOVER_AND_SELECTED, AssetsLoader._asset.getTexture('check_full.png'));
-					defaultRadioSkin.textureSmoothing = TextureSmoothing.TRILINEAR;
+					//defaultRadioSkin.textureSmoothing = TextureSmoothing.TRILINEAR;
 					defaultRadioSkin.width = Settings._getIntByDPI(34);
 					defaultRadioSkin.scaleY = defaultRadioSkin.scaleX;
 					
@@ -197,7 +197,7 @@ package components {
 			fromNameLayoutData.left = Settings._getIntByDPI(2);
 			
 			domainIco = new Image(AssetsLoader._asset.getTexture("post_item_green_light.png"));
-			domainIco.textureSmoothing = TextureSmoothing.BILINEAR;
+			//domainIco.textureSmoothing = TextureSmoothing.BILINEAR;
 			domainIco.width = Settings._getIntByDPI(15);
 			domainIco.scaleY = domainIco.scaleX;
 			
@@ -224,7 +224,7 @@ package components {
 					detailsBtnLayoutData.right = Settings._getIntByDPI(28);
 					
 					detailsIco = new Image(AssetsLoader._asset.getTexture("post_item_btn_arrow.png"));
-					detailsIco.textureSmoothing = TextureSmoothing.BILINEAR;
+					//detailsIco.textureSmoothing = TextureSmoothing.BILINEAR;
 					detailsIco.width = Settings._getIntByDPI(15);
 					detailsIco.scaleY = domainIco.scaleX;
 					
@@ -253,7 +253,7 @@ package components {
 			
 					
 					detailsIco = new Image(AssetsLoader._asset.getTexture("post_item_btn_arrow.png"));
-					detailsIco.textureSmoothing = TextureSmoothing.BILINEAR;
+					//detailsIco.textureSmoothing = TextureSmoothing.BILINEAR;
 					detailsIco.width = Settings._getIntByDPI(15);
 					detailsIco.scaleY = domainIco.scaleX;
 					
@@ -281,7 +281,7 @@ package components {
 			
 					
 					detailsIco = new Image(AssetsLoader._asset.getTexture("post_item_btn_arrow.png"));
-					detailsIco.textureSmoothing = TextureSmoothing.BILINEAR;
+					//detailsIco.textureSmoothing = TextureSmoothing.BILINEAR;
 					detailsIco.width = Settings._getIntByDPI(15);
 					detailsIco.scaleY = domainIco.scaleX;
 					
@@ -370,6 +370,7 @@ package components {
 					statusGroup.addChild(lariSimGroup);
 					
 					lariSymbolLabel = StaticGUI._addLabel(lariSimGroup, 's', lariStyle);
+					
 					//var lariImg:Image = new Image(AssetsLoader._asset.getTexture("lari_simb.png"));
 					/*lariImg.color = 0xff6363;
 					lariImg.textureSmoothing = TextureSmoothing.TRILINEAR;

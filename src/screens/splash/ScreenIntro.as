@@ -9,15 +9,12 @@ package screens.splash {
 	import feathers.layout.AnchorLayoutData;
 	import feathers.layout.RelativePosition;
 	import feathers.skins.ImageSkin;
-	import flash.geom.Rectangle;
 	import screens.splash.gallery.GalleryMain;
 	import starling.display.DisplayObject;
 	import starling.display.Image;
 	import starling.display.Quad;
-	import starling.display.Sprite;
 	import starling.events.Event;
 	import starling.text.TextFormat;
-	import starling.textures.TextureSmoothing;
 	
 	public class ScreenIntro extends LayoutGroup {
 		
@@ -80,7 +77,7 @@ package screens.splash {
 				var dot:Image = new Image(AssetsLoader._asset.getTexture("paging_dot_default.png"));
 				dot.width = Settings._getIntByDPI(11);
 				dot.scaleY = dot.scaleX;
-				dot.textureSmoothing = TextureSmoothing.TRILINEAR;
+				//dot.textureSmoothing = TextureSmoothing.TRILINEAR;
 				return dot;
 			};
 			 
@@ -88,7 +85,7 @@ package screens.splash {
 				var dot:Image = new Image(AssetsLoader._asset.getTexture("paging_dot_selected.png"));
 				dot.width = Settings._getIntByDPI(11);
 				dot.scaleY = dot.scaleX;
-				dot.textureSmoothing = TextureSmoothing.TRILINEAR;
+				//dot.textureSmoothing = TextureSmoothing.TRILINEAR;
 				return dot;
 			};
 			
@@ -109,7 +106,7 @@ package screens.splash {
 			
 			
 			var skipBtnIco:ImageSkin = new ImageSkin(AssetsLoader._asset.getTexture("intro_skip_arrow_btn.png"));
-			skipBtnIco.textureSmoothing = TextureSmoothing.TRILINEAR;
+			//skipBtnIco.textureSmoothing = TextureSmoothing.TRILINEAR;
 			skipBtnIco.width = Settings._getIntByDPI(9);
 			skipBtnIco.scaleY = skipBtnIco.scaleX;
 			
@@ -125,10 +122,9 @@ package screens.splash {
 			
 			
 			var contBtnSkin:ImageSkin = new ImageSkin(AssetsLoader._asset.getTexture("intro_start_btn.png"));
-			contBtnSkin.scale9Grid = StaticGUI._getScale9GridRect(16, 16, contBtnSkin.width, contBtnSkin.height);
-			contBtnSkin.textureSmoothing = TextureSmoothing.TRILINEAR;
-			contBtnSkin.width = Settings._getIntByDPI(295);
-			contBtnSkin.scaleY = contBtnSkin.scaleX;
+			contBtnSkin.scale9Grid = StaticGUI._getScale9GridRect(contBtnSkin.width, contBtnSkin.height);
+			//contBtnSkin.textureSmoothing = TextureSmoothing.TRILINEAR;
+			
 		
 			
 			contBtn = StaticGUI._addBtnSkin(this, Settings._mui['intro_continue_btn'][Settings._lang], btnStyle, contBtnSkin);
@@ -141,7 +137,7 @@ package screens.splash {
 			labelLayoutData.horizontalCenter = 0;
 			labelLayoutData.bottom = Settings._getIntByDPI(400)
 			var label:Label = StaticGUI._addLabel(this, 'ამანათების ჩამოტანა ამერიკიდან,<br>ყველაზე დაბალ ფასებში', legendStyle);
-			label.width = stage.stageWidth - 60;
+			label.width = stage.stageWidth - Settings._getIntByDPI(60);
 			label.textRendererProperties.wordWrap = true;
 			label.textRendererProperties.isHTML = true;
 			label.layoutData = labelLayoutData;
@@ -150,8 +146,11 @@ package screens.splash {
 		}
 		
 		private function contHandler(e:Event):void {
-			
+
 		}
+		
+
+		
 		
 		private function galleryChange(e:Event):void {
 			
@@ -163,6 +162,8 @@ package screens.splash {
 			if (skipBtn) skipBtn.removeEventListener(Event.TRIGGERED, skipHandler);
 			if (pageIndicator) pageIndicator.removeEventListener(Event.TRIGGERED, pagingHandler);
 			if (contBtn) contBtn.removeEventListener(Event.TRIGGERED, contHandler);
+			
+			if (sh) sh.removeEventListener(Event.CHANGE, galleryChange);
 			//if (mailRegBtn) mailRegBtn.removeEventListener(Event.TRIGGERED, mailRegHandler);
 			//if (faceBRegBtn) faceBRegBtn.removeEventListener(Event.TRIGGERED, faceBdHandler);
 			

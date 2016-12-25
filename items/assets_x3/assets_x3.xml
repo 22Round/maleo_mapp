@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TextureAtlas imagePath="assets_x3.png">
+	<!--
+	Created with ShoeBox
+	http://renderhjs.net/shoebox/
+	-->
+	<SubTexture name="drawer_fill_balance_btn.png"	x="605"	y="405"	width="264"	height="68" frameX="-0" frameY="-0" frameWidth="264" frameHeight="68"/>
+	<SubTexture name="intro_start_btn.png"	x="576"	y="797"	width="295"	height="80" frameX="-0" frameY="-0" frameWidth="295" frameHeight="80"/>
+	<SubTexture name="item_label_red.png"	x="606"	y="361"	width="145"	height="33" frameX="-0" frameY="-0" frameWidth="145" frameHeight="33"/>
+	<SubTexture name="item_label_yellow.png"	x="609"	y="177"	width="140"	height="33" frameX="-0" frameY="-0" frameWidth="140" frameHeight="33"/>
+	<SubTexture name="login_facebook_btn.png"	x="0"	y="723"	width="575"	height="80" frameX="-0" frameY="-0" frameWidth="575" frameHeight="80"/>
+	<SubTexture name="login_field_border.png"	x="0"	y="804"	width="575"	height="80" frameX="-0" frameY="-0" frameWidth="575" frameHeight="80"/>
+	<SubTexture name="login_mail_btn.png"	x="0"	y="561"	width="575"	height="80" frameX="-0" frameY="-0" frameWidth="575" frameHeight="80"/>
+	<SubTexture name="post_items_bg.png"	x="0"	y="405"	width="604"	height="155" frameX="-0" frameY="-0" frameWidth="604" frameHeight="155"/>
+	<SubTexture name="posta_declare_field_default.png"	x="0"	y="324"	width="605"	height="80" frameX="-0" frameY="-0" frameWidth="605" frameHeight="80"/>
+	<SubTexture name="posta_declare_field_disabled.png"	x="0"	y="243"	width="605"	height="80" frameX="-0" frameY="-0" frameWidth="605" frameHeight="80"/>
+	<SubTexture name="posta_declare_menuitem_1_default_btn.png"	x="576"	y="679"	width="304"	height="58" frameX="-0" frameY="-0" frameWidth="304" frameHeight="58"/>
+	<SubTexture name="posta_declare_menuitem_1_disabled_btn.png"	x="576"	y="620"	width="304"	height="58" frameX="-0" frameY="-0" frameWidth="304" frameHeight="58"/>
+	<SubTexture name="posta_declare_menuitem_1_selected_btn.png"	x="576"	y="561"	width="304"	height="58" frameX="-0" frameY="-0" frameWidth="304" frameHeight="58"/>
+	<SubTexture name="posta_declare_menuitem_1_selected_disabled_btn.png"	x="305"	y="944"	width="304"	height="58" frameX="-0" frameY="-0" frameWidth="304" frameHeight="58"/>
+	<SubTexture name="posta_declare_menuitem_2_default_btn.png"	x="305"	y="885"	width="304"	height="58" frameX="-0" frameY="-0" frameWidth="304" frameHeight="58"/>
+	<SubTexture name="posta_declare_menuitem_2_disabled_btn.png"	x="576"	y="738"	width="303"	height="58" frameX="-0" frameY="-0" frameWidth="303" frameHeight="58"/>
+	<SubTexture name="posta_declare_menuitem_2_selected_btn.png"	x="0"	y="885"	width="304"	height="58" frameX="-0" frameY="-0" frameWidth="304" frameHeight="58"/>
+	<SubTexture name="posta_declare_menuitem_2_selected_disabled_btn.png"	x="0"	y="944"	width="304"	height="58" frameX="-0" frameY="-0" frameWidth="304" frameHeight="58"/>
+	<SubTexture name="posta_item_pay_btn.png"	x="0"	y="0"	width="608"	height="80" frameX="-0" frameY="-0" frameWidth="608" frameHeight="80"/>
+	<SubTexture name="posta_item_submit_btn_disabled.png"	x="0"	y="81"	width="608"	height="80" frameX="-0" frameY="-0" frameWidth="608" frameHeight="80"/>
+	<SubTexture name="posta_item_submit_btn_normal.png"	x="0"	y="162"	width="608"	height="80" frameX="-0" frameY="-0" frameWidth="608" frameHeight="80"/>
+	<SubTexture name="posta_mails_menu_default_center.png"	x="609"	y="59"	width="201"	height="58" frameX="-0" frameY="-0" frameWidth="201" frameHeight="58"/>
+	<SubTexture name="posta_mails_menu_default_left.png"	x="605"	y="474"	width="203"	height="58" frameX="-0" frameY="-0" frameWidth="203" frameHeight="58"/>
+	<SubTexture name="posta_mails_menu_default_right.png"	x="609"	y="0"	width="203"	height="58" frameX="-0" frameY="-0" frameWidth="203" frameHeight="58"/>
+	<SubTexture name="posta_mails_menu_selected_center.png"	x="609"	y="118"	width="201"	height="58" frameX="-0" frameY="-0" frameWidth="201" frameHeight="58"/>
+	<SubTexture name="posta_mails_menu_selected_left.png"	x="606"	y="243"	width="203"	height="58" frameX="-0" frameY="-0" frameWidth="203" frameHeight="58"/>
+	<SubTexture name="posta_mails_menu_selected_right.png"	x="606"	y="302"	width="203"	height="58" frameX="-0" frameY="-0" frameWidth="203" frameHeight="58"/>
+	<SubTexture name="register_btn.png"	x="0"	y="642"	width="575"	height="80" frameX="-0" frameY="-0" frameWidth="575" frameHeight="80"/>
+</TextureAtlas>

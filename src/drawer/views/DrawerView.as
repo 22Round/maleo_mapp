@@ -147,7 +147,7 @@ package drawer.views {
 			
 			//titleLabel = StaticGUI._addLabel(lariSimGroup, 's', lariStyle);
 			var lariImg:Image = new Image(AssetsLoader._asset.getTexture("lari_simb.png"));
-			lariImg.textureSmoothing = TextureSmoothing.TRILINEAR;
+			//lariImg.textureSmoothing = TextureSmoothing.TRILINEAR;
 			lariImg.width = Settings._getIntByDPI(22);
 			lariImg.scaleY = lariImg.scaleX;
 			lariSimGroup.addChild(lariImg);

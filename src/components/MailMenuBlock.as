@@ -75,7 +75,7 @@ package components {
 				
 				var tabSkin:ImageSkin = new ImageSkin(AssetsLoader._asset.getTexture("posta_mails_menu_default_left.png"));
 				tabSkin.selectedTexture = AssetsLoader._asset.getTexture("posta_mails_menu_selected_left.png");
-				tabSkin.scale9Grid = StaticGUI._getScale9GridRect(16, 16, tabSkin.width, tabSkin.height);
+				tabSkin.scale9Grid = StaticGUI._getScale9GridRect(tabSkin.width, tabSkin.height);
 				var tab:ToggleButton = new ToggleButton();
 				
 				tab.labelFactory = function():ITextRenderer {
@@ -99,7 +99,7 @@ package components {
 				
 				var tabSkin:ImageSkin = new ImageSkin(AssetsLoader._asset.getTexture("posta_mails_menu_default_center.png"));
 				tabSkin.selectedTexture = AssetsLoader._asset.getTexture("posta_mails_menu_selected_center.png");
-				tabSkin.scale9Grid = StaticGUI._getScale9GridRect(16, 16, tabSkin.width, tabSkin.height);
+				tabSkin.scale9Grid = StaticGUI._getScale9GridRect(tabSkin.width, tabSkin.height);
 				var tab:ToggleButton = new ToggleButton();
 				
 				tab.labelFactory = function():ITextRenderer {
@@ -122,7 +122,7 @@ package components {
 				
 				var tabSkin:ImageSkin = new ImageSkin(AssetsLoader._asset.getTexture("posta_mails_menu_default_right.png"));
 				tabSkin.selectedTexture = AssetsLoader._asset.getTexture("posta_mails_menu_selected_right.png");
-				tabSkin.scale9Grid = StaticGUI._getScale9GridRect(16, 16, tabSkin.width, tabSkin.height);
+				tabSkin.scale9Grid = StaticGUI._getScale9GridRect(tabSkin.width, tabSkin.height);
 				var tab:ToggleButton = new ToggleButton();
 				
 				tab.labelFactory = function():ITextRenderer {

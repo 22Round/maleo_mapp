@@ -22,12 +22,12 @@ package {
 	
 	import starling.core.Starling;
 	
-	[SWF(width = "640", height = "960", frameRate = "60", backgroundColor = "#ffffff")]
+	[SWF(width = "320", height = "480", frameRate = "60", backgroundColor = "#ffffff")]
 	
 	public class AppPreloader extends Sprite {
-		//DeviceCapabilities.dpi = 163;
-		//DeviceCapabilities.screenPixelWidth = 480;
-		//DeviceCapabilities.screenPixelHeight = 800;
+		/*DeviceCapabilities.dpi = 326;
+		DeviceCapabilities.screenPixelWidth = 640;
+		DeviceCapabilities.screenPixelHeight = 1136;*/
 		
 		
 		public function AppPreloader() {
@@ -141,7 +141,7 @@ package {
 			
 			if (mui && mui._loaded && fonts && fonts._loaded) {
 				
-				assets = new AssetsLoader;
+				assets = new AssetsLoader(Starling.current.contentScaleFactor);
 			}
 		}
 		

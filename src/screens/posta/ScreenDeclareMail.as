@@ -11,6 +11,7 @@ package screens.posta {
 	import feathers.controls.ButtonState;
 	import feathers.controls.LayoutGroup;
 	import feathers.controls.ScrollBarDisplayMode;
+	import feathers.controls.ScrollPolicy;
 	import feathers.controls.ScrollScreen;
 	import feathers.layout.HorizontalAlign;
 	import feathers.layout.VerticalAlign;
@@ -55,6 +56,9 @@ package screens.posta {
 			super.initialize();
 			
 			
+			this.clipContent = false;
+			this.horizontalScrollPolicy = ScrollPolicy.OFF;
+			
 			mui = Settings._mui;
 			lang = Settings._lang;
 			
@@ -83,26 +87,40 @@ package screens.posta {
 			fillBtnStyle.size = Settings._getIntByDPI(20);
 			fillBtnStyle.color = 0x798188;
 			
-
 			trackingInput = new InputWithTitleBlock(mui['mails_declare_trackingcode'][lang], '9361289681090039432375');
+			trackingInput.width = Settings._getIntByDPI(605);
+			trackingInput.scaleY = trackingInput.scaleX;
 			addChild(trackingInput);
 			
+			
 			sender = new MailSenderBlock(mui['mails_declare_sender'][lang], mui['mails_declare_sender_example'][lang]);
+			sender.width = Settings._getIntByDPI(605);
+			sender.scaleY = sender.scaleX;
 			addChild(sender);
 			
 			product = new MailPickerItemBlock(mui['mails_declare_productname'][lang], mui['mails_declare_product_choose'][lang]);
+			product.width = Settings._getIntByDPI(605);
+			product.scaleY = product.scaleX;
 			addChild(product);
 			
 			mailPrice = new InputWithTitleBlock(mui['mails_declare_priseusd'][lang], '');
+			mailPrice.width = Settings._getIntByDPI(605);
+			mailPrice.scaleY = mailPrice.scaleX;
 			addChild(mailPrice);
 			
 			checkPac = new MailRepacBlock(mui['mails_declare_repack'][lang]);
+			checkPac.width = Settings._getIntByDPI(605);
+			checkPac.scaleY = checkPac.scaleX;
 			addChild(checkPac);
 			
 			address = new MailPickerItemBlock(mui['mails_declare_toaddress'][lang], 'თბილისი, ზუბალაშვილების #50');
+			address.width = Settings._getIntByDPI(605);
+			address.scaleY = address.scaleX;
 			addChild(address);
 			
 			comment = new InputWithTitleBlock(mui['mails_declare_comment'][lang], '');
+			comment.width = Settings._getIntByDPI(605);
+			comment.scaleY = comment.scaleX;
 			addChild(comment);
 			
 			buttonsGroup = new LayoutGroup();
@@ -115,7 +133,7 @@ package screens.posta {
 			
 			submitBtnSkin = new ImageSkin(AssetsLoader._asset.getTexture("posta_item_submit_btn_normal.png"));
 			submitBtnSkin.setTextureForState(ButtonState.DISABLED, AssetsLoader._asset.getTexture("posta_item_submit_btn_disabled.png"));
-			submitBtnSkin.scale9Grid = new Rectangle(40, 40, 120, 120);
+			submitBtnSkin.scale9Grid = StaticGUI._getScale9GridRect(submitBtnSkin.width, submitBtnSkin.height);
 			
 			submitBtn = StaticGUI._addBtnSkin(buttonsGroup, mui['mails_declare_submit'][lang], payBtnStyle, submitBtnSkin);
 			submitBtn.disabledFontStyles = payBtnDisabledStyle;

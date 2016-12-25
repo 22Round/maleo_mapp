@@ -33,10 +33,6 @@ package screens.splash {
 		private var btnMailSkin:ImageSkin;
 		private var btnFaceBSkin:ImageSkin;
 		private var btnRegSkin:ImageSkin;
-		private var btnFaceBIcom:Texture;
-		
-		private var bgQuad:Quad;
-		private var bgSkin:Image;
 		
 		private var mailRegBtn:Button;
 		private var faceBRegBtn:Button;
@@ -44,6 +40,9 @@ package screens.splash {
 		
 		private var group:LayoutGroup;
 		private var groupLayout:VerticalLayout;
+		
+		private var faceIcoTexture:Texture;
+		private	var faceIcoImage:Image;
 		
 		
 		public function ScreenLoginCase() {
@@ -59,7 +58,8 @@ package screens.splash {
 			var layout:VerticalLayout = new VerticalLayout();
 			layout.horizontalAlign = HorizontalAlign.CENTER;
 			layout.verticalAlign = VerticalAlign.MIDDLE;
-			layout.gap = Settings._getIntByDPI(50);
+			layout.gap = Settings._getIntByDPI(40);
+			layout.paddingTop = Settings._getIntByDPI(100);
 			this.layout = layout;
 			
 			btnStyle1 = new TextFormat;
@@ -78,13 +78,13 @@ package screens.splash {
 			labelStyle.color = 0x575a5b;
 			
 			btnMailSkin = new ImageSkin(AssetsLoader._asset.getTexture("login_mail_btn.png"));
-			btnMailSkin.scale9Grid = StaticGUI._getScale9GridRect(16, 16, btnMailSkin.width, btnMailSkin.height);
+			btnMailSkin.scale9Grid = StaticGUI._getScale9GridRect(btnMailSkin.width, btnMailSkin.height);
 			
 			btnFaceBSkin = new ImageSkin(AssetsLoader._asset.getTexture("login_facebook_btn.png"));
-			btnFaceBSkin.scale9Grid = StaticGUI._getScale9GridRect(16, 16, btnFaceBSkin.width, btnFaceBSkin.height);
+			btnFaceBSkin.scale9Grid = StaticGUI._getScale9GridRect(btnFaceBSkin.width, btnFaceBSkin.height);
 			
 			btnRegSkin = new ImageSkin(AssetsLoader._asset.getTexture("register_btn.png"));
-			btnRegSkin.scale9Grid = StaticGUI._getScale9GridRect(16, 16, btnRegSkin.width, btnRegSkin.height);
+			btnRegSkin.scale9Grid = StaticGUI._getScale9GridRect(btnRegSkin.width, btnRegSkin.height);
 			
 			
 			var label:Label = StaticGUI._addLabel(this, Settings._mui['logincase_enter_lbl'][Settings._lang], labelStyle);
@@ -98,10 +98,14 @@ package screens.splash {
 			mailRegBtn = StaticGUI._addBtnSkin(group, Settings._mui['logincase_login_mail_btn'][Settings._lang], btnStyle1, btnMailSkin);
 			mailRegBtn.addEventListener(Event.TRIGGERED, mailRegHandler);
 			
+			faceIcoTexture = AssetsLoader._asset.getTexture("facebook_btn_ico.png");
+			faceIcoImage = new Image(faceIcoTexture);
+			faceIcoImage.width = Settings._getIntByDPI(42);
+			faceIcoImage.scaleY = faceIcoImage.scaleX;
 			
 			faceBRegBtn = StaticGUI._addBtnSkin(group,  Settings._mui['logincase_login_facebook_btn'][Settings._lang], btnStyle1, btnFaceBSkin);
-			faceBRegBtn.defaultIcon = new Image(AssetsLoader._asset.getTexture("facebook_btn_ico.png"));
-			faceBRegBtn.iconOffsetX = -15;
+			faceBRegBtn.defaultIcon = faceIcoImage;
+			faceBRegBtn.iconOffsetX = Settings._getIntByDPI( -15);
 			faceBRegBtn.addEventListener(Event.TRIGGERED, faceBdHandler);
 			
 			
@@ -124,19 +128,35 @@ package screens.splash {
 			StaticGUI._safeRemoveChildren(group, true);
 			//StaticGUI._safeRemoveChildren(this, true);
 			
+			
+			btnMailSkin.dispose();
+			btnFaceBSkin.dispose();
+			btnRegSkin.dispose();
+
+			
+			faceIcoTexture.dispose();
+			faceIcoImage.dispose();
+			
+			faceIcoTexture = null;
+			faceIcoImage = null;
+			
+			btnMailSkin = null;
+			btnFaceBSkin = null;
+			btnRegSkin = null;
+			
 			super.dispose();
 		}
 		
 		protected function mailRegHandler(event:Event):void {
-			this.dispatchEventWith(Event.COMPLETE);
+			this.dispatchEventWith(AppEvent.COMPLETED);
 		}
 		
 		protected function faceBdHandler(event:Event):void {
-			this.dispatchEventWith(Event.COMPLETE);
+			this.dispatchEventWith(AppEvent.COMPLETED);
 		}
 		
 		protected function registerHandler(event:Event):void {
-			this.dispatchEventWith(Event.COMPLETE);
+			this.dispatchEventWith(AppEvent.LOGIN_NATIVE);
 		}
 	}
 }

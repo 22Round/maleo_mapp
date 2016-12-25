@@ -167,7 +167,7 @@ package components {
 			
 			inputSkin = new ImageSkin(AssetsLoader._asset.getTexture("posta_declare_field_default.png"));
 			inputSkin.disabledTexture = AssetsLoader._asset.getTexture("posta_declare_field_disabled.png")
-			inputSkin.scale9Grid = StaticGUI._getScale9GridRect(16, 16, inputSkin.width, inputSkin.height);
+			inputSkin.scale9Grid = StaticGUI._getScale9GridRect(inputSkin.width, inputSkin.height);
 			
 			input = StaticGUI._addAutoComplete(this, inputPromptStr, inputStyle, inputPromptStyle);
 			input.backgroundSkin = inputSkin;

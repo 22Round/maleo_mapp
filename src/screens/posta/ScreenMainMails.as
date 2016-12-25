@@ -16,6 +16,7 @@ package screens.posta {
 	import feathers.layout.VerticalLayout;
 	import feathers.layout.VerticalLayoutData;
 	import feathers.skins.ImageSkin;
+	import feathers.controls.ScrollPolicy;
 	import flash.geom.Rectangle;
 	import starling.display.Image;
 	import starling.display.Quad;
@@ -47,6 +48,10 @@ package screens.posta {
 		override protected function initialize():void {
 			
 			super.initialize();
+			
+			
+			this.clipContent = false;
+			this.horizontalScrollPolicy = ScrollPolicy.OFF;
 			
 			var layout:VerticalLayout = new VerticalLayout();
 			layout.horizontalAlign = HorizontalAlign.CENTER;
@@ -95,6 +100,10 @@ package screens.posta {
 			recivedGroup.addChild(item);
 			item = new MailBlock(MailBlock.UNKNOWN_MAIL);
 			recivedGroup.addChild(item);
+			item = new MailBlock(MailBlock.UNKNOWN_MAIL);
+			recivedGroup.addChild(item);
+			item = new MailBlock(MailBlock.UNKNOWN_MAIL);
+			recivedGroup.addChild(item);
 			
 			sendGroup = new LayoutGroup();
 			sendGroupLayout = new VerticalLayout();
@@ -107,7 +116,17 @@ package screens.posta {
 			title = StaticGUI._addLabel(sendGroup, Settings._mui['mails_title_estarrival'][Settings._lang]+' - 2016, 23 ოქტომბერი', subTitleStyle);
 			item = new MailBlock(MailBlock.ENTER_GOODS_MAIL);
 			sendGroup.addChild(item);
+			item = new MailBlock(MailBlock.ENTER_GOODS_MAIL);
+			sendGroup.addChild(item);
+			item = new MailBlock(MailBlock.ENTER_GOODS_MAIL);
+			sendGroup.addChild(item);
 			title = StaticGUI._addLabel(sendGroup, Settings._mui['mails_title_estarrival'][Settings._lang]+' - 2016, 3 ნოემბერი', subTitleStyle);
+			item = new MailBlock(MailBlock.UNKNOWN_MAIL);
+			sendGroup.addChild(item);
+			item = new MailBlock(MailBlock.UNKNOWN_MAIL);
+			sendGroup.addChild(item);
+			item = new MailBlock(MailBlock.UNKNOWN_MAIL);
+			sendGroup.addChild(item);
 			item = new MailBlock(MailBlock.UNKNOWN_MAIL);
 			sendGroup.addChild(item);
 			

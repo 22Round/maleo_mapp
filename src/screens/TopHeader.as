@@ -133,7 +133,7 @@ package screens {
 			for (i = 0; i < menuItems.length; i++ ) {
 				if (setIco  == menuItems[i].name) {
 					skin = new ImageSkin(AssetsLoader._asset.getTexture(menuItems[i].texture));
-					skin.textureSmoothing = TextureSmoothing.TRILINEAR;
+					//skin.textureSmoothing = TextureSmoothing.TRILINEAR;
 					btn = new Button();
 					btn.width = Settings._getIntByDPI(menuItems[i].widthDPI);
 					btn.height = Settings._getIntByDPI(menuItems[i].heightDPI);

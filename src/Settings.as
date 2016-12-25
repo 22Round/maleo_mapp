@@ -13,6 +13,7 @@
 	import flash.text.TextFieldAutoSize;
 	import screens.Splash;
 	import screens.TopFooter;
+	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	
 	/*import fl.text.TLFTextField;
@@ -75,7 +76,7 @@
 		
 		
 		public static function _getIntByDPI(exInt:int = 0):int {
-			return int(exInt * DeviceInfo.dpiScaleMultiplier);
+			return int(exInt / Starling.current.contentScaleFactor);
 		}
 		
 		public static function _moveByDPI(obj:DisplayObject,xPos:Number = undefined, yPos:Number=undefined):DisplayObject {

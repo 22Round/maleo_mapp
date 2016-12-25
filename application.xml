@@ -1,66 +1,78 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<!--
-	 Usage:
-
-	 To localize the description, use the following format for the description element.
-	 <description>
-	 <text xml:lang="en">English App description goes here</text>
-	 <text xml:lang="fr">French App description goes here</text>
-	 <text xml:lang="ja">Japanese App description goes here</text>
-	 </description>
-
-	 To localize the name, use the following format for the name element.
-	 <name>
-	 <text xml:lang="en">English App name goes here</text>
-	 <text xml:lang="fr">French App name goes here</text>
-	 <text xml:lang="ja">Japanese App name goes here</text>
-	 </name>
--->
+﻿<?xml version="1.0" encoding="utf-8"?>
 <application xmlns="http://ns.adobe.com/air/application/23.0">
-  <id>com.company.game</id>
-  <versionNumber>0.92.4</versionNumber>
-  <versionLabel>0.92.4a</versionLabel>
-  <filename>game</filename>
+  <id>ge.gpost.calculator</id>
+  <versionNumber>0.1</versionNumber>
+  <supportedProfiles>mobileDevice</supportedProfiles>
+  <filename>TestCompile</filename>
   <name>game</name>
-  <initialWindow>
-    <content>game.swf</content>
-    <systemChrome>standard</systemChrome>
-    <transparent>false</transparent>
-    <visible>true</visible>
-    <fullScreen>true</fullScreen>
-    <aspectRatio>portrait</aspectRatio>
-    <renderMode>direct</renderMode>
-    <autoOrients>false</autoOrients>
-  </initialWindow>
-  <icon>
-    <image36x36>icons/ICON_36.png</image36x36>
-	<image48x48>icons/ICON_48.png</image48x48>
-	<image72x72>icons/ICON_72.png</image72x72>
-	<image96x96>icons/ICON_96.png</image96x96>
-	<image144x144>icons/ICON_144.png</image144x144>
-  </icon>
-  <customUpdateUI>false</customUpdateUI>
-  <allowBrowserInvocation>false</allowBrowserInvocation>
   <android>
     <manifestAdditions><![CDATA[<manifest android:installLocation="auto">
-	<uses-sdk android:minSdkVersion="9" android:targetSdkVersion="19" />
+	<uses-sdk android:minSdkVersion="8" />
 	<uses-permission android:name="android.permission.INTERNET" />
-	<uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
-	<uses-permission android:name="android.permission.WAKE_LOCK" />
-	<uses-permission android:name="android.permission.GET_ACCOUNTS" />
-	<application android:hardwareAccelerated="true" android:allowBackup="true"></application>
+	<uses-feature android:required="true" android:name="android.hardware.touchscreen.multitouch" />
 </manifest>]]></manifestAdditions>
-    <colorDepth>16bit</colorDepth>
   </android>
-  <supportedProfiles>mobileDevice</supportedProfiles>
   <iPhone>
-    <InfoAdditions><![CDATA[<key>UIDeviceFamily</key>
+    <InfoAdditions><![CDATA[<key>UIStatusBarStyle</key>
+<string>UIStatusBarStyleBlackOpaque</string>
+<key>UIRequiresPersistentWiFi</key>
+<string>NO</string>
+<key>UIApplicationExitsOnSuspend</key>
+<true />
+<key>UIDeviceFamily</key>
 <array>
 	<string>1</string>
-	<string>2</string>
-</array>
-<key>MinimumOSVersion</key>
-<string>6.0</string>]]></InfoAdditions>
+</array>]]></InfoAdditions>
     <requestedDisplayResolution>high</requestedDisplayResolution>
   </iPhone>
+  <initialWindow>
+    <title>game</title>
+    <content>game.swf</content>
+    <visible>true</visible>
+    <fullScreen>true</fullScreen>
+    <!--<autoOrients>false</autoOrients>-->
+    <!--<aspectRatio>landscape</aspectRatio>-->
+    <renderMode>direct</renderMode>
+    <depthAndStencil>true</depthAndStencil>
+    <!-- required for 3D -->
+    <systemChrome>standard</systemChrome>
+  </initialWindow>
+  <icon>
+	<image29x29>icons/icon29.png</image29x29>
+    <image48x48>icons/icon48.png</image48x48>
+	<image50x50>icons/icon50.png</image50x50>
+    <image57x57>icons/icon57.png</image57x57>
+	<image58x58>icons/icon58.png</image58x58>  
+    <image72x72>icons/icon72.png</image72x72>
+    <image76x76>icons/icon76.png</image76x76>
+	<image87x87>icons/icon87.png</image87x87>  
+    <image96x96>icons/icon96.png</image96x96>
+	<image100x100>icons/icon100.png</image100x100>
+    <image114x114>icons/icon114.png</image114x114>
+    <image120x120>icons/icon120.png</image120x120>
+    <image128x128>icons/icon128.png</image128x128>
+    <image144x144>icons/icon144.png</image144x144>
+    <image152x152>icons/icon152.png</image152x152>
+    <image180x180>icons/icon180.png</image180x180>
+    <image192x192>icons/icon192.png</image192x192>
+    <image512x512>icons/icon512.png</image512x512>
+  </icon>
+  <!-- 
+	AIR options:
+	http://livedocs.adobe.com/flex/3/html/File_formats_1.html#1043413
+	
+	AIR mobile options:
+	http://help.adobe.com/en_US/air/build/WSfffb011ac560372f-5d0f4f25128cc9cd0cb-7ffe.html
+	
+	iOS icons guidelines:
+	http://developer.apple.com/library/ios/#documentation/userexperience/conceptual/mobilehig/IconsImages/IconsImages.html
+	
+	Android manifest documentation:
+	http://developer.android.com/guide/topics/manifest/manifest-intro.html
+	-->
+	
+	
+  <extensions>
+	<!--<extensionID>pl.mateuszmackowiak.nativeANE.NativeDialogs</extensionID>-->
+  </extensions>
 </application>

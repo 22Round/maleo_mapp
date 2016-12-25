@@ -66,7 +66,7 @@ package screens {
 			logoImg.width = Settings._getIntByDPI(280);
 			logoImg.height = Settings._getIntByDPI(55);
 			logoImg.x = Math.round((stage.stageWidth - logoImg.width) / 2);
-			logoImg.y = Settings._getIntByDPI(211);
+			logoImg.y = Settings._getIntByDPI(209);
 			
 			_navigator = new StackScreenNavigator();
 			_navigator.pushTransition = Slide.createSlideLeftTransition();
@@ -77,13 +77,15 @@ package screens {
 			item.setScreenIDForPushEvent(AppEvent.COMPLETED, ScreenID.LANG_SELECT);
 			_navigator.addScreen(ScreenID.INTRO, item);
 			
+			
 			item = new StackScreenNavigatorItem(ScreenLang);
-			item.setScreenIDForPushEvent(AppEvent.COMPLETED, ScreenID.LOGIN);
+			item.setScreenIDForPushEvent(AppEvent.COMPLETED, ScreenID.LOGIN_CASE);
 			item.addPopEvent(AppEvent.CANCEL);
 			_navigator.addScreen(ScreenID.LANG_SELECT, item);
 			
 			item = new StackScreenNavigatorItem(ScreenLoginCase);
 			item.setScreenIDForPushEvent(AppEvent.COMPLETED, ScreenID.ALL_MAILS);
+			item.setScreenIDForPushEvent(AppEvent.LOGIN_NATIVE, ScreenID.LOGIN);
 			item.addPopToRootEvent(AppEvent.CLOSE);
 			_navigator.addScreen(ScreenID.LOGIN_CASE, item);
 			
@@ -163,7 +165,7 @@ package screens {
 				shadowQade = null;
 			}
 			shadowQade = new Quad(50, stage.stageHeight, bgColor);
-			shadowQade.filter = new DropShadowFilter(4, Math.PI);
+			//shadowQade.filter = new DropShadowFilter(4, Math.PI);
 			addChildAt(shadowQade, 0);
 		
 		}

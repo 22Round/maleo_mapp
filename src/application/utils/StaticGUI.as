@@ -13,6 +13,7 @@ package application.utils {
 	import flash.geom.*;
 	import flash.text.AntiAliasType;
 	import flash.text.TextFormatAlign;
+	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
 	import starling.display.Image;
@@ -80,10 +81,12 @@ package application.utils {
 			return true;
 		}
 		
-		public static function _getScale9GridRect(xPos:int = 20 ,yPos:int = 20, sourceWidth:int = 100, sourceHeight:int = 100):Rectangle {
-			var rect:Rectangle = new Rectangle(xPos, yPos, sourceWidth - (xPos * 2), sourceHeight - (yPos * 2));
+		public static function _getScale9GridRect(sourceWidth:int = 100, sourceHeight:int = 100):Rectangle {
 			
-			return rect;
+			var scale:uint = Starling.current.contentScaleFactor;
+			var rect:Rectangle = new Rectangle(4*scale, 4*scale, sourceWidth - (4*scale * 2), sourceHeight - (4*scale * 2));
+			
+			return null;
 		}
 		   
 		   
@@ -123,6 +126,7 @@ package application.utils {
 					return renderer;
 				}
 				btn.defaultSkin = bSkin;
+				
 				cont.addChild(btn);
 				btn.validate();
 				return btn;

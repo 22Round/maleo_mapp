@@ -87,7 +87,7 @@ package components {
 			
 			inputSkin = new ImageSkin(AssetsLoader._asset.getTexture("posta_declare_field_default.png"));
 			inputSkin.disabledTexture = AssetsLoader._asset.getTexture("posta_declare_field_disabled.png")
-			inputSkin.scale9Grid = StaticGUI._getScale9GridRect(16, 16, inputSkin.width, inputSkin.height);
+			inputSkin.scale9Grid = StaticGUI._getScale9GridRect(inputSkin.width, inputSkin.height);
 			
 			picker = new PickerList();
 			picker.styleProvider = null;
@@ -97,7 +97,7 @@ package components {
 				btn.styleProvider = null;
 				btn.horizontalAlign = HorizontalAlign.CENTER;
 				var icoSkin:ImageSkin = new ImageSkin(AssetsLoader._asset.getTexture("posta_pickerfield_arrow.png"));
-				icoSkin.textureSmoothing = TextureSmoothing.TRILINEAR;
+				//icoSkin.textureSmoothing = TextureSmoothing.TRILINEAR;
 				icoSkin.width = Settings._getIntByDPI(16);
 				icoSkin.scaleY = icoSkin.scaleX;
 				btn.defaultIcon = icoSkin;
@@ -116,7 +116,7 @@ package components {
 			items.fixed = true;
 			
 			
-			picker.prompt = "Select an Item";
+			picker.prompt = inputPromptStr;
 			picker.dataProvider = new ListCollection(items);
 			//normally, the first item is selected, but let's show the prompt
 			picker.selectedIndex = -1;
