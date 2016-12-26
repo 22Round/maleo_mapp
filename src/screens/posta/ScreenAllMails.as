@@ -55,13 +55,6 @@ package screens.posta {
 			
 			mailsGroup = new LayoutGroup();
 			
-			var menuArr:Array = String(Settings._mui['mails_allmails_menu'][Settings._lang]).split(',');
-			menu = new MailMenuBlock(menuArr);
-			menu.addEventListener(AppEvent.CHANGE, menuChangeHandler);
-			addChild(menu);
-			
-			
-			
 			mailsGroupLayout = new VerticalLayout();
 			mailsGroupLayout.horizontalAlign = HorizontalAlign.CENTER;
 			mailsGroupLayout.verticalAlign = VerticalAlign.TOP;
@@ -69,6 +62,10 @@ package screens.posta {
 			mailsGroup.layout = mailsGroupLayout;
 			addChild(mailsGroup);
 			
+			var menuArr:Array = String(Settings._mui['mails_allmails_menu'][Settings._lang]).split(',');
+			menu = new MailMenuBlock(menuArr);
+			menu.addEventListener(AppEvent.CHANGE, menuChangeHandler);
+			addChildAt(menu, 0);
 			
 			
 			this.width = stage.stageWidth;
@@ -78,32 +75,43 @@ package screens.posta {
 		}
 		
 		private function menuChangeHandler(e:Event):void {
-			trace(e.data.selectedIndex);
+			
 			if (mailsGroup) mailsGroup.removeChildren();
 			
 			switch(e.data.selectedIndex) {
 				case 0:
-					item = new MailBlock(MailBlock.COMPLETED_MAIL);
+					item = new MailBlock;
 					mailsGroup.addChild(item);
-					item = new MailBlock(MailBlock.PAY_MAIL);
+					item._addDataState(MailBlock.COMPLETED_MAIL);
+					item.validate();
+					item = new MailBlock;
 					mailsGroup.addChild(item);
-					item = new MailBlock(MailBlock.ENTER_GOODS_MAIL);
+					item._addDataState(MailBlock.PAY_MAIL);
+					item.validate();
+					item = new MailBlock;
 					mailsGroup.addChild(item);
+					item._addDataState(MailBlock.ENTER_GOODS_MAIL);
+					item.validate();
 					break;
 					
 					
 				case 1:
-					item = new MailBlock(MailBlock.COMPLETED_MAIL);
+					item = new MailBlock;
 					mailsGroup.addChild(item);
-					item = new MailBlock(MailBlock.PAY_MAIL);
+					item._addDataState(MailBlock.COMPLETED_MAIL);
+					item.validate();
+					item = new MailBlock;
 					mailsGroup.addChild(item);
+					item._addDataState(MailBlock.PAY_MAIL);
+					item.validate();
 					break;
 					
 					
 				case 2:
+					item = new MailBlock;
 					mailsGroup.addChild(item);
-					item = new MailBlock(MailBlock.PAYED_MAIL);
-					mailsGroup.addChild(item);
+					item._addDataState(MailBlock.PAY_MAIL);
+					item.validate();
 					break;
 			}
 		}

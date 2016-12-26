@@ -120,22 +120,30 @@ package screens.posta {
 			
 			title = StaticGUI._addLabel(arrivedGroup, Settings._mui['mails_title_arrived'][Settings._lang], titleStyle);
 			
-			item = new MailBlock(MailBlock.COMPLETED_MAIL);
-			arrivedGroup.addChild(item);
-			item = new MailBlock(MailBlock.PAY_MAIL);
-			arrivedGroup.addChild(item);
-			item = new MailBlock(MailBlock.PAYED_MAIL);
+			item = new MailBlock;
+			item._state = MailBlock.COMPLETED_MAIL;
 			arrivedGroup.addChild(item);
 			
-			item = new MailBlock(MailBlock.CHECK_TOPAY_MAIL);
+			item = new MailBlock;
+			item._state = MailBlock.PAY_MAIL;
+			arrivedGroup.addChild(item);
+			
+			item = new MailBlock;
+			item._state = MailBlock.PAYED_MAIL;
+			arrivedGroup.addChild(item);
+			
+			item = new MailBlock;
+			item._state = MailBlock.CHECK_TOPAY_MAIL;
 			//item._radioGroup = mailToggleGroup;
 			arrivedGroup.addChild(item);
 			
-			item = new MailBlock(MailBlock.CHECK_TOPAY_MAIL);
+			item = new MailBlock;
+			item._state = MailBlock.CHECK_TOPAY_MAIL;
 			//item._radioGroup = mailToggleGroup;
 			arrivedGroup.addChild(item);
 			
-			item = new MailBlock(MailBlock.CHECK_TOPAY_MAIL);
+			item = new MailBlock;
+			item._state = MailBlock.CHECK_TOPAY_MAIL;
 			//item._radioGroup = mailToggleGroup;
 			arrivedGroup.addChild(item);
 			

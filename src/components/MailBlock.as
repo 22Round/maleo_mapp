@@ -16,6 +16,7 @@ package components {
 	import feathers.skins.ImageSkin;
 	import flash.geom.Rectangle;
 	import screens.ScreenID;
+	import starling.core.Starling;
 	import starling.display.Image;
 	import starling.display.Quad;
 	import starling.events.Event;
@@ -38,7 +39,7 @@ package components {
 		private var bgSkin:Image;
 		
 		private var detailsBtn:Button;
-		
+		private var defaultRadioSkin:ImageSkin;
 		private var bgTexture:Texture;
 		private var domainIco:Image;
 		private var domainLabel:Label;
@@ -78,12 +79,13 @@ package components {
 		
 		
 		public var _state:String;
+		public var _inited:Boolean;
 		
 		
 		
-		public function MailBlock(st:String) {
-			
+		public function MailBlock(st:String = null) {
 			_state = st;
+		
 			super();
 			//this.title = "Screen C";
 		}
@@ -95,7 +97,7 @@ package components {
 			bgTexture = AssetsLoader._asset.getTexture("post_items_bg.png");
 			
 			bgSkin = new Image(bgTexture);
-			bgSkin.scale9Grid = new Rectangle(20, 20, bgTexture.width - 40, bgTexture.height - 40);
+			bgSkin.scale9Grid = StaticGUI._getScale9GridRect(bgTexture.width, bgTexture.height);
 			this.backgroundSkin = bgSkin;
 			
 			this.width = stage.stageWidth - Settings._getIntByDPI(34);
@@ -151,12 +153,18 @@ package components {
 			lariStyle.size = Settings._getIntByDPI(24);
 			lariStyle.color = 0xff6363;
 			
+			
+			_addDataState(_state);
+		}
+		
+		public function _addDataState(st:String = null ):void {
+			
 			switch(_state) {
 				case MailBlock.CHECK_TOPAY_MAIL:
 					
-					/*fromNameLayoutData = new AnchorLayoutData();
+					fromNameLayoutData = new AnchorLayoutData();
 					fromNameLayoutData.top = Settings._getIntByDPI(21);
-					fromNameLayoutData.left = Settings._getIntByDPI(52);*/
+					fromNameLayoutData.left = Settings._getIntByDPI(52);
 					
 					productLabelLayoutData = new AnchorLayoutData();
 					productLabelLayoutData.top = Settings._getIntByDPI(60);
@@ -166,7 +174,11 @@ package components {
 					radioLayoutData.verticalCenter = 0;
 					radioLayoutData.left = Settings._getIntByDPI(22);
 					
-					var defaultRadioSkin:ImageSkin = new ImageSkin(AssetsLoader._asset.getTexture('check_empty.png'));
+					
+					
+					
+					
+					defaultRadioSkin = new ImageSkin(AssetsLoader._asset.getTexture('check_empty.png'));
 					defaultRadioSkin.setTextureForState(ButtonState.DOWN, AssetsLoader._asset.getTexture('check_full.png'));
 					defaultRadioSkin.setTextureForState(ButtonState.DOWN_AND_SELECTED, AssetsLoader._asset.getTexture('check_full.png'));
 					defaultRadioSkin.setTextureForState(ButtonState.UP_AND_SELECTED, AssetsLoader._asset.getTexture('check_full.png'));
@@ -181,6 +193,7 @@ package components {
 					check.layoutData = radioLayoutData;
 					check.defaultSkin = defaultRadioSkin;
 					addChild(check);
+					
 				
 					break;
 					
@@ -190,11 +203,12 @@ package components {
 					productLabelLayoutData.top = Settings._getIntByDPI(60);
 					productLabelLayoutData.left = Settings._getIntByDPI(28);
 					
+					fromNameLayoutData = new AnchorLayoutData();
+					fromNameLayoutData.top = Settings._getIntByDPI(15);
+					fromNameLayoutData.left = Settings._getIntByDPI(2);
+					
 			}
-			
-			fromNameLayoutData = new AnchorLayoutData();
-			fromNameLayoutData.top = Settings._getIntByDPI(21);
-			fromNameLayoutData.left = Settings._getIntByDPI(2);
+
 			
 			domainIco = new Image(AssetsLoader._asset.getTexture("post_item_green_light.png"));
 			//domainIco.textureSmoothing = TextureSmoothing.BILINEAR;
@@ -204,9 +218,12 @@ package components {
 			fromName = StaticGUI._addBtnSkin(this, 'amazon.com', domainStyle);
 			fromName.defaultIcon = domainIco;
 			fromName.layoutData = fromNameLayoutData;
-			
+	
+		
+		
 			productLabel = StaticGUI._addLabel(this, "ტელეფონი", productStyle);
 			productLabel.layoutData = productLabelLayoutData;
+			
 			
 			switch(_state) {
 				
@@ -223,15 +240,20 @@ package components {
 					detailsBtnLayoutData.verticalCenter = 0;
 					detailsBtnLayoutData.right = Settings._getIntByDPI(28);
 					
+					
+					
+					
 					detailsIco = new Image(AssetsLoader._asset.getTexture("post_item_btn_arrow.png"));
 					//detailsIco.textureSmoothing = TextureSmoothing.BILINEAR;
 					detailsIco.width = Settings._getIntByDPI(15);
 					detailsIco.scaleY = domainIco.scaleX;
 					
+					
 					detailsBtn = StaticGUI._addBtnSkin(this, Settings._mui['mails_block_label_1'][Settings._lang], btnStyle2);
 					detailsBtn.defaultIcon = detailsIco;
 					detailsBtn.iconPosition = RelativePosition.RIGHT;
 					detailsBtn.layoutData = detailsBtnLayoutData;
+					
 					
 					break;
 				
@@ -257,10 +279,12 @@ package components {
 					detailsIco.width = Settings._getIntByDPI(15);
 					detailsIco.scaleY = domainIco.scaleX;
 					
+					
 					detailsBtn = StaticGUI._addBtnSkin(this, Settings._mui['mails_block_label_1'][Settings._lang], btnStyle2);
 					detailsBtn.defaultIcon = detailsIco;
 					detailsBtn.iconPosition = RelativePosition.RIGHT;
 					detailsBtn.layoutData = detailsBtnLayoutData;
+					
 					
 					break;
 					
@@ -285,10 +309,12 @@ package components {
 					detailsIco.width = Settings._getIntByDPI(15);
 					detailsIco.scaleY = domainIco.scaleX;
 					
+					
 					detailsBtn = StaticGUI._addBtnSkin(this, Settings._mui['mails_block_label_1'][Settings._lang], btnStyle2);
 					detailsBtn.defaultIcon = detailsIco;
 					detailsBtn.iconPosition = RelativePosition.RIGHT;
 					detailsBtn.layoutData = detailsBtnLayoutData;
+					
 					
 					break;
 					
@@ -309,6 +335,7 @@ package components {
 					statusLayoutData.verticalCenter = 0;
 					statusLayoutData.right = Settings._getIntByDPI(-75);
 					
+					
 					statusGroup = new LayoutGroup();
 					statusGroup.width = Settings._getIntByDPI(350);
 					statusGroupLayout = new FlowLayout();
@@ -319,12 +346,15 @@ package components {
 					statusGroup.layoutData = statusLayoutData;
 					addChild(statusGroup);
 					
+					
+					
 					statusImg = new Image(AssetsLoader._asset.getTexture("item_label_yellow.png"));
 					statusImg.width = Settings._getIntByDPI(145);
 					statusImg.scaleY = statusImg.scaleX;
 					//label2Group.addChild(statusImg)
 					statusLabel = StaticGUI._addLabel(statusGroup, Settings._mui['mails_block_label_2'][Settings._lang], statusStyle);
 					statusLabel.backgroundSkin = statusImg;
+					
 					
 					break;
 					
@@ -343,6 +373,7 @@ package components {
 					statusLayoutData.verticalCenter = 30;
 					statusLayoutData.right = Settings._getIntByDPI(-75);
 					
+					
 					statusGroup = new LayoutGroup();
 					statusGroup.width = Settings._getIntByDPI(350);
 					statusGroupLayout = new FlowLayout();
@@ -353,6 +384,8 @@ package components {
 					statusGroup.layoutData = statusLayoutData;
 					addChild(statusGroup);
 					
+					
+					
 					statusImg = new Image(AssetsLoader._asset.getTexture("item_label_red.png"));
 					statusImg.width = Settings._getIntByDPI(145);
 					statusImg.scaleY = statusImg.scaleX;
@@ -360,6 +393,8 @@ package components {
 					statusLabel = StaticGUI._addLabel(statusGroup, Settings._mui['mails_block_label_3'][Settings._lang], statusStyle);
 					statusLabel.backgroundSkin = statusImg;
 					amountLabel = StaticGUI._addLabel(statusGroup, '12233.54', amountStyle);
+					
+					
 					
 					
 					lariSimGroup = new LayoutGroup();
@@ -370,6 +405,7 @@ package components {
 					statusGroup.addChild(lariSimGroup);
 					
 					lariSymbolLabel = StaticGUI._addLabel(lariSimGroup, 's', lariStyle);
+					
 					
 					//var lariImg:Image = new Image(AssetsLoader._asset.getTexture("lari_simb.png"));
 					/*lariImg.color = 0xff6363;
@@ -395,6 +431,7 @@ package components {
 					statusLayoutData.verticalCenter = 30;
 					statusLayoutData.right = Settings._getIntByDPI(-75);
 					
+					
 					statusGroup = new LayoutGroup();
 					statusGroup.width = Settings._getIntByDPI(350);
 					statusGroupLayout = new FlowLayout();
@@ -405,6 +442,8 @@ package components {
 					statusGroup.layoutData = statusLayoutData;
 					addChild(statusGroup);
 					
+					
+					
 					statusImg = new Image(AssetsLoader._asset.getTexture("item_label_red.png"));
 					statusImg.width = Settings._getIntByDPI(145);
 					statusImg.scaleY = statusImg.scaleX;
@@ -412,6 +451,7 @@ package components {
 					statusLabel = StaticGUI._addLabel(statusGroup, Settings._mui['mails_block_label_3'][Settings._lang], statusStyle);
 					statusLabel.backgroundSkin = statusImg;
 					amountLabel = StaticGUI._addLabel(statusGroup, '12233.54', amountStyle);
+					
 					
 					
 					lariSimGroup = new LayoutGroup();
@@ -422,6 +462,7 @@ package components {
 					statusGroup.addChild(lariSimGroup);
 					
 					lariSymbolLabel = StaticGUI._addLabel(lariSimGroup, 's', lariStyle);
+					
 					//var lariImg:Image = new Image(AssetsLoader._asset.getTexture("lari_simb.png"));
 					/*lariImg.color = 0xff6363;
 					lariImg.textureSmoothing = TextureSmoothing.TRILINEAR;
@@ -432,15 +473,16 @@ package components {
 					break;
 			}
 			
+
+				hitQad = new Quad(50, 50);
+				hitQad.alpha = 0;
+				hitBtn = new Button;
+				//hitBtn.defaultStyleProvider = null;
+				hitBtn.defaultSkin = hitQad;
+				hitBtn.layoutData = new AnchorLayoutData(0, 0, 0, 0);
+				addChild(hitBtn);
+				hitBtn.addEventListener(Event.TRIGGERED, blockHandler);
 			
-			hitQad = new Quad(50, 50);
-			hitQad.alpha = 0;
-			hitBtn = new Button;
-			//hitBtn.defaultStyleProvider = null;
-			hitBtn.defaultSkin = hitQad;
-			hitBtn.layoutData = new AnchorLayoutData(0, 0, 0, 0);
-			addChild(hitBtn);
-			hitBtn.addEventListener(Event.TRIGGERED, blockHandler);
 			
 		}
 		
@@ -451,12 +493,12 @@ package components {
 		
 		override public function dispose():void {
 			
+			if (hitBtn) {
+				hitBtn.removeEventListener(Event.TRIGGERED, blockHandler);
+				StaticGUI._safeRemoveChildren(hitBtn, true);
+				hitQad.dispose();
+			}
 			
-			//TODO need dispose and clear all components;
-			
-			//StaticGUI._safeRemoveChildren(this, true);
-			hitBtn.removeEventListener(Event.TRIGGERED, blockHandler);
-			StaticGUI._safeRemoveChildren(hitBtn, true);
 			if(detailsBtn) StaticGUI._safeRemoveChildren(detailsBtn, true);
 			if(domainLabel) StaticGUI._safeRemoveChildren(domainLabel, true);
 			if(productLabel) StaticGUI._safeRemoveChildren(productLabel, true);
@@ -471,10 +513,11 @@ package components {
 			
 			bgSkin.dispose();
 			bgTexture.dispose();
-			hitQad.dispose();
+			
 			if (domainIco) domainIco.dispose();
 			if (detailsIco) detailsIco.dispose();
 			if (statusImg) statusImg.dispose();
+			if (defaultRadioSkin) defaultRadioSkin.dispose();	
 			
 			
 			btnStyle1 = null;
@@ -486,7 +529,7 @@ package components {
 			statusStyle = null;
 			mailLocAmountStyle = null;
 			lariStyle = null;
-			
+			defaultRadioSkin = null;
 			bgSkin = null;
 			detailsBtn = null;
 			bgTexture = null;

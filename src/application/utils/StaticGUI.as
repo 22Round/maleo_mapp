@@ -86,7 +86,7 @@ package application.utils {
 			var scale:uint = Starling.current.contentScaleFactor;
 			var rect:Rectangle = new Rectangle(4*scale, 4*scale, sourceWidth - (4*scale * 2), sourceHeight - (4*scale * 2));
 			
-			return null;
+			return rect;
 		}
 		   
 		   

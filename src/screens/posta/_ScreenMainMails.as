@@ -1,26 +1,31 @@
 package screens.posta {
 	
+	import application.AssetsLoader;
 	import application.utils.StaticGUI;
 	import components.MailBlock;
-	import components.renderers.MailBlockGroupedHeaderRenderer;
-	import components.renderers.MailBlockGroupedListRenderer;
-	import feathers.controls.GroupedList;
+	import feathers.controls.Button;
 	import feathers.controls.Label;
 	import feathers.controls.LayoutGroup;
 	import feathers.controls.ScrollBarDisplayMode;
-	import feathers.controls.ScrollPolicy;
-	import feathers.controls.renderers.DefaultGroupedListHeaderOrFooterRenderer;
-	import feathers.controls.renderers.IGroupedListHeaderRenderer;
-	import feathers.controls.renderers.IGroupedListItemRenderer;
-	import feathers.data.HierarchicalCollection;
-	import feathers.layout.AnchorLayoutData;
+	import feathers.controls.ScrollScreen;
+	import feathers.controls.text.TextBlockTextRenderer;
+	import feathers.controls.text.TextFieldTextRenderer;
+	import feathers.core.ITextRenderer;
 	import feathers.layout.HorizontalAlign;
 	import feathers.layout.VerticalAlign;
 	import feathers.layout.VerticalLayout;
-	import starling.events.Event;
+	import feathers.layout.VerticalLayoutData;
+	import feathers.skins.ImageSkin;
+	import feathers.controls.ScrollPolicy;
+	import flash.geom.Rectangle;
+	import starling.display.Image;
+	import starling.display.Quad;
 	import starling.text.TextFormat;
+	import starling.textures.Texture;
 	
-	public class ScreenMainMails extends LayoutGroup {
+	import starling.events.Event;
+	
+	public class ScreenMainMails extends ScrollScreen {
 		
 		private var titleStyle:TextFormat;
 		private var subTitleStyle:TextFormat;
@@ -44,14 +49,18 @@ package screens.posta {
 			
 			super.initialize();
 			
+			
+			this.clipContent = false;
+			this.horizontalScrollPolicy = ScrollPolicy.OFF;
+			
 			var layout:VerticalLayout = new VerticalLayout();
 			layout.horizontalAlign = HorizontalAlign.CENTER;
 			layout.verticalAlign = VerticalAlign.TOP;
-			
-			layout.paddingTop = Settings._getIntByDPI(160);
-			layout.paddingBottom = Settings._getIntByDPI(103);
+			layout.gap = 50;
+			layout.paddingTop = Settings._getIntByDPI(180);
+			layout.paddingBottom = Settings._getIntByDPI(130);
 			this.layout = layout;
-			
+			this.scrollBarDisplayMode = ScrollBarDisplayMode.NONE;
 			
 			titleStyle = new TextFormat;
 			titleStyle.font = '_bpgArialRegular';
@@ -63,83 +72,7 @@ package screens.posta {
 			subTitleStyle.size = Settings._getIntByDPI(20);
 			subTitleStyle.color = 0x798188;
 			
-			
-			var listLayout:VerticalLayout = new VerticalLayout();
-			listLayout.verticalAlign = VerticalAlign.TOP;
-			listLayout.horizontalAlign = HorizontalAlign.CENTER;
-			
-			
-			//listLayout.paddingLeft = Settings._getIntByDPI(15);
-			//listLayout.paddingRight = Settings._getIntByDPI(15);
-			
-			var list:GroupedList = new GroupedList();
-			list.horizontalScrollPolicy = ScrollPolicy.OFF;
-			list.scrollBarDisplayMode = ScrollBarDisplayMode.NONE;
-			list.clipContent = false;
-			list.width = stage.stageWidth;
-			list.backgroundSkin = null;
-			list.height = stage.stageHeight - layout.paddingTop - layout.paddingBottom;
-			this.addChild( list );
-			list.validate();
-			list.layout = listLayout;
-			
-			list.dataProvider = null;
-			list.headerRendererFactory = function ():IGroupedListHeaderRenderer {
-				var renderer:MailBlockGroupedHeaderRenderer = new MailBlockGroupedHeaderRenderer();
-				
-				
-				return renderer;
-			}
-			
-			list.itemRendererFactory = function():IGroupedListItemRenderer{
-				var renderer:MailBlockGroupedListRenderer = new MailBlockGroupedListRenderer();
-				
-				
-				renderer.padding = 5;
-				return renderer;
-			};
-			
-			var groceryList:HierarchicalCollection = new HierarchicalCollection(
-			[
-				{
-					header: { label: Settings._mui['mails_title_arrived'][Settings._lang] },
-					//footer: { label: Settings._mui['mails_title_arrived'][Settings._lang] },
-					children:
-					[
-						{ status: MailBlock.ENTER_GOODS_MAIL  },
-						{ status: MailBlock.ENTER_GOODS_MAIL  }
-					]
-				},
-				{
-					header: { label: Settings._mui['mails_title_recived_usa'][Settings._lang] },
-					children:
-					[
-						{ status: MailBlock.ENTER_GOODS_MAIL },
-						{ status: MailBlock.ENTER_GOODS_MAIL},
-						{ status: MailBlock.ENTER_GOODS_MAIL },
-						{ status: MailBlock.ENTER_GOODS_MAIL},
-						{ status: MailBlock.ENTER_GOODS_MAIL },
-						{ status: MailBlock.ENTER_GOODS_MAIL},
-						{ status: MailBlock.ENTER_GOODS_MAIL }
-					]
-				},
-				{
-					header: { label: Settings._mui['mails_title_ontheway'][Settings._lang] },
-					children:
-					[
-						{ status: MailBlock.ENTER_GOODS_MAIL},
-						{ status: MailBlock.ENTER_GOODS_MAIL},
-						{ status: MailBlock.ENTER_GOODS_MAIL},
-						{ status: MailBlock.ENTER_GOODS_MAIL }
-					]
-				},
-			]);
-			list.dataProvider = groceryList;
-			
-			
-
-			
-			/*arrivedGroup = new LayoutGroup();
+			arrivedGroup = new LayoutGroup();
 			arrivedGroupLayout = new VerticalLayout();
 			arrivedGroupLayout.horizontalAlign = HorizontalAlign.CENTER;
 			arrivedGroupLayout.verticalAlign = VerticalAlign.TOP;
@@ -167,6 +100,10 @@ package screens.posta {
 			recivedGroup.addChild(item);
 			item = new MailBlock(MailBlock.UNKNOWN_MAIL);
 			recivedGroup.addChild(item);
+			item = new MailBlock(MailBlock.UNKNOWN_MAIL);
+			recivedGroup.addChild(item);
+			item = new MailBlock(MailBlock.UNKNOWN_MAIL);
+			recivedGroup.addChild(item);
 			
 			sendGroup = new LayoutGroup();
 			sendGroupLayout = new VerticalLayout();
@@ -179,9 +116,19 @@ package screens.posta {
 			title = StaticGUI._addLabel(sendGroup, Settings._mui['mails_title_estarrival'][Settings._lang]+' - 2016, 23 ოქტომბერი', subTitleStyle);
 			item = new MailBlock(MailBlock.ENTER_GOODS_MAIL);
 			sendGroup.addChild(item);
+			item = new MailBlock(MailBlock.ENTER_GOODS_MAIL);
+			sendGroup.addChild(item);
+			item = new MailBlock(MailBlock.ENTER_GOODS_MAIL);
+			sendGroup.addChild(item);
 			title = StaticGUI._addLabel(sendGroup, Settings._mui['mails_title_estarrival'][Settings._lang]+' - 2016, 3 ნოემბერი', subTitleStyle);
 			item = new MailBlock(MailBlock.UNKNOWN_MAIL);
-			sendGroup.addChild(item);*/
+			sendGroup.addChild(item);
+			item = new MailBlock(MailBlock.UNKNOWN_MAIL);
+			sendGroup.addChild(item);
+			item = new MailBlock(MailBlock.UNKNOWN_MAIL);
+			sendGroup.addChild(item);
+			item = new MailBlock(MailBlock.UNKNOWN_MAIL);
+			sendGroup.addChild(item);
 			
 			this.width = stage.stageWidth;
 			this.height = stage.stageHeight;
