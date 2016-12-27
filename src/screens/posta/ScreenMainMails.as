@@ -76,8 +76,9 @@ package screens.posta {
 			list.horizontalScrollPolicy = ScrollPolicy.OFF;
 			list.scrollBarDisplayMode = ScrollBarDisplayMode.NONE;
 			list.clipContent = false;
-			list.width = stage.stageWidth;
+			
 			list.backgroundSkin = null;
+			//list.width = stage.stageWidth;
 			list.height = stage.stageHeight - layout.paddingTop - layout.paddingBottom;
 			this.addChild( list );
 			list.validate();
@@ -91,13 +92,13 @@ package screens.posta {
 				return renderer;
 			}
 			
-			list.itemRendererFactory = function():IGroupedListItemRenderer{
+			/*list.itemRendererFactory = function():IGroupedListItemRenderer{
 				var renderer:MailBlockGroupedListRenderer = new MailBlockGroupedListRenderer();
 				
 				
 				renderer.padding = 5;
 				return renderer;
-			};
+			};*/
 			
 			var groceryList:HierarchicalCollection = new HierarchicalCollection(
 			[
@@ -106,20 +107,20 @@ package screens.posta {
 					//footer: { label: Settings._mui['mails_title_arrived'][Settings._lang] },
 					children:
 					[
-						{ status: MailBlock.ENTER_GOODS_MAIL  },
-						{ status: MailBlock.ENTER_GOODS_MAIL  }
+						{ status: MailBlock.PAY_MAIL  },
+						{ status: MailBlock.COMPLETED_MAIL  }
 					]
 				},
 				{
 					header: { label: Settings._mui['mails_title_recived_usa'][Settings._lang] },
 					children:
 					[
-						{ status: MailBlock.ENTER_GOODS_MAIL },
+						{ status: MailBlock.CHECK_TOPAY_MAIL },
+						{ status: MailBlock.PAYED_MAIL},
+						{ status: MailBlock.COMPLETED_MAIL },
 						{ status: MailBlock.ENTER_GOODS_MAIL},
-						{ status: MailBlock.ENTER_GOODS_MAIL },
-						{ status: MailBlock.ENTER_GOODS_MAIL},
-						{ status: MailBlock.ENTER_GOODS_MAIL },
-						{ status: MailBlock.ENTER_GOODS_MAIL},
+						{ status: MailBlock.COMPLETED_MAIL },
+						{ status: MailBlock.UNKNOWN_MAIL},
 						{ status: MailBlock.ENTER_GOODS_MAIL }
 					]
 				},
@@ -127,15 +128,28 @@ package screens.posta {
 					header: { label: Settings._mui['mails_title_ontheway'][Settings._lang] },
 					children:
 					[
-						{ status: MailBlock.ENTER_GOODS_MAIL},
-						{ status: MailBlock.ENTER_GOODS_MAIL},
-						{ status: MailBlock.ENTER_GOODS_MAIL},
-						{ status: MailBlock.ENTER_GOODS_MAIL }
+						{ status: MailBlock.UNKNOWN_MAIL},
+						{ status: MailBlock.COMPLETED_MAIL},
+						{ status: MailBlock.COMPLETED_MAIL},
+						{ status: MailBlock.UNKNOWN_MAIL }
 					]
 				},
 			]);
+			
+			list.snapScrollPositionsToPixels = true;
 			list.dataProvider = groceryList;
 			
+			list.setItemRendererFactoryWithID(MailBlock.CHECK_TOPAY_MAIL,      CHECK_TOPAY_MAIL_itemFactory);
+			list.setItemRendererFactoryWithID(MailBlock.COMPLETED_MAIL,        COMPLETED_MAIL_itemFactory);
+			list.setItemRendererFactoryWithID(MailBlock.ENTER_GOODS_MAIL,      ENTER_GOODS_MAIL_itemFactory);
+			list.setItemRendererFactoryWithID(MailBlock.PAY_MAIL,              PAY_MAIL_itemFactory);
+			list.setItemRendererFactoryWithID(MailBlock.PAYED_MAIL,            PAYED_MAIL_itemFactory);
+			list.setItemRendererFactoryWithID(MailBlock.UNKNOWN_MAIL,          UNKNOWN_MAIL_itemFactory);
+			
+			list.factoryIDFunction = function( item:Object, groupIndex:int, itemIndex:int ):String {
+				
+				return item.status;
+			};
 			
 
 			
@@ -188,6 +202,37 @@ package screens.posta {
 			
 			this.validate();
 		}
+		
+		private function CHECK_TOPAY_MAIL_itemFactory():IGroupedListItemRenderer {
+			return itemFactory(MailBlock.CHECK_TOPAY_MAIL);
+		}
+		
+		private function COMPLETED_MAIL_itemFactory():IGroupedListItemRenderer {
+			return itemFactory(MailBlock.COMPLETED_MAIL);	
+		}
+		
+		private function ENTER_GOODS_MAIL_itemFactory():IGroupedListItemRenderer{
+			return itemFactory(MailBlock.ENTER_GOODS_MAIL);	
+		}
+		
+		private function PAY_MAIL_itemFactory():IGroupedListItemRenderer {
+			return itemFactory(MailBlock.PAY_MAIL);	
+		}
+		
+		private function PAYED_MAIL_itemFactory():IGroupedListItemRenderer {
+			return itemFactory(MailBlock.PAYED_MAIL);	
+		}
+		
+		private function UNKNOWN_MAIL_itemFactory():IGroupedListItemRenderer {
+			return itemFactory(MailBlock.UNKNOWN_MAIL);	
+		}
+		
+		private function itemFactory(st:String):IGroupedListItemRenderer {
+			var renderer:MailBlockGroupedListRenderer = new MailBlockGroupedListRenderer(st);
+			renderer.padding = 5;
+			return renderer;	
+		}
+		
 		
 		override public function dispose():void {
 			

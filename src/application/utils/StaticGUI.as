@@ -64,15 +64,20 @@ package application.utils {
 			return true;
 		} // end function
 		
-		public static function _safeRemoveChildren(param1:DisplayObjectContainer, dispose:Boolean = false):Boolean {
+		public static function _safeRemoveChildren(param1:Object, dispose:Boolean = false):Boolean {
 			if (param1 == null) {
 				//Tracer._log("couldnt remove: " + param1);
 				return false;
 			} else if (dispose == true) {
 				
-				while (param1.numChildren > 0) {
-					param1.getChildAt(0).dispose();
-					param1.removeChildAt(0)	
+				if (param1.hasOwnProperty('texture')) param1.texture.dispose();
+				
+				if (param1.hasOwnProperty('numChildren')) {
+					while (param1.numChildren > 0) {
+						param1.getChildAt(0).dispose();
+						param1.removeChildAt(0)	
+					}
+				
 				}
 				
 				param1.dispose();

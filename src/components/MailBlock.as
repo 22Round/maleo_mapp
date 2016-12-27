@@ -14,13 +14,17 @@ package components {
 	import feathers.layout.RelativePosition;
 	import feathers.layout.VerticalLayout;
 	import feathers.skins.ImageSkin;
+	import flash.display.BitmapData;
 	import flash.geom.Rectangle;
 	import screens.ScreenID;
 	import starling.core.Starling;
+	import starling.display.DisplayObject;
 	import starling.display.Image;
 	import starling.display.Quad;
 	import starling.events.Event;
+	import starling.rendering.Painter;
 	import starling.text.TextFormat;
+	import starling.textures.RenderTexture;
 	import starling.textures.Texture;
 	import starling.textures.TextureSmoothing;
 	
@@ -70,6 +74,8 @@ package components {
 		private var hitQad:Quad;
 		private var hitBtn:Button;
 		
+		private var lariSymbolImg:Image;
+		
 		public static const COMPLETED_MAIL:String = 'completedMail';
 		public static const ENTER_GOODS_MAIL:String = 'enterGoodsMail';
 		public static const PAY_MAIL:String = 'payMail';
@@ -100,8 +106,7 @@ package components {
 			bgSkin.scale9Grid = StaticGUI._getScale9GridRect(bgTexture.width, bgTexture.height);
 			this.backgroundSkin = bgSkin;
 			
-			this.width = stage.stageWidth - Settings._getIntByDPI(34);
-			this.height = Settings._getIntByDPI(155);
+			
 			
 			btnStyle1 = new TextFormat;
 			btnStyle1.font = '_bpgArialRegular';
@@ -110,7 +115,7 @@ package components {
 			
 			btnStyle2 = new TextFormat;
 			btnStyle2.font = '_bpgArialRegular';
-			btnStyle2.size = 16;
+			btnStyle2.size = Settings._getIntByDPI(16);
 			btnStyle2.color = 0x575a5b;
 			
 			domainStyle = new TextFormat;
@@ -158,27 +163,76 @@ package components {
 		}
 		
 		public function _addDataState(st:String = null ):void {
+			_state = st;
+			
+			/*if (check) {
+				StaticGUI._safeRemoveChildren(check, true)
+				check = null;
+			}
+			
+			
+			if (defaultRadioSkin) StaticGUI._safeRemoveChildren(defaultRadioSkin, true);
+			defaultRadioSkin = null;
+			fromNameLayoutData = null;
+			productLabelLayoutData = null;
+			radioLayoutData = null;
+			
+			if (domainIco)StaticGUI._safeRemoveChildren(domainIco, true);
+			domainIco = null;
+			
+			if (fromName) StaticGUI._safeRemoveChildren(fromName, true);
+			fromName = null;
+			
+			if (productLabel) StaticGUI._safeRemoveChildren(productLabel, true);
+			productLabel = null;
+			
+			infoLabelLayoutData = null;
+			detailsBtnLayoutData = null;
+			
+			if (detailsIco) StaticGUI._safeRemoveChildren(detailsIco, true);
+			detailsIco = null;
+			
+			if (detailsBtn) StaticGUI._safeRemoveChildren(detailsBtn, true);
+			detailsBtn = null;
+			
+			if (infoLabel) StaticGUI._safeRemoveChildren(infoLabel, true);
+			infoLabel = null;
+			
+			statusLayoutData = null;
+			infoLabelLayoutData = null;
+			
+			if (statusImg) StaticGUI._safeRemoveChildren(statusImg, true);
+			statusImg = null;
+			
+			if (statusLabel) StaticGUI._safeRemoveChildren(statusLabel, true);
+			statusLabel = null;
+			
+			if (statusGroup) StaticGUI._safeRemoveChildren(statusGroup, true);
+			statusGroup = null;
+			
+			if (lariSimGroup) StaticGUI._safeRemoveChildren(lariSimGroup, true);
+			lariSimGroup = null;
+			
+			if (lariSymbolLabel) StaticGUI._safeRemoveChildren(lariSymbolLabel, true);
+			lariSymbolLabel = null;*/
 			
 			switch(_state) {
 				case MailBlock.CHECK_TOPAY_MAIL:
 					
 					fromNameLayoutData = new AnchorLayoutData();
-					fromNameLayoutData.top = Settings._getIntByDPI(21);
+					fromNameLayoutData.top = Settings._getIntByDPI(10);
 					fromNameLayoutData.left = Settings._getIntByDPI(52);
 					
 					productLabelLayoutData = new AnchorLayoutData();
-					productLabelLayoutData.top = Settings._getIntByDPI(60);
+					productLabelLayoutData.verticalCenter = Settings._getIntByDPI(0);
 					productLabelLayoutData.left = Settings._getIntByDPI(68);
 					
 					radioLayoutData = new AnchorLayoutData();
 					radioLayoutData.verticalCenter = 0;
 					radioLayoutData.left = Settings._getIntByDPI(22);
 					
-					
-					
-					
-					
 					defaultRadioSkin = new ImageSkin(AssetsLoader._asset.getTexture('check_empty.png'));
+					
 					defaultRadioSkin.setTextureForState(ButtonState.DOWN, AssetsLoader._asset.getTexture('check_full.png'));
 					defaultRadioSkin.setTextureForState(ButtonState.DOWN_AND_SELECTED, AssetsLoader._asset.getTexture('check_full.png'));
 					defaultRadioSkin.setTextureForState(ButtonState.UP_AND_SELECTED, AssetsLoader._asset.getTexture('check_full.png'));
@@ -200,12 +254,12 @@ package components {
 				default:
 					
 					productLabelLayoutData = new AnchorLayoutData();
-					productLabelLayoutData.top = Settings._getIntByDPI(60);
+					productLabelLayoutData.verticalCenter = Settings._getIntByDPI(0);
 					productLabelLayoutData.left = Settings._getIntByDPI(28);
 					
 					fromNameLayoutData = new AnchorLayoutData();
-					fromNameLayoutData.top = Settings._getIntByDPI(15);
-					fromNameLayoutData.left = Settings._getIntByDPI(2);
+					fromNameLayoutData.top = Settings._getIntByDPI(10);
+					fromNameLayoutData.left = Settings._getIntByDPI(8);
 					
 			}
 
@@ -221,10 +275,11 @@ package components {
 	
 		
 		
-			productLabel = StaticGUI._addLabel(this, "ტელეფონი", productStyle);
+			productLabel = StaticGUI._addLabel(this, "ტელეფონი"+ stage.stageWidth, productStyle);
 			productLabel.layoutData = productLabelLayoutData;
 			
 			
+
 			switch(_state) {
 				
 				case MailBlock.COMPLETED_MAIL:
@@ -233,14 +288,12 @@ package components {
 					infoLabelLayoutData.bottom = Settings._getIntByDPI(20);
 					infoLabelLayoutData.left = Settings._getIntByDPI(28);
 					infoLabel = StaticGUI._addLabel(this, "20 $", mailLocAmountStyle);
-					infoLabel.width = 200;
+					infoLabel.width = Settings._getIntByDPI(200);
 					infoLabel.layoutData = infoLabelLayoutData;
 					
 					detailsBtnLayoutData = new AnchorLayoutData();
 					detailsBtnLayoutData.verticalCenter = 0;
 					detailsBtnLayoutData.right = Settings._getIntByDPI(28);
-					
-					
 					
 					
 					detailsIco = new Image(AssetsLoader._asset.getTexture("post_item_btn_arrow.png"));
@@ -264,7 +317,7 @@ package components {
 					infoLabelLayoutData.top = Settings._getIntByDPI(88);
 					infoLabelLayoutData.left = Settings._getIntByDPI(28);
 					infoLabel = StaticGUI._addLabel(this, Settings._mui['mails_block_notifi_1'][Settings._lang], infoStyle);
-					infoLabel.width = 400;
+					infoLabel.width = Settings._getIntByDPI(400);
 					infoLabel.textRendererProperties.wordWrap = true;
 					infoLabel.textRendererProperties.isHTML = true;
 					infoLabel.layoutData = infoLabelLayoutData;
@@ -296,7 +349,7 @@ package components {
 					infoLabelLayoutData.bottom = Settings._getIntByDPI(20);
 					infoLabelLayoutData.left = Settings._getIntByDPI(28);
 					infoLabel = StaticGUI._addLabel(this, "20 $", mailLocAmountStyle);
-					infoLabel.width = 200;
+					infoLabel.width = Settings._getIntByDPI(200);
 					infoLabel.layoutData = infoLabelLayoutData;
 					
 					detailsBtnLayoutData = new AnchorLayoutData();
@@ -326,7 +379,7 @@ package components {
 					infoLabelLayoutData.top = Settings._getIntByDPI(88);
 					infoLabelLayoutData.left = Settings._getIntByDPI(28);
 					infoLabel = StaticGUI._addLabel(this, Settings._mui['mails_block_notifi_2'][Settings._lang], infoStyle);
-					infoLabel.width = 400;
+					infoLabel.width = Settings._getIntByDPI(400);
 					infoLabel.textRendererProperties.wordWrap = true;
 					infoLabel.textRendererProperties.isHTML = true;
 					infoLabel.layoutData = infoLabelLayoutData;
@@ -341,7 +394,7 @@ package components {
 					statusGroupLayout = new FlowLayout();
 					statusGroupLayout.horizontalAlign = HorizontalAlign.CENTER;
 					statusGroupLayout.firstHorizontalGap = Settings._getIntByDPI(170);
-					statusGroupLayout.gap = 5;
+					statusGroupLayout.gap = Settings._getIntByDPI(5);
 					statusGroup.layout = statusGroupLayout;
 					statusGroup.layoutData = statusLayoutData;
 					addChild(statusGroup);
@@ -366,11 +419,11 @@ package components {
 					infoLabelLayoutData.bottom = Settings._getIntByDPI(20);
 					infoLabelLayoutData.left = Settings._getIntByDPI(28);
 					infoLabel = StaticGUI._addLabel(this, "20 $", mailLocAmountStyle);
-					infoLabel.width = 200;
+					infoLabel.width = Settings._getIntByDPI(200);
 					infoLabel.layoutData = infoLabelLayoutData;
 					
 					statusLayoutData = new AnchorLayoutData();
-					statusLayoutData.verticalCenter = 30;
+					statusLayoutData.verticalCenter = Settings._getIntByDPI(10);
 					statusLayoutData.right = Settings._getIntByDPI(-75);
 					
 					
@@ -379,11 +432,10 @@ package components {
 					statusGroupLayout = new FlowLayout();
 					statusGroupLayout.horizontalAlign = HorizontalAlign.CENTER;
 					statusGroupLayout.firstHorizontalGap = Settings._getIntByDPI(170);
-					statusGroupLayout.gap = 5;
+					statusGroupLayout.gap =  Settings._getIntByDPI(5);
 					statusGroup.layout = statusGroupLayout;
 					statusGroup.layoutData = statusLayoutData;
 					addChild(statusGroup);
-					
 					
 					
 					statusImg = new Image(AssetsLoader._asset.getTexture("item_label_red.png"));
@@ -395,8 +447,6 @@ package components {
 					amountLabel = StaticGUI._addLabel(statusGroup, '12233.54', amountStyle);
 					
 					
-					
-					
 					lariSimGroup = new LayoutGroup();
 					lariSimGroupLayout = new VerticalLayout();
 					lariSimGroupLayout.paddingTop = Settings._getIntByDPI(1);
@@ -404,15 +454,15 @@ package components {
 					lariSimGroup.layout = lariSimGroupLayout;
 					statusGroup.addChild(lariSimGroup);
 					
-					lariSymbolLabel = StaticGUI._addLabel(lariSimGroup, 's', lariStyle);
+					//lariSymbolLabel = StaticGUI._addLabel(lariSimGroup, 's', lariStyle);
 					
 					
-					//var lariImg:Image = new Image(AssetsLoader._asset.getTexture("lari_simb.png"));
-					/*lariImg.color = 0xff6363;
-					lariImg.textureSmoothing = TextureSmoothing.TRILINEAR;
-					lariImg.width = Settings._getIntByDPI(19);
-					lariImg.scaleY = lariImg.scaleX;
-					lariSimGroup.addChild(lariImg);*/
+					lariSymbolImg = new Image(AssetsLoader._asset.getTexture("lari_simb.png"));
+					lariSymbolImg.color = 0xff6363;
+					lariSymbolImg.textureSmoothing = TextureSmoothing.TRILINEAR;
+					lariSymbolImg.width = Settings._getIntByDPI(19);
+					lariSymbolImg.scaleY = lariSymbolImg.scaleX;
+					lariSimGroup.addChild(lariSymbolImg);
 					
 					break;
 					
@@ -424,11 +474,11 @@ package components {
 					infoLabelLayoutData.bottom = Settings._getIntByDPI(20);
 					infoLabelLayoutData.left = Settings._getIntByDPI(70);
 					infoLabel = StaticGUI._addLabel(this, "20 $", mailLocAmountStyle);
-					infoLabel.width = 200;
+					infoLabel.width = Settings._getIntByDPI(200);
 					infoLabel.layoutData = infoLabelLayoutData;
 					
 					statusLayoutData = new AnchorLayoutData();
-					statusLayoutData.verticalCenter = 30;
+					statusLayoutData.verticalCenter = Settings._getIntByDPI(20);
 					statusLayoutData.right = Settings._getIntByDPI(-75);
 					
 					
@@ -437,12 +487,10 @@ package components {
 					statusGroupLayout = new FlowLayout();
 					statusGroupLayout.horizontalAlign = HorizontalAlign.CENTER;
 					statusGroupLayout.firstHorizontalGap = Settings._getIntByDPI(170);
-					statusGroupLayout.gap = 5;
+					statusGroupLayout.gap = Settings._getIntByDPI(5);
 					statusGroup.layout = statusGroupLayout;
 					statusGroup.layoutData = statusLayoutData;
 					addChild(statusGroup);
-					
-					
 					
 					statusImg = new Image(AssetsLoader._asset.getTexture("item_label_red.png"));
 					statusImg.width = Settings._getIntByDPI(145);
@@ -461,30 +509,31 @@ package components {
 					lariSimGroup.layout = lariSimGroupLayout;
 					statusGroup.addChild(lariSimGroup);
 					
-					lariSymbolLabel = StaticGUI._addLabel(lariSimGroup, 's', lariStyle);
+					//lariSymbolLabel = StaticGUI._addLabel(lariSimGroup, 's', lariStyle);
 					
-					//var lariImg:Image = new Image(AssetsLoader._asset.getTexture("lari_simb.png"));
-					/*lariImg.color = 0xff6363;
-					lariImg.textureSmoothing = TextureSmoothing.TRILINEAR;
-					lariImg.width = Settings._getIntByDPI(19);
-					lariImg.scaleY = lariImg.scaleX;
-					lariSimGroup.addChild(lariImg);*/
+					lariSymbolImg = new Image(AssetsLoader._asset.getTexture("lari_simb.png"));
+					lariSymbolImg.color = 0xff6363;
+					lariSymbolImg.textureSmoothing = TextureSmoothing.TRILINEAR;
+					lariSymbolImg.width = Settings._getIntByDPI(19);
+					lariSymbolImg.scaleY = lariSymbolImg.scaleX;
+					lariSimGroup.addChild(lariSymbolImg);
 					
 					break;
 			}
 			
 
-				hitQad = new Quad(50, 50);
-				hitQad.alpha = 0;
-				hitBtn = new Button;
-				//hitBtn.defaultStyleProvider = null;
-				hitBtn.defaultSkin = hitQad;
-				hitBtn.layoutData = new AnchorLayoutData(0, 0, 0, 0);
-				addChild(hitBtn);
-				hitBtn.addEventListener(Event.TRIGGERED, blockHandler);
-			
-			
+			hitQad = new Quad(50, 50);
+			hitQad.alpha = 0;
+			hitBtn = new Button;
+			//hitBtn.defaultStyleProvider = null;
+			hitBtn.defaultSkin = hitQad;
+			hitBtn.layoutData = new AnchorLayoutData(0, 0, 0, 0);
+			addChild(hitBtn);
+			hitBtn.addEventListener(Event.TRIGGERED, blockHandler);	
 		}
+		
+		
+		
 		
 		private function blockHandler(e:Event):void {
 			//this.dispatchEventWith(AppEvent.COMPLETED, true);
@@ -514,12 +563,13 @@ package components {
 			bgSkin.dispose();
 			bgTexture.dispose();
 			
+			if (lariSymbolImg) lariSymbolImg.dispose();
 			if (domainIco) domainIco.dispose();
 			if (detailsIco) detailsIco.dispose();
 			if (statusImg) statusImg.dispose();
 			if (defaultRadioSkin) defaultRadioSkin.dispose();	
 			
-			
+			lariSymbolImg = null;
 			btnStyle1 = null;
 			btnStyle2 = null;
 			domainStyle = null;

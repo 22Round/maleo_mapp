@@ -10,12 +10,13 @@ package components.renderers{
 	import starling.events.Event;
 	
 	public class MailBlockGroupedListRenderer extends FeathersControl implements IGroupedListItemRenderer {
-		public function MailBlockGroupedListRenderer() {
+		public function MailBlockGroupedListRenderer(st:String) {
+			_state = st;
 		}
 		
 		protected var _label:Label;
 		protected var _blockIitem:MailBlock;
-		
+		protected var _state:String;
 		
 		protected var _groupIndex:int = -1;
 		
@@ -132,11 +133,14 @@ package components.renderers{
 		override protected function initialize():void {
 			
 			if(!_blockIitem){
-				_blockIitem = new MailBlock(MailBlock.UNKNOWN_MAIL);
+				_blockIitem = new MailBlock(_state);
 				this.addChild(this._blockIitem);
 				_blockIitem.validate();
 
 			}
+			
+			this.width = stage.stageWidth - Settings._getIntByDPI(34);
+			this.height = Settings._getIntByDPI(155);
 		}
 		
 		override public function dispose():void {
@@ -183,8 +187,8 @@ package components.renderers{
 			if (this._data) {
 				//this._label.text = this._data.label;
 				
-				
-				
+				/*_blockIitem._addDataState(this._data.status);
+				_blockIitem.validate();*/
 				
 			} else {
 				
