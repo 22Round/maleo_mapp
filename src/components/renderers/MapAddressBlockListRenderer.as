@@ -169,10 +169,13 @@ package components.renderers{
 				addChild(_conten);
 			}
 			
+			var lineSize:uint = Settings._getIntByDPI(1);
+			if (lineSize < 1) lineSize = 1;
+			
 			if (!line) {
 				line = new MyCanvas;
 				
-				line.lineStyle(Settings._getIntByDPI(1), 0xced6db);
+				line.lineStyle(lineSize, 0xced6db);
 				line.lineTo(0, 0);
 				line.lineTo(stage.stageWidth, 0);
 				line.endFill();
@@ -183,7 +186,7 @@ package components.renderers{
 			if (!line2) {
 				line2 = new MyCanvas;
 				
-				line2.lineStyle(Settings._getIntByDPI(1), 0xced6db);
+				line2.lineStyle(lineSize, 0xced6db);
 				line2.lineTo(0, 0);
 				line2.lineTo(0, Settings._getIntByDPI(23));
 				line2.endFill();

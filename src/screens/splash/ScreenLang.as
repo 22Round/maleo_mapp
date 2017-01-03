@@ -52,9 +52,12 @@ package screens.splash {
 			btnStyle.size = Settings._getIntByDPI(24);
 			btnStyle.color = 0x575757;
 			
+			var lineSize:uint = Settings._getIntByDPI(3);
+			if (lineSize < 1) lineSize = 1;
+			
 			line = new MyCanvas;
 			addChild(line);
-			line.lineStyle(Settings._getIntByDPI(3), 0xd6dde1);
+			line.lineStyle(lineSize, 0xd6dde1);
 			line.lineTo(0, 0);
 			line.lineTo(Settings._getIntByDPI(300), 0);
 			
@@ -67,7 +70,7 @@ package screens.splash {
 			
 			line = new MyCanvas;
 			addChild(line);
-			line.lineStyle(Settings._getIntByDPI(3), 0xd6dde1);
+			line.lineStyle(lineSize, 0xd6dde1);
 			line.lineTo(0, 0);
 			line.lineTo(Settings._getIntByDPI(300), 0);
 			
@@ -80,12 +83,12 @@ package screens.splash {
 			
 			line = new MyCanvas;
 			addChild(line);
-			line.lineStyle(Settings._getIntByDPI(3), 0xd6dde1);
+			line.lineStyle(lineSize, 0xd6dde1);
 			line.lineTo(0, 0);
 			line.lineTo(Settings._getIntByDPI(300), 0);
 			
 			
-			ruLangBtn = StaticGUI._addBtnSkin(this, "Русский"+Starling.current.contentScaleFactor, btnStyle, btnSkin);
+			ruLangBtn = StaticGUI._addBtnSkin(this, "Русский", btnStyle, btnSkin);
 			ruLangBtn.width = Settings._getIntByDPI(400);
 			ruLangBtn.height = Settings._getIntByDPI(80);
 			//replaceWithB2Button.layoutData = new VerticalLayoutData(50);
@@ -93,7 +96,7 @@ package screens.splash {
 			
 			line = new MyCanvas;
 			addChild(line);
-			line.lineStyle(Settings._getIntByDPI(3), 0xd6dde1);
+			line.lineStyle(lineSize, 0xd6dde1);
 			line.lineTo(0, 0);
 			line.lineTo(Settings._getIntByDPI(300), 0);
 		}
