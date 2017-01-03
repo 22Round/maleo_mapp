@@ -4,10 +4,12 @@ package components.renderers {
 	import feathers.controls.Label;
 	import feathers.controls.LayoutGroup;
 	import feathers.controls.renderers.IGroupedListHeaderRenderer;
+	import feathers.controls.text.BitmapFontTextRenderer;
 	import feathers.core.FeathersControl;
 	import feathers.layout.HorizontalAlign;
 	import feathers.layout.VerticalAlign;
 	import feathers.layout.VerticalLayout;
+	import feathers.text.BitmapFontTextFormat;
 	import starling.events.Event;
 	import starling.text.TextFormat;
 	
@@ -15,17 +17,24 @@ package components.renderers {
 	public class MailBlockGroupedHeaderRenderer extends FeathersControl implements IGroupedListHeaderRenderer {
 		
 		private var titleStyle:TextFormat;
+		private var titleStyleB:BitmapFontTextFormat;
 		
 		public function MailBlockGroupedHeaderRenderer() {
-			
+			super();
 			
 			titleStyle = new TextFormat;
 			titleStyle.font = '_bpgArialRegular';
 			titleStyle.size = Settings._getIntByDPI(30);
 			titleStyle.color = 0x4d5051;
+			
+			titleStyleB = new BitmapFontTextFormat('_BPGArial');
+			//titleStyleB.font = '_bpgArialRegular';
+			titleStyleB.size = Settings._getIntByDPI(80);
+			titleStyleB.color = 0x4d5051;
+			
 		}
 		
-		protected var _label:Label;
+		protected var _label:BitmapFontTextRenderer;
 		private var labelGroup:LayoutGroup;
 		protected var _index:int = -1;
 		
@@ -155,6 +164,8 @@ package components.renderers {
 		
 		override protected function initialize():void {
 			
+			super.initialize();
+			
 			if(!labelGroup){
 				labelGroup = new LayoutGroup();
 				var labelLayout:VerticalLayout = new VerticalLayout();
@@ -169,7 +180,7 @@ package components.renderers {
 			
 			
 			if (!this._label) {
-				this._label = StaticGUI._addLabel(labelGroup, '', titleStyle);
+				this._label = StaticGUI._addBFTR(labelGroup, '', titleStyleB);
 				
 			}
 		}

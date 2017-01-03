@@ -9,17 +9,19 @@ package components {
 	import feathers.controls.text.TextFieldTextRenderer;
 	import feathers.core.ITextRenderer;
 	import feathers.data.ListCollection;
+	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
 	import feathers.layout.HorizontalAlign;
 	import feathers.layout.VerticalAlign;
 	import feathers.layout.VerticalLayout;
 	import feathers.skins.ImageSkin;
 	import flash.geom.Rectangle;
+	import starling.display.Quad;
 	import starling.events.Event;
 	import starling.text.TextFormat;
 	
 	
-	public class MailMenuBlock extends LayoutGroup {
+	public class AddressMenuBlock extends LayoutGroup {
 		
 		private var tabStyle:TextFormat;
 		private var tabSelectedStyle:TextFormat;
@@ -29,7 +31,7 @@ package components {
 		
 		private var menuArray:Array;
 		
-		public function MailMenuBlock(menuArr:Array = null) {
+		public function AddressMenuBlock(menuArr:Array = null) {
 			menuArray = menuArr
 			super();
 			//this.title = "Screen C";
@@ -37,25 +39,23 @@ package components {
 		
 		override protected function initialize():void {
 			
-			var layout:VerticalLayout = new VerticalLayout();
-			layout.horizontalAlign = HorizontalAlign.CENTER;
-			layout.verticalAlign = VerticalAlign.TOP;
-			layout.gap = Settings._getIntByDPI(20);
+			var layout:AnchorLayout = new AnchorLayout();
+
 			this.layout = layout;
 
 			tabStyle = new TextFormat;
 			tabStyle.font = '_bpgArialRegular';
-			tabStyle.size = Settings._getIntByDPI(20);
-			tabStyle.color = 0x575a5b;
+			tabStyle.size = Settings._getIntByDPI(22);
+			tabStyle.color = 0xb6b6b6;
 			
 			tabSelectedStyle = new TextFormat;
 			tabSelectedStyle.font = '_bpgArialRegular';
-			tabSelectedStyle.size = Settings._getIntByDPI(20);
-			tabSelectedStyle.color = 0xffffff;
+			tabSelectedStyle.size = Settings._getIntByDPI(22);
+			tabSelectedStyle.color = 0x575757;
 			
 			tabDisabledStyle = new TextFormat;
 			tabDisabledStyle.font = '_bpgArialRegular';
-			tabDisabledStyle.size = Settings._getIntByDPI(20);
+			tabDisabledStyle.size = Settings._getIntByDPI(22);
 			tabDisabledStyle.color = 0xabadad;
 
 			
@@ -71,36 +71,9 @@ package components {
 			
 			tabBar = new TabBar();
 			
-			tabBar.firstTabFactory = function():ToggleButton {
-				
-				var tabSkin:ImageSkin = new ImageSkin(AssetsLoader._asset.getTexture("posta_mails_menu_default_left.png"));
-				tabSkin.selectedTexture = AssetsLoader._asset.getTexture("posta_mails_menu_selected_left.png");
-				tabSkin.scale9Grid = StaticGUI._getScale9GridRect(tabSkin.width, tabSkin.height);
-				
-				var tab:ToggleButton = new ToggleButton();
-				
-				tab.labelFactory = function():ITextRenderer {
-					var renderer:TextFieldTextRenderer = new TextFieldTextRenderer();
-					renderer.embedFonts = true;
-					return renderer;
-				};
-				
-				tab.defaultSkin = tabSkin;
-				tab.fontStyles = tabStyle;
-				tab.setFontStylesForState(ButtonState.DOWN_AND_SELECTED, tabSelectedStyle);
-				tab.setFontStylesForState(ButtonState.HOVER_AND_SELECTED, tabSelectedStyle);
-				tab.setFontStylesForState(ButtonState.UP_AND_SELECTED, tabSelectedStyle);
-				tab.setFontStylesForState(ButtonState.DISABLED, tabDisabledStyle);
-				
-				return tab;
-			}
-			
-			
 			tabBar.tabFactory = function():ToggleButton {
 				
-				var tabSkin:ImageSkin = new ImageSkin(AssetsLoader._asset.getTexture("posta_mails_menu_default_center.png"));
-				tabSkin.selectedTexture = AssetsLoader._asset.getTexture("posta_mails_menu_selected_center.png");
-				tabSkin.scale9Grid = StaticGUI._getScale9GridRect(tabSkin.width, tabSkin.height);
+				
 				var tab:ToggleButton = new ToggleButton();
 				
 				tab.labelFactory = function():ITextRenderer {
@@ -108,8 +81,8 @@ package components {
 					renderer.embedFonts = true;
 					return renderer;
 				};
+				tab.defaultSkin = new Quad(50, 50, 0xffffff);
 				
-				tab.defaultSkin = tabSkin;
 				tab.fontStyles = tabStyle;
 				tab.setFontStylesForState(ButtonState.DOWN_AND_SELECTED, tabSelectedStyle);
 				tab.setFontStylesForState(ButtonState.HOVER_AND_SELECTED, tabSelectedStyle);
@@ -119,37 +92,19 @@ package components {
 				return tab;
 			}
 			
-			tabBar.lastTabFactory = function():ToggleButton {
-				
-				var tabSkin:ImageSkin = new ImageSkin(AssetsLoader._asset.getTexture("posta_mails_menu_default_right.png"));
-				tabSkin.selectedTexture = AssetsLoader._asset.getTexture("posta_mails_menu_selected_right.png");
-				tabSkin.scale9Grid = StaticGUI._getScale9GridRect(tabSkin.width, tabSkin.height);
-				var tab:ToggleButton = new ToggleButton();
-				
-				tab.labelFactory = function():ITextRenderer {
-					var renderer:TextFieldTextRenderer = new TextFieldTextRenderer();
-					renderer.embedFonts = true;
-					return renderer;
-				};
-				
-				tab.defaultSkin = tabSkin;
-				tab.fontStyles = tabStyle;
-				tab.setFontStylesForState(ButtonState.DOWN_AND_SELECTED, tabSelectedStyle);
-				tab.setFontStylesForState(ButtonState.HOVER_AND_SELECTED, tabSelectedStyle);
-				tab.setFontStylesForState(ButtonState.UP_AND_SELECTED, tabSelectedStyle);
-				tab.setFontStylesForState(ButtonState.DISABLED, tabDisabledStyle);
-				
-				return tab;
-			}
 			
+			var selectionSkin:Quad = new Quad(int(stage.stageWidth / 2), Settings._getIntByDPI(3), 0x186c97);
+			selectionSkin.y = Settings._getIntByDPI(86) - selectionSkin.height;
+			tabBar.selectionSkin = selectionSkin;
 			tabBar.dataProvider = new ListCollection(dataProvArr);
 			
 			tabBar.addEventListener(Event.CHANGE, tabBarHandler);
-			tabBar.layoutData = new AnchorLayoutData(NaN, 0, 0, 0);
+			tabBar.layoutData = new AnchorLayoutData(0, 0, 0, 0);
 			tabBar.styleProvider = null;
 			this.addChild(tabBar);
 			tabBar.validate();
-			
+			this.width = stage.stageWidth
+			this.height = Settings._getIntByDPI(86);
 			tabBarHandler(null);
 			
 		}

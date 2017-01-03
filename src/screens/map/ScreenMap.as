@@ -40,7 +40,7 @@ package screens.map {
 			super.initialize();
 			
 			
-			var mapScale:Number = 2; // use 1 for non-retina displays
+			var mapScale:Number = Starling.current.contentScaleFactor; // use 1 for non-retina displays
 			GeoUtils.scale = mapScale;
 			
 			mapOptions = new MapOptions();
@@ -56,8 +56,8 @@ package screens.map {
 			mapOptions.movementBounds.bottom = GeoUtils.lat2y(43.23870);*/
 			
 			geoMap = new GeoMap(mapOptions);
-			geoMap.setSize(stage.stageWidth, stage.stageHeight - Settings._getIntByDPI(130) -Settings._getIntByDPI(103)); // header and footer height
-			geoMap.y = Settings._getIntByDPI(130);
+			geoMap.setSize(stage.stageWidth, stage.stageHeight - Settings._getIntByDPI(130) - Settings._getIntByDPI(103) - Settings._getIntByDPI(150)); // header and footer height
+			geoMap.y = Settings._getIntByDPI(150);
 			addChild(geoMap);
 			
 			googleMaps = Maps.GOOGLE_MAPS_SCALED(mapScale);

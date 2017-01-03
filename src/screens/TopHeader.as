@@ -228,7 +228,8 @@ package screens {
 					
 					break;
 					
-				case ScreenID.MAPS:	
+				case ScreenID.MAPS:
+				case ScreenID.MAPS_ADDRESS:
 					
 					visible = true;
 					_changeBackgroundSkin(0x18a6e7);

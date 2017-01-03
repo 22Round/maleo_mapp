@@ -24,7 +24,8 @@ package {
 		public static const LOGIN_FACEBOOK:String              = 'loginFacebook';
 		public static const LOGIN_NATIVE:String                = 'loginNative';
 		public static const POSTA_MENU_CALLBACK:String         = 'postaMenuCallBack';
-		public static const TOGGLE_LEFT_DRAWER:String                   = "toggleLeftDrawer";
+		public static const TOGGLE_LEFT_DRAWER:String          = "toggleLeftDrawer";
+		public static const TOGGLE_TOP_MAP_DRAWER:String       = "toggTopMapDrawer";
 		
 	
 		public var data:Object;

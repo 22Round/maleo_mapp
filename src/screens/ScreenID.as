@@ -10,6 +10,7 @@ package screens {
 		public static const LOGIN:String                              = 'login';
 		public static const MAIN_MAILS:String                         = 'mainMails';
 		public static const MAPS:String                               = 'maps';
+		public static const MAPS_ADDRESS:String                       = 'mapsAddress';
 		public static const ALL_MAILS:String                          = 'allMails';
 		
 		public static const RECIVED_MAILS:String                      = 'recivedMails';

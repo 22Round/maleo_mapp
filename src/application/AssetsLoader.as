@@ -13,12 +13,18 @@ package application {
 		public function AssetsLoader(scaleFactor:Number=1, useMipmaps:Boolean=false):void {
 			super(scaleFactor, useMipmaps);
 			_asset = this;
-			
+			this.verbose = true; 
 			
 			var appDir:File = File.applicationDirectory;
 			
 			this.enqueue(appDir.resolvePath("assets/assets.xml"));
 			this.enqueue(appDir.resolvePath("assets/assets.png"));
+			
+			this.enqueue(appDir.resolvePath("assets/_BPGArial.xml"));
+			this.enqueue(appDir.resolvePath("assets/_BPGArial.png"));
+			
+			this.enqueue(appDir.resolvePath("assets/_BPGArialBold.xml"));
+			this.enqueue(appDir.resolvePath("assets/_BPGArialBold.png"));
 			
 			this.enqueue(appDir.resolvePath("assets/assets_x" + 3 + ".xml"));
 			this.enqueue(appDir.resolvePath("assets/assets_x" + 3 + ".png"));

@@ -17,6 +17,7 @@ package screens.posta {
 	import feathers.layout.HorizontalAlign;
 	import feathers.layout.VerticalAlign;
 	import feathers.layout.VerticalLayout;
+	import starling.display.DisplayObject;
 	import starling.events.Event;
 	import starling.text.TextFormat;
 	
@@ -34,6 +35,9 @@ package screens.posta {
 		private var recivedGroupLayout:VerticalLayout;
 		private var sendGroup:LayoutGroup;
 		private var sendGroupLayout:VerticalLayout;
+		
+		private var list:GroupedList;
+		private var groceryList:HierarchicalCollection;
 		
 		public function ScreenMainMails() {
 			super();
@@ -72,13 +76,12 @@ package screens.posta {
 			//listLayout.paddingLeft = Settings._getIntByDPI(15);
 			//listLayout.paddingRight = Settings._getIntByDPI(15);
 			
-			var list:GroupedList = new GroupedList();
+			list = new GroupedList();
 			list.horizontalScrollPolicy = ScrollPolicy.OFF;
 			list.scrollBarDisplayMode = ScrollBarDisplayMode.NONE;
 			list.clipContent = false;
-			
+			list.width = stage.stageWidth;
 			list.backgroundSkin = null;
-			//list.width = stage.stageWidth;
 			list.height = stage.stageHeight - layout.paddingTop - layout.paddingBottom;
 			this.addChild( list );
 			list.validate();
@@ -100,14 +103,14 @@ package screens.posta {
 				return renderer;
 			};*/
 			
-			var groceryList:HierarchicalCollection = new HierarchicalCollection(
+			groceryList = new HierarchicalCollection(
 			[
 				{
 					header: { label: Settings._mui['mails_title_arrived'][Settings._lang] },
 					//footer: { label: Settings._mui['mails_title_arrived'][Settings._lang] },
 					children:
 					[
-						{ status: MailBlock.PAY_MAIL  },
+						{ status: MailBlock.COMPLETED_MAIL  },
 						{ status: MailBlock.COMPLETED_MAIL  }
 					]
 				},
@@ -115,12 +118,12 @@ package screens.posta {
 					header: { label: Settings._mui['mails_title_recived_usa'][Settings._lang] },
 					children:
 					[
-						{ status: MailBlock.CHECK_TOPAY_MAIL },
-						{ status: MailBlock.PAYED_MAIL},
 						{ status: MailBlock.COMPLETED_MAIL },
+						{ status: MailBlock.COMPLETED_MAIL},
+						{ status: MailBlock.COMPLETED_MAIL },
+						{ status: MailBlock.COMPLETED_MAIL},
+						{ status: MailBlock.ENTER_GOODS_MAIL },
 						{ status: MailBlock.ENTER_GOODS_MAIL},
-						{ status: MailBlock.COMPLETED_MAIL },
-						{ status: MailBlock.UNKNOWN_MAIL},
 						{ status: MailBlock.ENTER_GOODS_MAIL }
 					]
 				},
@@ -128,10 +131,10 @@ package screens.posta {
 					header: { label: Settings._mui['mails_title_ontheway'][Settings._lang] },
 					children:
 					[
-						{ status: MailBlock.UNKNOWN_MAIL},
+						{ status: MailBlock.ENTER_GOODS_MAIL},
 						{ status: MailBlock.COMPLETED_MAIL},
 						{ status: MailBlock.COMPLETED_MAIL},
-						{ status: MailBlock.UNKNOWN_MAIL }
+						{ status: MailBlock.COMPLETED_MAIL }
 					]
 				},
 			]);
@@ -233,12 +236,22 @@ package screens.posta {
 			return renderer;	
 		}
 		
+		private function disposeItemAccessory(item:Object):void {
+			DisplayObject(itemFactory(item.status)).dispose();
+		}
+		
 		
 		override public function dispose():void {
 			
 			if (arrivedGroup) StaticGUI._safeRemoveChildren(arrivedGroup, true);
 			if (recivedGroup) StaticGUI._safeRemoveChildren(recivedGroup, true);
 			if (sendGroup) StaticGUI._safeRemoveChildren(sendGroup, true);
+			if (list) {
+				list.dataProvider.dispose(null, disposeItemAccessory);
+				StaticGUI._safeRemoveChildren(list, true);
+			}
+			
+			
 			
 			super.dispose();
 		}

@@ -36,6 +36,7 @@ package screens {
 			
 			
 			for (var i:uint; i < 5; i++) {
+				
 				dataProvObj = new Object;
 				dataProvObj.label = '';
 				defaultIco = new Image(AssetsLoader._asset.getTexture('footer_item_' + (i + 1) + '_normal.png'));
@@ -87,6 +88,7 @@ package screens {
 			if (clickedBoo) {
 				clickedBoo = false;
 				switch(_tabBar.selectedIndex) {
+					
 					case 0:
 						
 						Settings._splash._navigator.pushScreen(ScreenID.MAIN_MAILS);
@@ -104,11 +106,10 @@ package screens {
 						break
 					case 3:
 						
-						Settings._splash._navigator.pushScreen(ScreenID.MAPS);
+						Settings._splash._navigator.pushScreen(ScreenID.MAPS_ADDRESS);
 						
 						break;
 				}
-				
 			}	
 		}
 	}

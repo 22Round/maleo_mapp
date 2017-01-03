@@ -58,7 +58,7 @@ package drawer.views {
 			this.addChild(navigator);
 			this.validate();
 			
-			this.width = stage.stageWidth  - Settings._getIntByDPI(stage.stageWidth / 4 - 20);
+			this.width = stage.stageWidth  - Settings._getIntByDPI(stage.stageWidth / 4);
 			
 		}
 		

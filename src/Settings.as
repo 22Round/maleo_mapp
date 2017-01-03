@@ -42,6 +42,7 @@
 		public static var _sharedObj:Shared;
 		public static var _splash:Splash;
 		public static var _topFooter:TopFooter;
+		public static const LARI_SYMBOL:String = '¢';
 		
 		
 		//ITEM LIBRARY

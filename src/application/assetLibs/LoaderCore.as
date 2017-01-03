@@ -4,6 +4,7 @@
 	import flash.events.EventDispatcher;
 	import flash.net.LocalConnection;
 	import flash.net.URLRequest;
+	import flash.system.ApplicationDomain;
 	import flash.system.Security;
 	import flash.system.LoaderContext;
 	import flash.events.HTTPStatusEvent;
@@ -26,8 +27,8 @@
 		public function _callLoadAssets(asset:String):void {
 			$loader = new Loader();
 			
-			$lc = new LoaderContext(true);
-			$lc.checkPolicyFile = true;
+			$lc = new LoaderContext(false, ApplicationDomain.currentDomain, null);
+			//$lc.checkPolicyFile = true;
 			
 			var $url:String = asset;
 			

@@ -1,6 +1,5 @@
 package screens {
 	import application.AssetsLoader;
-	import application.utils.DeviceInfo;
 	import feathers.controls.LayoutGroup;
 	import feathers.controls.StackScreenNavigator;
 	import feathers.controls.StackScreenNavigatorItem;
@@ -9,6 +8,7 @@ package screens {
 	import feathers.layout.AnchorLayoutData;
 	import feathers.motion.Slide;
 	import screens.faq.ScreenFAQ;
+	import screens.map.DrawerMapAddress;
 	import screens.map.ScreenMap;
 	import screens.posta.ScreenAllMails;
 	import screens.posta.ScreenArrivedMails;
@@ -22,7 +22,6 @@ package screens {
 	import starling.display.Image;
 	import starling.display.Quad;
 	import starling.events.Event;
-	import starling.filters.DropShadowFilter;
 	import starling.textures.Texture;
 	
 	
@@ -122,10 +121,17 @@ package screens {
 			_navigator.addScreen(ScreenID.FAQ, item);
 			
 			
+			item = new StackScreenNavigatorItem(DrawerMapAddress);
+			//item.setScreenIDForPushEvent(AppEvent.COMPLETED, ScreenID.LOGIN_CASE);
+			item.addPopEvent(AppEvent.CANCEL);
+			_navigator.addScreen(ScreenID.MAPS_ADDRESS, item);
+			
+			
 			item = new StackScreenNavigatorItem(ScreenMap);
 			//item.setScreenIDForPushEvent(AppEvent.COMPLETED, ScreenID.LOGIN_CASE);
 			item.addPopEvent(AppEvent.CANCEL);
-			_navigator.addScreen(ScreenID.MAPS, item);
+			_navigator.addScreen(ScreenID.MAPS, item);			
+			
 			
 			//item = new StackScreenNavigatorItem(ScreenLoginCase);
 			//itemLoginCase.pushTransition = Fade.createFadeInTransition();
@@ -137,7 +143,7 @@ package screens {
 			   itemC.addPopEvent(Event.CANCEL);
 			   this._navigator.addScreen(SCREEN_LOGIN, itemC);*/
 			
-			_navigator.rootScreenID = ScreenID.INTRO; //ScreenID.INTRO
+			_navigator.rootScreenID = ScreenID.MAIN_MAILS; //ScreenID.INTRO
 			this.addChild(_navigator);
 			this.validate();
 			
@@ -238,6 +244,7 @@ package screens {
 					break;
 					
 				case ScreenID.MAPS:
+				case ScreenID.MAPS_ADDRESS:
 					topFooter._tabBar.selectedIndex = 3;
 					topFooter.visible = true;
 					break;

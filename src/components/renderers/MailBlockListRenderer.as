@@ -9,8 +9,8 @@ package components.renderers{
 	
 	import starling.events.Event;
 	
-	public class MailBlockGroupedListRenderer extends FeathersControl implements IGroupedListItemRenderer {
-		public function MailBlockGroupedListRenderer(st:String) {
+	public class MailBlockListRenderer extends FeathersControl implements IListItemRenderer {
+		public function MailBlockListRenderer(st:String) {
 			super();
 			
 			_state = st;
@@ -20,58 +20,30 @@ package components.renderers{
 		protected var _blockIitem:MailBlock;
 		protected var _state:String;
 		
-		protected var _groupIndex:int = -1;
+		protected var _index:int = -1;
 		
-		public function get groupIndex () : int {
-			return this._groupIndex;
+		public function get index () : int {
+			return this._index;
 		};
 		
-		public function set groupIndex (value:int) : void {
-			if (this._groupIndex == value) {
+		public function set index (value:int) : void {
+			if (this._index == value) {
 				return;
 			}
-			this._groupIndex = value;
+			this._index = value;
 			this.invalidate(INVALIDATION_FLAG_DATA);
 		}
 		
-		
-		protected var _layoutIndex:int = -1;
-		
-		public function get layoutIndex () : int {
-			return this._layoutIndex;
-		};
-		
-		public function set layoutIndex (value:int) : void {
-			if (this._layoutIndex == value) {
-				return;
-			}
-			this._layoutIndex = value;
-			this.invalidate(INVALIDATION_FLAG_DATA);
-		}
+			
 		
 		
-		protected var _itemIndex:int = -1;
+		protected var _owner:List;
 		
-		public function get itemIndex () : int {
-			return this._itemIndex;
-		};
-		
-		public function set itemIndex (value:int) : void {
-			if (this._itemIndex == value) {
-				return;
-			}
-			this._itemIndex = value;
-			this.invalidate(INVALIDATION_FLAG_DATA);
-		}		
-		
-		
-		protected var _owner:GroupedList;
-		
-		public function get owner():GroupedList {
+		public function get owner():List {
 			return this._owner;
 		}
 		
-		public function set owner(value:GroupedList):void {
+		public function set owner(value:List):void {
 			if (this._owner == value) {
 				return;
 			}

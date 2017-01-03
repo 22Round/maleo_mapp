@@ -95,7 +95,7 @@ package application.utils {
 		}
 		   
 		   
-		   public static function _setButtonBitmapLabel(target:Button,  lab:String, yoff:Number, fontName:String, ls:Number, fontSize:int = -1):Button{
+		public static function _setButtonBitmapLabel(target:Button,  lab:String, yoff:Number, fontName:String, ls:Number, fontSize:int = -1):Button{
 			
 			var $btn:Button = Button(target);
 			$btn.label = lab;
@@ -117,6 +117,25 @@ package application.utils {
 			return $btn; 
 			
 		}
+		
+		
+			public static function _addBtnSkinBFont(cont:*, label:String='', fStyle:BitmapFontTextFormat = null, bSkin:ImageSkin = null):Button {
+				
+				var btn:Button = new Button;
+				//btn.fontStyles = fStyle;
+				btn.label = label;
+				btn.labelFactory = function():ITextRenderer{
+					var renderer:BitmapFontTextRenderer = new BitmapFontTextRenderer();
+					renderer.textFormat = fStyle;
+					return renderer;
+				};
+				btn.defaultSkin = bSkin;
+				
+				cont.addChild(btn);
+				btn.validate();
+				return btn;
+			}
+		
 		   
 			public static function _addBtnSkin(cont:*, label:String='', fStyle:TextFormat = null, bSkin:ImageSkin = null):Button {
 				
@@ -235,6 +254,7 @@ package application.utils {
 			var htmlTxt:BitmapFontTextRenderer = new BitmapFontTextRenderer();
 
 			var format:BitmapFontTextFormat = new BitmapFontTextFormat(fontName);
+			
 			format.letterSpacing = _letterSpacing;
 			if (_size != -1)
 			{
@@ -311,6 +331,35 @@ package application.utils {
 			cont.addChild(input);
 			input.validate();
 			return(input);
+		}
+		
+		public static function _addBFTR(cont:DisplayObjectContainer, lab_txt:String = '', labStyle:BitmapFontTextFormat = null):BitmapFontTextRenderer {
+			
+			var lab:BitmapFontTextRenderer = new BitmapFontTextRenderer;
+			
+			lab.text = lab_txt;
+			lab.textFormat = labStyle;
+					
+			cont.addChild(lab);
+			lab.validate();
+			return lab;
+		}
+		
+		public static function _addLabelBFont(cont:DisplayObjectContainer, lab_txt:String = '', labStyle:BitmapFontTextFormat = null):Label {
+			
+			var lab:Label = new Label;
+			lab.text = lab_txt;
+			//lab.fontStyles = labStyle;
+			
+			lab.textRendererFactory = function():ITextRenderer {
+				var renderer:BitmapFontTextRenderer = new BitmapFontTextRenderer();
+				renderer.textFormat = labStyle;
+				return renderer;
+			};
+			
+			cont.addChild(lab);
+			lab.validate();
+			return lab;
 		}
 		
 		public static function _addLabel(cont:DisplayObjectContainer, lab_txt:String = '', labStyle:TextFormat = null):Label {

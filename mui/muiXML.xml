@@ -211,7 +211,7 @@
 	<muipack word = 'mails_block_notifi_2'>
 		<lang ID = 'en'><![CDATA[Please declare parcel in the next 24 hours]]></lang>
 		<lang ID = 'ru'><![CDATA[Пожалуйста, объявить посылку в течение следующих 24 часов]]></lang>
-		<lang ID = 'ka'><![CDATA[გთხოვთ დაადეკლარიროთ ამანათი<br>მომდევნო 24 საათის გამვალობაში]]></lang>
+		<lang ID = 'ka'><![CDATA[გთხოვთ დაადეკლარიროთ ამანათი მომდევნო 24 საათის გამვალობაში]]></lang>
 	</muipack>	
 	
 	<!-- drawer menu items and labels -->
@@ -325,6 +325,15 @@
 		<lang ID = 'ru'>Регистрировать</lang>
 		<lang ID = 'ka'>რეგისტრაცია</lang>
 	</muipack>
+	
+	<!-- map screen -->
+	
+	<muipack word = 'map_address_menu'>
+		<lang ID = 'en'>Service providers,Mailboxes</lang>
+		<lang ID = 'ru'>Поставщики услуг,Почтовые ящики</lang>
+		<lang ID = 'ka'>სერვის ცენტრები,საფოსტო ყუთები</lang>
+	</muipack>
+	
 	
 	<!-- months -->
 

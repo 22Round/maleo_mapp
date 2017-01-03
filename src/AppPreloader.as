@@ -117,7 +117,7 @@ package {
 			this._starling.skipUnchangedFrames = true;
 			this._starling.showStats = true;
 			this._starling.showStatsAt('right', 'bottom', 1);
-		
+			this._starling.antiAliasing = 2;
 			this._starling.start();
 			this._starling.addEventListener("rootCreated", starling_rootCreatedHandler);
 			/*if (this._launchImage) {
