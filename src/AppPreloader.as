@@ -115,8 +115,8 @@ package {
 			this._starling = new Starling(Main, this.stage, null, null, Context3DRenderMode.AUTO, Context3DProfile.BASELINE);
 			this._starling.supportHighResolutions = true;
 			this._starling.skipUnchangedFrames = true;
-			this._starling.showStats = true;
-			this._starling.showStatsAt('right', 'bottom', 1);
+			//this._starling.showStats = true;
+			//this._starling.showStatsAt('right', 'bottom', 1);
 			this._starling.antiAliasing = 2;
 			this._starling.start();
 			this._starling.addEventListener("rootCreated", starling_rootCreatedHandler);

@@ -37,6 +37,8 @@ package components {
 		
 		override protected function initialize():void {
 			
+			super.initialize();
+			
 			var layout:VerticalLayout = new VerticalLayout();
 			layout.horizontalAlign = HorizontalAlign.CENTER;
 			layout.verticalAlign = VerticalAlign.TOP;
@@ -145,7 +147,9 @@ package components {
 			tabBar.dataProvider = new ListCollection(dataProvArr);
 			
 			tabBar.addEventListener(Event.CHANGE, tabBarHandler);
-			tabBar.layoutData = new AnchorLayoutData(NaN, 0, 0, 0);
+			tabBar.width = stage.stageWidth - Settings._getIntByDPI(45);
+			tabBar.height = Settings._getIntByDPI(58);
+			//tabBar.layoutData = new AnchorLayoutData(0, 0, 0, 0);
 			tabBar.styleProvider = null;
 			this.addChild(tabBar);
 			tabBar.validate();

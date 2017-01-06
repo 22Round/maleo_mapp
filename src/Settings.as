@@ -4,6 +4,7 @@
 	import application.assetLibs.Shared;
 	import application.utils.DeviceInfo;
 	import application.utils.SendAndLoadData;
+	import feathers.controls.Drawers;
 	import feathers.controls.LayoutGroup;
 	import flash.text.engine.FontLookup;
 	import flash.text.engine.Kerning;
@@ -43,6 +44,7 @@
 		public static var _splash:Splash;
 		public static var _topFooter:TopFooter;
 		public static const LARI_SYMBOL:String = '¢';
+		public static var _mapSettingsDrawer:Drawers;
 		
 		
 		//ITEM LIBRARY
@@ -77,7 +79,7 @@
 		
 		
 		public static function _getIntByDPI(exInt:int = 0):int {
-			return int(exInt / Starling.current.contentScaleFactor);
+			return int(exInt * (1/ Starling.current.contentScaleFactor));
 		}
 		
 		public static function _moveByDPI(obj:DisplayObject,xPos:Number = undefined, yPos:Number=undefined):DisplayObject {

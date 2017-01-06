@@ -1,5 +1,6 @@
 package screens {
 	import application.AssetsLoader;
+	import application.utils.StaticGUI;
 	import feathers.controls.Button;
 	import feathers.controls.Header;
 	import feathers.controls.text.TextFieldTextRenderer;
@@ -30,6 +31,7 @@ package screens {
 		public static const EDIT_DISABLED_WHITE_ITEM:String             = 'editDisabledWhiteItem';
 		public static const ARROWTOLEFT_WHITE_ITEM:String               = 'arrowToLeftWhiteItem';
 		public static const CLOSE_WHITE_ITEM:String                     = 'closeWhiteItem';
+		public static const MAP_WHITE_SETTINGS:String                   = 'mapSettingsWhiteItem';
 		
 		public static const LEFT_ITEM:String                            = 'leftSideItem';
 		public static const RIGHT_ITEM:String                           = 'rightSideItem';
@@ -53,6 +55,7 @@ package screens {
 			menuItems.push({name:EDIT_DISABLED_WHITE_ITEM,     texture:'edit_disabled_white_btn.png',     widthDPI:41,     heightDPI:40});
 			menuItems.push({name:ARROWTOLEFT_WHITE_ITEM,       texture:'arrowtoleft_white_btn.png',       widthDPI:47,     heightDPI:40});
 			menuItems.push({name:CLOSE_WHITE_ITEM,             texture:'close_white_btn.png',             widthDPI:38,     heightDPI:38});
+			menuItems.push({name:MAP_WHITE_SETTINGS,           texture:'map_settings_white_btn.png',      widthDPI:49,     heightDPI:39});
 			
 			
 			this.addEventListener(Event.ADDED_TO_STAGE, added)
@@ -71,9 +74,9 @@ package screens {
 			removeEventListener(Event.ADDED_TO_STAGE, added);
 			this.addEventListener(Event.REMOVED_FROM_STAGE, removed);
 			
-			this.paddingLeft = Settings._getIntByDPI(30);
-			this.paddingRight = Settings._getIntByDPI(30);
-			
+			this.paddingLeft = Settings._getIntByDPI(0);
+			this.paddingRight = Settings._getIntByDPI(0);
+			this.paddingTop = 0;
 			//_setMenuItems(MENU_WHITE_ITEM, LEFT_ITEM);
 			//_setMenuItems(FAQ_WHITE_ITEM, RIGHT_ITEM);
 			
@@ -111,7 +114,10 @@ package screens {
 			
 				for (i = 0; i < leftItems.length; i++ ) {
 					removeItem = leftItems[i] as DisplayObject;
+					
 					removeItem.parent.removeChild(removeItem);
+					
+					if (removeItem) removeItem = StaticGUI._safeRemoveChildren(removeItem, true);
 				}
 				
 				leftItems = null;
@@ -122,7 +128,9 @@ package screens {
 				
 				for (i = 0; i < rightItems.length; i++ ) {
 					removeItem = rightItems[i] as DisplayObject;
+					
 					removeItem.parent.removeChild(removeItem);
+					if (removeItem) removeItem = StaticGUI._safeRemoveChildren(removeItem, true);
 				}
 				
 				rightItems = null
@@ -133,12 +141,15 @@ package screens {
 			for (i = 0; i < menuItems.length; i++ ) {
 				if (setIco  == menuItems[i].name) {
 					skin = new ImageSkin(AssetsLoader._asset.getTexture(menuItems[i].texture));
+					skin.width = Settings._getIntByDPI(menuItems[i].widthDPI);
+					skin.height = Settings._getIntByDPI(menuItems[i].heightDPI);
 					//skin.textureSmoothing = TextureSmoothing.TRILINEAR;
+					var q:Quad = new Quad(this.height, this.height);
+					q.alpha = 0;
 					btn = new Button();
-					btn.width = Settings._getIntByDPI(menuItems[i].widthDPI);
-					btn.height = Settings._getIntByDPI(menuItems[i].heightDPI);
 					
-					btn.defaultSkin = skin;
+					btn.defaultSkin = q;
+					btn.defaultIcon = skin;
 					btn.name = menuItems[i].name;
 					if (side == LEFT_ITEM) {
 						
@@ -223,7 +234,7 @@ package screens {
 					
 				    visible = true;
 					_changeBackgroundSkin(0x18a6e7);
-					_setMenuItems(MENU_WHITE_ITEM);
+					_setMenuItems(ARROWTOLEFT_WHITE_ITEM);
 					_setMenuItems(FAQ_WHITE_ITEM, RIGHT_ITEM);
 					
 					break;
@@ -233,7 +244,13 @@ package screens {
 					
 					visible = true;
 					_changeBackgroundSkin(0x18a6e7);
-					_setMenuItems(ARROWTOLEFT_WHITE_ITEM);
+					
+					if (screenID == ScreenID.MAPS_ADDRESS) {
+						_setMenuItems(MAP_WHITE_SETTINGS);
+					}else {
+						_setMenuItems(ARROWTOLEFT_WHITE_ITEM);
+					}
+					
 					
 					break;
 					
@@ -253,18 +270,24 @@ package screens {
 			switch(_currentLeftItem) {
 				case MENU_BLUE_ITEM:
 				case MENU_WHITE_ITEM:
+					
 					this.dispatchEventWith(AppEvent.TOGGLE_LEFT_DRAWER, true);
 					break;
 					
 				case ARROWTOLEFT_WHITE_ITEM:
+					
 					Settings._splash._navigator.popScreen();
 					break
 				
 				case CLOSE_WHITE_ITEM:
 					
 					Settings._splash._navigator.pushScreen(ScreenID.MAIN_MAILS, null, Slide.createSlideRightTransition());
-					
 					break;
+					
+				case MAP_WHITE_SETTINGS:
+					
+					if (Settings._mapSettingsDrawer) Settings._mapSettingsDrawer.toggleTopDrawer();
+					break;	
 			}	
 		}
 		
@@ -273,14 +296,19 @@ package screens {
 			switch(_currentRightItem) {
 				case FAQ_BLUE_ITEM:
 				case FAQ_WHITE_ITEM:
+					
 					Settings._splash._navigator.pushScreen(ScreenID.FAQ);
 					break;
+					
 				case EDIT_WHITE_ITEM:
 					
-					break
+					break;
+					
 				case EDIT_DISABLED_WHITE_ITEM:
 					
 					break;
+					
+				
 			}
 			
 			

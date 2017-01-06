@@ -1,4 +1,5 @@
 package components.renderers{
+	import application.utils.StaticGUI;
 	import components.MailBlock;
 	import feathers.controls.GroupedList;
 	import feathers.controls.Label;
@@ -138,6 +139,7 @@ package components.renderers{
 			
 			if(!_blockIitem){
 				_blockIitem = new MailBlock(_state);
+				this.width = stage.stageWidth - Settings._getIntByDPI(34);
 				this.addChild(this._blockIitem);
 				_blockIitem.validate();
 
@@ -146,6 +148,7 @@ package components.renderers{
 		
 		override public function dispose():void {
 			
+			if (_blockIitem) _blockIitem = StaticGUI._safeRemoveChildren(_blockIitem, true);
 			
 			super.dispose();
 		}

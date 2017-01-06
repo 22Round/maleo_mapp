@@ -15,6 +15,7 @@ package screens.posta {
 	import feathers.layout.VerticalAlign;
 	import feathers.layout.VerticalLayout;
 	import feathers.skins.ImageSkin;
+	import feathers.text.BitmapFontTextFormat;
 	import flash.geom.Rectangle;
 	import starling.events.Event;
 	import starling.text.TextFormat;
@@ -27,21 +28,32 @@ package screens.posta {
 		private var payBtnStyle:TextFormat;
 		private var fillBtnStyle:TextFormat;
 		
+		private var amountStyleB:BitmapFontTextFormat;
+		private var amountDisableStyleB:BitmapFontTextFormat;
+		
 		private var subTitleStyle:TextFormat;
 		private var amountStyle:TextFormat;
 		private var amountDisableStyle:TextFormat;
 		private var lariStyle:TextFormat;
 		private var lariDisableStyle:TextFormat;
 		
+		private var payBtnSkin:ImageSkin;
+		private var payBtn:Button;
+		
 		private var title:Label;
 		private var item:MailBlock;
-		private var mailToggleGroup:ToggleGroup;
+		private var amountLabel:Label;
+		private var lariSymbolLabel:Label;
+		private var fillBtnSkin:ImageSkin;
+		private var fillBtn:Button;
+		
 		private var arrivedGroup:LayoutGroup;
 		private var arrivedGroupLayout:VerticalLayout;
 		private var notifiGroup:LayoutGroup;
 		private var notifiGroupLayout:VerticalLayout;
 		private var buttonsGroup:LayoutGroup;
 		private var buttonsGroupLayout:VerticalLayout;
+		private var payBtnIcoGroup:LayoutGroup
 		
 		public function ScreenArrivedMails() {
 			super();
@@ -52,7 +64,7 @@ package screens.posta {
 			
 			super.initialize();
 			
-			mailToggleGroup = new ToggleGroup;
+			
 			
 			var layout:VerticalLayout = new VerticalLayout();
 			layout.horizontalAlign = HorizontalAlign.CENTER;
@@ -94,10 +106,22 @@ package screens.posta {
 			amountStyle.color = 0xffffff;
 			amountStyle.horizontalAlign = HorizontalAlign.LEFT;
 			
+			
+			amountStyleB = new BitmapFontTextFormat('_BPGArialBold');
+			amountStyleB.size = Settings._getIntByDPI(60);
+			amountStyleB.color = 0xffffff;
+			
+			
 			lariStyle = new TextFormat;
 			lariStyle.font = '_lariSymbol';
 			lariStyle.size = Settings._getIntByDPI(24);
 			lariStyle.color = 0xffffff;
+			
+			
+			amountDisableStyleB = new BitmapFontTextFormat('_BPGArialBold');
+			amountDisableStyleB.size = Settings._getIntByDPI(60);
+			amountDisableStyleB.color = 0xd5dfe7;
+			
 			
 			amountDisableStyle = new TextFormat;
 			amountDisableStyle.font = '_bpgArialRegular';
@@ -130,15 +154,15 @@ package screens.posta {
 			arrivedGroup.addChild(item);
 			
 			item = new MailBlock(MailBlock.CHECK_TOPAY_MAIL);
-			//item._radioGroup = mailToggleGroup;
+			
 			arrivedGroup.addChild(item);
 			
 			item = new MailBlock(MailBlock.CHECK_TOPAY_MAIL);
-			//item._radioGroup = mailToggleGroup;
+			
 			arrivedGroup.addChild(item);
 			
 			item = new MailBlock(MailBlock.CHECK_TOPAY_MAIL);
-			//item._radioGroup = mailToggleGroup;
+			
 			arrivedGroup.addChild(item);
 			
 			notifiGroup = new LayoutGroup();
@@ -163,16 +187,31 @@ package screens.posta {
 			buttonsGroup.layout = buttonsGroupLayout;
 			addChild(buttonsGroup);
 			
-			var payBtnSkin:ImageSkin = new ImageSkin(AssetsLoader._asset.getTexture("posta_item_submit_btn_normal.png"));
+			payBtnSkin = new ImageSkin(AssetsLoader._asset.getTexture("posta_item_submit_btn_normal.png"));
 			payBtnSkin.setTextureForState(ButtonState.DISABLED, AssetsLoader._asset.getTexture("posta_item_submit_btn_disabled.png"));
-			payBtnSkin.scale9Grid = new Rectangle(40, 40, 120, 120);
+			payBtnSkin.scale9Grid = StaticGUI._getScale9GridRect(payBtnSkin.width, payBtnSkin.height);
 			
-			var payBtn:Button = StaticGUI._addBtnSkin(buttonsGroup, '', null, payBtnSkin);
-			payBtn.isEnabled = false;
+			var aStyle:BitmapFontTextFormat;
+			
+			var canPay:Boolean;
+			if (canPay) {
+				aStyle = amountStyleB;
+				
+			}else {
+				aStyle = amountDisableStyleB;
+				
+			}
+			var payStr:String = Settings._mui['mails_arrived_sum_pay_btn'][Settings._lang] + ' 320122.54';
+			payStr += Settings.LARI_SYMBOL;
+			payStr += ' - ' + Settings._mui['mails_arrived_payment_pay_btn'][Settings._lang];
+			
+			payBtn = StaticGUI._addBtnSkinBFont(buttonsGroup, payStr, aStyle, payBtnSkin);
+			payBtn.labelOffsetY = Settings._getIntByDPI(-27);
+			payBtn.isEnabled = canPay;
 			//payBtn.addEventListener(Event.TRIGGERED, mailRegHandler);
 			
 			
-			var payBtnIcoGroup:LayoutGroup = new LayoutGroup();
+			payBtnIcoGroup = new LayoutGroup();
 			payBtnIcoGroup.width = Settings._getIntByDPI(350);
 			var payBtnIcoGroupLayout:FlowLayout = new FlowLayout();
 			payBtnIcoGroupLayout.horizontalAlign = HorizontalAlign.CENTER;
@@ -181,26 +220,17 @@ package screens.posta {
 			payBtnIcoGroup.layout = payBtnIcoGroupLayout;
 			
 			//addChild(statusGroup);
-			var aStyle:TextFormat;
-			var lStyle:TextFormat;
 			
-			if (payBtn.isEnabled) {
-				aStyle = amountStyle;
-				lStyle = lariStyle;
-			}else {
-				aStyle = amountDisableStyle;
-				lStyle = lariDisableStyle;
-			}
 			
-			var amountLabel:Label = StaticGUI._addLabel(payBtnIcoGroup, Settings._mui['mails_arrived_sum_pay_btn'][Settings._lang]+' 320122.54', aStyle);
-			var lariSymbolLabel:Label = StaticGUI._addLabel(payBtnIcoGroup, 's', lStyle);
+			/*amountLabel = StaticGUI._addLabel(payBtnIcoGroup, Settings._mui['mails_arrived_sum_pay_btn'][Settings._lang]+' 320122.54', aStyle);
+			//lariSymbolLabel = StaticGUI._addLabel(payBtnIcoGroup, 's', lStyle);
 			amountLabel = StaticGUI._addLabel(payBtnIcoGroup, ' - '+Settings._mui['mails_arrived_payment_pay_btn'][Settings._lang], aStyle);
 			payBtn.defaultIcon = payBtnIcoGroup;
-			payBtn.iconOffsetY = 25;
+			payBtn.iconOffsetY = Settings._getIntByDPI(15);*/
 			
 			
-			var fillBtnSkin:ImageSkin = new ImageSkin(AssetsLoader._asset.getTexture("posta_item_pay_btn.png"));
-			var fillBtn:Button = StaticGUI._addBtnSkin(buttonsGroup, Settings._mui['mails_arrived_fill_balance_btn'][Settings._lang], fillBtnStyle, fillBtnSkin);
+			fillBtnSkin = new ImageSkin(AssetsLoader._asset.getTexture("posta_item_pay_btn.png"));
+			fillBtn = StaticGUI._addBtnSkin(buttonsGroup, Settings._mui['mails_arrived_fill_balance_btn'][Settings._lang], fillBtnStyle, fillBtnSkin);
 			
 			
 			this.width = stage.stageWidth;
@@ -211,8 +241,34 @@ package screens.posta {
 		
 		override public function dispose():void {
 			
-			if (arrivedGroup) StaticGUI._safeRemoveChildren(arrivedGroup, true);
-			if (notifiGroup) StaticGUI._safeRemoveChildren(notifiGroup, true);
+			if (arrivedGroup) arrivedGroup = StaticGUI._safeRemoveChildren(arrivedGroup, true);
+			if (buttonsGroup) buttonsGroup = StaticGUI._safeRemoveChildren(buttonsGroup, true);
+			if (notifiGroup) notifiGroup = StaticGUI._safeRemoveChildren(notifiGroup, true);
+			if (payBtnIcoGroup) payBtnIcoGroup = StaticGUI._safeRemoveChildren(payBtnIcoGroup, true);
+			if (payBtnSkin) payBtnSkin = StaticGUI._safeRemoveChildren(payBtnSkin, true);
+			if (payBtn)payBtn = StaticGUI._safeRemoveChildren(payBtn, true);
+			if (title) title = StaticGUI._safeRemoveChildren(title, true);
+			if (item) item = StaticGUI._safeRemoveChildren(item, true);
+			if (amountLabel) amountLabel = StaticGUI._safeRemoveChildren(amountLabel, true);
+			if (lariSymbolLabel) lariSymbolLabel = StaticGUI._safeRemoveChildren(lariSymbolLabel, true);
+			if (fillBtnSkin) fillBtnSkin = StaticGUI._safeRemoveChildren(fillBtnSkin, true);
+			if (fillBtn) fillBtn = StaticGUI._safeRemoveChildren(fillBtn, true);
+			
+			titleStyle = null;
+			alertStyle = null;
+			payBtnStyle = null;
+			fillBtnStyle = null;
+			
+			subTitleStyle = null;
+			amountStyle = null;
+			amountDisableStyle = null;
+			lariStyle = null;
+			lariDisableStyle = null;
+			arrivedGroupLayout = null;
+			notifiGroupLayout = null;
+			buttonsGroupLayout = null;
+			
+			
 			
 			super.dispose();
 		}

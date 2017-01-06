@@ -58,7 +58,11 @@ package drawer.views {
 			this.addChild(navigator);
 			this.validate();
 			
-			this.width = stage.stageWidth  - Settings._getIntByDPI(stage.stageWidth / 4);
+			this.width = stage.stageWidth  - Settings._getIntByDPI(120);
+			
+			/*var drw:DrawerView = new DrawerView;
+			//drw.styleNameList.add(DrawersExplorerTheme.THEME_NAME_LEFT_AND_RIGHT_DRAWER);
+			addChild(drw);*/
 			
 		}
 		

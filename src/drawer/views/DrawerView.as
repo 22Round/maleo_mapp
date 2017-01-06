@@ -17,6 +17,7 @@ package drawer.views {
 	import feathers.skins.ImageSkin;
 	import feathers.controls.Button;
 	import starling.display.Image;
+	import starling.display.Quad;
 	import starling.text.TextFormat;
 	import starling.textures.TextureSmoothing;
 	
@@ -50,12 +51,19 @@ package drawer.views {
 			//never forget to call super.initialize()
 			super.initialize();
 			
+			
+			
+			
+			
+			
 			var layout:VerticalLayout = new VerticalLayout();
 			//layout.horizontalAlign = HorizontalAlign.CENTER;
 			//layout.verticalAlign = VerticalAlign.MIDDLE;
+			
 			layout.paddingTop = Settings._getIntByDPI(110);
 			layout.paddingLeft = Settings._getIntByDPI(45);
 			layout.gap = Settings._getIntByDPI(60);
+			
 			this.layout = layout;
 			
 			
@@ -84,6 +92,9 @@ package drawer.views {
 			lariStyle.size = Settings._getIntByDPI(30);
 			lariStyle.color = 0xffffff;
 			
+			
+		
+			
 			var btn:Button;
 			
 			
@@ -104,11 +115,15 @@ package drawer.views {
 			}
 			
 			
+			
+			
 			line = new MyCanvas;
 			addChild(line);
 			line.lineStyle(2, 0x66696a);
 			line.lineTo(0, 0);
 			line.lineTo(Settings._getIntByDPI(400), 0);
+			
+			
 			
 			
 			var sectorTwoGroup:LayoutGroup = new LayoutGroup();
@@ -126,6 +141,8 @@ package drawer.views {
 			titleLabel = StaticGUI._addLabel(label1Group, Settings._mui['drawer_title_1'][Settings._lang], labelStyle1);
 			titleLabel = StaticGUI._addLabel(label1Group, 'ზვიად Ziziguri დიდი ერთი царица', btnStyle1);
 			
+			
+			
 			var label2Group:LayoutGroup = new LayoutGroup();
 			label2Group.width = Settings._getIntByDPI(350);
 			var label2GroupLayout:FlowLayout = new FlowLayout();
@@ -138,6 +155,7 @@ package drawer.views {
 			titleLabel = StaticGUI._addLabel(label2Group, Settings._mui['drawer_title_2'][Settings._lang], labelStyle1);
 			titleLabel = StaticGUI._addLabel(label2Group, '33.54', labelStyle2);
 			
+
 			var lariSimGroup:LayoutGroup = new LayoutGroup();
 			var lariSimGroupLayout:VerticalLayout = new VerticalLayout();
 			lariSimGroupLayout.paddingTop = Settings._getIntByDPI(23);
@@ -152,6 +170,8 @@ package drawer.views {
 			lariImg.scaleY = lariImg.scaleX;
 			lariSimGroup.addChild(lariImg);
 			
+			
+			
 			fillBalanceBtn = StaticGUI._addBtnSkin(sectorTwoGroup, Settings._mui['drawer_balance_btn'][Settings._lang], btnStyle1, new ImageSkin(AssetsLoader._asset.getTexture("drawer_fill_balance_btn.png")));
 			
 			line = new MyCanvas;
@@ -160,8 +180,9 @@ package drawer.views {
 			line.lineTo(0, 0);
 			line.lineTo(Settings._getIntByDPI(400), 0);
 			
+			this.height = stage.stageHeight - Settings._getIntByDPI(100);
 			
-			this.height = stage.height-100;
+			
 		}
 		
 		private function menuHandler(e:Event):void {
@@ -179,7 +200,6 @@ package drawer.views {
 			this.removeChildren();
 			super.dispose();
 			
-			trace('dispose callde')
 		}
 		
 		private function addBtnSkin(cont:*, fStyle:TextFormat, bSkin:ImageSkin ,btn:Button):Button {

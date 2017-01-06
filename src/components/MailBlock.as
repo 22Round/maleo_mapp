@@ -538,8 +538,8 @@ package components {
 			if (statusGroup) StaticGUI._safeRemoveChildren(statusGroup, true);
 			if (domainIco) StaticGUI._safeRemoveChildren(domainIco, true);
 			
-			bgSkin.dispose();
-			bgTexture.dispose();
+			if (bgSkin) bgSkin.dispose();
+			if (bgTexture) bgTexture.dispose();
 			
 			if (lariSymbolImg) lariSymbolImg.dispose();
 			if (domainIco) domainIco.dispose();

@@ -143,7 +143,7 @@ package screens {
 			   itemC.addPopEvent(Event.CANCEL);
 			   this._navigator.addScreen(SCREEN_LOGIN, itemC);*/
 			
-			_navigator.rootScreenID = ScreenID.MAIN_MAILS; //ScreenID.INTRO
+			_navigator.rootScreenID = ScreenID.INTRO; //ScreenID.INTRO
 			this.addChild(_navigator);
 			this.validate();
 			
@@ -247,6 +247,7 @@ package screens {
 				case ScreenID.MAPS_ADDRESS:
 					topFooter._tabBar.selectedIndex = 3;
 					topFooter.visible = true;
+					_changeBackgroundSkin(0xffffff);
 					break;
 					
 				case ScreenID.FAQ:

@@ -1,25 +1,26 @@
 package components.renderers {
+	import application.utils.MyCanvas;
 	import application.utils.StaticGUI;
 	import feathers.controls.GroupedList;
-	import feathers.controls.Label;
 	import feathers.controls.LayoutGroup;
-	import feathers.controls.renderers.IGroupedListHeaderRenderer;
+	import feathers.controls.renderers.IGroupedListFooterRenderer;
 	import feathers.controls.text.BitmapFontTextRenderer;
 	import feathers.core.FeathersControl;
 	import feathers.layout.HorizontalAlign;
 	import feathers.layout.VerticalAlign;
 	import feathers.layout.VerticalLayout;
 	import feathers.text.BitmapFontTextFormat;
+	import feathers.utils.touch.TapToTrigger;
 	import starling.events.Event;
 	import starling.text.TextFormat;
 	
 	
-	public class MailBlockGroupedHeaderRenderer extends FeathersControl implements IGroupedListHeaderRenderer {
+	public class MailBlockGroupedFooterRenderer extends FeathersControl implements IGroupedListFooterRenderer {
 		
 		private var titleStyle:TextFormat;
 		private var titleStyleB:BitmapFontTextFormat;
 		
-		public function MailBlockGroupedHeaderRenderer() {
+		public function MailBlockGroupedFooterRenderer() {
 			super();
 			
 			titleStyle = new TextFormat;
@@ -27,12 +28,16 @@ package components.renderers {
 			titleStyle.size = Settings._getIntByDPI(30);
 			titleStyle.color = 0x4d5051;
 			
-			titleStyleB = new BitmapFontTextFormat('_BPGArial');
+			titleStyleB = new BitmapFontTextFormat('_BPGArialBold');
 			//titleStyleB.font = '_bpgArialRegular';
-			titleStyleB.size = Settings._getIntByDPI(80);
-			titleStyleB.color = 0x4d5051;
+			titleStyleB.size = Settings._getIntByDPI(60);
+			titleStyleB.color = 0x186c97;
+			
+			trigger = new TapToTrigger(this);
+			
 			
 		}
+		private var trigger:TapToTrigger;
 		
 		protected var _label:BitmapFontTextRenderer;
 		private var labelGroup:LayoutGroup;
@@ -162,6 +167,8 @@ package components.renderers {
 			this.invalidate(INVALIDATION_FLAG_LAYOUT);
 		}
 		
+		private var line:MyCanvas;
+		private var lineSize:uint;
 		override protected function initialize():void {
 			
 			super.initialize();
@@ -172,24 +179,50 @@ package components.renderers {
 				labelLayout.horizontalAlign = HorizontalAlign.CENTER;
 				labelLayout.verticalAlign = VerticalAlign.TOP;
 				
-				labelLayout.paddingTop = Settings._getIntByDPI(30);
-				labelLayout.paddingBottom =  Settings._getIntByDPI(30);
+				labelLayout.paddingTop = Settings._getIntByDPI(0);
+				labelLayout.gap = Settings._getIntByDPI(15);
 				labelGroup.layout = labelLayout;
 				addChild(labelGroup);
 			}
 			
+			lineSize = Settings._getIntByDPI(2);
+			if (lineSize < 2) lineSize = 2;
 			
 			if (!this._label) {
 				this._label = StaticGUI._addBFTR(labelGroup, '', titleStyleB);
-				
 			}
+			
+			if (!line) {
+					
+				line = new MyCanvas;
+				
+				line.lineStyle(lineSize, 0x4286aa);
+				line.lineTo(0, 0);
+				line.lineTo(100, 0);
+				line.endFill();
+				
+				labelGroup.addChild(line);
+			}
+			
+			this.addEventListener(Event.TRIGGERED, onTriggered);
+		}
+		
+		private function onTriggered(e:Event):void {
+			
+			this.dispatchEventWith(Event.CHANGE, true, { target:'mail_footer' } );
 		}
 		
 		
 		override public function dispose():void {
 			
+			
+			this.removeEventListener(Event.TRIGGERED, onTriggered);
 			if (labelGroup) StaticGUI._safeRemoveChildren(labelGroup, true);
 			if (_label) StaticGUI._safeRemoveChildren(_label, true);
+			if (line) StaticGUI._safeRemoveChildren(line, true);
+			
+			trigger = null;
+			
 			super.dispose();
 		}
 		
@@ -233,6 +266,12 @@ package components.renderers {
 			} else {
 				this._label.text = null;
 			}
+			
+			if (line) {
+				this._label.validate();
+				line.width = this._label.width;
+			}
+			trace('asdsad  ', line.width, this._label);
 		}
 		
 		protected function layoutChildren():void {

@@ -1,4 +1,5 @@
 package components.renderers{
+	import application.utils.StaticGUI;
 	import components.MailBlock;
 	import feathers.controls.GroupedList;
 	import feathers.controls.Label;
@@ -6,6 +7,7 @@ package components.renderers{
 	import feathers.controls.renderers.IGroupedListItemRenderer;
 	import feathers.controls.renderers.IListItemRenderer;
 	import feathers.core.FeathersControl;
+	import feathers.layout.AnchorLayoutData;
 	
 	import starling.events.Event;
 	
@@ -108,8 +110,12 @@ package components.renderers{
 			
 			super.initialize();
 			
-			if(!_blockIitem){
+			if (!_blockIitem) {
+				
+				
 				_blockIitem = new MailBlock(_state);
+				this.width = stage.stageWidth - Settings._getIntByDPI(34);
+				//_blockIitem.layoutData = new AnchorLayoutData(0, 0, 0, 0);
 				this.addChild(this._blockIitem);
 				_blockIitem.validate();
 
@@ -118,7 +124,7 @@ package components.renderers{
 		
 		override public function dispose():void {
 			
-			
+			if (_blockIitem) _blockIitem = StaticGUI._safeRemoveChildren(_blockIitem, true);
 			super.dispose();
 		}
 		

@@ -2,46 +2,32 @@ package screens.posta {
 	
 	import application.utils.StaticGUI;
 	import components.MailBlock;
+	import components.renderers.MailBlockGroupedFooterRenderer;
 	import components.renderers.MailBlockGroupedHeaderRenderer;
 	import components.renderers.MailBlockGroupedListRenderer;
 	import feathers.controls.GroupedList;
-	import feathers.controls.Label;
 	import feathers.controls.LayoutGroup;
 	import feathers.controls.ScrollBarDisplayMode;
 	import feathers.controls.ScrollPolicy;
-	import feathers.controls.renderers.DefaultGroupedListHeaderOrFooterRenderer;
+	import feathers.controls.renderers.IGroupedListFooterRenderer;
 	import feathers.controls.renderers.IGroupedListHeaderRenderer;
 	import feathers.controls.renderers.IGroupedListItemRenderer;
 	import feathers.data.HierarchicalCollection;
-	import feathers.layout.AnchorLayoutData;
 	import feathers.layout.HorizontalAlign;
 	import feathers.layout.VerticalAlign;
 	import feathers.layout.VerticalLayout;
+	import screens.ScreenID;
 	import starling.display.DisplayObject;
 	import starling.events.Event;
-	import starling.text.TextFormat;
 	
 	public class ScreenMainMails extends LayoutGroup {
-		
-		private var titleStyle:TextFormat;
-		private var subTitleStyle:TextFormat;
-		
-		private var title:Label;
-		private var item:MailBlock;
-		
-		private var arrivedGroup:LayoutGroup;
-		private var arrivedGroupLayout:VerticalLayout;
-		private var recivedGroup:LayoutGroup;
-		private var recivedGroupLayout:VerticalLayout;
-		private var sendGroup:LayoutGroup;
-		private var sendGroupLayout:VerticalLayout;
 		
 		private var list:GroupedList;
 		private var groceryList:HierarchicalCollection;
 		
 		public function ScreenMainMails() {
 			super();
-			//this.title = "Screen C";
+			
 		}
 		
 		override protected function initialize():void {
@@ -52,21 +38,9 @@ package screens.posta {
 			layout.horizontalAlign = HorizontalAlign.CENTER;
 			layout.verticalAlign = VerticalAlign.TOP;
 			
-			layout.paddingTop = Settings._getIntByDPI(160);
+			layout.paddingTop = Settings._getIntByDPI(120);
 			layout.paddingBottom = Settings._getIntByDPI(103);
 			this.layout = layout;
-			
-			
-			titleStyle = new TextFormat;
-			titleStyle.font = '_bpgArialRegular';
-			titleStyle.size = Settings._getIntByDPI(30);
-			titleStyle.color = 0x4d5051;
-			
-			subTitleStyle = new TextFormat;
-			subTitleStyle.font = '_bpgArialRegular';
-			subTitleStyle.size = Settings._getIntByDPI(20);
-			subTitleStyle.color = 0x798188;
-			
 			
 			var listLayout:VerticalLayout = new VerticalLayout();
 			listLayout.verticalAlign = VerticalAlign.TOP;
@@ -95,6 +69,11 @@ package screens.posta {
 				return renderer;
 			}
 			
+			list.footerRendererFactory = function ():IGroupedListFooterRenderer {
+				var renderer:MailBlockGroupedFooterRenderer = new MailBlockGroupedFooterRenderer();
+				return renderer;
+			}
+			
 			/*list.itemRendererFactory = function():IGroupedListItemRenderer{
 				var renderer:MailBlockGroupedListRenderer = new MailBlockGroupedListRenderer();
 				
@@ -107,7 +86,7 @@ package screens.posta {
 			[
 				{
 					header: { label: Settings._mui['mails_title_arrived'][Settings._lang] },
-					//footer: { label: Settings._mui['mails_title_arrived'][Settings._lang] },
+					footer: { label: Settings._mui['mails_footer_payall'][Settings._lang] },
 					children:
 					[
 						{ status: MailBlock.COMPLETED_MAIL  },
@@ -118,11 +97,11 @@ package screens.posta {
 					header: { label: Settings._mui['mails_title_recived_usa'][Settings._lang] },
 					children:
 					[
-						{ status: MailBlock.COMPLETED_MAIL },
+						{ status: MailBlock.UNKNOWN_MAIL },
 						{ status: MailBlock.COMPLETED_MAIL},
 						{ status: MailBlock.COMPLETED_MAIL },
 						{ status: MailBlock.COMPLETED_MAIL},
-						{ status: MailBlock.ENTER_GOODS_MAIL },
+						{ status: MailBlock.PAY_MAIL },
 						{ status: MailBlock.ENTER_GOODS_MAIL},
 						{ status: MailBlock.ENTER_GOODS_MAIL }
 					]
@@ -133,7 +112,7 @@ package screens.posta {
 					[
 						{ status: MailBlock.ENTER_GOODS_MAIL},
 						{ status: MailBlock.COMPLETED_MAIL},
-						{ status: MailBlock.COMPLETED_MAIL},
+						{ status: MailBlock.PAY_MAIL},
 						{ status: MailBlock.COMPLETED_MAIL }
 					]
 				},
@@ -141,7 +120,7 @@ package screens.posta {
 			
 			list.snapScrollPositionsToPixels = true;
 			list.dataProvider = groceryList;
-			
+			list.addEventListener(Event.CHANGE, listChangeHandler );
 			list.setItemRendererFactoryWithID(MailBlock.CHECK_TOPAY_MAIL,      CHECK_TOPAY_MAIL_itemFactory);
 			list.setItemRendererFactoryWithID(MailBlock.COMPLETED_MAIL,        COMPLETED_MAIL_itemFactory);
 			list.setItemRendererFactoryWithID(MailBlock.ENTER_GOODS_MAIL,      ENTER_GOODS_MAIL_itemFactory);
@@ -154,56 +133,14 @@ package screens.posta {
 				return item.status;
 			};
 			
-
-			
-			/*arrivedGroup = new LayoutGroup();
-			arrivedGroupLayout = new VerticalLayout();
-			arrivedGroupLayout.horizontalAlign = HorizontalAlign.CENTER;
-			arrivedGroupLayout.verticalAlign = VerticalAlign.TOP;
-			arrivedGroupLayout.gap = 10;
-			arrivedGroup.layout = arrivedGroupLayout;
-			addChild(arrivedGroup);
-			
-			title = StaticGUI._addLabel(arrivedGroup, Settings._mui['mails_title_arrived'][Settings._lang], titleStyle);
-			
-			item = new MailBlock(MailBlock.COMPLETED_MAIL);
-			arrivedGroup.addChild(item);
-			item = new MailBlock(MailBlock.PAY_MAIL);
-			arrivedGroup.addChild(item);
-			
-			
-			recivedGroup = new LayoutGroup();
-			recivedGroupLayout = new VerticalLayout();
-			recivedGroupLayout.horizontalAlign = HorizontalAlign.CENTER;
-			recivedGroupLayout.verticalAlign = VerticalAlign.TOP;
-			recivedGroupLayout.gap = 10;
-			recivedGroup.layout = arrivedGroupLayout;
-			addChild(recivedGroup);
-			title = StaticGUI._addLabel(recivedGroup, Settings._mui['mails_title_recived_usa'][Settings._lang], titleStyle);
-			item = new MailBlock(MailBlock.ENTER_GOODS_MAIL);
-			recivedGroup.addChild(item);
-			item = new MailBlock(MailBlock.UNKNOWN_MAIL);
-			recivedGroup.addChild(item);
-			
-			sendGroup = new LayoutGroup();
-			sendGroupLayout = new VerticalLayout();
-			sendGroupLayout.horizontalAlign = HorizontalAlign.CENTER;
-			sendGroupLayout.verticalAlign = VerticalAlign.TOP;
-			sendGroupLayout.gap = 10;
-			sendGroup.layout = sendGroupLayout;
-			addChild(sendGroup);
-			title = StaticGUI._addLabel(sendGroup, Settings._mui['mails_title_ontheway'][Settings._lang], titleStyle);
-			title = StaticGUI._addLabel(sendGroup, Settings._mui['mails_title_estarrival'][Settings._lang]+' - 2016, 23 ოქტომბერი', subTitleStyle);
-			item = new MailBlock(MailBlock.ENTER_GOODS_MAIL);
-			sendGroup.addChild(item);
-			title = StaticGUI._addLabel(sendGroup, Settings._mui['mails_title_estarrival'][Settings._lang]+' - 2016, 3 ნოემბერი', subTitleStyle);
-			item = new MailBlock(MailBlock.UNKNOWN_MAIL);
-			sendGroup.addChild(item);*/
-			
 			this.width = stage.stageWidth;
 			this.height = stage.stageHeight;
 			
 			this.validate();
+		}
+		
+		private function listChangeHandler(e:Event):void {
+			Settings._splash._navigator.pushScreen(ScreenID.ARRIVED_MAIL);
 		}
 		
 		private function CHECK_TOPAY_MAIL_itemFactory():IGroupedListItemRenderer {
@@ -232,7 +169,7 @@ package screens.posta {
 		
 		private function itemFactory(st:String):IGroupedListItemRenderer {
 			var renderer:MailBlockGroupedListRenderer = new MailBlockGroupedListRenderer(st);
-			renderer.padding = 5;
+			renderer.padding =  Settings._getIntByDPI(5);
 			return renderer;	
 		}
 		
@@ -243,21 +180,13 @@ package screens.posta {
 		
 		override public function dispose():void {
 			
-			if (arrivedGroup) StaticGUI._safeRemoveChildren(arrivedGroup, true);
-			if (recivedGroup) StaticGUI._safeRemoveChildren(recivedGroup, true);
-			if (sendGroup) StaticGUI._safeRemoveChildren(sendGroup, true);
 			if (list) {
+				list.removeEventListener(Event.CHANGE, listChangeHandler );
 				list.dataProvider.dispose(null, disposeItemAccessory);
 				StaticGUI._safeRemoveChildren(list, true);
 			}
-			
-			
-			
+			list = null;
 			super.dispose();
-		}
-		
-		protected function mailRegHandler(event:Event):void {
-			this.dispatchEventWith(Event.COMPLETE);
 		}
 	}
 }

@@ -2,8 +2,6 @@ package screens.map {
 	
 	import application.utils.StaticGUI;
 	import components.AddressMenuBlock;
-	import components.MailBlock;
-	import components.MailMenuBlock;
 	import components.renderers.MapAddressBlockListRenderer;
 	import feathers.controls.List;
 	import feathers.controls.Screen;
@@ -72,7 +70,6 @@ package screens.map {
 				return renderer;
 			}
 			
-			
 			mailList = new ListCollection;
 			list.dataProvider = mailList;
 			
@@ -89,7 +86,7 @@ package screens.map {
 		}
 		
 		private function listChangeHandler(e:Event):void {
-			
+			//dispatchEventWith(AppEvent.TOGGLE_TOP_MAP_DRAWER, true);
 			Settings._splash._navigator.pushScreen(ScreenID.MAPS);
 		}
 		

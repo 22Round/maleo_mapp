@@ -125,10 +125,16 @@
 		<lang ID = 'ka'>მიღებული</lang>
 	</muipack>
 	
+	<muipack word = 'mails_footer_payall'>
+		<lang ID = 'en'>Pay all</lang>
+		<lang ID = 'ru'>Оплатить все</lang>
+		<lang ID = 'ka'>რამოდენიმეს გადახდა ერთად</lang>
+	</muipack>
+	
 	<muipack word = 'mails_title_recived_usa'>
 		<lang ID = 'en'>Recived in USA</lang>
 		<lang ID = 'ru'>Поступило в США</lang>
-		<lang ID = 'ka'>ნიღებული აშშ-ში</lang>
+		<lang ID = 'ka'>მიღებული აშშ-ში</lang>
 	</muipack>
 	
 	<muipack word = 'mails_title_ontheway'>
@@ -334,6 +340,70 @@
 		<lang ID = 'ka'>სერვის ცენტრები,საფოსტო ყუთები</lang>
 	</muipack>
 	
+	<muipack word = 'map_local_working_from'>
+		<lang ID = 'en'>Mon-Fri:</lang>
+		<lang ID = 'ru'>Пон-Пят:</lang>
+		<lang ID = 'ka'>ორშ-პარ:</lang>
+	</muipack>
+	
+	<!-- distance -->
+	
+	<muipack word = 'distance_meters'>
+		<lang ID = 'en'>m</lang>
+		<lang ID = 'ru'>m</lang>
+		<lang ID = 'ka'>მ</lang>
+	</muipack>
+	
+	<muipack word = 'distance_kmeters'>
+		<lang ID = 'en'>km</lang>
+		<lang ID = 'ru'>km</lang>
+		<lang ID = 'ka'>მ</lang>
+	</muipack>	
+	
+	
+	<!-- days -->
+	
+	<muipack word = 'day_0'>
+		<lang ID = 'en'>Monday</lang>
+		<lang ID = 'ru'>Понедельник</lang>
+		<lang ID = 'ka'>ორშაბათი</lang>
+	</muipack>
+	
+	<muipack word = 'day_1'>
+		<lang ID = 'en'>Tuesday</lang>
+		<lang ID = 'ru'>Вторник</lang>
+		<lang ID = 'ka'>სამშაბათი</lang>
+	</muipack>
+	
+	<muipack word = 'day_2'>
+		<lang ID = 'en'>Wednesday</lang>
+		<lang ID = 'ru'>Среда</lang>
+		<lang ID = 'ka'>ოთხშაბათი</lang>
+	</muipack>
+	
+	<muipack word = 'day_3'>
+		<lang ID = 'en'>Thursday</lang>
+		<lang ID = 'ru'>Четверг</lang>
+		<lang ID = 'ka'>ხუთშაბათი</lang>
+	</muipack>
+	
+	<muipack word = 'day_4'>
+		<lang ID = 'en'>Friday</lang>
+		<lang ID = 'ru'>Пятница</lang>
+		<lang ID = 'ka'>პარასკევი</lang>
+	</muipack>
+	
+	<muipack word = 'day_5'>
+		<lang ID = 'en'>Saturday</lang>
+		<lang ID = 'ru'>Суббота</lang>
+		<lang ID = 'ka'>შაბათი</lang>
+	</muipack>
+	
+	<muipack word = 'day_6'>
+		<lang ID = 'en'>Sunday</lang>
+		<lang ID = 'ru'>Воскресенье</lang>
+		<lang ID = 'ka'>კვირა</lang>
+	</muipack>
 	
 	<!-- months -->
 

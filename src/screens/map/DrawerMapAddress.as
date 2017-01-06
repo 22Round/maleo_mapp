@@ -5,6 +5,7 @@ package screens.map {
 	import feathers.controls.LayoutGroup;
 	import feathers.layout.HorizontalAlign;
 	import feathers.layout.Orientation;
+	import feathers.layout.RelativeDepth;
 	import feathers.layout.VerticalAlign;
 	import feathers.layout.VerticalLayout;
 	import starling.events.Event;
@@ -34,7 +35,8 @@ package screens.map {
 			this.layout = layout;
 			
 			drawers = new Drawers();
-			drawers.overlaySkin = null;
+			//drawers.overlaySkin = null;
+			Settings._mapSettingsDrawer = drawers;
 
 			drawers.openGesture = DragGesture.EDGE;
 			
@@ -46,7 +48,8 @@ package screens.map {
 			
 			var topDrawer:DrawerMapContent = new DrawerMapContent();
 			drawers.topDrawer = topDrawer;
-			drawers.topDrawerDockMode = Orientation.NONE;
+			drawers.topDrawerDockMode = Orientation.LANDSCAPE;
+			drawers.openMode = RelativeDepth.ABOVE;
 			
 			this.addChild(drawers);
 			
@@ -54,10 +57,12 @@ package screens.map {
 		}
 		
 		override public function dispose():void {
+			drawers.content.removeEventListener(Event.CHANGE, contentView_openDrawerChangeHandler);
 			drawers.topDrawer.dispose();
 			drawers.content.dispose();
 			drawers.dispose();
 			drawers = null;
+			Settings._mapSettingsDrawer = null;
 			super.dispose();
 		}
 		

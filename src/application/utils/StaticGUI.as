@@ -64,7 +64,7 @@ package application.utils {
 			return true;
 		} // end function
 		
-		public static function _safeRemoveChildren(param1:Object, dispose:Boolean = false):Boolean {
+		public static function _safeRemoveChildren(param1:Object, dispose:Boolean = false):* {
 			if (param1 == null) {
 				//Tracer._log("couldnt remove: " + param1);
 				return false;
@@ -83,7 +83,7 @@ package application.utils {
 				param1.dispose();
 			}
 			
-			return true;
+			return null;
 		}
 		
 		public static function _getScale9GridRect(sourceWidth:int = 100, sourceHeight:int = 100):Rectangle {

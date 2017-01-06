@@ -2,6 +2,7 @@ package drawer.views {
 	
 	import application.AssetsLoader;
 	import application.utils.StaticGUI;
+	import components.MailBlock;
 	import feathers.controls.Button;
 	import feathers.controls.Screen;
 	import feathers.layout.AnchorLayout;
@@ -47,7 +48,7 @@ package drawer.views {
 			btnStyle1.color = 0x898a8b;
 			
 			
-			drw = new DrawerView;
+			var drw:DrawerView = new DrawerView;
 			//drw.styleNameList.add(DrawersExplorerTheme.THEME_NAME_LEFT_AND_RIGHT_DRAWER);
 			addChild(drw);
 		
@@ -67,6 +68,11 @@ package drawer.views {
 			//settingsBtn.iconOffsetX = -15;
 			settingsBtn.defaultSkin = null;
 			settingsBtn.layoutData = fillBottomLayoutData;
+			
+			
+			
+			
+			
 			
 			
 			//this.height = stage.stageHeight;

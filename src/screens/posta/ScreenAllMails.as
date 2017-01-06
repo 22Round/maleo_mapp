@@ -85,9 +85,11 @@ package screens.posta {
 			
 			var menuArr:Array = String(Settings._mui['mails_allmails_menu'][Settings._lang]).split(',');
 			menu = new MailMenuBlock(menuArr);
-			menu.addEventListener(AppEvent.CHANGE, menuChangeHandler);
-			addChildAt(menu, 0);
 			
+			menu.addEventListener(AppEvent.CHANGE, menuChangeHandler);
+			
+			addChildAt(menu, 0);
+			menu.validate();
 			
 			this.width = stage.stageWidth;
 			this.height = stage.stageHeight;
@@ -165,7 +167,7 @@ package screens.posta {
 		
 		private function itemFactory(st:String):IListItemRenderer {
 			var renderer:MailBlockListRenderer = new MailBlockListRenderer(st);
-			renderer.padding = 5;
+			renderer.padding = Settings._getIntByDPI(5);
 			return renderer;	
 		}
 		
