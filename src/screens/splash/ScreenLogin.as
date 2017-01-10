@@ -72,7 +72,7 @@ package screens.splash {
 			
 			btnStyle1 = new TextFormat;
 			btnStyle1.font = '_bpgArialRegular';
-			btnStyle1.size = Settings._getIntByDPI(24);
+			btnStyle1.size = Settings._getIntByDPI(27);
 			btnStyle1.color = 0xffffff;
 			
 			labelStyle = new TextFormat;
@@ -82,7 +82,7 @@ package screens.splash {
 			
 			inputStyle = new TextFormat;
 			inputStyle.font = '_bpgArialRegular';
-			inputStyle.size = Settings._getIntByDPI(24);
+			inputStyle.size = Settings._getIntByDPI(27);
 			inputStyle.horizontalAlign = HorizontalAlign.CENTER;
 			inputStyle.color = 0x747474;
 			

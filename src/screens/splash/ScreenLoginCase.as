@@ -64,12 +64,12 @@ package screens.splash {
 			
 			btnStyle1 = new TextFormat;
 			btnStyle1.font = '_bpgArialRegular';
-			btnStyle1.size = Settings._getIntByDPI(24);
+			btnStyle1.size = Settings._getIntByDPI(27);
 			btnStyle1.color = 0xffffff;
 			
 			btnStyle2 = new TextFormat;
 			btnStyle2.font = '_bpgArialRegular';
-			btnStyle2.size = Settings._getIntByDPI(24);
+			btnStyle2.size = Settings._getIntByDPI(27);
 			btnStyle2.color = 0x575a5b;
 			
 			labelStyle = new TextFormat;

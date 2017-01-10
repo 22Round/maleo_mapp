@@ -45,17 +45,17 @@ package components {
 
 			tabStyle = new TextFormat;
 			tabStyle.font = '_bpgArialRegular';
-			tabStyle.size = Settings._getIntByDPI(22);
+			tabStyle.size = Settings._getIntByDPI(24);
 			tabStyle.color = 0xb6b6b6;
 			
 			tabSelectedStyle = new TextFormat;
 			tabSelectedStyle.font = '_bpgArialRegular';
-			tabSelectedStyle.size = Settings._getIntByDPI(22);
+			tabSelectedStyle.size = Settings._getIntByDPI(24);
 			tabSelectedStyle.color = 0x575757;
 			
 			tabDisabledStyle = new TextFormat;
 			tabDisabledStyle.font = '_bpgArialRegular';
-			tabDisabledStyle.size = Settings._getIntByDPI(22);
+			tabDisabledStyle.size = Settings._getIntByDPI(24);
 			tabDisabledStyle.color = 0xabadad;
 
 			

@@ -159,14 +159,17 @@ package {
 		}
 		
 		private function stage_deactivateHandler(event:Event):void {
+			
+			Starling.current.nativeStage.frameRate = 0.1;
 			this._starling.stop(true);
 			this.stage.addEventListener(Event.ACTIVATE, stage_activateHandler, false, 0, true);
 		}
 		
 		private function stage_activateHandler(event:Event):void {
-			this.stage.removeEventListener(Event.ACTIVATE, stage_activateHandler);
+			
+			Starling.current.nativeStage.frameRate = 60;
 			this._starling.start();
+			this.stage.removeEventListener(Event.ACTIVATE, stage_activateHandler);
 		}
-	
 	}
 }

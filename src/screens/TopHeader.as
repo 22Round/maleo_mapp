@@ -76,7 +76,7 @@ package screens {
 			
 			this.paddingLeft = Settings._getIntByDPI(0);
 			this.paddingRight = Settings._getIntByDPI(0);
-			this.paddingTop = 0;
+			this.paddingTop = Settings._getIntByDPI(20);
 			//_setMenuItems(MENU_WHITE_ITEM, LEFT_ITEM);
 			//_setMenuItems(FAQ_WHITE_ITEM, RIGHT_ITEM);
 			
@@ -144,7 +144,7 @@ package screens {
 					skin.width = Settings._getIntByDPI(menuItems[i].widthDPI);
 					skin.height = Settings._getIntByDPI(menuItems[i].heightDPI);
 					//skin.textureSmoothing = TextureSmoothing.TRILINEAR;
-					var q:Quad = new Quad(this.height, this.height);
+					var q:Quad = new Quad(this.height, this.height-this.paddingTop);
 					q.alpha = 0;
 					btn = new Button();
 					

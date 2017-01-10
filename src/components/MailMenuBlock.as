@@ -47,17 +47,17 @@ package components {
 
 			tabStyle = new TextFormat;
 			tabStyle.font = '_bpgArialRegular';
-			tabStyle.size = Settings._getIntByDPI(20);
+			tabStyle.size = Settings._getIntByDPI(24);
 			tabStyle.color = 0x575a5b;
 			
 			tabSelectedStyle = new TextFormat;
 			tabSelectedStyle.font = '_bpgArialRegular';
-			tabSelectedStyle.size = Settings._getIntByDPI(20);
+			tabSelectedStyle.size = Settings._getIntByDPI(24);
 			tabSelectedStyle.color = 0xffffff;
 			
 			tabDisabledStyle = new TextFormat;
 			tabDisabledStyle.font = '_bpgArialRegular';
-			tabDisabledStyle.size = Settings._getIntByDPI(20);
+			tabDisabledStyle.size = Settings._getIntByDPI(24);
 			tabDisabledStyle.color = 0xabadad;
 
 			
@@ -83,6 +83,7 @@ package components {
 				
 				tab.labelFactory = function():ITextRenderer {
 					var renderer:TextFieldTextRenderer = new TextFieldTextRenderer();
+					renderer.width = tabSkin.width;
 					renderer.embedFonts = true;
 					return renderer;
 				};
@@ -107,6 +108,7 @@ package components {
 				
 				tab.labelFactory = function():ITextRenderer {
 					var renderer:TextFieldTextRenderer = new TextFieldTextRenderer();
+					renderer.width = tabSkin.width;
 					renderer.embedFonts = true;
 					return renderer;
 				};
@@ -130,6 +132,7 @@ package components {
 				
 				tab.labelFactory = function():ITextRenderer {
 					var renderer:TextFieldTextRenderer = new TextFieldTextRenderer();
+					renderer.width = tabSkin.width;
 					renderer.embedFonts = true;
 					return renderer;
 				};

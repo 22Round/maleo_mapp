@@ -63,12 +63,12 @@ package screens.splash {
 			
 			btnStyle = new TextFormat;
 			btnStyle.font = '_bpgArialRegular';
-			btnStyle.size = Settings._getIntByDPI(24);
+			btnStyle.size = Settings._getIntByDPI(27);
 			btnStyle.color = 0xffffff;
 			
 			legendStyle = new TextFormat;
 			legendStyle.font = '_bpgMrglovaniCapsRegular';
-			legendStyle.size = Settings._getIntByDPI(30);
+			legendStyle.size = Settings._getIntByDPI(28);
 			legendStyle.color = 0xffffff;
 			
 			
@@ -102,7 +102,7 @@ package screens.splash {
 			var skipBtnLayoutData:AnchorLayoutData = new AnchorLayoutData();
 			
 			skipBtnLayoutData.top = Settings._getIntByDPI(40)
-			skipBtnLayoutData.right = Settings._getIntByDPI(40);
+			skipBtnLayoutData.right = Settings._getIntByDPI(20);
 			
 			
 			var skipBtnIco:ImageSkin = new ImageSkin(AssetsLoader._asset.getTexture("intro_skip_arrow_btn.png"));

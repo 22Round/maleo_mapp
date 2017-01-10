@@ -37,8 +37,8 @@ package screens.posta {
 			var layout:VerticalLayout = new VerticalLayout();
 			layout.horizontalAlign = HorizontalAlign.CENTER;
 			layout.verticalAlign = VerticalAlign.TOP;
-			layout.gap = Settings._getIntByDPI(5);
-			layout.paddingTop = Settings._getIntByDPI(160);
+			layout.gap = Settings._getIntByDPI(15);
+			layout.paddingTop = Settings._getIntByDPI(150);
 			layout.paddingBottom = Settings._getIntByDPI(130);
 			this.layout = layout;
 			

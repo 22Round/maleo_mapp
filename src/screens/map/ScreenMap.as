@@ -160,7 +160,7 @@ package screens.map {
 				line2.lineTo(0, Settings._getIntByDPI(23));
 				line2.endFill();
 				line2.y = Settings._getIntByDPI(59);
-				line2.x = Settings._getIntByDPI(490);
+				line2.x = stage.stageWidth - Settings._getIntByDPI(150);
 				contentGroup.addChild(line2);
 			}
 			
@@ -172,7 +172,7 @@ package screens.map {
 			labelCity.layoutData = new AnchorLayoutData(Settings._getIntByDPI(95), NaN, NaN, Settings._getIntByDPI(35));
 			
 			labelDistance = StaticGUI._addLabel(contentGroup, int(Math.random()*1588).toString()+" მ", distStyle);
-			labelDistance.layoutData = new AnchorLayoutData(Settings._getIntByDPI(62), NaN, NaN, Settings._getIntByDPI(506));
+			labelDistance.layoutData = new AnchorLayoutData(Settings._getIntByDPI(62), Settings._getIntByDPI(133) - labelDistance.width, NaN, NaN);
 			
 			fromWorkLab = StaticGUI._addLabel(contentGroup, Settings._mui['map_local_working_from'][Settings._lang], addressStyle);
 			fromWorkLab.layoutData = new AnchorLayoutData(Settings._getIntByDPI(150), NaN, NaN, Settings._getIntByDPI(35));

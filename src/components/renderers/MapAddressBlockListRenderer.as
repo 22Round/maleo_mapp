@@ -183,24 +183,14 @@ package components.renderers{
 				_conten.addChild(line);
 			}
 			
-			if (!line2) {
-				line2 = new MyCanvas;
-				
-				line2.lineStyle(lineSize, 0xced6db);
-				line2.lineTo(0, 0);
-				line2.lineTo(0, Settings._getIntByDPI(23));
-				line2.endFill();
-				line2.y = int(_conten.height - line2.height) / 2;
-				line2.x = int(490);
-				_conten.addChild(line2);
-			}
+			
 			
 			
 			if (!arrow) {
 				arrow = new Image(AssetsLoader._asset.getTexture("post_item_btn_arrow.png"));
 				arrow.textureSmoothing = TextureSmoothing.TRILINEAR;
 				arrow.width = Settings._getIntByDPI(11);
-				arrow.x = Settings._getIntByDPI(595);
+				arrow.x = stage.stageWidth - Settings._getIntByDPI(46);
 				arrow.alignPivot(Align.LEFT, Align.CENTER);
 				arrow.y = int(_conten.height) / 2;
 				arrow.scaleY = arrow.scaleX;
@@ -221,8 +211,21 @@ package components.renderers{
 			
 			if (!_labelDistance) {
 				_labelDistance = StaticGUI._addLabel(_conten, int(Math.random()*1588).toString()+" მ", distStyle);
-				_labelDistance.layoutData = new AnchorLayoutData(NaN, NaN, NaN, Settings._getIntByDPI(505), NaN, Settings._getIntByDPI( 0));
+				_labelDistance.layoutData = new AnchorLayoutData(NaN, Settings._getIntByDPI(135) - _labelDistance.width, NaN, NaN, NaN, Settings._getIntByDPI(0));
 			}
+			
+			if (!line2) {
+				line2 = new MyCanvas;
+				
+				line2.lineStyle(lineSize, 0xced6db);
+				line2.lineTo(0, 0);
+				line2.lineTo(0, Settings._getIntByDPI(23));
+				line2.endFill();
+				line2.y = int(_conten.height - line2.height) / 2;
+				line2.x = stage.stageWidth - Settings._getIntByDPI(150);
+				_conten.addChild(line2);
+			}
+			
 		}
 		
 		override public function dispose():void {

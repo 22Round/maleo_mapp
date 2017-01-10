@@ -269,7 +269,6 @@ package screens.posta {
 			buttonsGroupLayout = null;
 			
 			
-			
 			super.dispose();
 		}
 		

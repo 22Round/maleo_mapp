@@ -5,6 +5,7 @@ package screens.posta {
 	import components.renderers.MailBlockGroupedFooterRenderer;
 	import components.renderers.MailBlockGroupedHeaderRenderer;
 	import components.renderers.MailBlockGroupedListRenderer;
+	import components.renderers.MailBlockGroupedListTitleRenderer;
 	import feathers.controls.GroupedList;
 	import feathers.controls.LayoutGroup;
 	import feathers.controls.ScrollBarDisplayMode;
@@ -110,8 +111,11 @@ package screens.posta {
 					header: { label: Settings._mui['mails_title_ontheway'][Settings._lang] },
 					children:
 					[
-						{ status: MailBlock.ENTER_GOODS_MAIL},
-						{ status: MailBlock.COMPLETED_MAIL},
+						{ status: MailBlock.SUBTITLE_MAIL, title:'სავარაუდო ჩამოფრენა - 2016, 23 ოქტომბერი' },
+						{ status: MailBlock.ENTER_GOODS_MAIL },
+						{ status: MailBlock.SUBTITLE_MAIL, title:'სავარაუდო ჩამოფრენა - 2016, 3 ნოემბერი'},
+						{ status: MailBlock.COMPLETED_MAIL },
+						{ status: MailBlock.SUBTITLE_MAIL, title:'სავარაუდო ჩამოფრენა - 2017, 3 სექტემბერი'},
 						{ status: MailBlock.PAY_MAIL},
 						{ status: MailBlock.COMPLETED_MAIL }
 					]
@@ -127,6 +131,7 @@ package screens.posta {
 			list.setItemRendererFactoryWithID(MailBlock.PAY_MAIL,              PAY_MAIL_itemFactory);
 			list.setItemRendererFactoryWithID(MailBlock.PAYED_MAIL,            PAYED_MAIL_itemFactory);
 			list.setItemRendererFactoryWithID(MailBlock.UNKNOWN_MAIL,          UNKNOWN_MAIL_itemFactory);
+			list.setItemRendererFactoryWithID(MailBlock.SUBTITLE_MAIL,         SUBTITLE_MAIL_itemFactory);
 			
 			list.factoryIDFunction = function( item:Object, groupIndex:int, itemIndex:int ):String {
 				
@@ -165,6 +170,12 @@ package screens.posta {
 		
 		private function UNKNOWN_MAIL_itemFactory():IGroupedListItemRenderer {
 			return itemFactory(MailBlock.UNKNOWN_MAIL);	
+		}
+		
+		private function SUBTITLE_MAIL_itemFactory():IGroupedListItemRenderer {
+			var renderer:MailBlockGroupedListTitleRenderer = new MailBlockGroupedListTitleRenderer();
+			renderer.padding = Settings._getIntByDPI(8);
+			return renderer;	
 		}
 		
 		private function itemFactory(st:String):IGroupedListItemRenderer {

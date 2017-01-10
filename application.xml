@@ -14,15 +14,21 @@
   </android>
   <iPhone>
     <InfoAdditions><![CDATA[<key>UIStatusBarStyle</key>
-<string>UIStatusBarStyleBlackOpaque</string>
-<key>UIRequiresPersistentWiFi</key>
-<string>NO</string>
-<key>UIApplicationExitsOnSuspend</key>
-<true />
-<key>UIDeviceFamily</key>
-<array>
-	<string>1</string>
-</array>]]></InfoAdditions>
+		<string>UIStatusBarStyleBlackOpaque</string>
+		<key>UIViewControllerBasedStatusBarAppearance</key>
+        <true/>
+		<key>NSLocationAlwaysUsageDescription</key> 
+        <string>Sample description to allow geolocation always</string>
+		<key>UIRequiresPersistentWiFi</key>
+		<string>NO</string>
+		<key>UIApplicationExitsOnSuspend</key>
+		<true />
+		<key>UIDeviceFamily</key>
+		<array>
+			<string>1</string>
+		</array>]]>
+		
+	</InfoAdditions>
     <requestedDisplayResolution>high</requestedDisplayResolution>
   </iPhone>
   <initialWindow>

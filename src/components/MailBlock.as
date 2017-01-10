@@ -60,13 +60,13 @@ package components {
 		private var bgTexture:Texture;
 		private var domainIco:Image;
 		private var domainLabel:Label;
-		private var productLabel:BitmapFontTextRenderer;
+		private var productLabel:Label;//BitmapFontTextRenderer;
 		private var infoLabelAmount:BitmapFontTextRenderer;
 		private var infoLabel:Label;
 		private var detailsIco:Image;
 		private var lariSymbolLabel:Label;
 		
-		private var fromName:BitmapFontTextRenderer;
+		private var fromName:Label;//BitmapFontTextRenderer;
 		
 		private var statusImg:Image;
 		private var statusLabel:Label;
@@ -92,6 +92,7 @@ package components {
 		private var lariSymbolImg:Image;
 		
 		public static const COMPLETED_MAIL:String = 'completedMail';
+		public static const SUBTITLE_MAIL:String = 'subTitle';
 		public static const ENTER_GOODS_MAIL:String = 'enterGoodsMail';
 		public static const PAY_MAIL:String = 'payMail';
 		public static const UNKNOWN_MAIL:String = 'unknownMail';
@@ -141,7 +142,7 @@ package components {
 			
 			domainStyle = new TextFormat;
 			domainStyle.font = '_bpgArialRegular';
-			domainStyle.size = Settings._getIntByDPI(24);
+			domainStyle.size = Settings._getIntByDPI(26);
 			domainStyle.color = 0x575a5b;
 			
 			domainStyleB = new BitmapFontTextFormat('_BPGArial');
@@ -153,7 +154,7 @@ package components {
 			
 			productStyle = new TextFormat;
 			productStyle.font = '_bpgArialRegular';
-			productStyle.size = Settings._getIntByDPI(20);
+			productStyle.size = Settings._getIntByDPI(24);
 			productStyle.color = 0x828485;
 			
 			
@@ -178,7 +179,6 @@ package components {
 			infoStyleB.align = HorizontalAlign.LEFT;
 			
 			
-			
 			mailLocAmountStyleB = new BitmapFontTextFormat('_BPGArial');
 			//mailLocAmountStyleB.font = '_bpgArialRegular';
 			mailLocAmountStyleB.size = Settings._getIntByDPI(80);
@@ -193,7 +193,7 @@ package components {
 			
 			statusStyle = new TextFormat;
 			statusStyle.font = '_bpgArialRegular';
-			statusStyle.size = Settings._getIntByDPI(14);
+			statusStyle.size = Settings._getIntByDPI(16);
 			statusStyle.color = 0xffffff;
 			statusStyle.horizontalAlign = HorizontalAlign.CENTER;
 			
@@ -229,8 +229,9 @@ package components {
 			_state = st;
 			
 				fromNameLayoutData = new AnchorLayoutData();
-				fromNameLayoutData.top = Settings._getIntByDPI(-20);
+				fromNameLayoutData.top = Settings._getIntByDPI(20);
 			switch(_state) {
+				
 				case MailBlock.CHECK_TOPAY_MAIL:
 					
 				
@@ -238,7 +239,7 @@ package components {
 					fromNameLayoutData.left = Settings._getIntByDPI(52);
 					
 					productLabelLayoutData = new AnchorLayoutData();
-					productLabelLayoutData.verticalCenter = Settings._getIntByDPI(-25);
+					productLabelLayoutData.verticalCenter = Settings._getIntByDPI(-5);
 					productLabelLayoutData.left = Settings._getIntByDPI(68);
 					
 					radioLayoutData = new AnchorLayoutData();
@@ -277,7 +278,7 @@ package components {
 						fromNameLayoutData.left = Settings._getIntByDPI(30);
 					}
 					productLabelLayoutData = new AnchorLayoutData();
-					productLabelLayoutData.verticalCenter = Settings._getIntByDPI(-25);
+					productLabelLayoutData.verticalCenter = Settings._getIntByDPI(-5);
 					productLabelLayoutData.left = Settings._getIntByDPI(28);
 					
 					
@@ -285,12 +286,12 @@ package components {
 			
 			
 			
-			fromName = StaticGUI._addBFTR(this, 'amazon.com', domainStyleB);
+			fromName = StaticGUI._addLabel(this, 'amazon.com', domainStyle);
 			//fromName.defaultIcon = domainIco;
 			fromName.layoutData = fromNameLayoutData;
 			
 		
-			productLabel = StaticGUI._addBFTR(this, "ტელეფონი", productStyleB);
+			productLabel = StaticGUI._addLabel(this, "ტელეფონი", productStyle);
 			productLabel.layoutData = productLabelLayoutData;
 			
 			
