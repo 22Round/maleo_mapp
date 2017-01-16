@@ -199,7 +199,7 @@ package screens {
 					
 				case ScreenID.MAIN_MAILS:
 					
-					_changeBackgroundSkin(0x18a6e7);
+					_changeBackgroundSkin(0x00b7f0);
 					_setMenuItems(MENU_WHITE_ITEM);
 					_setMenuItems(FAQ_WHITE_ITEM, RIGHT_ITEM);
 					visible = true;
@@ -209,7 +209,7 @@ package screens {
 				case ScreenID.DECLARE_MAIL:
 					
 					_setMenuItems(CLOSE_WHITE_ITEM);
-					_changeBackgroundSkin(0x18a6e7);
+					_changeBackgroundSkin(0x00b7f0);
 					visible = true;
 					
 				break;
@@ -217,7 +217,7 @@ package screens {
 				case ScreenID.MAIL_CONTENT:
 					
 					_setMenuItems(ARROWTOLEFT_WHITE_ITEM);
-					_changeBackgroundSkin(0x18a6e7);
+					_changeBackgroundSkin(0x00b7f0);
 					visible = true;
 					
 				break
@@ -225,7 +225,7 @@ package screens {
 				case ScreenID.ALL_MAILS:
 					
 					visible = true;
-					_changeBackgroundSkin(0x18a6e7);
+					_changeBackgroundSkin(0x00b7f0);
 					_setMenuItems(MENU_WHITE_ITEM);
 					_setMenuItems(FAQ_WHITE_ITEM, RIGHT_ITEM);
 					
@@ -233,7 +233,7 @@ package screens {
 				case ScreenID.ARRIVED_MAIL:
 					
 				    visible = true;
-					_changeBackgroundSkin(0x18a6e7);
+					_changeBackgroundSkin(0x00b7f0);
 					_setMenuItems(ARROWTOLEFT_WHITE_ITEM);
 					_setMenuItems(FAQ_WHITE_ITEM, RIGHT_ITEM);
 					
@@ -243,7 +243,7 @@ package screens {
 				case ScreenID.MAPS_ADDRESS:
 					
 					visible = true;
-					_changeBackgroundSkin(0x18a6e7);
+					_changeBackgroundSkin(0x00b7f0);
 					
 					if (screenID == ScreenID.MAPS_ADDRESS) {
 						_setMenuItems(MAP_WHITE_SETTINGS);
@@ -257,7 +257,7 @@ package screens {
 				case ScreenID.FAQ:	
 					
 					visible = true;
-					_changeBackgroundSkin(0x18a6e7);
+					_changeBackgroundSkin(0x00b7f0);
 					_setMenuItems(ARROWTOLEFT_WHITE_ITEM);
 					
 					break;	

@@ -4,7 +4,7 @@
   <versionNumber>0.1</versionNumber>
   <supportedProfiles>mobileDevice</supportedProfiles>
   <filename>TestCompile</filename>
-  <name>game</name>
+  <name>Maleo</name>
   <android>
     <manifestAdditions><![CDATA[<manifest android:installLocation="auto">
 	<uses-sdk android:minSdkVersion="8" />
@@ -22,7 +22,7 @@
 		<key>UIRequiresPersistentWiFi</key>
 		<string>NO</string>
 		<key>UIApplicationExitsOnSuspend</key>
-		<true />
+		<false />
 		<key>UIDeviceFamily</key>
 		<array>
 			<string>1</string>
@@ -32,7 +32,7 @@
     <requestedDisplayResolution>high</requestedDisplayResolution>
   </iPhone>
   <initialWindow>
-    <title>game</title>
+    <title>Maleo</title>
     <content>game.swf</content>
     <visible>true</visible>
     <fullScreen>true</fullScreen>
@@ -62,6 +62,7 @@
     <image180x180>icons/icon180.png</image180x180>
     <image192x192>icons/icon192.png</image192x192>
     <image512x512>icons/icon512.png</image512x512>
+	<image1024x1024>icons/icon1024.png</image1024x1024>
   </icon>
   <!-- 
 	AIR options:
