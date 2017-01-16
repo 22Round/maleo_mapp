@@ -106,8 +106,6 @@ package components {
 				return btn; 
 			}
 			
-			
-			
 			var items:Array = [];
 			for (var i:int = 0; i < 150; i++) {
 				var item:Object = {text: "Item " + (i + 1).toString()};
@@ -188,7 +186,6 @@ package components {
 			StaticGUI._safeRemoveChildren(title, true);
 			
 			inputSkin.dispose();
-			
 			
 			title = null;
 			titleStyle = null;

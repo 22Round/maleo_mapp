@@ -35,6 +35,7 @@ package screens {
 		private var topHeader:TopHeader;
 		private var statusBar:StatusBar;
 		private var topFooter:TopFooter;
+		public var _savedScreenID:String;
 		
 		public function Splash() {
 			
@@ -42,6 +43,7 @@ package screens {
 		}
 		
 		public var _navigator:StackScreenNavigator;
+		
 		
 		override protected function initialize():void {
 			
@@ -185,8 +187,8 @@ package screens {
 			statusBar._visible = false;
 			
 			
-			var currentSt:String = StackScreenNavigator(e.target).activeScreenID
-			
+			var currentSt:String = StackScreenNavigator(e.target).activeScreenID;
+			_savedScreenID = currentSt;
 			topHeader._changeHeaderState(currentSt);
 			
 			switch (currentSt) {

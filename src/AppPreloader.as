@@ -4,7 +4,9 @@ package {
 	import application.assetLibs.Mui;
 	import feathers.system.DeviceCapabilities;
 	import feathers.utils.ScreenDensityScaleFactorManager;
+	import flash.desktop.NativeApplication;
 	import flash.text.Font;
+	import flash.utils.setTimeout;
 	
 	import flash.display.Loader;
 	import flash.display.Sprite;
@@ -41,14 +43,15 @@ package {
 			this.loaderInfo.addEventListener(Event.COMPLETE, loaderInfo_completeHandler);
 		}
 		
-		private var _starling:Starling;
-		private var _scaler:ScreenDensityScaleFactorManager;
-		private var _launchImage:Loader;
-		private var _savedAutoOrients:Boolean;
+		private var starling:Starling;
+		private var scaler:ScreenDensityScaleFactorManager;
+		private var launchImage:Loader;
+		private var savedAutoOrients:Boolean;
 		
 		private var assets:AssetsLoader;
 		private var mui:Mui;
 		private var fonts:FontLoader;
+		private var savedScreenID:String;
 		
 		public static var _cont:AppPreloader;
 		
@@ -95,10 +98,10 @@ package {
 					stream.open(file, FileMode.READ);
 					stream.readBytes(bytes, 0, stream.bytesAvailable);
 					stream.close();
-					this._launchImage = new Loader();
-					this._launchImage.loadBytes(bytes);
-					this.addChild(this._launchImage);
-					this._savedAutoOrients = this.stage.autoOrients;
+					launchImage = new Loader();
+					launchImage.loadBytes(bytes);
+					this.addChild(launchImage);
+					savedAutoOrients = this.stage.autoOrients;
 					this.stage.autoOrients = false;
 					if (isPortraitOnly) {
 						this.stage.setOrientation(StageOrientation.DEFAULT);
@@ -112,20 +115,20 @@ package {
 			Starling.multitouchEnabled = true;
 			Settings._lang = 'ka';
 			
-			this._starling = new Starling(Main, this.stage, null, null, Context3DRenderMode.AUTO, Context3DProfile.BASELINE);
-			this._starling.supportHighResolutions = true;
-			this._starling.skipUnchangedFrames = true;
+			starling = new Starling(Main, this.stage, null, null, Context3DRenderMode.AUTO, Context3DProfile.BASELINE);
+			starling.supportHighResolutions = true;
+			starling.skipUnchangedFrames = true;
 			//this._starling.showStats = true;
 			//this._starling.showStatsAt('right', 'bottom', 1);
-			this._starling.antiAliasing = 2;
-			this._starling.start();
-			this._starling.addEventListener("rootCreated", starling_rootCreatedHandler);
+			starling.antiAliasing = 2;
+			starling.start();
+			starling.addEventListener("rootCreated", starling_rootCreatedHandler);
 			/*if (this._launchImage) {
 				this._starling.addEventListener("rootCreated", starling_rootCreatedHandler);
 			}*/
 			
-			this._scaler = new ScreenDensityScaleFactorManager(this._starling);
-			this.stage.addEventListener(Event.DEACTIVATE, stage_deactivateHandler, false, 0, true);
+			scaler = new ScreenDensityScaleFactorManager(starling);
+			this.stage.addEventListener(Event.DEACTIVATE, stageDeactivateHandler, false, 0, true);
 		}
 		
 		private function starling_rootCreatedHandler(event:Object):void {
@@ -149,27 +152,31 @@ package {
 		
 		public  function _assetLoaded():void{
 			
-			if (this._launchImage) {
-				this.removeChild(this._launchImage);
-				this._launchImage.unloadAndStop(true);
-				this._launchImage = null;
-				this.stage.autoOrients = this._savedAutoOrients;
+			if (launchImage) {
+				this.removeChild(launchImage);
+				launchImage.unloadAndStop(true);
+				launchImage = null;
+				this.stage.autoOrients = savedAutoOrients;
 				
+				//if (savedScreenID) setTimeout(Settings._splash._navigator.replaceScreen, 1000, [savedScreenID]);
 			}
 		}
 		
-		private function stage_deactivateHandler(event:Event):void {
-			
+		private function stageDeactivateHandler(event:Event):void {
+			//NativeApplication.nativeApplication.executeInBackground = true;
 			Starling.current.nativeStage.frameRate = 0.1;
-			this._starling.stop(true);
-			this.stage.addEventListener(Event.ACTIVATE, stage_activateHandler, false, 0, true);
+			starling.stop(true);
+			this.stage.addEventListener(Event.ACTIVATE, stageActivateHandler, false, 0, true);
 		}
 		
-		private function stage_activateHandler(event:Event):void {
+		private function stageActivateHandler(event:Event):void {
 			
+			//if (Settings._splash._savedScreenID) savedScreenID = Settings._splash._savedScreenID;
+			//NativeApplication.nativeApplication.executeInBackground = false;
 			Starling.current.nativeStage.frameRate = 60;
-			this._starling.start();
-			this.stage.removeEventListener(Event.ACTIVATE, stage_activateHandler);
+			starling.start();
+			this.stage.removeEventListener(Event.ACTIVATE, stageActivateHandler);
+			
 		}
 	}
 }
