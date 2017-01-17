@@ -54,8 +54,8 @@ package screens.splash {
 			
 			var pageIndLabelLayoutData:AnchorLayoutData = new AnchorLayoutData();
 			pageIndLabelLayoutData.horizontalCenter = 0;
-			pageIndLabelLayoutData.bottom = Settings._getIntByDPI(150)
-			pageIndLabelLayoutData.left = Settings._getIntByDPI(68);
+			pageIndLabelLayoutData.bottom = Settings._getIntByDPI(85)
+			//pageIndLabelLayoutData.left = Settings._getIntByDPI(68);
 			
 			pageIndicator = new PageIndicator();
 			pageIndicator.styleProvider = null;
@@ -70,7 +70,6 @@ package screens.splash {
 			legendStyle.font = '_bpgMrglovaniCapsRegular';
 			legendStyle.size = Settings._getIntByDPI(28);
 			legendStyle.color = 0xffffff;
-			
 			
 			pageIndicator.normalSymbolFactory = function():DisplayObject {
 			
@@ -101,7 +100,7 @@ package screens.splash {
 			
 			var skipBtnLayoutData:AnchorLayoutData = new AnchorLayoutData();
 			
-			skipBtnLayoutData.top = Settings._getIntByDPI(40)
+			skipBtnLayoutData.top = Settings._getIntByDPI(37)
 			skipBtnLayoutData.right = Settings._getIntByDPI(20);
 			
 			
@@ -118,7 +117,7 @@ package screens.splash {
 			
 			var contBtnLayoutData:AnchorLayoutData = new AnchorLayoutData();
 			contBtnLayoutData.horizontalCenter = 0;
-			contBtnLayoutData.bottom = Settings._getIntByDPI(250)
+			contBtnLayoutData.bottom = Settings._getIntByDPI(170)
 			
 			
 			var contBtnSkin:ImageSkin = new ImageSkin(AssetsLoader._asset.getTexture("intro_start_btn.png"));

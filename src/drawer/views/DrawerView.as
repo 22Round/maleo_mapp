@@ -52,17 +52,13 @@ package drawer.views {
 			super.initialize();
 			
 			
-			
-			
-			
-			
 			var layout:VerticalLayout = new VerticalLayout();
 			//layout.horizontalAlign = HorizontalAlign.CENTER;
 			//layout.verticalAlign = VerticalAlign.MIDDLE;
 			
-			layout.paddingTop = Settings._getIntByDPI(110);
+			layout.paddingTop = Settings._getIntByDPI(107);
 			layout.paddingLeft = Settings._getIntByDPI(45);
-			layout.gap = Settings._getIntByDPI(60);
+			layout.gap = Settings._getIntByDPI(50);
 			
 			this.layout = layout;
 			
@@ -92,16 +88,13 @@ package drawer.views {
 			lariStyle.size = Settings._getIntByDPI(30);
 			lariStyle.color = 0xffffff;
 			
-			
-		
-			
 			var btn:Button;
 			
 			
 			var menuGroup:LayoutGroup = new LayoutGroup();
 			var menuGroupLayout:VerticalLayout = new VerticalLayout();
-			menuGroupLayout.gap = 0;
-			menuGroupLayout.paddingLeft = -15;
+			menuGroupLayout.gap = Settings._getIntByDPI(0);
+			menuGroupLayout.paddingLeft = Settings._getIntByDPI(-15);
 			menuGroup.layout = menuGroupLayout;
 			this.addChild( menuGroup );
 			
@@ -115,8 +108,6 @@ package drawer.views {
 			}
 			
 			
-			
-			
 			line = new MyCanvas;
 			addChild(line);
 			line.lineStyle(2, 0x66696a);
@@ -124,11 +115,9 @@ package drawer.views {
 			line.lineTo(Settings._getIntByDPI(400), 0);
 			
 			
-			
-			
 			var sectorTwoGroup:LayoutGroup = new LayoutGroup();
 			var sectorTwoGroupLayout:VerticalLayout = new VerticalLayout();
-			sectorTwoGroupLayout.gap = Settings._getIntByDPI(35);
+			sectorTwoGroupLayout.gap = Settings._getIntByDPI(30);
 			sectorTwoGroup.layout = sectorTwoGroupLayout;
 			this.addChild( sectorTwoGroup );
 			
@@ -139,8 +128,7 @@ package drawer.views {
 			sectorTwoGroup.addChild( label1Group );
 			
 			titleLabel = StaticGUI._addLabel(label1Group, Settings._mui['drawer_title_1'][Settings._lang], labelStyle1);
-			titleLabel = StaticGUI._addLabel(label1Group, 'ზვიად Ziziguri დიდი ერთი царица', btnStyle1);
-			
+			titleLabel = StaticGUI._addLabel(label1Group, 'ზვიად Ziziguri დიდი царица', btnStyle1);
 			
 			
 			var label2Group:LayoutGroup = new LayoutGroup();
@@ -171,8 +159,12 @@ package drawer.views {
 			lariSimGroup.addChild(lariImg);
 			
 			
+			var fillSkin:ImageSkin = new ImageSkin(AssetsLoader._asset.getTexture("drawer_fill_balance_btn.png"));
+			fillSkin.scale9Grid = StaticGUI._getScale9GridRect(fillSkin.width, fillSkin.height);
 			
-			fillBalanceBtn = StaticGUI._addBtnSkin(sectorTwoGroup, Settings._mui['drawer_balance_btn'][Settings._lang], btnStyle1, new ImageSkin(AssetsLoader._asset.getTexture("drawer_fill_balance_btn.png")));
+			fillBalanceBtn = StaticGUI._addBtnSkin(sectorTwoGroup, Settings._mui['drawer_balance_btn'][Settings._lang], btnStyle2, fillSkin);
+			fillBalanceBtn.width = Settings._getIntByDPI(265);
+			fillBalanceBtn.height = Settings._getIntByDPI(68)
 			
 			line = new MyCanvas;
 			addChild(line);

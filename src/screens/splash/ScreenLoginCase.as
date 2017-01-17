@@ -10,7 +10,9 @@ package screens.splash {
 	import feathers.controls.text.TextBlockTextRenderer;
 	import feathers.controls.text.TextFieldTextRenderer;
 	import feathers.core.ITextRenderer;
+	import feathers.layout.AnchorLayoutData;
 	import feathers.layout.HorizontalAlign;
+	import feathers.layout.HorizontalLayoutData;
 	import feathers.layout.VerticalAlign;
 	import feathers.layout.VerticalLayout;
 	import feathers.layout.VerticalLayoutData;
@@ -98,6 +100,8 @@ package screens.splash {
 			mailRegBtn = StaticGUI._addBtnSkin(group, Settings._mui['logincase_login_mail_btn'][Settings._lang], btnStyle1, btnMailSkin);
 			mailRegBtn.addEventListener(Event.TRIGGERED, mailRegHandler);
 			
+			mailRegBtn.width = stage.stageWidth - Settings._getIntByDPI(70);
+			
 			faceIcoTexture = AssetsLoader._asset.getTexture("facebook_btn_ico.png");
 			faceIcoImage = new Image(faceIcoTexture);
 			faceIcoImage.width = Settings._getIntByDPI(42);
@@ -107,14 +111,14 @@ package screens.splash {
 			faceBRegBtn.defaultIcon = faceIcoImage;
 			faceBRegBtn.iconOffsetX = Settings._getIntByDPI( -15);
 			faceBRegBtn.addEventListener(Event.TRIGGERED, faceBdHandler);
-			
+			faceBRegBtn.width = stage.stageWidth - Settings._getIntByDPI(70);
 			
 			label = StaticGUI._addLabel(this, Settings._mui['logincase_orregister_lbl'][Settings._lang], labelStyle);
 			
 			registRegBtn = StaticGUI._addBtnSkin(this, Settings._mui['logincase_register_btn'][Settings._lang], btnStyle2, btnRegSkin);
 			registRegBtn.addEventListener(Event.TRIGGERED, registerHandler);
+			registRegBtn.width = stage.stageWidth - Settings._getIntByDPI(70);
 			
-	
 			
 		}
 		

@@ -5,6 +5,7 @@ package screens {
 	import feathers.controls.Header;
 	import feathers.controls.text.TextFieldTextRenderer;
 	import feathers.core.ITextRenderer;
+	import feathers.layout.AnchorLayoutData;
 	import feathers.motion.Slide;
 	import feathers.skins.ImageSkin;
 	import starling.display.DisplayObject;
@@ -76,7 +77,8 @@ package screens {
 			
 			this.paddingLeft = Settings._getIntByDPI(0);
 			this.paddingRight = Settings._getIntByDPI(0);
-			this.paddingTop = Settings._getIntByDPI(20);
+			this.paddingTop = Settings._getIntByDPI(25);
+			
 			//_setMenuItems(MENU_WHITE_ITEM, LEFT_ITEM);
 			//_setMenuItems(FAQ_WHITE_ITEM, RIGHT_ITEM);
 			
@@ -90,6 +92,7 @@ package screens {
 			
 			titleFactory = function():ITextRenderer {
 				var titleRenderer:TextFieldTextRenderer = new TextFieldTextRenderer();
+				
 				titleRenderer.embedFonts = true;
 				return titleRenderer;
 			}

@@ -40,11 +40,11 @@ package screens {
 				dataProvObj = new Object;
 				dataProvObj.label = '';
 				defaultIco = new Image(AssetsLoader._asset.getTexture('footer_item_' + (i + 1) + '_normal.png'));
-				defaultIco.height = Settings._getIntByDPI(58);
+				defaultIco.height = Settings._getIntByDPI(54);
 				defaultIco.scaleX = defaultIco.scaleY;
 				
 				defaultSelectedIco = new Image(AssetsLoader._asset.getTexture('footer_item_' + (i + 1) + '_selected.png'));
-				defaultSelectedIco.height = Settings._getIntByDPI(58);
+				defaultSelectedIco.height = Settings._getIntByDPI(54);
 				defaultSelectedIco.scaleX = defaultSelectedIco.scaleY;
 				dataProvObj.defaultIcon = defaultIco;
 				dataProvObj.defaultSelectedIcon = defaultSelectedIco;

@@ -57,7 +57,6 @@ package drawer.views {
 			settingsIco.width = Settings._getIntByDPI(55)
 			settingsIco.scaleY = settingsIco.scaleX;
 			
-			
 			var fillBottomLayoutData:AnchorLayoutData = new AnchorLayoutData();
 			fillBottomLayoutData.left = Settings._getIntByDPI(30);
 			fillBottomLayoutData.bottom = Settings._getIntByDPI(25);
@@ -68,10 +67,6 @@ package drawer.views {
 			//settingsBtn.iconOffsetX = -15;
 			settingsBtn.defaultSkin = null;
 			settingsBtn.layoutData = fillBottomLayoutData;
-			
-			
-			
-			
 			
 			
 			

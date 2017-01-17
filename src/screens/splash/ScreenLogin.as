@@ -106,7 +106,7 @@ package screens.splash {
 			
 			userInput = StaticGUI._addTextInput(inputGroup, Settings._mui['login_user_input'][Settings._lang], inputStyle, inputStyle);
 			userInput.backgroundSkin = userInputSkin;
-			userInput.width = Settings._getIntByDPI(575);
+			userInput.width = stage.stageWidth - Settings._getIntByDPI(70);
 			userInput.height = Settings._getIntByDPI(80);
 			
 			userPassInputSkin = new ImageSkin(AssetsLoader._asset.getTexture("login_field_border.png"));
@@ -115,7 +115,7 @@ package screens.splash {
 			passInput = StaticGUI._addTextInput(inputGroup, Settings._mui['login_pass_input'][Settings._lang], inputStyle, inputStyle);
 			passInput.backgroundSkin = userPassInputSkin;
 			passInput.displayAsPassword = true;
-			passInput.width = Settings._getIntByDPI(575);
+			passInput.width = stage.stageWidth - Settings._getIntByDPI(70);
 			passInput.height = Settings._getIntByDPI(80);
 			
 			group = new LayoutGroup();
@@ -128,7 +128,7 @@ package screens.splash {
 			
 			mailRegBtn = StaticGUI._addBtnSkin(group, Settings._mui['login_submit_btn'][Settings._lang], btnStyle1, btnMailSkin);
 			mailRegBtn.addEventListener(Event.TRIGGERED, mailRegHandler);
-			mailRegBtn.width = Settings._getIntByDPI(575);
+			mailRegBtn.width = stage.stageWidth - Settings._getIntByDPI(70);
 			mailRegBtn.height = Settings._getIntByDPI(80);
 			label = StaticGUI._addLabel(group, Settings._mui['login_or_lbl'][Settings._lang], labelStyle);
 			
@@ -142,7 +142,7 @@ package screens.splash {
 			faceBRegBtn.addEventListener(Event.TRIGGERED, faceBdHandler);
 			faceBRegBtn.defaultIcon = faceIcoImage;
 			faceBRegBtn.iconOffsetX = Settings._getIntByDPI( -15);
-			faceBRegBtn.width = Settings._getIntByDPI(575);
+			faceBRegBtn.width = stage.stageWidth - Settings._getIntByDPI(70);
 			faceBRegBtn.height = Settings._getIntByDPI(80);
 			
 			

@@ -11,7 +11,7 @@ package screens {
 	import screens.map.DrawerMapAddress;
 	import screens.map.ScreenMap;
 	import screens.posta.ScreenAllMails;
-	import screens.posta.ScreenArrivedMails;
+	import screens.posta.ScreenToPayMails;
 	import screens.posta.ScreenDeclareMail;
 	import screens.posta.ScreenMailContent;
 	import screens.posta.ScreenMainMails;
@@ -103,7 +103,7 @@ package screens {
 			item.addPopEvent(AppEvent.CANCEL);
 			_navigator.addScreen(ScreenID.MAIN_MAILS, item);
 			
-			item = new StackScreenNavigatorItem(ScreenArrivedMails);
+			item = new StackScreenNavigatorItem(ScreenToPayMails);
 			item.setScreenIDForPushEvent(AppEvent.COMPLETED, ScreenID.LOGIN_CASE);
 			item.addPopEvent(AppEvent.CANCEL);
 			_navigator.addScreen(ScreenID.ARRIVED_MAIL, item);
