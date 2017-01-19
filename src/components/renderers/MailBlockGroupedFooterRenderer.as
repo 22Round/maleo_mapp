@@ -180,6 +180,7 @@ package components.renderers {
 				labelLayout.verticalAlign = VerticalAlign.TOP;
 				
 				labelLayout.paddingTop = Settings._getIntByDPI(0);
+				
 				labelLayout.gap = Settings._getIntByDPI(15);
 				labelGroup.layout = labelLayout;
 				addChild(labelGroup);
@@ -271,7 +272,7 @@ package components.renderers {
 				this._label.validate();
 				line.width = this._label.width;
 			}
-			trace('asdsad  ', line.width, this._label);
+			
 		}
 		
 		protected function layoutChildren():void {
