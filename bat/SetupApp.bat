@@ -17,17 +17,18 @@ set AND_ICONS=icons/android
 set AND_SIGNING_OPTIONS=-storetype pkcs12 -keystore "%AND_CERT_FILE%" -storepass %AND_CERT_PASS%
 
 :: iOS packaging
-set IOS_DIST_CERT_FILE=cert\iphone_dev.p12
+set IOS_DIST_CERT_FILE=cert\iphone_dist_maleo.p12
 set IOS_DEV_CERT_FILE=cert\iphone_dev.p12
 set IOS_DEV_CERT_PASS=maleo577posT
-set IOS_PROVISION=cert\gpost_calc.mobileprovision
+set IOS_PROVISION=cert\maleo_app.mobileprovision
+set IOS_DIST_PROVISION=cert\maleo_app_dist.mobileprovision
 set IOS_ICONS=icons/ios
 
 set IOS_DEV_SIGNING_OPTIONS=-storetype pkcs12 -keystore "%IOS_DEV_CERT_FILE%" -storepass %IOS_DEV_CERT_PASS% -provisioning-profile %IOS_PROVISION%
-set IOS_DIST_SIGNING_OPTIONS=-storetype pkcs12 -keystore "%IOS_DIST_CERT_FILE%" -provisioning-profile %IOS_PROVISION%
+set IOS_DIST_SIGNING_OPTIONS=-storetype pkcs12 -keystore "%IOS_DIST_CERT_FILE%" -storepass %IOS_DEV_CERT_PASS% -provisioning-profile %IOS_DIST_PROVISION%
 
 :: Application descriptor
-set APP_XML=application.xml
+set APP_XML=manifest\application_ios.xml
 
 :: Files to package
 set APP_DIR=bin
