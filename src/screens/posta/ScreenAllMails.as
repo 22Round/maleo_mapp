@@ -94,7 +94,7 @@ package screens.posta {
 			this.width = stage.stageWidth;
 			this.height = stage.stageHeight;
 			
-			this.validate();
+			//this.validate();
 		}
 		
 		private function menuChangeHandler(e:Event):void {

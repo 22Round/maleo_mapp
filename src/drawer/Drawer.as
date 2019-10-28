@@ -37,6 +37,8 @@ package drawer {
 			drawers.openGesture = DragGesture.EDGE;
 			
 			drawers.content = new Splash();
+			
+			
 
 			drawers.leftDrawerToggleEventType = AppEvent.TOGGLE_LEFT_DRAWER;
 			drawers.content.addEventListener(Event.CHANGE, contentView_openDrawerChangeHandler);
@@ -47,6 +49,7 @@ package drawer {
 			drawers.leftDrawerDockMode = Orientation.NONE;
 			
 			this.addChild(drawers);
+			
 		}
 
 		

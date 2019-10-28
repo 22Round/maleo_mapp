@@ -8,11 +8,11 @@
     <movie fps="60" />
     <movie width="534" />
     <movie height="800" />
-    <movie version="23" />
+    <movie version="32" />
     <movie minorVersion="0" />
     <movie platform="AIR Mobile" />
     <movie background="#000000" />
-    <movie preferredSDK="AIR SDK 23;;D:\SDK\AIR_23" />
+    <movie preferredSDK="AIR BETA 32.0.103;32.0.103;" />
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
@@ -85,11 +85,12 @@
     <element path="lib\androidSupport.ane" />
     <element path="liband\AndroidFullScreen.ane" />
     <element path="lib\AndroidFullScreen.ane" />
-    <element path="D:\Flash Resources\com\starling_2.1.swc" />
     <element path="D:\Flash Resources\com\feathers_3.1.0.swc" />
     <element path="D:\Flash Resources\com\feathers_3.1.1.swc" />
     <element path="lib\MetalWorksMobileTheme\swc\TopcoatLightMobileTheme.swc" />
     <element path="lib\swc\themes\TopcoatLightMobileTheme.swc" />
+    <element path="D:\Flash Resources\com\feathers_4.0.0.swc" />
+    <element path="D:\Flash Resources\com\starling_2.3.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>

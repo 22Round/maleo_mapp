@@ -17,7 +17,7 @@ set AND_ICONS=icons/android
 set AND_SIGNING_OPTIONS=-storetype pkcs12 -keystore "%AND_CERT_FILE%" -storepass %AND_CERT_PASS%
 
 :: iOS packaging
-set IOS_DIST_CERT_FILE=cert\iphone_dist_maleo.p12
+set IOS_DIST_CERT_FILE=cert\iphone_gpost_dis.p12
 set IOS_DEV_CERT_FILE=cert\iphone_dev.p12
 set IOS_DEV_CERT_PASS=maleo577posT
 set IOS_PROVISION=cert\maleo_app.mobileprovision

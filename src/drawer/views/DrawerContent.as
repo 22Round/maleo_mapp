@@ -56,7 +56,7 @@ package drawer.views {
 			
 			navigator.rootScreenID = ScreenID.DRAWER_MAIN;
 			this.addChild(navigator);
-			this.validate();
+			//this.validate();
 			
 			this.width = stage.stageWidth  - Settings._getIntByDPI(120);
 			

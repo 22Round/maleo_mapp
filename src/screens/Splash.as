@@ -147,7 +147,7 @@ package screens {
 			
 			_navigator.rootScreenID = ScreenID.INTRO; //ScreenID.INTRO
 			this.addChild(_navigator);
-			this.validate();
+			//this.validate();
 			
 			//addChild(logoImg);
 			

@@ -143,7 +143,7 @@ package screens.posta {
 			this.width = stage.stageWidth;
 			this.height = stage.stageHeight;
 			
-			this.validate();
+			//this.validate();
 		}
 		
 		override public function dispose():void {

@@ -234,7 +234,7 @@ package screens.posta {
 			fillBtn = StaticGUI._addBtnSkin(buttonsGroup, Settings._mui['mails_arrived_fill_balance_btn'][Settings._lang], fillBtnStyle, fillBtnSkin);
 			fillBtn.width = stage.stageWidth - Settings._getIntByDPI(70);
 			
-			this.validate();
+			//this.validate();
 		}
 		
 		override public function dispose():void {

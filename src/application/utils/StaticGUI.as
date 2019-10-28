@@ -3,6 +3,7 @@ package application.utils {
 	import feathers.controls.Button;
 	import feathers.controls.Label;
 	import feathers.controls.TextInput;
+	import feathers.controls.ButtonState;
 	import feathers.controls.text.BitmapFontTextRenderer;
 	import feathers.controls.text.TextFieldTextEditor;
 	import feathers.controls.text.TextFieldTextRenderer;
@@ -423,9 +424,9 @@ package application.utils {
 								          hoverSkin: Texture = null,
 									       downSkin: Texture = null):void {
 			if (btName && btName != '') bt.name = btName;
-			if (defaultSkin) bt.setSkinForState(Button.STATE_UP, new Image(defaultSkin));
-			if (hoverSkin) bt.setSkinForState(Button.STATE_HOVER, new Image(hoverSkin));
-			if (downSkin) bt.setSkinForState(Button.STATE_DOWN, new Image(downSkin));
+			if (defaultSkin) bt.setSkinForState(ButtonState.UP, new Image(defaultSkin));  ButtonState.UP
+			if (hoverSkin) bt.setSkinForState(ButtonState.HOVER, new Image(hoverSkin));
+			if (downSkin) bt.setSkinForState(ButtonState.DOWN, new Image(downSkin));
 		}
 		
 		

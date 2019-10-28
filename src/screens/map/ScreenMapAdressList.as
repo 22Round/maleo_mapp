@@ -82,7 +82,7 @@ package screens.map {
 			this.width = stage.stageWidth;
 			this.height = stage.stageHeight;
 			
-			this.validate();
+			//this.validate();
 		}
 		
 		private function listChangeHandler(e:Event):void {

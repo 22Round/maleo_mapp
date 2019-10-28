@@ -3,8 +3,8 @@ cd %~dp0 & cd ..
 
 :user_configuration
 
-:: Static path to Flex SDK
-set FLEX_SDK=D:\SDK\AIR_27.0.0.132
+:: Static path to Flex SDK D:\SDK\AIR_BETA_32.0.0.116
+set FLEX_SDK=D:\SDK\AIR_32.0.0.116
 
 :: Use FD supplied SDK path if executed from FD
 if exist "%FD_CUR_SDK%" set FLEX_SDK=%FD_CUR_SDK%
